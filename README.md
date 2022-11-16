@@ -1,4 +1,4 @@
-# Platzhalter für Projektname
+# Rucksackproblem-Heist
 
 ## Kurzbeschreibung 
 ...
