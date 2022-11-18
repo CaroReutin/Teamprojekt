@@ -1,10 +1,15 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Main{
+
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.setTitle("Teamprojekt");
+        JButton close = new JButton("Close");
+        close.addActionListener(e -> frame.dispose());
+        frame.add(close);
+        frame.setTitle("Optimal Heist");
         frame.setSize(400,400);
         frame.setVisible(true);
     }
+
 }
