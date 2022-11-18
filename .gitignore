@@ -2,3 +2,4 @@
 test.iml
 target
 .DS_Store
+*.jar
