@@ -6,5 +6,6 @@ public class Main{
         frame.setTitle("Teamprojekt");
         frame.setSize(400,400);
         frame.setVisible(true);
+
     }
 }
