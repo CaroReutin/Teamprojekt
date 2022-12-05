@@ -1,4 +1,3 @@
-import Rucksack.Item;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
