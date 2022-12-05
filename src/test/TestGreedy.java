@@ -51,6 +51,40 @@ public class TestGreedy {
     }
 
     @Test
+    public void Epic3(){
+        amount.add(1);
+        amount.add(1);
+        amount.add(2);
+        items = new ArrayList<>();
+        items.add(new Item(5,5,"Goldbarren"));
+        items.add(new Item(4,4,"Besen"));
+        items.add(new Item(3,3,"Apfel"));
+        Assertions.assertEquals("0,1",s.solveGreedy(items,amount,10));
+        amount = new ArrayList<>();
+        amount.add(1);
+        amount.add(2);
+        amount.add(1);
+        items = new ArrayList<>();
+        items.add(new Item(4,4,"Besen"));
+        items.add(new Item(3,3,"Apfel"));
+        items.add(new Item(5,5,"Goldbarren"));
+        Assertions.assertEquals("0,1,1",s.solveGreedy(items,amount,10));
+
+    }
+
+    @Test
+    public void Epic1(){
+        amount.add(1);
+        amount.add(1);
+        amount.add(1);
+        items = new ArrayList<>();
+        items.add(new Item(4,4,"Besen"));
+        items.add(new Item(3,3,"Apfel"));
+        items.add(new Item(2,2,"Kaugummi"));
+        Assertions.assertEquals("0",s.solveGreedy(items,amount,5));
+    }
+
+    @Test
     public void badInputs(){
         amount.add(1);
         amount.add(1);
@@ -92,6 +126,4 @@ public class TestGreedy {
         items.add(new Item(-4,1,"3"));
         Assertions.assertEquals("0,1",s.solveGreedy(items,amount,50));
     }
-
-    //TODO tests for amount not just 1s
 }
