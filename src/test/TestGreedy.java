@@ -73,6 +73,24 @@ public class TestGreedy {
         items.add(new Item(100,20,"2"));
         items.add(new Item(0,0,"3"));
         Assertions.assertEquals("0,1",s.solveGreedy(items,amount,50));
+        // Weight and Value Negative
+        items = new ArrayList<>();
+        items.add(new Item(60,10,"1"));
+        items.add(new Item(100,20,"2"));
+        items.add(new Item(-10,-20,"3"));
+        Assertions.assertEquals("0,1",s.solveGreedy(items,amount,50));
+        // Weight Negative
+        items = new ArrayList<>();
+        items.add(new Item(60,10,"1"));
+        items.add(new Item(100,20,"2"));
+        items.add(new Item(5000,-3,"3"));
+        Assertions.assertEquals("0,1",s.solveGreedy(items,amount,50));
+        // Value Negative
+        items = new ArrayList<>();
+        items.add(new Item(60,10,"1"));
+        items.add(new Item(100,20,"2"));
+        items.add(new Item(-4,1,"3"));
+        Assertions.assertEquals("0,1",s.solveGreedy(items,amount,50));
     }
 
     //TODO tests for amount not just 1s
