@@ -11,15 +11,17 @@ public class Solver {
         String tmpString;
 
         for (int i = 0; i < size; i++) {
-            if (items.get(i).getWeight() != 0 && items.get(i).getValue() != 0){
+            if (items.get(i).getWeight() > 0 && items.get(i).getValue() > 0){
                 ratio[i] = (double)items.get(i).getValue() / (double)items.get(i).getWeight();
                 indexes[i] = i;
-            }else if(items.get(i).getValue() == 0){
+            }else if(items.get(i).getValue() <= 0){
                 ratio[i] = -1;
             }else if (items.get(i).getWeight() == 0){
                 ratio[i] = -1;
                 tmpString = i + ",";
                 result.append(tmpString.repeat(amount.get(i)));
+            }else if (items.get(i).getWeight() < 0){
+                ratio[i] = -1;
             }
         }
 
@@ -36,6 +38,7 @@ public class Solver {
                 }
             }
         }
+
         for (int i = 0; i < size; i++) {
             tmpString = indexes[i] + ",";
             for (int j = 0; j < amount.get(indexes[i]); j++) {
