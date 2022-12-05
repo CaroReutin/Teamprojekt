@@ -29,6 +29,12 @@ public class TestGreedy {
         items.add(new Item(15,8,"2"));
         items.add(new Item(40,9,"3"));
         Assertions.assertEquals("",s.solveGreedy(items,amount,6));
+        // Best does not Fit
+        items = new ArrayList<>();
+        items.add(new Item(10,3,"1"));
+        items.add(new Item(15,4,"2"));
+        items.add(new Item(999999,9,"3"));
+        Assertions.assertEquals("1",s.solveGreedy(items,amount,6));
         // Random Numbers
         items = new ArrayList<>();
         items.add(new Item(60,10,"1"));
@@ -52,6 +58,7 @@ public class TestGreedy {
 
     @Test
     public void Epic3(){
+        // Suboptimal Order
         amount.add(1);
         amount.add(1);
         amount.add(2);
@@ -60,6 +67,7 @@ public class TestGreedy {
         items.add(new Item(4,4,"Besen"));
         items.add(new Item(3,3,"Apfel"));
         Assertions.assertEquals("0,1",s.solveGreedy(items,amount,10));
+        // Optimal Order
         amount = new ArrayList<>();
         amount.add(1);
         amount.add(2);
@@ -69,7 +77,6 @@ public class TestGreedy {
         items.add(new Item(3,3,"Apfel"));
         items.add(new Item(5,5,"Goldbarren"));
         Assertions.assertEquals("0,1,1",s.solveGreedy(items,amount,10));
-
     }
 
     @Test
