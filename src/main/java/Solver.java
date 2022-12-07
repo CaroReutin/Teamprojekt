@@ -2,6 +2,14 @@ import java.util.ArrayList;
 
 public class Solver {
 
+    /**
+     * The Result can change based on the Order of the ArrayList
+     *
+     * @param items ArrayList of Items available
+     * @param amount Amount of Items available (amount.get(i) must be the amount of the item items.get(i))
+     * @param capacity The capacity of the Rucksack
+     * @return Returns an ArrayList of Items that a Greedy Algorithm would put in the Rucksack
+     */
     public ArrayList<Item> solveGreedy(ArrayList<Item> items, ArrayList<Integer> amount, int capacity){
         int size = items.size();
         double[] ratio = new double[size];
