@@ -165,5 +165,19 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(expected,s.solveGreedy(items,amount,50));
+        // Capacity Negative
+        items = new ArrayList<>();
+        expected = new ArrayList<>();
+        items.add(new Item(60,10,"1"));
+        items.add(new Item(130,20,"2"));
+        items.add(new Item(200,30,"3"));
+        Assertions.assertEquals(expected,s.solveGreedy(items,amount,-10));
+        // Capacity Zero
+        items = new ArrayList<>();
+        expected = new ArrayList<>();
+        items.add(new Item(60,10,"1"));
+        items.add(new Item(130,20,"2"));
+        items.add(new Item(200,30,"3"));
+        Assertions.assertEquals(expected,s.solveGreedy(items,amount,0));
     }
 }
