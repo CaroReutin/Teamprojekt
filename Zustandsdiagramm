@@ -1,1 +1,84 @@
-<mxfile host="app.diagrams.net" modified="2022-12-07T14:04:21.407Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15" etag="OMgqpPlEiiZW4Ha6Tdk4" version="20.6.0" type="github"><diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">7Vtdk6MoFP01eZwuQfHjcTrbPfuyVVvVVbszj0RJYo1KipBJZ3/9YsSooMZ2NLGT5KXlgoj3nANXuD0z5/H7N4Y3679oQKIZNIL3mfnHDEJgGa74k1oOmcWxpGHFwkA2Kgxv4X9EGg1p3YUB2VYackojHm6qRp8mCfF5xYYZo/tqsyWNqk/d4BXRDG8+jnTrv2HA19IKDKOo+JOEq7V8tItkxQL7P1eM7hL5vIQmJKuJcd6NbLpd44DuSybzZWbOGaU8u4rf5yRK3Zp7LLvvtaH2NGRGEt7lBtOFCw8sEAJgERhL54vs4ReOdtINcqD8kPtF9CAgEIXnNY8jYQPiUrzIJq3fcsz4G8c8rV+GUTSnEWXHG03j+Esbc0Z/klLNcilrjl4jQdFp5p20yqdx6MvrCC9I9Hxyc97T0dHisTThrzgOo5R4/xAW4ARLs2QZgLJcNzochatE2HzhQyIqn4OQCX6FNDVu6S6F8Fl3dO45wjh5L5mk478RGhPODqJJXmtKEhzyMsrK+4JteZN1iWe5DUt+r049F0CLC4l1R9yRhvtX8cq/Qn7Q8K9itF+HnLxtsJ/W7sVMUOUFZr70ObR0RizFz29nxEQ4MADe0KribeYTXQlvAGsAt8cA3H4AfmnAT+BeBHA/IHaAA9e2MHAw/mLqE3kg1jtZpIyv6YomOHoprGVcyXvIv5euf6SoPEGUFhMxtu9K+Ucn1EgSfE2X6nQEG5JkFomX20qTjnjnuEZkydtQFfM680mDVhwZfWC2IryhjZe1SX3ayg1GIix0Vo0xBlW281D22Mq2FGVD45rKtoZRtvHkoLK4y8oGFVk/oRsRttdB2PbQwj7eKpyDD6UGGxomfFvq+e/UUDDOdZW1BBkKZ7IeCwadhtaPVKB9vSDRgu7PEaqyVDiohVDOPTEqj/smsFZ4j7Vi7LXC8aYU9ucPfyA+HuIIXhNxdSJHvefxTzgfQ2wufIgM7C8NGzjBtEP3ptGWxDkXTsFhIqiporjdh3GEj1CckeYgm2oZnPlGKPg4jEMqzEMVgVmevnPm1W2dneL0QRWWy/sGJdbE0NYYyK3RnOazyYRA7mNB/OCC2Dhtdd8ZA1UB27p+R1sgobX0bDcAhkecwF5Y+cZY7yOPVJO3deAxBuSuArmrx0SjHXaok4931/O11sbsECO5k4mRfleu93tC+fsidqajYQB02O9IxE0BVWvQBa8WdDWM9hF0XXAFtozqtsQlgy6dADWz9j3LF+rybQpUJyBf+JDvxeWL3Ct+M6mj1z+alwzHREM/D7p2cfR6bHCHm1VKmldNlhcwUA1wjoVGQK792+fsYfHUJ98uZ3R1odLop769ATuzu/jJECtyhWZaRkE/NO0OaDpDo9nrDN9UZoJ8ZhjqDF+nTvs30vnMkCKxy5l4YleRxFLOYQG9WdXl3AiNwiqNNtpxonqIkb2IvKvg00fpiZTvA+gpuePn6OyNTef2b4YPJDrBxkQnNYVxejNoPz6jz7XmjZKsis6sP/eC8/Xyj3SgB8td7Jq6eDOZZjmKlw18+iPdnocyTP55FWp4V1BfLwFd3R2yW5H+PFt7jeFv57CyVzrShcJKU8lhR4ay3dAQVp7tyHSV+DR7W62jIbKUnduj2oNpk2SaeytMq/8I6v+lXBNxNpFxdKIhhWigL9GUjkxvKKKJYvHf3Vnz4r/nzZf/AQ==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-12-07T14:29:14.806Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15" etag="n8ZM4IxsnSN2Unrdvslx" version="20.6.0" type="github">
+  <diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">
+    <mxGraphModel dx="1113" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-6" value="Start des Programms&lt;br&gt;/Homescreen öffnen" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;" edge="1" parent="1" source="Y8kZHkkbkPLD9dmNPPJZ-5" target="Y8kZHkkbkPLD9dmNPPJZ-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="215.00000000000023" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-5" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="45" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-15" value="Optionsbutton drücken&lt;br&gt;&amp;nbsp;/Optionsmenü öffnen" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=openThin;endFill=0;" edge="1" parent="1" source="Y8kZHkkbkPLD9dmNPPJZ-8" target="Y8kZHkkbkPLD9dmNPPJZ-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-22" value="Levelbutton drücken&lt;br&gt;/Levelmenü öffnen" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;" edge="1" parent="1" source="Y8kZHkkbkPLD9dmNPPJZ-8" target="Y8kZHkkbkPLD9dmNPPJZ-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-8" value="Homescreen" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="30" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-14" value="Optionsmenü" style="swimlane;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="30" width="530" height="345" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;" edge="1" parent="Y8kZHkkbkPLD9dmNPPJZ-14" source="Y8kZHkkbkPLD9dmNPPJZ-16" target="Y8kZHkkbkPLD9dmNPPJZ-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-16" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;rounded=1;" vertex="1" parent="Y8kZHkkbkPLD9dmNPPJZ-14">
+          <mxGeometry x="10" y="30" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;" edge="1" parent="Y8kZHkkbkPLD9dmNPPJZ-14" source="Y8kZHkkbkPLD9dmNPPJZ-17" target="Y8kZHkkbkPLD9dmNPPJZ-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-17" value="passiv" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Y8kZHkkbkPLD9dmNPPJZ-14">
+          <mxGeometry x="70" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-19" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Y8kZHkkbkPLD9dmNPPJZ-14">
+          <mxGeometry x="70" y="140" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-24" value="Level auswählen&lt;br&gt;/Level starten" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y8kZHkkbkPLD9dmNPPJZ-21" target="Y8kZHkkbkPLD9dmNPPJZ-25">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-21" value="Levelauswahl" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="125" y="260" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;" edge="1" parent="1" source="Y8kZHkkbkPLD9dmNPPJZ-25" target="Y8kZHkkbkPLD9dmNPPJZ-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-42" value="Fluchtbutton klicken&lt;br&gt;/Ausgabe ob Flucht richtig war" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Y8kZHkkbkPLD9dmNPPJZ-41">
+          <mxGeometry x="-0.0458" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-25" value="Spielmodus" style="swimlane;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="500" width="570" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-28" value="/Levelelemente laden" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;" edge="1" parent="Y8kZHkkbkPLD9dmNPPJZ-25" source="Y8kZHkkbkPLD9dmNPPJZ-26" target="Y8kZHkkbkPLD9dmNPPJZ-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="85" y="55" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-26" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;rounded=1;" vertex="1" parent="Y8kZHkkbkPLD9dmNPPJZ-25">
+          <mxGeometry x="20" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-31" value="Gegenstand anklicken [Gewicht des Gegenstand &amp;lt; Restkapazität]&lt;br&gt;/Gegenstand in Rucksack einfügen" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=openThin;endFill=0;" edge="1" parent="Y8kZHkkbkPLD9dmNPPJZ-25" source="Y8kZHkkbkPLD9dmNPPJZ-29" target="Y8kZHkkbkPLD9dmNPPJZ-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-29" value="Rucksack leer" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Y8kZHkkbkPLD9dmNPPJZ-25">
+          <mxGeometry x="200" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-30" value="Rucksack befüllt" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Y8kZHkkbkPLD9dmNPPJZ-25">
+          <mxGeometry x="200" y="130" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y8kZHkkbkPLD9dmNPPJZ-40" value="Flucht" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="335" y="940" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
