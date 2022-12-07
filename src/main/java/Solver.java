@@ -2,13 +2,12 @@ import java.util.ArrayList;
 
 public class Solver {
 
-    public String solveGreedy(ArrayList<Item> items, ArrayList<Integer> amount, int capacity){
+    public ArrayList<Item> solveGreedy(ArrayList<Item> items, ArrayList<Integer> amount, int capacity){
         int size = items.size();
         double[] ratio = new double[size];
         int[] indexes = new int[size];
 
-        StringBuilder result = new StringBuilder();
-        String tmpString;
+        ArrayList<Item> inBag = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
             if (items.get(i).getWeight() > 0 && items.get(i).getValue() > 0){
@@ -18,8 +17,7 @@ public class Solver {
                 ratio[i] = -1;
             }else if (items.get(i).getWeight() == 0){
                 ratio[i] = -1;
-                tmpString = i + ",";
-                result.append(tmpString.repeat(amount.get(i)));
+                inBag.add(items.get(i));
             }else if (items.get(i).getWeight() < 0){
                 ratio[i] = -1;
             }
@@ -40,19 +38,15 @@ public class Solver {
         }
 
         for (int i = 0; i < size; i++) {
-            tmpString = indexes[i] + ",";
             for (int j = 0; j < amount.get(indexes[i]); j++) {
                 if (capacity >= items.get(indexes[i]).getWeight() && ratio[i] >= 0){
                     capacity = capacity - items.get(indexes[i]).getWeight();
-                    result.append(tmpString);
+                    inBag.add(items.get(indexes[i]));
                 }else {
                     break;
                 }
             }
         }
-        if (result.length() > 0){
-            return result.substring(0,result.length()-1);
-        }
-        return "";
+        return inBag;
     }
 }
