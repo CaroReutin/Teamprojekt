@@ -1,4 +1,4 @@
-# Platzhalter für Projektname
+# Optimal Heist
 
 Jedes Backlogitem hat einen eigenen Branch und jeder entwickelt auf dem Branch für das entsprechende item.
 Sobald ein Item abgeschlossen und getestet ist auf diesem Branch , dann wird auf Github eine Pull-Request auf dev geöffnet.
