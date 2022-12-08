@@ -1,3 +1,7 @@
+package Rucksack;
+
+import Solving.Solver;
+
 import java.util.ArrayList;
 
 public class LevelManager {
