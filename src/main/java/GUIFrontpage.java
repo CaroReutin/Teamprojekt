@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class GUIFrontpage {
     GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+    GUIOptionsPage guiOptionsPage;
 
     public void openProgrammWindow(){
         JFrame frame = new JFrame();
@@ -42,10 +43,9 @@ public class GUIFrontpage {
         settingsButton.setBounds(190, 260, 120, 40);
         settingsButton.setBackground(Color.cyan);
         pane.add(settingsButton);
+        guiOptionsPage = new GUIOptionsPage(frame);
 
-        settingsButton.addActionListener(e -> {
-
-        });
+        settingsButton.addActionListener(e -> guiOptionsPage.openOptionsPage());
 
     }
 
