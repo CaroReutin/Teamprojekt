@@ -1,5 +1,9 @@
 package GUI_Level;
 
+import Rucksack.Item;
+import Rucksack.Level;
+import Rucksack.Rucksack;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +28,25 @@ public class GUIBasic{
         JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         this.escapeButton(centerPanel);
-        this.itemButtoms(rightPanel);
+
+        //Test ItemButtons
+        Item coin = new Item(5, 1, "coin");
+        Item crown = new Item(50, 8, "crown");
+        Item pearl = new Item(11, 2, "pearl");
+        Rucksack rucksack = new Rucksack(60);
+
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(coin);
+        items.add(crown);
+        items.add(pearl);
+        ArrayList<Integer> amount = new ArrayList<>();
+        amount.add(10);
+        amount.add(7);
+        amount.add(4);
+        //
+
+        ArrayList<JButton> itemButtons = this.itemButtoms(rightPanel, new Level(rucksack,items, amount));
+        this.itemRucksackButtons(leftPanel,itemButtons );
 
         //Füge Rucksack png ein und ändere größe
         URL url = getClass().getClassLoader().getResource("rucksack.png");
@@ -45,15 +67,38 @@ public class GUIBasic{
         panel.add(flucht);
     }
 
-    private void itemButtoms(JPanel panel) {
-        String[] testItems = {"1","2", "3", "4", "5","6"};
-        ArrayList<JButton> items = new ArrayList();
-        for (int i = 0; i<testItems.length; i++) {
-            JButton current = new JButton(testItems[i]);
-            items.add(current);
+    /**
+     * fügt zur Verfügung stehende Items als Button ein
+     * @param panel
+     * @param level
+     * @return
+     */
+    private ArrayList<JButton> itemButtoms(JPanel panel, Level level) {
+        ArrayList<Item> items = level.getItemList();
+        ArrayList<JButton> itemButtons = new ArrayList();
+        for (int i = 0; i<items.size(); i++) {
+            JButton current = new JButton(items.get(i).getName());
+            itemButtons.add(current);
             panel.add(current);
         }
+        return  itemButtons;
 
+    }
+
+    /**
+     * fügt Item-Buttons in Rucksack ein
+     * @param panel
+     * @param itemButtons
+     * @return
+     */
+    private ArrayList<JButton> itemRucksackButtons(JPanel panel, ArrayList<JButton> itemButtons) {
+        ArrayList<JButton> buttons = new ArrayList<>();
+        for (int i = 0; i<itemButtons.size(); i++) {
+            JButton current = new JButton(itemButtons.get(i).getText());
+            buttons.add(current);
+            panel.add(current);
+        }
+        return  buttons;
     }
 
 

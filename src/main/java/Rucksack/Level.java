@@ -133,4 +133,8 @@ public class Level {
     public static void tipsAllowed(boolean isAllowed){
         //TODO
     }
+
+    public void endOfLevel() {
+
+    }
 }
