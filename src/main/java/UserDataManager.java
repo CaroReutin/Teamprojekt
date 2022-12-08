@@ -6,8 +6,14 @@ import java.io.*;
 public class UserDataManager {
     private static UserData data = new UserData();
 
+    /**
+     * Amount of non-Custom Levels
+     */
     public static final int LEVELAMOUNT = 15;
 
+    /**
+     * Set every current high score to 0
+     */
     public static void newUser(){
         data.newUser();
     }
@@ -80,22 +86,39 @@ public class UserDataManager {
         }
     }
 
-    public static int getScore(int i) {
-        return data.getScore(i);
+    /**
+     *
+     * @param level the index of the level
+     * @return returns the current high score
+     * @throws IndexOutOfBoundsException if there is no entry for level
+     */
+    public static int getScore(int level) throws IndexOutOfBoundsException {
+        return data.getScore(level);
     }
 
-    public static void newHighScore(int i, int j) {
-        data.newHighScore(i,j);
+    /**
+     * There is no check whether the newHighScore is actually higher than the old one
+     *
+     * @param level the index of the level
+     * @param score the new high score
+     * @throws IndexOutOfBoundsException if there is no entry for level
+     */
+    public static void newHighScore(int level, int score) throws IndexOutOfBoundsException {
+        data.newHighScore(level,score);
     }
 
-    public static void softReset() {
-        data.reset();
-    }
-
-    public static void hardReset(){
+    /**
+     * Resets User Data and sets all current high scores to 0
+     */
+    public static void reset(){
         data = new UserData();
+        data.newUser();
     }
 
+    /**
+     *
+     * @return returns the Scores in format x1|x2|...|x14|x15 where xn is the score of the nth Level
+     */
     public static String dataToString() {
         return data.toString();
     }

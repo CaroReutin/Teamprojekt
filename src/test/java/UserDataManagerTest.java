@@ -12,7 +12,7 @@ public class UserDataManagerTest {
 
     @BeforeEach
     public void cleanUp(){
-        UserDataManager.hardReset();
+        UserDataManager.reset();
         File save = new File(testSaveFile);
         save.delete();
     }
@@ -20,32 +20,19 @@ public class UserDataManagerTest {
     @Test
     public void makeNewSave(){
         UserDataManager.load(testSaveFolder);
-        StringBuilder newScore = new StringBuilder();
-        for (int i = 0; i < UserDataManager.LEVELAMOUNT; i++) {
-            newScore.append(UserDataManager.getScore(i));
-            newScore.append("|");
-        }
-        Assertions.assertEquals("0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|",newScore.toString());
+        Assertions.assertEquals("0|0|0|0|0|0|0|0|0|0|0|0|0|0|0",UserDataManager.dataToString());
     }
 
     @Test
     public void scoreEqualsLevel(){
         UserDataManager.load(testSaveFolder);
-        StringBuilder newScore = new StringBuilder();
         for (int i = 0; i < UserDataManager.LEVELAMOUNT; i++) {
             UserDataManager.newHighScore(i,i);
-            newScore.append(UserDataManager.getScore(i));
-            newScore.append("|");
         }
-        Assertions.assertEquals("0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|",newScore.toString());
+        Assertions.assertEquals("0|1|2|3|4|5|6|7|8|9|10|11|12|13|14",UserDataManager.dataToString());
         UserDataManager.save(testSaveFolder);
-        UserDataManager.softReset();
+        UserDataManager.reset();
         UserDataManager.load(testSaveFolder);
-        newScore = new StringBuilder();
-        for (int i = 0; i < UserDataManager.LEVELAMOUNT; i++) {
-            newScore.append(UserDataManager.getScore(i));
-            newScore.append("|");
-        }
-        Assertions.assertEquals("0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|",newScore.toString());
+        Assertions.assertEquals("0|1|2|3|4|5|6|7|8|9|10|11|12|13|14",UserDataManager.dataToString());
     }
 }
