@@ -3,13 +3,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// In case this becomes an issue later fyi
+// < will be saved as &lt;
+// & will be saved as &amp;
+// > will be saved as &gt;
+// \" will be saved as "
+// !§$%/()=?"+#*~'`sèé^°,.;:_-@|äÄ were as saved correctly
+
 /**
  * Do not make a UserData object, use the static methods in UserDataManager instead.
  */
 @XmlRootElement
 public class UserData implements Serializable {
     @XmlElement
-
     private ArrayList<Integer> bestLevelScores = new ArrayList<>();
 
     /**
