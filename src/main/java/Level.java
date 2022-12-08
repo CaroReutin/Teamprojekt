@@ -122,4 +122,13 @@ public class Level {
     public ArrayList<String> getTips() {
         return tips;
     }
+
+    /**
+     * By default, tips are not allowed
+     *
+     * @param isAllowed true = tips are allowed, false = tips are locked
+     */
+    public static void tipsAllowed(boolean isAllowed){
+        //TODO
+    }
 }
