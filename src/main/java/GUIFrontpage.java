@@ -24,12 +24,14 @@ public class GUIFrontpage {
 
         JButton levelButton = new JButton("Level");
         levelButton.setBounds(190,100,120,40);
+        levelButton.setBackground(Color.cyan);
         pane.add(levelButton);
 
         levelButton.addActionListener(e -> guiLevelDeciderPage.openLevelDeciderPage());
 
         JButton ownLevelButton = new JButton("Eigene Level");
         ownLevelButton.setBounds(190, 180, 120, 40);
+        ownLevelButton.setBackground(Color.cyan);
         pane.add(ownLevelButton);
 
         ownLevelButton.addActionListener(e -> {
@@ -38,6 +40,7 @@ public class GUIFrontpage {
 
         JButton settingsButton = new JButton("Einstellungen");
         settingsButton.setBounds(190, 260, 120, 40);
+        settingsButton.setBackground(Color.cyan);
         pane.add(settingsButton);
 
         settingsButton.addActionListener(e -> {

@@ -23,6 +23,7 @@ public class GUILevelDeciderPage {
 
         JButton levelOne = new JButton("1");
         levelOne.setBounds(25, 200, 50, 50);
+        levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
         levelOne.addActionListener(e -> {
 
@@ -35,6 +36,7 @@ public class GUILevelDeciderPage {
 
         JButton levelTwoGreedy = new JButton("2");
         levelTwoGreedy.setBounds(100, 125, 50, 50);
+        levelTwoGreedy.setBackground(Color.cyan);
         pane.add(levelTwoGreedy);
         levelTwoGreedy.addActionListener(e -> {
 
@@ -42,6 +44,7 @@ public class GUILevelDeciderPage {
 
         JButton levelThreeGreedy = new JButton("3");
         levelThreeGreedy.setBounds(160, 125, 50, 50);
+        levelThreeGreedy.setBackground(Color.cyan);
         pane.add(levelThreeGreedy);
         levelThreeGreedy.addActionListener(e -> {
 
@@ -50,6 +53,7 @@ public class GUILevelDeciderPage {
 
         JButton levelFourGreedy = new JButton("4");
         levelFourGreedy.setBounds(220, 125, 50, 50);
+        levelFourGreedy.setBackground(Color.cyan);
         pane.add(levelFourGreedy);
         levelFourGreedy.addActionListener(e -> {
 
@@ -57,6 +61,7 @@ public class GUILevelDeciderPage {
 
         JButton levelFiveGreedy = new JButton("5");
         levelFiveGreedy.setBounds(280, 125, 50, 50);
+        levelFiveGreedy.setBackground(Color.cyan);
         pane.add(levelFiveGreedy);
         levelFiveGreedy.addActionListener(e -> {
 
@@ -64,6 +69,7 @@ public class GUILevelDeciderPage {
 
         JButton levelSixGreedy = new JButton("6");
         levelSixGreedy.setBounds(340, 125, 50, 50);
+        levelSixGreedy.setBackground(Color.cyan);
         pane.add(levelSixGreedy);
         levelSixGreedy.addActionListener(e -> {
 
@@ -71,6 +77,7 @@ public class GUILevelDeciderPage {
 
         JButton levelSevenGreedy = new JButton("7");
         levelSevenGreedy.setBounds(400, 125, 50, 50);
+        levelSevenGreedy.setBackground(Color.cyan);
         pane.add(levelSevenGreedy);
         levelSevenGreedy.addActionListener(e -> {
 
@@ -83,6 +90,7 @@ public class GUILevelDeciderPage {
 
         JButton levelTwoBack = new JButton("2");
         levelTwoBack.setBounds(100, 275, 50, 50);
+        levelTwoBack.setBackground(Color.cyan);
         pane.add(levelTwoBack);
         levelTwoBack.addActionListener(e -> {
 
@@ -90,6 +98,7 @@ public class GUILevelDeciderPage {
 
         JButton levelThreeBack = new JButton("3");
         levelThreeBack.setBounds(160, 275, 50, 50);
+        levelThreeBack.setBackground(Color.cyan);
         pane.add(levelThreeBack);
         levelThreeBack.addActionListener(e -> {
 
@@ -97,6 +106,7 @@ public class GUILevelDeciderPage {
 
         JButton levelFourBack = new JButton("4");
         levelFourBack.setBounds(220, 275, 50, 50);
+        levelFourBack.setBackground(Color.cyan);
         pane.add(levelFourBack);
         levelFourBack.addActionListener(e -> {
 
@@ -104,6 +114,7 @@ public class GUILevelDeciderPage {
 
         JButton levelFiveBack = new JButton("2");
         levelFiveBack.setBounds(280, 275, 50, 50);
+        levelFiveBack.setBackground(Color.cyan);
         pane.add(levelFiveBack);
         levelFiveBack.addActionListener(e -> {
 
@@ -111,6 +122,7 @@ public class GUILevelDeciderPage {
 
         JButton levelSixBack = new JButton("2");
         levelSixBack.setBounds(340, 275, 50, 50);
+        levelSixBack.setBackground(Color.cyan);
         pane.add(levelSixBack);
         levelSixBack.addActionListener(e -> {
 
@@ -118,6 +130,7 @@ public class GUILevelDeciderPage {
 
         JButton levelSevenBack = new JButton("2");
         levelSevenBack.setBounds(400, 275, 50, 50);
+        levelSevenBack.setBackground(Color.cyan);
         pane.add(levelSevenBack);
         levelSevenBack.addActionListener(e -> {
 
