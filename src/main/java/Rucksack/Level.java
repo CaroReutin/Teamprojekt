@@ -135,6 +135,12 @@ public class Level {
     }
 
     public void endOfLevel() {
-
+        if(this.robber.equals(Robber.DR_META)) {
+            //TODO zu Levelauswahl führen - muss gemerged werden
+        } else if(this.robber.equals(Robber.GIERIGER_GANOVE)){
+            //TODO brauche Solver - muss gemerged werden
+        } else {
+            //TODO
+        }
     }
 }
