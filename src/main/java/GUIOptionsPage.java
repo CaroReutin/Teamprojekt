@@ -18,6 +18,7 @@ public class GUIOptionsPage {
         passwordInput = new JFormattedTextField("");
         JButton enterPassword = new JButton("Enter");
         options.setTitle("Einstellungen");
+        options.setResizable(false);
         // Bugged: The first time Enter is pressed is always ignored, every other time the program works
         options.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0),"callConfirmPassword");
         options.getRootPane().getActionMap().put("callConfirmPassword", new AbstractAction() {

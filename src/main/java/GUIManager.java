@@ -9,7 +9,7 @@ public class GUIManager {
     // see comment above
 
     private void innit() {
-        passwords.add("tipTop");
+        passwords.add("Gr33dy");
     }
 
     private LevelManager lm = new LevelManager();

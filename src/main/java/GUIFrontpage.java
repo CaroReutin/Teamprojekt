@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUIFrontpage {
-    GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+    GUILevelDeciderPage guiLevelDeciderPage;
     GUIOptionsPage guiOptionsPage;
 
     public void openProgrammWindow(){
@@ -12,6 +12,7 @@ public class GUIFrontpage {
         frame.setSize(500,500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setResizable(false);
 
         Container pane = frame.getContentPane();
         pane.setLayout(null);
@@ -27,6 +28,7 @@ public class GUIFrontpage {
         levelButton.setBounds(190,100,120,40);
         levelButton.setBackground(Color.cyan);
         pane.add(levelButton);
+        guiLevelDeciderPage = new GUILevelDeciderPage();
 
         levelButton.addActionListener(e -> guiLevelDeciderPage.openLevelDeciderPage());
 
@@ -34,6 +36,7 @@ public class GUIFrontpage {
         ownLevelButton.setBounds(190, 180, 120, 40);
         ownLevelButton.setBackground(Color.cyan);
         pane.add(ownLevelButton);
+
 
         ownLevelButton.addActionListener(e -> {
 
