@@ -1,3 +1,5 @@
+import Rucksack.*;
+import Solving.*;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;

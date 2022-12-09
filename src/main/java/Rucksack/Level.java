@@ -1,3 +1,5 @@
+package Rucksack;
+
 import java.util.ArrayList;
 
 public class Level {
@@ -22,7 +24,7 @@ public class Level {
      *
      * @param rucksack the Rucksack
      * @param itemList ArrayList of available Items
-     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Level
+     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
      */
     public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList) {
         this.rucksack = rucksack;
@@ -39,11 +41,11 @@ public class Level {
      *
      * @param rucksack the Rucksack
      * @param itemList ArrayList of available Items
-     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Level
+     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
      * @param tips ArrayList of String that are the tips
      */
 
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList,ArrayList<String> tips) {
+    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips) {
         this.rucksack = rucksack;
         this.tips = tips;
         this.itemList = itemList;
@@ -56,11 +58,11 @@ public class Level {
      *
      * @param rucksack the Rucksack
      * @param itemList ArrayList of available Items
-     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Level
+     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
      * @param tips ArrayList of String that are the tips
      * @param robber the Robber
      */
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList,ArrayList<String> tips,Robber robber) {
+    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips, Robber robber) {
         this.rucksack = rucksack;
         this.tips = tips;
         this.itemList = itemList;
@@ -75,7 +77,7 @@ public class Level {
      *
      * @param rucksack the Rucksack
      * @param itemList ArrayList of available Items
-     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Level
+     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
      * @param robber the Robber
      */
     public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, Robber robber) {
@@ -99,7 +101,7 @@ public class Level {
     /**
      * NOTE: this does not return the items still available in the level (i.e. the ones not in the Backpack)
      *
-     * @return Returns the items that exist in the Level
+     * @return Returns the items that exist in the Rucksack.Level
      */
     public ArrayList<Item> getItemList() {
         return itemList;
@@ -108,7 +110,7 @@ public class Level {
     /**
      * NOTE: this does not return the amounts of the items still available in the level (i.e. the ones not in the Backpack)
      *
-     * @return Returns the amounts of the items that exist in the Level
+     * @return Returns the amounts of the items that exist in the Rucksack.Level
      */
     public ArrayList<Integer> getItemAmountList() {
         return itemAmountList;
@@ -121,5 +123,24 @@ public class Level {
      */
     public ArrayList<String> getTips() {
         return tips;
+    }
+
+    /**
+     * By default, tips are not allowed
+     *
+     * @param isAllowed true = tips are allowed, false = tips are locked
+     */
+    public static void tipsAllowed(boolean isAllowed){
+        //TODO
+    }
+
+    public void endOfLevel() {
+        if(this.robber.equals(Robber.DR_META)) {
+            //TODO zu Levelauswahl führen - muss gemerged werden
+        } else if(this.robber.equals(Robber.GIERIGER_GANOVE)){
+            //TODO brauche Solver - muss gemerged werden
+        } else {
+            //TODO
+        }
     }
 }

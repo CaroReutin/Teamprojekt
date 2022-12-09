@@ -1,3 +1,5 @@
+package Solving;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 // !§$%/()=?"+#*~'`sèé^°,.;:_-@|äÄ were as saved correctly
 
 /**
- * Do not make a UserData object, use the static methods in UserDataManager instead.
+ * Do not make a Solving.UserData object, use the static methods in UserDataManager instead.
  */
 @XmlRootElement
 public class UserData implements Serializable {

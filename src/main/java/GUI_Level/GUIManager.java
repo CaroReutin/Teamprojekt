@@ -1,3 +1,7 @@
+package GUI_Level;
+
+import Rucksack.LevelManager;
+
 import javax.swing.*;
 
 public class GUIManager {

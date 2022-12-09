@@ -1,3 +1,5 @@
+package Rucksack;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +15,7 @@ class RucksackTest {
     private Rucksack rucksack;
 
     @BeforeAll
-    void configuration() {
+        void configuration() {
         coin = new Item(5, 1, "coin");
         crown = new Item(50, 8, "crown");
         pearl = new Item(11, 2, "pearl");

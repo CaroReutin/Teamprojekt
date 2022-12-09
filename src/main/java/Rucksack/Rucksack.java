@@ -1,3 +1,5 @@
+package Rucksack;
+
 import java.util.ArrayList;
 
 public class Rucksack {
@@ -9,7 +11,7 @@ public class Rucksack {
     /**
      * list of items inside the rucksack
      */
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList();
     /**
      * contains amount of the corresponding items at the same position
      */
@@ -107,15 +109,6 @@ public class Rucksack {
         currentValue = 0;
     }
 
-    public void showItems() {
-        for(int i = 0; i<items.size(); i++) {
-            System.out.println(items.get(i).getName() + ": " + amount.get(i));
-        }
-    }
 
-    public void showRucksack() {
-        System.out.println("remaining capacity: " + (capacity - currentWeight));
-        System.out.println("currentValue: " + currentValue);
-    }
 
 }

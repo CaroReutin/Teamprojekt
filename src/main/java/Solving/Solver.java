@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+package Solving;
+
 public class Solver {
 
     /**

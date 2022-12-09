@@ -1,3 +1,5 @@
+package Rucksack;
+
 /**
  * Item that can be stolen.
  */
@@ -16,23 +18,13 @@ public class Item {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     public int getWeight() {
         return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }
