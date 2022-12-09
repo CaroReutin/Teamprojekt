@@ -16,9 +16,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class GUIBasic{
+public class GUILevelPage {
     private Level level;
-    public GUIBasic(Level level) {
+    public GUILevelPage(Level level) {
         this.level = level;
         JFrame frame = new JFrame();
         frame.setTitle("Level");

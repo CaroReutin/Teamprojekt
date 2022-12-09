@@ -1,16 +1,12 @@
-import GUI_Level.GUIBasic;
+import GUI_Level.GUILevelPage;
 import Rucksack.Item;
 import Rucksack.Rucksack;
 import Rucksack.Level;
-import javax.swing.JFrame;
+
 import java.util.ArrayList;
 
 public class Main{
     public static void main(String[] args) {
-       /* JFrame frame = new JFrame();
-        frame.setTitle("Teamprojekt");
-        frame.setSize(400,400);
-        frame.setVisible(true);*/
 
         //Test ItemButtons
         Item coin = new Item(5, 1, "coin");
@@ -27,7 +23,7 @@ public class Main{
         amount.add(7);
         amount.add(4);
         //
-        GUIBasic gui = new GUIBasic(new Level(rucksack,items, amount));
+        GUILevelPage gui = new GUILevelPage(new Level(rucksack,items, amount));
 
     }
 }
