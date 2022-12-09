@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-
 package Solving;
+
+import Rucksack.*;
+import java.util.ArrayList;
 
 public class Solver {
 
