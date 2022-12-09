@@ -1,19 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUIFrontpage {
     GUILevelDeciderPage guiLevelDeciderPage;
     GUIOptionsPage guiOptionsPage;
+    GUIManager guiManager;
 
-    public void openProgrammWindow(){
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Frontpage");
-        frame.setSize(500,500);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setResizable(false);
 
+    public void getFrontPage(JFrame frame) {
+        guiManager = new GUIManager();
         Container pane = frame.getContentPane();
         pane.setLayout(null);
 
@@ -30,13 +27,16 @@ public class GUIFrontpage {
         pane.add(levelButton);
         guiLevelDeciderPage = new GUILevelDeciderPage();
 
-        levelButton.addActionListener(e -> guiLevelDeciderPage.openLevelDeciderPage());
+        levelButton.addActionListener(e -> {
+            guiManager.rePaintFrame(pane);
+            guiLevelDeciderPage.openLevelDeciderPage(frame, guiManager);
+        });
+
 
         JButton ownLevelButton = new JButton("Eigene Level");
         ownLevelButton.setBounds(190, 180, 120, 40);
         ownLevelButton.setBackground(Color.cyan);
         pane.add(ownLevelButton);
-
 
         ownLevelButton.addActionListener(e -> {
 
@@ -48,7 +48,8 @@ public class GUIFrontpage {
         pane.add(settingsButton);
         guiOptionsPage = new GUIOptionsPage(frame);
 
-        settingsButton.addActionListener(e -> guiOptionsPage.openOptionsPage());
+        settingsButton.addActionListener(e ->
+            guiOptionsPage.openOptionsPage(frame));
 
     }
 

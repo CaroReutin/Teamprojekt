@@ -5,14 +5,7 @@ public class GUILevelDeciderPage {
 
     GUIFrontpage guiFrontpage;
 
-    public void openLevelDeciderPage() {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Frontpage");
-        frame.setSize(500,500);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setResizable(false);
+    public void openLevelDeciderPage(JFrame frame, GUIManager guiManager) {
 
         Container pane = frame.getContentPane();
         pane.setLayout(null);
@@ -160,7 +153,8 @@ public class GUILevelDeciderPage {
         pane.add(backToFrontPage);
         guiFrontpage = new GUIFrontpage();
         backToFrontPage.addActionListener(e -> {
-            guiFrontpage.openProgrammWindow();
+            guiManager.rePaintFrame(pane);
+            guiFrontpage.getFrontPage(frame);
         });
 
         /*//Test Sternbutton

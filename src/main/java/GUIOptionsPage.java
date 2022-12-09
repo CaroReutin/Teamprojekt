@@ -6,11 +6,10 @@ import java.awt.event.KeyEvent;
 public class GUIOptionsPage {
     private final JDialog options;
     private final JFormattedTextField passwordInput;
-    private final Frame parent;
 
-    public GUIOptionsPage(Frame parent){
-        this.parent = parent;
-        options = new JDialog(parent,true);
+
+    public GUIOptionsPage(JFrame frame){
+        options = new JDialog(frame,true);
         options.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Container optionsPane = options.getContentPane();
         optionsPane.setLayout(null);
@@ -38,8 +37,8 @@ public class GUIOptionsPage {
         optionsPane.add(enterPassword);
         optionsPane.add(close);
     }
-    public void openOptionsPage() {
-        options.setLocation(parent.getLocation());
+    public void openOptionsPage(JFrame frame) {
+        options.setLocation(frame.getLocation());
         passwordInput.setValue("");
         options.setVisible(true);
     }

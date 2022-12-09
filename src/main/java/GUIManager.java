@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GUIManager {
@@ -13,10 +15,24 @@ public class GUIManager {
     }
 
     private LevelManager lm = new LevelManager();
-    GUIFrontpage guiFrontpage = new GUIFrontpage();
+    GUIFrontpage guiFrontPage = new GUIFrontpage();
 
     public void launch(){
         innit();
-        guiFrontpage.openProgrammWindow();
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setTitle("Optimal Heist");
+        frame.setSize(500,500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setResizable(false);
+
+        guiFrontPage.getFrontPage(frame);
+    }
+
+    public void rePaintFrame(Container pane) {
+        pane.removeAll();
+        pane.revalidate();
+        pane.repaint();
     }
 }
