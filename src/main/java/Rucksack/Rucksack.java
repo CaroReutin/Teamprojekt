@@ -109,15 +109,6 @@ public class Rucksack {
         currentValue = 0;
     }
 
-    public void showItems() {
-        for(int i = 0; i<items.size(); i++) {
-            System.out.println(items.get(i).getName() + ": " + amount.get(i));
-        }
-    }
 
-    public void showRucksack() {
-        System.out.println("remaining capacity: " + (capacity - currentWeight));
-        System.out.println("currentValue: " + currentValue);
-    }
 
 }

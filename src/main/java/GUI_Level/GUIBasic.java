@@ -22,12 +22,12 @@ public class GUIBasic{
         this.level = level;
         JFrame frame = new JFrame();
         frame.setTitle("Level");
-        frame.setSize(4000,2500);
+        frame.setSize(500,500);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         frame.setLayout(new GridLayout(1,3));
 
-        JPanel leftPanel = new JPanel(new FlowLayout());
+        JPanel leftPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
 
@@ -77,7 +77,6 @@ public class GUIBasic{
                 public void actionPerformed(ActionEvent e) {
                     if(current.getAmount() > 0){
                         current.setAmount(current.getAmount() - 1);
-                        System.out.println(current.getAmount());
                         label.setText(String.valueOf(current.getAmount()));
 
                     }
@@ -102,8 +101,10 @@ public class GUIBasic{
         ArrayList<JButton> buttons = new ArrayList<>();
         for (int i = 0; i<itemButtons.size(); i++) {
             JButton current = new JButton(itemButtons.get(i).getText());
+            JLabel label = new JLabel("0");
             buttons.add(current);
             panel.add(current);
+            panel.add(label);
         }
         return  buttons;
     }
