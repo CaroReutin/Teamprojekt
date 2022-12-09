@@ -1,4 +1,5 @@
 import GUI_Level.GUIBasic;
+import GUI_Level.GUIManager;
 import Rucksack.Item;
 import Rucksack.Rucksack;
 import Rucksack.Level;
