@@ -1,3 +1,5 @@
+package Rucksack;
+
 import java.util.ArrayList;
 
 public class Rucksack {
