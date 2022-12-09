@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GUIFrontpage {
     GUILevelDeciderPage guiLevelDeciderPage;
@@ -22,7 +20,7 @@ public class GUIFrontpage {
         pane.add(titel);
 
         JButton levelButton = new JButton("Level");
-        levelButton.setBounds(190,100,120,40);
+        levelButton.setBounds(190, 100, 120, 40);
         levelButton.setBackground(Color.cyan);
         pane.add(levelButton);
         guiLevelDeciderPage = new GUILevelDeciderPage();
@@ -46,12 +44,12 @@ public class GUIFrontpage {
         settingsButton.setBounds(190, 260, 120, 40);
         settingsButton.setBackground(Color.cyan);
         pane.add(settingsButton);
-        guiOptionsPage = new GUIOptionsPage(frame);
+        guiOptionsPage = new GUIOptionsPage();
 
-        settingsButton.addActionListener(e ->
-            guiOptionsPage.openOptionsPage(frame));
-
+        settingsButton.addActionListener(e -> {
+            guiManager.rePaintFrame(pane);
+            guiOptionsPage.openOptionsPage(frame, guiManager);
+        });
     }
-
 
 }
