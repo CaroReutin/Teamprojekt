@@ -70,16 +70,15 @@ public class GUILevelPage {
         ArrayList<Item> items = level.getItemList();
         ArrayList<JButton> itemButtons = new ArrayList();
         for (int i = 0; i<items.size(); i++) {
-            JReferencingButton current = new JReferencingButton(items.get(i).getName(), level.getItemAmountList().get(i));
+            //JReferencingButton current = new JReferencingButton(items.get(i).getName(), level.getItemAmountList().get(i));
+            JReferencingButton current = new JReferencingButton(items.get(i).getName(), level,  i);
             JLabel label = new JLabel(level.getItemAmountList().get(i).toString());
             current.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(current.getAmount() > 0){
-                        current.setAmount(current.getAmount() - 1);
-                        label.setText(String.valueOf(current.getAmount()));
+                    current.setItemAmount();
+                    label.setText(String.valueOf(current.getAmount()));
 
-                    }
 
                 }
             });
