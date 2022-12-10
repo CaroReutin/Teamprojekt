@@ -1,9 +1,9 @@
-import GUI_Level.GUIBasic;
+import GUI_Level.GUILevelPage;
 import GUI_Level.GUIManager;
 import Rucksack.Item;
 import Rucksack.Rucksack;
 import Rucksack.Level;
-import javax.swing.JFrame;
+
 import java.util.ArrayList;
 
 public class Main{
@@ -32,7 +32,7 @@ public class Main{
         //
 
         guiManager.launch();
-        GUIBasic gui = new GUIBasic(new Level(rucksack,items, amount));
+        GUILevelPage gui = new GUILevelPage(new Level(rucksack,items, amount));
 
     }
 }

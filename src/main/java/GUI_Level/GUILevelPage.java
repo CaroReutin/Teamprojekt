@@ -2,35 +2,31 @@ package GUI_Level;
 
 import Rucksack.Item;
 import Rucksack.Level;
-import Rucksack.Rucksack;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
 
-public class GUIBasic{
+public class GUILevelPage {
     private Level level;
-    public GUIBasic(Level level) {
+    GUIAfterLevelPage guiAfterLevelPage;
+    public GUILevelPage(Level level) {
         this.level = level;
 
     }
 
-    public void startLevelFrame(JFrame frame) {
+    public void startLevelFrame(JFrame frame, GUIManager guiManager) {
         frame.setLayout(new GridLayout(1,3));
 
         JPanel leftPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
 
-        this.escapeButton(centerPanel);
+        this.escapeButton(centerPanel, frame, guiManager);
 
         ArrayList<JButton> itemButtons = this.itemButtoms(rightPanel);
         this.itemRucksackButtons(leftPanel,itemButtons );
@@ -47,14 +43,18 @@ public class GUIBasic{
         frame.add(rightPanel, BorderLayout.EAST);
 
         frame.setVisible(true);
+
     }
 
-    private void escapeButton(JPanel panel){
+    private void escapeButton(JPanel panel, JFrame frame, GUIManager guiManager){
         JButton flucht = new JButton("Flucht");
+        guiAfterLevelPage = new GUIAfterLevelPage();
         flucht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 level.endOfLevel();
+                guiManager.rePaintFrame(panel);
+                guiAfterLevelPage.getAfterLevelPage(frame);
             }
         });
         panel.add(flucht);
@@ -79,7 +79,6 @@ public class GUIBasic{
                         label.setText(String.valueOf(current.getAmount()));
 
                     }
-
                 }
             });
             itemButtons.add(current);
@@ -87,7 +86,6 @@ public class GUIBasic{
             panel.add(label);
         }
         return  itemButtons;
-
     }
 
     /**

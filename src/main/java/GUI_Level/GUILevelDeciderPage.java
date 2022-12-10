@@ -3,7 +3,6 @@ package GUI_Level;
 import Rucksack.Item;
 import Rucksack.Level;
 import Rucksack.Rucksack;
-import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 public class GUILevelDeciderPage {
 
     GUIFrontpage guiFrontpage;
-    GUIBasic guiBasic;
+    GUILevelPage guiLevelPage;
 
 
     public void openLevelDeciderPage(JFrame frame, GUIManager guiManager) {
@@ -49,10 +48,10 @@ public class GUILevelDeciderPage {
         levelOne.setBounds(25, 200, 50, 50);
         levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
-        guiBasic = new GUIBasic(new Level(rucksack,items, amount));
+        guiLevelPage = new GUILevelPage(new Level(rucksack,items, amount));
         levelOne.addActionListener(e -> {
            guiManager.rePaintFrame(pane);
-           guiBasic.startLevelFrame(frame);
+           guiLevelPage.startLevelFrame(frame, guiManager);
         });
 
         JLabel ganove = new JLabel("gieriger Ganove");

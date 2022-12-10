@@ -39,4 +39,10 @@ public class GUIManager {
         pane.revalidate();
         pane.repaint();
     }
+
+    public void rePaintFromLevel(JPanel panel) {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+    }
 }
