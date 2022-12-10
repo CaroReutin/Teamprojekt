@@ -23,27 +23,32 @@ public class GUILevelPage {
 
         frame.setLayout(new GridLayout(1,3));
 
-        JPanel leftPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
-        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
-
-        this.escapeButton(centerPanel);
-
-        this.itemButtoms(rightPanel, leftPanel);
-        //this.itemRucksackButtons(leftPanel,itemButtons );
-
         //Füge Rucksack png ein und ändere größe
-        URL url = getClass().getClassLoader().getResource("rucksack.png");
+        URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
         ImageIcon rucksackImage = new ImageIcon(url);
-        Image scaledRucksackImage = rucksackImage.getImage().getScaledInstance(800,800,java.awt.Image.SCALE_SMOOTH);
-        JLabel picLabel = new JLabel(new ImageIcon(scaledRucksackImage));
-        leftPanel.add(picLabel);
+        Image scaledRucksackImage = rucksackImage.getImage().getScaledInstance(170,300,java.awt.Image.SCALE_SMOOTH);
+
+
+        JPanel leftPanel = new JBackgroundPanel(scaledRucksackImage);
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel rightPanel = new JPanel();
+        //JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
+
+        // erzeuge Buttons
+        this.escapeButton(centerPanel);
+        this.itemButtoms(rightPanel, leftPanel);
+
+
+        //alles zusammenpuzzeln
 
         frame.add(leftPanel, BorderLayout.WEST);
+        //frame.add(background, BorderLayout.WEST);
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.add(rightPanel, BorderLayout.EAST);
 
+        //layeredPane.setVisible(true);
         frame.setVisible(true);
+
     }
 
     private void escapeButton(JPanel panel){
@@ -86,9 +91,7 @@ public class GUILevelPage {
      */
     private void itemButtoms(JPanel panelItems, JPanel panelRucksack) {
         ArrayList<Item> items = level.getItemList();
-        //ArrayList<JButton> itemButtons = new ArrayList();
         for (int i = 0; i<items.size(); i++) {
-            //JReferencingButton current = new JReferencingButton(items.get(i).getName(), level.getItemAmountList().get(i));
             JReferencingButton current = new JReferencingButton(items.get(i).getName(), level,  i);
             JLabel label = new JLabel(level.getItemAmountList().get(i).toString());
 
@@ -112,7 +115,6 @@ public class GUILevelPage {
                     label.setText(String.valueOf(current.getAmountLevelItem()));
                 }
             });
-            //itemButtons.add(current);
             panelItems.add(current);
             panelItems.add(label);
             panelRucksack.add(currentRucksack);
@@ -122,23 +124,7 @@ public class GUILevelPage {
 
     }
 
-    /**
-     * fügt Item-Buttons in Rucksack ein
-     * @param panel
-     * @param itemButtons
-     * @return
-     */
-    private ArrayList<JButton> itemRucksackButtons(JPanel panel, ArrayList<JButton> itemButtons) {
-        ArrayList<JButton> buttons = new ArrayList<>();
-        for (int i = 0; i<itemButtons.size(); i++) {
-            JButton current = new JButton(itemButtons.get(i).getText());
-            JLabel label = new JLabel("0");
-            buttons.add(current);
-            panel.add(current);
-            panel.add(label);
-        }
-        return  buttons;
-    }
+
 
 
 }
