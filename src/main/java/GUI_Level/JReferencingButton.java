@@ -27,7 +27,6 @@ public class JReferencingButton extends JButton {
            level.getItemAmountList().set(position ,itemAmount - 1 );
        }
         System.out.println(level.getItemAmountList());
-
     }
 
     public int getAmount(){

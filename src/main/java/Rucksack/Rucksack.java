@@ -108,7 +108,4 @@ public class Rucksack {
         currentWeight = 0;
         currentValue = 0;
     }
-
-
-
 }
