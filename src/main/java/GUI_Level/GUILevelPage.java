@@ -18,8 +18,10 @@ import java.util.ArrayList;
 
 public class GUILevelPage {
     private Level level;
+
     public GUILevelPage(Level level) {
         this.level = level;
+
         JFrame frame = new JFrame();
         frame.setTitle("Level");
         frame.setSize(500,500);
@@ -33,8 +35,8 @@ public class GUILevelPage {
 
         this.escapeButton(centerPanel);
 
-        ArrayList<JButton> itemButtons = this.itemButtoms(rightPanel);
-        this.itemRucksackButtons(leftPanel,itemButtons );
+        this.itemButtoms(rightPanel, leftPanel);
+        //this.itemRucksackButtons(leftPanel,itemButtons );
 
         //Füge Rucksack png ein und ändere größe
         URL url = getClass().getClassLoader().getResource("rucksack.png");
@@ -63,30 +65,36 @@ public class GUILevelPage {
 
     /**
      * fügt zur Verfügung stehende Items als Button ein
-     * @param panel
+     * @param
      * @return
      */
-    private ArrayList<JButton> itemButtoms(JPanel panel) {
+    private void itemButtoms(JPanel panelItems, JPanel panelRucksack) {
         ArrayList<Item> items = level.getItemList();
-        ArrayList<JButton> itemButtons = new ArrayList();
+        //ArrayList<JButton> itemButtons = new ArrayList();
         for (int i = 0; i<items.size(); i++) {
             //JReferencingButton current = new JReferencingButton(items.get(i).getName(), level.getItemAmountList().get(i));
             JReferencingButton current = new JReferencingButton(items.get(i).getName(), level,  i);
             JLabel label = new JLabel(level.getItemAmountList().get(i).toString());
+
+            JReferencingButton currentRucksack = new JReferencingButton(items.get(i).getName(), level, i);
+            JLabel labelRucksack = new JLabel("0");
             current.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     current.setItemAmount();
-                    label.setText(String.valueOf(current.getAmount()));
+                    label.setText(String.valueOf(current.getAmountLevelItem()));
+                    labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
 
 
                 }
             });
-            itemButtons.add(current);
-            panel.add(current);
-            panel.add(label);
+            //itemButtons.add(current);
+            panelItems.add(current);
+            panelItems.add(label);
+            panelRucksack.add(currentRucksack);
+            panelRucksack.add(labelRucksack);
+
         }
-        return  itemButtons;
 
     }
 

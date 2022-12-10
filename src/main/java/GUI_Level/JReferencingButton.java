@@ -1,11 +1,13 @@
 package GUI_Level;
 
 import Rucksack.Level;
+import Rucksack.Rucksack;
 
 import javax.swing.*;
 
 public class JReferencingButton extends JButton {
     private Level level;
+
     /**
      * Stelle des Items in der Itemslist
      */
@@ -17,6 +19,7 @@ public class JReferencingButton extends JButton {
         this.position = position;
     }
 
+
     public Level getLevel() {
         return level;
     }
@@ -25,11 +28,17 @@ public class JReferencingButton extends JButton {
         int itemAmount = level.getItemAmountList().get(position);
         if(itemAmount > 0) {
            level.getItemAmountList().set(position ,itemAmount - 1 );
+           level.getRucksack().getAmountList().set(position, (level.getRucksack().getAmountList().get(position) + 1));
+            System.out.println("Rucksack Itemanzahlen:" + level.getRucksack().getAmountList());
+            System.out.println("zur Verügung stehende Itemanzahlen:" + level.getItemAmountList());
        }
-        System.out.println(level.getItemAmountList());
     }
 
-    public int getAmount(){
+    public int getAmountLevelItem(){
         return level.getItemAmountList().get(position);
+    }
+
+    public int getAmountRucksackItem() {
+        return level.getRucksack().getAmountList().get(position);
     }
 }

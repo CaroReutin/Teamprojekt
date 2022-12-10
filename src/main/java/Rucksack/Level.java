@@ -34,6 +34,11 @@ public class Level {
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = Robber.DR_META;
+
+        for (int i = 0; i < itemList.size(); i++) {
+            rucksack.getItems().add(itemList.get(i));
+            rucksack.getAmountList().add(0);
+        }
     }
 
     /**
@@ -53,6 +58,11 @@ public class Level {
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = Robber.DR_META;
+
+        for (int i = 0; i < itemList.size(); i++) {
+            rucksack.getItems().add(itemList.get(i));
+            rucksack.getAmountList().add(0);
+        }
     }
     /**
      *
@@ -70,6 +80,11 @@ public class Level {
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = robber;
+
+        for (int i = 0; i < itemList.size(); i++) {
+            rucksack.getItems().add(itemList.get(i));
+            rucksack.getAmountList().add(0);
+        }
     }
 
     /**
@@ -88,6 +103,11 @@ public class Level {
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = robber;
+
+        for (int i = 0; i < itemList.size(); i++) {
+            rucksack.getItems().add(itemList.get(i));
+            rucksack.getAmountList().add(0);
+        }
     }
 
     /**
@@ -96,6 +116,10 @@ public class Level {
      */
     public int getRucksackCapacity(){
         return rucksack.getCapacity();
+    }
+
+    public Rucksack getRucksack() {
+        return rucksack;
     }
 
     /**

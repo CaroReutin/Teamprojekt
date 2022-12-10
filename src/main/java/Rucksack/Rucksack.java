@@ -102,6 +102,10 @@ public class Rucksack {
         }
     }
 
+    public ArrayList<Integer> getAmountList() {
+        return amount;
+    }
+
     public void clearRucksack(){
         items.clear();
         amount.clear();
