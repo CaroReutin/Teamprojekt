@@ -42,11 +42,9 @@ public class GUILevelPage {
         //alles zusammenpuzzeln
 
         frame.add(leftPanel, BorderLayout.WEST);
-        //frame.add(background, BorderLayout.WEST);
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.add(rightPanel, BorderLayout.EAST);
 
-        //layeredPane.setVisible(true);
         frame.setVisible(true);
 
     }
@@ -95,8 +93,13 @@ public class GUILevelPage {
             JReferencingButton current = new JReferencingButton(items.get(i).getName(), level,  i);
             JLabel label = new JLabel(level.getItemAmountList().get(i).toString());
 
+            Font f = label.getFont();
+            label.setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+
             JReferencingButton currentRucksack = new JReferencingButton(items.get(i).getName(), level, i);
             JLabel labelRucksack = new JLabel("0");
+            Font fRucksack = labelRucksack.getFont();
+            labelRucksack.setFont(fRucksack.deriveFont(fRucksack.getStyle() | Font.BOLD));
             current.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
