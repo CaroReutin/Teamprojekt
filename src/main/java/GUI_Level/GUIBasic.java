@@ -20,11 +20,10 @@ public class GUIBasic{
     private Level level;
     public GUIBasic(Level level) {
         this.level = level;
-        JFrame frame = new JFrame();
-        frame.setTitle("Level");
-        frame.setSize(500,500);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+    }
+
+    public void startLevelFrame(JFrame frame) {
         frame.setLayout(new GridLayout(1,3));
 
         JPanel leftPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));

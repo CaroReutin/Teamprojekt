@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import java.util.ArrayList;
 
 public class Main{
+
     public static void main(String[] args) {
+        GUIManager guiManager = new GUIManager();
        /* JFrame frame = new JFrame();
         frame.setTitle("Teamprojekt");
         frame.setSize(400,400);
@@ -28,6 +30,8 @@ public class Main{
         amount.add(7);
         amount.add(4);
         //
+
+        guiManager.launch();
         GUIBasic gui = new GUIBasic(new Level(rucksack,items, amount));
 
     }
