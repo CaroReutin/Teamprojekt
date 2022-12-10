@@ -1,17 +1,11 @@
 package GUI_Level;
 
-import Rucksack.Item;
-import Rucksack.Level;
-import Rucksack.Rucksack;
+import Rucksack.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -57,6 +51,28 @@ public class GUILevelPage {
         flucht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String[] buttons = {"Erneut Spielen","Nächstes Level","Levelauswahl"};
+                int chosenButton = JOptionPane.showOptionDialog(panel,"Hier steht Tips / Feedback","Geflohen",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,buttons,buttons[0]);
+                switch (chosenButton) {
+                    case 0:
+                        //LevelManager.restart();
+                        System.out.println("Es wurde auf " + buttons[0] + " geklickt.");
+                        break;
+                    case 1:
+                        //LevelManager.nextLevel();
+                        System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+                        break;
+                    case 2:
+                        /*
+                        GuiLevelDeciderPage guiLevelDeciderPage = new guiLevelDeciderPage();
+                        back.addActionListener(e -> {
+                            guiManager.rePaintFrame(pane);
+                            guiLevelDeciderPage.getFrontPage(frame);
+                        });
+                         */
+                        System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
+                        break;
+                }
                 level.endOfLevel();
             }
         });
