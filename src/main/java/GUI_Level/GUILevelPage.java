@@ -104,6 +104,14 @@ public class GUILevelPage {
 
                 }
             });
+            currentRucksack.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    currentRucksack.setRucksackItemAmount();
+                    labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
+                    label.setText(String.valueOf(current.getAmountLevelItem()));
+                }
+            });
             //itemButtons.add(current);
             panelItems.add(current);
             panelItems.add(label);
