@@ -7,6 +7,7 @@ public class GUIFrontpage {
     GUILevelDeciderPage guiLevelDeciderPage;
     GUIOptionsPage guiOptionsPage;
     GUIManager guiManager;
+    GUIAfterLevelPage guiAfterLevelPage;
 
 
     public void getFrontPage(JFrame frame) {
@@ -39,6 +40,8 @@ public class GUIFrontpage {
         pane.add(ownLevelButton);
 
         ownLevelButton.addActionListener(e -> {
+            guiManager.rePaintFrame(pane);
+            guiAfterLevelPage.getAfterLevelPage(frame);
 
         });
 
