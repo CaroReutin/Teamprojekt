@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Solver {
 
     /**
-     * The Result can change based on the Order of the Items ArrayList in Level
      *
      * @param level the level to solve
      * @return Returns an ArrayList of Items that a Greedy Algorithm would put in the Rucksack
@@ -21,7 +20,6 @@ public class Solver {
 
 
     /**
-     * The Result can change based on the Order of the ArrayLists
      *
      * @param items ArrayList of Items available
      * @param amount Amount of Items available (amount.get(i) must be the amount of the item items.get(i))
