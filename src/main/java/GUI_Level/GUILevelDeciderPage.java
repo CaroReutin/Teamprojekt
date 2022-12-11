@@ -34,6 +34,7 @@ public class GUILevelDeciderPage {
         Item crown = new Item(50, 8, "crown");
         Item pearl = new Item(11, 2, "pearl");
         Rucksack rucksack = new Rucksack(60);
+        int levelindex = 0;
 
         ArrayList<Item> items = new ArrayList<>();
         items.add(coin);
@@ -50,7 +51,7 @@ public class GUILevelDeciderPage {
         levelOne.setBounds(25, 200, 50, 50);
         levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
-        guiLevelPage = new GUILevelPage(new Level(rucksack,items, amount));
+        guiLevelPage = new GUILevelPage(new Level(rucksack,items, amount,levelindex));
         levelOne.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
             guiLevelPage.startLevelFrame(frame, guiManager);
