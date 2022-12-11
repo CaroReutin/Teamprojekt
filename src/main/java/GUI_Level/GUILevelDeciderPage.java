@@ -194,10 +194,9 @@ public class GUILevelDeciderPage {
         JButton backToFrontPage = new JButton("zurück");
         backToFrontPage.setBounds(25, 25, 80, 40);
         pane.add(backToFrontPage);
-        guiFrontpage = new GUIFrontpage();
         backToFrontPage.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
-            guiFrontpage.getFrontPage(frame);
+            guiManager.getGuiFrontPage().getFrontPage(frame);
         });
 
         /*//Test Sternbutton

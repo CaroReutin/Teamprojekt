@@ -26,7 +26,7 @@ public class GUILevelPage {
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
 
-        this.escapeButton(centerPanel, frame, guiManager);
+        this.escapeButton(centerPanel, frame, guiManager, leftPanel, rightPanel);
 
         ArrayList<JButton> itemButtons = this.itemButtoms(rightPanel);
         this.itemRucksackButtons(leftPanel,itemButtons );
@@ -46,18 +46,23 @@ public class GUILevelPage {
 
     }
 
-    private void escapeButton(JPanel panel, JFrame frame, GUIManager guiManager){
+    private void escapeButton(JPanel centerPanel, JFrame frame, GUIManager guiManager, JPanel leftPanel, JPanel rightPanel){
         JButton flucht = new JButton("Flucht");
-        guiAfterLevelPage = new GUIAfterLevelPage();
         flucht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                level.endOfLevel();
-                guiManager.rePaintFrame(panel);
-                guiAfterLevelPage.getAfterLevelPage(frame);
+                clearPanel(centerPanel, guiManager);
+                clearPanel(leftPanel, guiManager);
+                clearPanel(rightPanel, guiManager);
+                guiManager.getGuiAfterLevelPage().getAfterLevelPage(frame, guiManager);
+              //  level.endOfLevel();
             }
         });
-        panel.add(flucht);
+        centerPanel.add(flucht);
+    }
+
+    private void clearPanel(JPanel panel, GUIManager guiManager) {
+        guiManager.rePaintFromLevel(panel);
     }
 
     /**

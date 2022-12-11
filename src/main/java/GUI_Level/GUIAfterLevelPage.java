@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUIAfterLevelPage {
-    public void getAfterLevelPage(JFrame frame) {
+    public void getAfterLevelPage(JFrame frame, GUIManager guiManager) {
         Container pane = frame.getContentPane();
         pane.setLayout(null);
 
@@ -16,7 +16,7 @@ public class GUIAfterLevelPage {
         pane.add(titel);
 
         JButton resetButton = new JButton("Level wiederholen");
-        resetButton.setBounds(190,100,120,40);
+        resetButton.setBounds(60,100,150,40);
         resetButton.setBackground(Color.cyan);
         pane.add(resetButton);
 
@@ -33,6 +33,14 @@ public class GUIAfterLevelPage {
 
         });
 
+        JButton backToFrontPage = new JButton("zurück");
+        backToFrontPage.setBounds(25, 25, 80, 40);
+        pane.add(backToFrontPage);
+
+        backToFrontPage.addActionListener(e -> {
+            guiManager.rePaintFrame(pane);
+            guiManager.getGuiFrontPage().getFrontPage(frame);
+        });
     }
 
 }

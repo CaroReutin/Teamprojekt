@@ -19,7 +19,14 @@ public class GUIManager {
     }
 
     private LevelManager lm = new LevelManager();
+
+
+
+
     GUIFrontpage guiFrontPage = new GUIFrontpage();
+    GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
+    GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+    GUIAfterLevelPage guiAfterLevelPage = new GUIAfterLevelPage();
 
     public void launch(){
         innit();
@@ -45,4 +52,22 @@ public class GUIManager {
         panel.revalidate();
         panel.repaint();
     }
+
+    public GUIFrontpage getGuiFrontPage() {
+        return guiFrontPage;
+    }
+
+    public GUIOptionsPage getGuiOptionsPage() {
+        return guiOptionsPage;
+    }
+
+
+    public GUILevelDeciderPage getGuiLevelDeciderPage() {
+        return guiLevelDeciderPage;
+    }
+
+    public GUIAfterLevelPage getGuiAfterLevelPage() {
+        return guiAfterLevelPage;
+    }
+
 }
