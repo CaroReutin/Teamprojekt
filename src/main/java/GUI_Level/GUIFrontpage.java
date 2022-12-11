@@ -41,7 +41,7 @@ public class GUIFrontpage {
 
         ownLevelButton.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
-            guiAfterLevelPage.getAfterLevelPage(frame);
+            guiAfterLevelPage.getAfterLevelPage(frame, guiManager);
 
         });
 

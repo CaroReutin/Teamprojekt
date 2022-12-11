@@ -15,12 +15,9 @@ public class GUILevelPage {
 
     public GUILevelPage(Level level) {
         this.level = level;
+    }
 
-        JFrame frame = new JFrame();
-        frame.setTitle("Level");
-        frame.setSize(500,500);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+    public void startLevelFrame(JFrame frame, GUIManager guiManager) {
         frame.setLayout(new GridLayout(1,3));
 
         //Füge Rucksack png ein und ändere größe
@@ -46,7 +43,6 @@ public class GUILevelPage {
         frame.add(rightPanel, BorderLayout.EAST);
 
         frame.setVisible(true);
-
     }
 
     private void escapeButton(JPanel panel){

@@ -1,3 +1,4 @@
+
 package GUI_Level;
 
 import Rucksack.Item;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class GUILevelDeciderPage {
 
     GUIFrontpage guiFrontpage;
-    GUILevelPage guiBasic;
+    GUILevelPage guiLevelPage;
 
 
     public void openLevelDeciderPage(JFrame frame, GUIManager guiManager) {
@@ -49,10 +50,10 @@ public class GUILevelDeciderPage {
         levelOne.setBounds(25, 200, 50, 50);
         levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
-        guiBasic = new GUILevelPage(new Level(rucksack,items, amount));
+        guiLevelPage = new GUILevelPage(new Level(rucksack,items, amount));
         levelOne.addActionListener(e -> {
-           guiManager.rePaintFrame(pane);
-           //guiBasic.startLevelFrame(frame);
+            guiManager.rePaintFrame(pane);
+            guiLevelPage.startLevelFrame(frame, guiManager);
         });
 
         JLabel ganove = new JLabel("gieriger Ganove");
@@ -195,10 +196,9 @@ public class GUILevelDeciderPage {
         JButton backToFrontPage = new JButton("zurück");
         backToFrontPage.setBounds(25, 25, 80, 40);
         pane.add(backToFrontPage);
-        guiFrontpage = new GUIFrontpage();
         backToFrontPage.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
-            guiFrontpage.getFrontPage(frame);
+            guiManager.getGuiFrontPage().getFrontPage(frame);
         });
 
         /*//Test Sternbutton

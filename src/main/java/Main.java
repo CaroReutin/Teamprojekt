@@ -1,12 +1,15 @@
-import GUI_Level.GUILevelPage;
+
+import GUI_Level.GUIManager;
 import Rucksack.Item;
 import Rucksack.Rucksack;
-import Rucksack.Level;
+
 
 import java.util.ArrayList;
 
 public class Main{
     public static void main(String[] args) {
+
+        GUIManager guiManager = new GUIManager();
 
         //Test ItemButtons
         Item coin = new Item(5, 1, "coin");
@@ -23,7 +26,9 @@ public class Main{
         amount.add(7);
         amount.add(4);
         //
-        GUILevelPage gui = new GUILevelPage(new Level(rucksack,items, amount));
+
+        guiManager.launch();
+
 
     }
 }
