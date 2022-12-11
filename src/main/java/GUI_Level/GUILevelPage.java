@@ -62,6 +62,7 @@ public class GUILevelPage {
                         System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
                         break;
                     case 2:
+
                         /*
                         GuiLevelDeciderPage guiLevelDeciderPage = new guiLevelDeciderPage();
                         back.addActionListener(e -> {

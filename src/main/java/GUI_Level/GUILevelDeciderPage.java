@@ -4,7 +4,6 @@ package GUI_Level;
 import Rucksack.Item;
 import Rucksack.Level;
 import Rucksack.Rucksack;
-import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 
 public class GUILevelDeciderPage {
 
-    GUIFrontpage guiFrontpage;
     GUILevelPage guiLevelPage;
 
 
@@ -27,7 +25,6 @@ public class GUILevelDeciderPage {
         titel.setBounds(200, 20, 300, 40);
         titel.setFont(fontStyle);
         pane.add(titel);
-
 
         //Testlevel 1
         Item coin = new Item(5, 1, "coin");
@@ -44,7 +41,6 @@ public class GUILevelDeciderPage {
         amount.add(7);
         amount.add(4);
         //
-
 
         JButton levelOne = new JButton("1");
         levelOne.setBounds(25, 200, 50, 50);
@@ -200,24 +196,6 @@ public class GUILevelDeciderPage {
             guiManager.rePaintFrame(pane);
             guiManager.getGuiFrontPage().getFrontPage(frame);
         });
-
-        /*//Test Sternbutton
-        JButton levelTestStern = new JButton("1");
-        levelTestStern.setIcon(new ImageIcon("src/main/resources/stern.png"));
-        levelTestStern.setBounds(400, 400, 50, 50);
-        levelTestStern.setBorder(null);
-        levelTestStern.setBackground(Color.getHSBColor(0,0,93));
-        pane.add(levelTestStern);
-        levelTestStern.addActionListener(e -> {
-            //Methode die aufgerufen werden soll
-        });*/
-
-
-
-
-
-
-
 
     }
 }
