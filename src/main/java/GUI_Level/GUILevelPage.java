@@ -1,6 +1,7 @@
 package GUI_Level;
 
 import Rucksack.*;
+import Solving.UserDataManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,6 +51,9 @@ public class GUILevelPage {
         flucht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (level.getRucksack().getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())){
+                    UserDataManager.save();
+                }
                 String[] buttons = {"Erneut Spielen","Nächstes Level","Levelauswahl"};
                 int chosenButton = JOptionPane.showOptionDialog(panel,"Hier steht Tips / Feedback","Geflohen",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,buttons,buttons[0]);
                 switch (chosenButton) {

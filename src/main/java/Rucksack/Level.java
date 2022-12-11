@@ -3,6 +3,10 @@ package Rucksack;
 import java.util.ArrayList;
 
 public class Level {
+    public int getLevelNumber() {
+        return this.levelindex;
+    }
+
     /**
      * Greedy -> Gieriger Ganove
      * Backtracking -> Backtracking Bandit
@@ -17,6 +21,7 @@ public class Level {
     private ArrayList<Integer> availableItemAmountList;
     private ArrayList<String> tips;
     private Robber robber;
+    private int levelindex;
 
     /**
      * By default, has Dr.Meta as Robber.
@@ -25,8 +30,10 @@ public class Level {
      * @param rucksack the Rucksack
      * @param itemList ArrayList of available Items
      * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
+     * @param levelindex the index of the level
      */
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList) {
+    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, int levelindex) {
+        this.levelindex = levelindex;
         this.rucksack = rucksack;
         this.itemList = itemList;
         this.tips = new ArrayList<>();
@@ -49,8 +56,10 @@ public class Level {
      * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
      * @param tips ArrayList of String that are the tips
      * @param robber the Robber
+     * @param levelindex the index of the level
      */
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips, Robber robber) {
+    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips, Robber robber, int levelindex) {
+        this.levelindex = levelindex;
         this.rucksack = rucksack;
         this.tips = tips;
         this.itemList = itemList;
