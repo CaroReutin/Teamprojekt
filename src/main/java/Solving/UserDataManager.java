@@ -1,9 +1,10 @@
+package Solving;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
 
-package Solving;
 
 public class UserDataManager {
     private static UserData data = new UserData();
@@ -37,7 +38,7 @@ public class UserDataManager {
      * @param saveFolder the Folder in which userData.save should be saved in
      */
     public static void save(String saveFolder) {
-        new File(saveFolder).mkdir();
+        new File(saveFolder).mkdirs();
         String saveFilePath = saveFolder + "/userData.xml";
         try {
             FileOutputStream fos = new FileOutputStream(saveFilePath);
@@ -70,7 +71,7 @@ public class UserDataManager {
      *
      */
     public static void load(String saveFolder){
-        new File(saveFolder).mkdir();
+        new File(saveFolder).mkdirs();
         String saveFilePath = saveFolder + "/userData.xml";
         File saveFile = new File(saveFilePath);
         if (!saveFile.exists()) {

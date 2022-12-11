@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GUILevelDeciderPage {
 
     GUIFrontpage guiFrontpage;
-    GUIBasic guiBasic;
+    GUILevelPage guiBasic;
 
 
     public void openLevelDeciderPage(JFrame frame, GUIManager guiManager) {
@@ -49,10 +49,10 @@ public class GUILevelDeciderPage {
         levelOne.setBounds(25, 200, 50, 50);
         levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
-        guiBasic = new GUIBasic(new Level(rucksack,items, amount));
+        guiBasic = new GUILevelPage(new Level(rucksack,items, amount));
         levelOne.addActionListener(e -> {
            guiManager.rePaintFrame(pane);
-           guiBasic.startLevelFrame(frame);
+           //guiBasic.startLevelFrame(frame);
         });
 
         JLabel ganove = new JLabel("gieriger Ganove");
