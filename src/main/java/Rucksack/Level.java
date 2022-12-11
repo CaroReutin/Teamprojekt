@@ -34,26 +34,14 @@ public class Level {
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = Robber.DR_META;
+
+        for (int i = 0; i < itemList.size(); i++) {
+            rucksack.getItems().add(itemList.get(i));
+            rucksack.getAmountList().add(0);
+        }
     }
 
-    /**
-     * By default, has Dr.Meta as Robber.
-     *
-     * @param rucksack the Rucksack
-     * @param itemList ArrayList of available Items
-     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
-     * @param tips ArrayList of String that are the tips
-     */
 
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips) {
-        this.rucksack = rucksack;
-        this.tips = tips;
-        this.itemList = itemList;
-        this.itemAmountList = itemAmountList;
-        this.availableItemAmountList = itemAmountList;
-        this.availableItemList = itemList;
-        this.robber = Robber.DR_META;
-    }
     /**
      *
      * @param rucksack the Rucksack
@@ -70,25 +58,13 @@ public class Level {
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = robber;
+
+        for (int i = 0; i < itemList.size(); i++) {
+            rucksack.getItems().add(itemList.get(i));
+            rucksack.getAmountList().add(0);
+        }
     }
 
-    /**
-     * Has no tips.
-     *
-     * @param rucksack the Rucksack
-     * @param itemList ArrayList of available Items
-     * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
-     * @param robber the Robber
-     */
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, Robber robber) {
-        this.rucksack = rucksack;
-        this.tips = new ArrayList<>();
-        this.itemList = itemList;
-        this.itemAmountList = itemAmountList;
-        this.availableItemAmountList = itemAmountList;
-        this.availableItemList = itemList;
-        this.robber = robber;
-    }
 
     /**
      *
@@ -96,6 +72,10 @@ public class Level {
      */
     public int getRucksackCapacity(){
         return rucksack.getCapacity();
+    }
+
+    public Rucksack getRucksack() {
+        return rucksack;
     }
 
     /**
