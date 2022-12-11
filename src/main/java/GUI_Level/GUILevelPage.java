@@ -88,9 +88,17 @@ public class GUILevelPage {
      * @return
      */
     private void itemButtoms(JPanel panelItems, JPanel panelRucksack) {
+        JLabel currentWeightLabel = new JLabel("0/" + level.getRucksack().getCapacity() + "g");
+        Font fCurrentWeightLabel = currentWeightLabel.getFont();
+        currentWeightLabel.setFont(fCurrentWeightLabel.deriveFont(fCurrentWeightLabel.getStyle() | Font.BOLD));
+
+        JLabel currentValueLabel = new JLabel("0€");
+        Font fcurrentValueLabel = currentValueLabel.getFont();
+        currentValueLabel.setFont(fcurrentValueLabel.deriveFont(fcurrentValueLabel.getStyle() | Font.BOLD));
+
         ArrayList<Item> items = level.getItemList();
         for (int i = 0; i<items.size(); i++) {
-            JReferencingButton current = new JReferencingButton(items.get(i).getName(), level,  i);
+            JReferencingButton current = new JReferencingButton(items.get(i).getName() + " (" + items.get(i).getWeight() + "g, " + items.get(i).getValue() + "€)", level,  i);
             JLabel label = new JLabel(level.getItemAmountList().get(i).toString());
 
             Font f = label.getFont();
@@ -103,9 +111,14 @@ public class GUILevelPage {
             current.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    current.setItemAmount();
-                    label.setText(String.valueOf(current.getAmountLevelItem()));
-                    labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
+                    if((level.getRucksack().getCurrentWeight() + current.getLevel().getRucksack().getItems().get(current.getPosition()).getWeight() )<= level.getRucksack().getCapacity()) {
+                        current.setItemAmount();
+                        label.setText(String.valueOf(current.getAmountLevelItem()));
+                        labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
+                        currentWeightLabel.setText(level.getRucksack().getCurrentWeight() + "/" + level.getRucksack().getCapacity() + "g");
+                        currentValueLabel.setText((level.getRucksack().getCurrentValue() + "€"));
+                    }
+
 
 
                 }
@@ -116,12 +129,16 @@ public class GUILevelPage {
                     currentRucksack.setRucksackItemAmount();
                     labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
                     label.setText(String.valueOf(current.getAmountLevelItem()));
+                    currentWeightLabel.setText(level.getRucksack().getCurrentWeight() + "/" + level.getRucksack().getCapacity() + "g");
+                    currentValueLabel.setText((level.getRucksack().getCurrentValue() + "€"));
                 }
             });
             panelItems.add(current);
             panelItems.add(label);
             panelRucksack.add(currentRucksack);
             panelRucksack.add(labelRucksack);
+            panelRucksack.add(currentWeightLabel);
+            panelRucksack.add(currentValueLabel);
 
         }
 

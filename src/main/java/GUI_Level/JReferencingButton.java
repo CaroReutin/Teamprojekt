@@ -24,6 +24,10 @@ public class JReferencingButton extends JButton {
         return level;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     /**
      * setzt die Anzahl an Items in Rucksack und in zur Verfügung stehenden Mwnge wenn ein Item in den Rucksack gepackt wird
      */
