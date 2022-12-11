@@ -102,13 +102,14 @@ public class Rucksack {
         }
     }
 
+    public ArrayList<Integer> getAmountList() {
+        return amount;
+    }
+
     public void clearRucksack(){
         items.clear();
         amount.clear();
         currentWeight = 0;
         currentValue = 0;
     }
-
-
-
 }

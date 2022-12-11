@@ -1,19 +1,15 @@
+package Rucksack;
 import GUI_Level.GUILevelPage;
-import GUI_Level.GUILevelPage;
-import GUI_Level.GUIManager;
-import Rucksack.Item;
-import Rucksack.Rucksack;
-import Rucksack.Level;
-import GUI_Level.GUIManager;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 
-public class Main{
-    public static void main(String[] args) {
-
-        GUIManager guiManager = new GUIManager();
-
-        //Test ItemButtons
+class GUIBasicTest{
+    @Test
+    void runBasicGui(){
         Item coin = new Item(5, 1, "coin");
         Item crown = new Item(50, 8, "crown");
         Item pearl = new Item(11, 2, "pearl");
@@ -28,9 +24,9 @@ public class Main{
         amount.add(7);
         amount.add(4);
         //
-
-        guiManager.launch();
         GUILevelPage gui = new GUILevelPage(new Level(rucksack,items, amount));
 
     }
+
+
 }

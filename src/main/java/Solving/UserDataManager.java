@@ -1,11 +1,9 @@
-
 package Solving;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
-
 
 
 public class UserDataManager {
