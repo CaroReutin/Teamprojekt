@@ -13,10 +13,8 @@ import java.util.ArrayList;
 
 public class GUILevelPage {
     private Level level;
-    GUIAfterLevelPage guiAfterLevelPage;
     public GUILevelPage(Level level) {
         this.level = level;
-
     }
 
     public void startLevelFrame(JFrame frame, GUIManager guiManager) {
@@ -55,7 +53,7 @@ public class GUILevelPage {
                 clearPanel(leftPanel, guiManager);
                 clearPanel(rightPanel, guiManager);
                 guiManager.getGuiAfterLevelPage().getAfterLevelPage(frame, guiManager);
-              //  level.endOfLevel();
+                level.endOfLevel();
             }
         });
         centerPanel.add(flucht);
