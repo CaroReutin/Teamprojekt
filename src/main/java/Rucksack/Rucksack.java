@@ -15,7 +15,6 @@ public class Rucksack {
 
     private ArrayList<Item> items = new ArrayList();
 
-    private ArrayList<Item> items = new ArrayList<>();
     /**
      * contains amount of the corresponding items at the same position
      */
