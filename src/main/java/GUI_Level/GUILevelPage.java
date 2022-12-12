@@ -58,7 +58,7 @@ public class GUILevelPage {
                 int chosenButton = JOptionPane.showOptionDialog(panel,"Hier steht Tips / Feedback","Geflohen",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,buttons,buttons[0]);
                 switch (chosenButton) {
                     case 0:
-                        LevelManager.restart(level, frame, manager);
+                        LevelManager.resetLevel(level, frame, manager);
                         System.out.println("Es wurde auf " + buttons[0] + " geklickt.");
                         break;
                     case 1:
