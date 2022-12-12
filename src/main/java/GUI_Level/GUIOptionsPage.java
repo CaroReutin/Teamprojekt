@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 
 public class GUIOptionsPage {
     private JFormattedTextField passwordInput;
-    GUIFrontpage guiFrontpage;
 
     public void openOptionsPage(JFrame frame, GUIManager guiManager) {
         Container pane = frame.getContentPane();
@@ -27,11 +26,10 @@ public class GUIOptionsPage {
         enterPassword.setBounds(4*frame.getWidth()/10,2*frame.getHeight()/10 + passwordInput.getHeight(), 2*frame.getWidth()/10,frame.getHeight()/10);
         enterPassword.addActionListener(e -> confirmPassword(passwordInput.getText(),frame));
         back.setBounds(4*frame.getWidth()/10,3*frame.getHeight()/10 + passwordInput.getHeight() + enterPassword.getHeight(), 2*frame.getWidth()/10,frame.getHeight()/10);
-        guiFrontpage = new GUIFrontpage();
         back.addActionListener(e -> {
             frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0));
             guiManager.rePaintFrame(pane);
-            guiFrontpage.getFrontPage(frame);
+            guiManager.getGuiFrontPage().getFrontPage(frame);
         });
         passwordInput.setValue("");
         pane.add(passwordInput);
