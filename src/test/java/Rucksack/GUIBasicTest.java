@@ -24,7 +24,7 @@ class GUIBasicTest{
         amount.add(7);
         amount.add(4);
         //
-        GUILevelPage gui = new GUILevelPage(new Level(rucksack,items, amount));
+        GUILevelPage gui = new GUILevelPage(new Level(rucksack,items, amount,0));
 
     }
 

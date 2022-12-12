@@ -12,8 +12,10 @@ public class Rucksack {
     /**
      * list of items inside the rucksack
      */
+
     private ArrayList<Item> items = new ArrayList();
 
+    private ArrayList<Item> items = new ArrayList<>();
     /**
      * contains amount of the corresponding items at the same position
      */
@@ -134,6 +136,10 @@ public class Rucksack {
             currentWeight -= item.getWeight();
         }
         counter++;
+    }
+
+    public ArrayList<Integer> getAmountList() {
+        return amount;
     }
 
     public void clearRucksack(){
