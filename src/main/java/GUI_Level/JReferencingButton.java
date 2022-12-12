@@ -1,7 +1,6 @@
 package GUI_Level;
 
 import Rucksack.Level;
-import Rucksack.Rucksack;
 
 import javax.swing.*;
 
@@ -32,12 +31,12 @@ public class JReferencingButton extends JButton {
      * setzt die Anzahl an Items in Rucksack und in zur Verfügung stehenden Mwnge wenn ein Item in den Rucksack gepackt wird
      */
     public void setItemAmount(){
-        int itemAmount = level.getItemAmountList().get(position);
+        int itemAmount = level.getCurrentItemAmountList().get(position);
         if(itemAmount > 0) {
-           level.getItemAmountList().set(position ,itemAmount - 1 );
+           level.getCurrentItemAmountList().set(position ,itemAmount - 1 );
            level.getRucksack().getAmountList().set(position, (level.getRucksack().getAmountList().get(position) + 1));
             System.out.println("Rucksack Itemanzahlen:" + level.getRucksack().getAmountList());
-            System.out.println("zur Verügung stehende Itemanzahlen:" + level.getItemAmountList());
+            System.out.println("zur Verfügung stehende Itemanzahlen:" + level.getCurrentItemAmountList());
        }
     }
 
@@ -48,14 +47,14 @@ public class JReferencingButton extends JButton {
         int itemAmountRucksack = level.getRucksack().getAmountList().get(position);
         if(itemAmountRucksack > 0) {
             level.getRucksack().getAmountList().set(position ,itemAmountRucksack - 1 );
-            level.getItemAmountList().set(position, (level.getItemAmountList().get(position) + 1));
+            level.getCurrentItemAmountList().set(position, (level.getCurrentItemAmountList().get(position) + 1));
             System.out.println("Rucksack Itemanzahlen:" + level.getRucksack().getAmountList());
-            System.out.println("zur Verügung stehende Itemanzahlen:" + level.getItemAmountList());
+            System.out.println("zur Verügung stehende Itemanzahlen:" + level.getCurrentItemAmountList());
         }
     }
 
     public int getAmountLevelItem(){
-        return level.getItemAmountList().get(position);
+        return level.getCurrentItemAmountList().get(position);
     }
 
     public int getAmountRucksackItem() {

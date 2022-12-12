@@ -1,13 +1,18 @@
 package Rucksack;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Rucksack {
     /**
      * maximal weight that can be put into the rucksack
      */
-    //TODO capacity final machen
-    private int capacity;
+    private final int maximumCapacity;
+
+    /**
+     * weight that is currently in the rucksack
+     */
+    private int currentCapacity;
     /**
      * list of items inside the rucksack
      */
@@ -20,15 +25,16 @@ public class Rucksack {
     private int currentValue = 0;
 
     public Rucksack(int capacity) {
-        this.capacity = capacity;
+        this.currentCapacity = capacity;
+        this.maximumCapacity = capacity;
 
     }
-    public int getCapacity() {
-        return capacity;
+    public int getCurrentCapacity() {
+        return currentCapacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setCurrentCapacity(int currentCapacity) {
+        this.currentCapacity = currentCapacity;
     }
 
     public ArrayList<Item> getItems() {
@@ -70,7 +76,7 @@ public class Rucksack {
      * @param item to be added
      */
     public void addItem(Item item) {
-        if((currentWeight + item.getWeight()) <= capacity ) {
+        if((currentWeight + item.getWeight()) <= currentCapacity) {
             if(items.contains(item)) {
                 int index = items.indexOf(item);
                 amount.set(index, amount.get(index) + 1);
@@ -100,6 +106,19 @@ public class Rucksack {
             currentValue -= item.getValue();
             currentWeight -= item.getWeight();
         }
+    }
+
+    public void resetRucksack() {
+        currentValue = 0;
+        currentWeight = 0;
+        System.out.println("Der Rucksack hat nun den Wert " + currentValue + " und das Gewicht " + currentWeight);
+        setCurrentCapacity(maximumCapacity);
+        System.out.println("Die Kapazität des Rucksacks wurde geändert auf " + currentCapacity);
+        resetAmount();
+    }
+
+    private void resetAmount() {
+        amount.replaceAll(ignored -> 0);
     }
 
     public ArrayList<Integer> getAmountList() {

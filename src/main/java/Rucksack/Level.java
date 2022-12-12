@@ -3,10 +3,6 @@ package Rucksack;
 import java.util.ArrayList;
 
 public class Level {
-    public int getLevelNumber() {
-        return this.levelindex;
-    }
-
     /**
      * Greedy -> Gieriger Ganove
      * Backtracking -> Backtracking Bandit
@@ -17,7 +13,8 @@ public class Level {
     private Rucksack rucksack;
     private ArrayList<Item> itemList;
     private ArrayList<Item> availableItemList;
-    private ArrayList<Integer> itemAmountList;
+    private final ArrayList<Integer> defaultItemAmountList;
+    private ArrayList<Integer> currentItemAmountList;
     private ArrayList<Integer> availableItemAmountList;
     private ArrayList<String> tips;
     private Robber robber;
@@ -37,7 +34,8 @@ public class Level {
         this.rucksack = rucksack;
         this.itemList = itemList;
         this.tips = new ArrayList<>();
-        this.itemAmountList = itemAmountList;
+        this.currentItemAmountList = new ArrayList<Integer>(itemAmountList);
+        this.defaultItemAmountList = new ArrayList<Integer>(itemAmountList);
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = Robber.DR_META;
@@ -63,7 +61,8 @@ public class Level {
         this.rucksack = rucksack;
         this.tips = tips;
         this.itemList = itemList;
-        this.itemAmountList = itemAmountList;
+        this.currentItemAmountList = itemAmountList;
+        this.defaultItemAmountList = itemAmountList;
         this.availableItemAmountList = itemAmountList;
         this.availableItemList = itemList;
         this.robber = robber;
@@ -74,13 +73,16 @@ public class Level {
         }
     }
 
-
+public void setCurrentItemAmountList(ArrayList<Integer> currentItemAmountList) {
+        this.currentItemAmountList = currentItemAmountList;
+        System.out.println("Item amount was changed");
+}
     /**
      *
      * @return Returns the capacity of the Rucksack
      */
     public int getRucksackCapacity(){
-        return rucksack.getCapacity();
+        return rucksack.getCurrentCapacity();
     }
 
     public Rucksack getRucksack() {
@@ -101,8 +103,8 @@ public class Level {
      *
      * @return Returns the amounts of the items that exist in the Rucksack.Level
      */
-    public ArrayList<Integer> getItemAmountList() {
-        return itemAmountList;
+    public ArrayList<Integer> getCurrentItemAmountList() {
+        return currentItemAmountList;
     }
 
     /**
@@ -131,5 +133,22 @@ public class Level {
         } else {
             //TODO
         }
+    }
+
+    /*
+    resets the level through resetting the rucksack first and after that the ItemAmounts are reset
+     */
+    public void resetLevel() {
+        rucksack.resetRucksack();
+        currentItemAmountList = new ArrayList<Integer>(defaultItemAmountList);
+        System.out.println("zur Verfügung stehende Itemanzahlen:" + getCurrentItemAmountList());
+    }
+
+    public int getLevelNumber() {
+        return this.levelindex;
+    }
+
+    public Robber getRobber() {
+        return this.robber;
     }
 }
