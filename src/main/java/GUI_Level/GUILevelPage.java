@@ -18,7 +18,7 @@ public class GUILevelPage {
         this.level = level;
     }
 
-    public void startLevelFrame(JFrame frame, GUIManager guiManager) {
+    public void startLevelFrame(JFrame frame) {
         Container pane = frame.getContentPane();
         pane.setLayout(new GridLayout(1,3));
 
@@ -34,8 +34,8 @@ public class GUILevelPage {
         //JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
 
         // erzeuge Buttons
-        this.escapeButton(centerPanel);
-        this.itemButtoms(rightPanel, leftPanel);
+        this.escapeButton(centerPanel, frame);
+        this.itemButtons(rightPanel, leftPanel);
 
 
         //alles zusammenpuzzeln
@@ -47,7 +47,7 @@ public class GUILevelPage {
         frame.setVisible(true);
     }
 
-    private void escapeButton(JPanel panel){
+    private void escapeButton(JPanel panel, JFrame frame){
         JButton flucht = new JButton("Flucht");
         flucht.addActionListener(new ActionListener() {
             @Override
@@ -60,7 +60,7 @@ public class GUILevelPage {
                 int chosenButton = JOptionPane.showOptionDialog(panel,"Hier steht Tips / Feedback","Geflohen",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,buttons,buttons[0]);
                 switch (chosenButton) {
                     case 0:
-                        LevelManager.resetLevel(level, frame, manager);
+                        LevelManager.resetLevel(level, frame);
                         System.out.println("Es wurde auf " + buttons[0] + " geklickt.");
                         break;
                     case 1:
@@ -68,8 +68,8 @@ public class GUILevelPage {
                         System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
                         break;
                     case 2:
-                        guiManager.rePaintFrame(frame.getContentPane());
-                        guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame, guiManager);
+                        GUIManager.rePaintFrame(frame.getContentPane());
+                        GUIManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame);
 
                         System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
                         break;
@@ -77,7 +77,7 @@ public class GUILevelPage {
                 level.endOfLevel();
             }
         });
-        centerPanel.add(flucht);
+        panel.add(flucht);
     }
 
     /**

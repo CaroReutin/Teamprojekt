@@ -39,7 +39,7 @@ public class JReferencingButton extends JButton {
             System.out.println("zur Verfügung stehende Itemanzahlen:" + level.getCurrentItemAmountList());
        }
 
-        System.out.println(level.getItemAmountList());
+        System.out.println(level.getCurrentItemAmountList());
 
     }
 

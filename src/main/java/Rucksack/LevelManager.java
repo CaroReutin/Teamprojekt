@@ -18,8 +18,8 @@ public class LevelManager {
     /*
     restarts a level through resetting the item selection and the rucksack. After that the GUI is updated.
      */
-    public static void resetLevel(Level level, JFrame frame, GUIManager manager) {
+    public static void resetLevel(Level level, JFrame frame) {
         level.resetLevel();
-        GUILevelDeciderPage.restart(level, frame, manager);
+        GUILevelDeciderPage.restart(level, frame);
     }
 }

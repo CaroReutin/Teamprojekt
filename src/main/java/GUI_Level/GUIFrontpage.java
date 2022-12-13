@@ -25,7 +25,7 @@ public class GUIFrontpage {
 
         levelButton.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
-            guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame, guiManager);
+            guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame);
         });
 
 
