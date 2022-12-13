@@ -38,6 +38,9 @@ public class JReferencingButton extends JButton {
             System.out.println("Rucksack Itemanzahlen:" + level.getRucksack().getAmountList());
             System.out.println("zur Verfügung stehende Itemanzahlen:" + level.getCurrentItemAmountList());
        }
+
+        System.out.println(level.getItemAmountList());
+
     }
 
     /**
@@ -51,6 +54,7 @@ public class JReferencingButton extends JButton {
             System.out.println("Rucksack Itemanzahlen:" + level.getRucksack().getAmountList());
             System.out.println("zur Verügung stehende Itemanzahlen:" + level.getCurrentItemAmountList());
         }
+
     }
 
     public int getAmountLevelItem(){

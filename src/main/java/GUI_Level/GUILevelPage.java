@@ -19,7 +19,8 @@ public class GUILevelPage {
     }
 
     public void startLevelFrame(JFrame frame, GUIManager guiManager) {
-        frame.setLayout(new GridLayout(1,3));
+        Container pane = frame.getContentPane();
+        pane.setLayout(new GridLayout(1,3));
 
         //Füge Rucksack png ein und ändere größe
         URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
@@ -33,25 +34,26 @@ public class GUILevelPage {
         //JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
 
         // erzeuge Buttons
-        this.escapeButton(centerPanel, frame, guiManager);
-        this.itemButtons(rightPanel, leftPanel);
+        this.escapeButton(centerPanel);
+        this.itemButtoms(rightPanel, leftPanel);
 
 
         //alles zusammenpuzzeln
 
-        frame.add(leftPanel, BorderLayout.WEST);
-        frame.add(centerPanel, BorderLayout.CENTER);
-        frame.add(rightPanel, BorderLayout.EAST);
+        pane.add(leftPanel, BorderLayout.WEST);
+        pane.add(centerPanel, BorderLayout.CENTER);
+        pane.add(rightPanel, BorderLayout.EAST);
 
         frame.setVisible(true);
     }
 
-    private void escapeButton(JPanel panel, JFrame frame, GUIManager manager) {
+    private void escapeButton(JPanel panel){
         JButton flucht = new JButton("Flucht");
         flucht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (level.getRucksack().getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())){
+                    UserDataManager.newHighScore(level.getLevelNumber(),level.getRucksack().getCurrentValue());
                     UserDataManager.save();
                 }
                 String[] buttons = {"Erneut Spielen","Nächstes Level","Levelauswahl"};
@@ -66,21 +68,16 @@ public class GUILevelPage {
                         System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
                         break;
                     case 2:
+                        guiManager.rePaintFrame(frame.getContentPane());
+                        guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame, guiManager);
 
-                        /*
-                        GuiLevelDeciderPage guiLevelDeciderPage = new guiLevelDeciderPage();
-                        back.addActionListener(e -> {
-                            guiManager.rePaintFrame(pane);
-                            guiLevelDeciderPage.getFrontPage(frame);
-                        });
-                         */
                         System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
                         break;
                 }
                 level.endOfLevel();
             }
         });
-        panel.add(flucht);
+        centerPanel.add(flucht);
     }
 
     /**
@@ -145,6 +142,15 @@ public class GUILevelPage {
 
     }
 
+    private void clearRucksack(Image image) {
+        //todo remove image method
+    }
+
+    private void clearPage(JPanel panel) {
+     panel.removeAll();
+     panel.revalidate();
+     panel.repaint();
+    }
 
 
 

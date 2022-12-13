@@ -21,8 +21,22 @@ public class Rucksack {
      * contains amount of the corresponding items at the same position
      */
     private ArrayList<Integer> amount = new ArrayList<>();
+
+    /**
+     * added weight of all the items inside the rucksack
+     */
     private int currentWeight = 0;
+
+    /**
+     * added value of all the items inside the rucksack
+     */
     private int currentValue = 0;
+
+    /**
+     * amount of steps needed until now
+     * a step is either "putting item in rucksack" or "removing items from rucksack"
+     */
+    private int counter = 0;
 
     public Rucksack(int capacity) {
         this.currentCapacity = capacity;
@@ -72,6 +86,22 @@ public class Rucksack {
     }
 
     /**
+     * counts the number of steps needed; adding and removing items both count as a step
+     * @return current value of the counter
+     */
+    public int getCounter() {
+        return counter;
+    }
+
+    /**
+     * sets the counter to a new value
+     * @param counter the new value of the counter which overwrites the current one
+     */
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    /**
      * updates value and weight of the rucksack if item is added
      * @param item to be added
      */
@@ -86,6 +116,7 @@ public class Rucksack {
             }
             currentValue += item.getValue();
             currentWeight += item.getWeight();
+            counter++;
         }
 
     }
@@ -106,6 +137,7 @@ public class Rucksack {
             currentValue -= item.getValue();
             currentWeight -= item.getWeight();
         }
+        counter++;
     }
 
     public void resetRucksack() {
@@ -130,5 +162,6 @@ public class Rucksack {
         amount.clear();
         currentWeight = 0;
         currentValue = 0;
+        counter = 0;
     }
 }
