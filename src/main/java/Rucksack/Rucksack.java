@@ -1,13 +1,18 @@
 package Rucksack;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Rucksack {
     /**
      * maximal weight that can be put into the rucksack
      */
-    //TODO capacity final machen
-    private int capacity;
+    private final int maximumCapacity;
+
+    /**
+     * weight that is currently in the rucksack
+     */
+    private int currentCapacity;
     /**
      * list of items inside the rucksack
      */
@@ -16,19 +21,34 @@ public class Rucksack {
      * contains amount of the corresponding items at the same position
      */
     private ArrayList<Integer> amount = new ArrayList<>();
+
+    /**
+     * added weight of all the items inside the rucksack
+     */
     private int currentWeight = 0;
+
+    /**
+     * added value of all the items inside the rucksack
+     */
     private int currentValue = 0;
 
+    /**
+     * amount of steps needed until now
+     * a step is either "putting item in rucksack" or "removing items from rucksack"
+     */
+    private int counter = 0;
+
     public Rucksack(int capacity) {
-        this.capacity = capacity;
+        this.currentCapacity = capacity;
+        this.maximumCapacity = capacity;
 
     }
-    public int getCapacity() {
-        return capacity;
+    public int getCurrentCapacity() {
+        return currentCapacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setCurrentCapacity(int currentCapacity) {
+        this.currentCapacity = currentCapacity;
     }
 
     public ArrayList<Item> getItems() {
@@ -66,11 +86,27 @@ public class Rucksack {
     }
 
     /**
+     * counts the number of steps needed; adding and removing items both count as a step
+     * @return current value of the counter
+     */
+    public int getCounter() {
+        return counter;
+    }
+
+    /**
+     * sets the counter to a new value
+     * @param counter the new value of the counter which overwrites the current one
+     */
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    /**
      * updates value and weight of the rucksack if item is added
      * @param item to be added
      */
     public void addItem(Item item) {
-        if((currentWeight + item.getWeight()) <= capacity ) {
+        if((currentWeight + item.getWeight()) <= currentCapacity) {
             if(items.contains(item)) {
                 int index = items.indexOf(item);
                 amount.set(index, amount.get(index) + 1);
@@ -80,6 +116,7 @@ public class Rucksack {
             }
             currentValue += item.getValue();
             currentWeight += item.getWeight();
+            counter++;
         }
 
     }
@@ -100,6 +137,20 @@ public class Rucksack {
             currentValue -= item.getValue();
             currentWeight -= item.getWeight();
         }
+        counter++;
+    }
+
+    public void resetRucksack() {
+        currentValue = 0;
+        currentWeight = 0;
+        System.out.println("Der Rucksack hat nun den Wert " + currentValue + " und das Gewicht " + currentWeight);
+        setCurrentCapacity(maximumCapacity);
+        System.out.println("Die Kapazität des Rucksacks wurde geändert auf " + currentCapacity);
+        resetAmount();
+    }
+
+    private void resetAmount() {
+        amount.replaceAll(ignored -> 0);
     }
 
     public ArrayList<Integer> getAmountList() {
@@ -111,5 +162,6 @@ public class Rucksack {
         amount.clear();
         currentWeight = 0;
         currentValue = 0;
+        counter = 0;
     }
 }

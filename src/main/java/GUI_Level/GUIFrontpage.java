@@ -4,11 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUIFrontpage {
-    GUILevelDeciderPage guiLevelDeciderPage;
-    GUIOptionsPage guiOptionsPage;
     GUIManager guiManager;
-    GUIAfterLevelPage guiAfterLevelPage;
-
 
     public void getFrontPage(JFrame frame) {
         guiManager = new GUIManager();
@@ -26,11 +22,10 @@ public class GUIFrontpage {
         levelButton.setBounds(190, 100, 120, 40);
         levelButton.setBackground(Color.cyan);
         pane.add(levelButton);
-        guiLevelDeciderPage = new GUILevelDeciderPage();
 
         levelButton.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
-            guiLevelDeciderPage.openLevelDeciderPage(frame, guiManager);
+            guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame);
         });
 
 
@@ -41,20 +36,20 @@ public class GUIFrontpage {
 
         ownLevelButton.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
-            guiAfterLevelPage.getAfterLevelPage(frame, guiManager);
-
         });
 
         JButton settingsButton = new JButton("Einstellungen");
         settingsButton.setBounds(190, 260, 120, 40);
         settingsButton.setBackground(Color.cyan);
         pane.add(settingsButton);
-        guiOptionsPage = new GUIOptionsPage();
 
         settingsButton.addActionListener(e -> {
             guiManager.rePaintFrame(pane);
-            guiOptionsPage.openOptionsPage(frame, guiManager);
+            guiManager.getGuiOptionsPage().openOptionsPage(frame, guiManager);
         });
+
+        pane.revalidate();
+        pane.repaint();
     }
 
 }

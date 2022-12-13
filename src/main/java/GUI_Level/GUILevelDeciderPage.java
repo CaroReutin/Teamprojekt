@@ -4,7 +4,6 @@ package GUI_Level;
 import Rucksack.Item;
 import Rucksack.Level;
 import Rucksack.Rucksack;
-import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +11,17 @@ import java.util.ArrayList;
 
 public class GUILevelDeciderPage {
 
-    GUIFrontpage guiFrontpage;
-    GUILevelPage guiLevelPage;
+    static GUILevelPage[] guiLevelPages = new GUILevelPage[15];
+
+    public static void restart(Level level, JFrame frame) {
+        Container pane = frame.getContentPane();
+        guiLevelPages[level.getLevelNumber()] = new GUILevelPage(level);
+        GUIManager.rePaintFrame(pane);
+        guiLevelPages[level.getLevelNumber()].startLevelFrame(frame);
+    }
 
 
-    public void openLevelDeciderPage(JFrame frame, GUIManager guiManager) {
+    public void openLevelDeciderPage(JFrame frame) {
 
         Container pane = frame.getContentPane();
         pane.setLayout(null);
@@ -27,7 +32,6 @@ public class GUILevelDeciderPage {
         titel.setBounds(200, 20, 300, 40);
         titel.setFont(fontStyle);
         pane.add(titel);
-
 
         //Testlevel 1
         Item coin = new Item(5, 1, "coin");
@@ -45,15 +49,15 @@ public class GUILevelDeciderPage {
         amount.add(4);
         //
 
-
         JButton levelOne = new JButton("1");
         levelOne.setBounds(25, 200, 50, 50);
         levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
-        guiLevelPage = new GUILevelPage(new Level(rucksack,items, amount));
+        int levelindex = 0;
+        guiLevelPages[levelindex] = new GUILevelPage(new Level(rucksack,items, amount,levelindex));
         levelOne.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
-            guiLevelPage.startLevelFrame(frame, guiManager);
+            GUIManager.rePaintFrame(pane);
+            guiLevelPages[levelindex].startLevelFrame(frame);
         });
 
         JLabel ganove = new JLabel("gieriger Ganove");
@@ -66,7 +70,7 @@ public class GUILevelDeciderPage {
         levelTwoGreedy.setBackground(Color.cyan);
         pane.add(levelTwoGreedy);
         levelTwoGreedy.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -75,7 +79,7 @@ public class GUILevelDeciderPage {
         levelThreeGreedy.setBackground(Color.cyan);
         pane.add(levelThreeGreedy);
         levelThreeGreedy.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -85,7 +89,7 @@ public class GUILevelDeciderPage {
         levelFourGreedy.setBackground(Color.cyan);
         pane.add(levelFourGreedy);
         levelFourGreedy.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -94,7 +98,7 @@ public class GUILevelDeciderPage {
         levelFiveGreedy.setBackground(Color.cyan);
         pane.add(levelFiveGreedy);
         levelFiveGreedy.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -103,7 +107,7 @@ public class GUILevelDeciderPage {
         levelSixGreedy.setBackground(Color.cyan);
         pane.add(levelSixGreedy);
         levelSixGreedy.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -112,7 +116,7 @@ public class GUILevelDeciderPage {
         levelSevenGreedy.setBackground(Color.cyan);
         pane.add(levelSevenGreedy);
         levelSevenGreedy.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -121,7 +125,7 @@ public class GUILevelDeciderPage {
         levelEightGreedy.setBackground(Color.cyan);
         pane.add(levelEightGreedy);
         levelEightGreedy.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -135,7 +139,7 @@ public class GUILevelDeciderPage {
         levelTwoBack.setBackground(Color.cyan);
         pane.add(levelTwoBack);
         levelTwoBack.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -144,7 +148,7 @@ public class GUILevelDeciderPage {
         levelThreeBack.setBackground(Color.cyan);
         pane.add(levelThreeBack);
         levelThreeBack.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -153,7 +157,7 @@ public class GUILevelDeciderPage {
         levelFourBack.setBackground(Color.cyan);
         pane.add(levelFourBack);
         levelFourBack.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -162,7 +166,7 @@ public class GUILevelDeciderPage {
         levelFiveBack.setBackground(Color.cyan);
         pane.add(levelFiveBack);
         levelFiveBack.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -171,7 +175,7 @@ public class GUILevelDeciderPage {
         levelSixBack.setBackground(Color.cyan);
         pane.add(levelSixBack);
         levelSixBack.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -180,7 +184,7 @@ public class GUILevelDeciderPage {
         levelSevenBack.setBackground(Color.cyan);
         pane.add(levelSevenBack);
         levelSevenBack.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -189,7 +193,7 @@ public class GUILevelDeciderPage {
         levelEightBack.setBackground(Color.cyan);
         pane.add(levelEightBack);
         levelEightBack.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
+            GUIManager.rePaintFrame(pane);
 
         });
 
@@ -197,27 +201,9 @@ public class GUILevelDeciderPage {
         backToFrontPage.setBounds(25, 25, 80, 40);
         pane.add(backToFrontPage);
         backToFrontPage.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
-            guiManager.getGuiFrontPage().getFrontPage(frame);
+            GUIManager.rePaintFrame(pane);
+            GUIManager.getGuiFrontPage().getFrontPage(frame);
         });
-
-        /*//Test Sternbutton
-        JButton levelTestStern = new JButton("1");
-        levelTestStern.setIcon(new ImageIcon("src/main/resources/stern.png"));
-        levelTestStern.setBounds(400, 400, 50, 50);
-        levelTestStern.setBorder(null);
-        levelTestStern.setBackground(Color.getHSBColor(0,0,93));
-        pane.add(levelTestStern);
-        levelTestStern.addActionListener(e -> {
-            //Methode die aufgerufen werden soll
-        });*/
-
-
-
-
-
-
-
 
     }
 }

@@ -23,12 +23,9 @@ public class GUIManager {
     private LevelManager lm = new LevelManager();
 
 
-
-
-    GUIFrontpage guiFrontPage = new GUIFrontpage();
+    static GUIFrontpage guiFrontPage = new GUIFrontpage();
     GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
-    GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
-    GUIAfterLevelPage guiAfterLevelPage = new GUIAfterLevelPage();
+    static GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
 
     public void launch(){
         innit();
@@ -43,19 +40,13 @@ public class GUIManager {
         guiFrontPage.getFrontPage(frame);
     }
 
-    public void rePaintFrame(Container pane) {
+    public static void rePaintFrame(Container pane) {
         pane.removeAll();
         pane.revalidate();
         pane.repaint();
     }
 
-    public void rePaintFromLevel(JPanel panel) {
-        panel.removeAll();
-        panel.revalidate();
-        panel.repaint();
-    }
-
-    public GUIFrontpage getGuiFrontPage() {
+    public static GUIFrontpage getGuiFrontPage() {
         return guiFrontPage;
     }
 
@@ -64,12 +55,8 @@ public class GUIManager {
     }
 
 
-    public GUILevelDeciderPage getGuiLevelDeciderPage() {
+    public static GUILevelDeciderPage getGuiLevelDeciderPage() {
         return guiLevelDeciderPage;
-    }
-
-    public GUIAfterLevelPage getGuiAfterLevelPage() {
-        return guiAfterLevelPage;
     }
 
 }

@@ -27,8 +27,12 @@ public class UserDataManager {
      */
     public static void save() {
         if (System.getProperty("os.name").contains("Windows")) {
-            String appdataPath = System.getenv("APPDATA").replaceAll("\\\\", "/");
+            String appdataPath = System.getenv("APPDATA");
             String saveFolder = appdataPath + "/Optimal Heist/savedata";
+            save(saveFolder);
+        }else{
+            String homePath = System.getProperty("user.home","Desktop");
+            String saveFolder = homePath + "/Optimal Heist/savedata";
             save(saveFolder);
         }
     }
@@ -57,11 +61,18 @@ public class UserDataManager {
 
     /**
      *  Tries to get default save location based on OS then calls load(String saveFolder) with that location.
+     *  If the userData.save file is not in the specified directory a new User will be created and saved in that directory
      */
     public static void load() {
-        String appdataPath = System.getenv("APPDATA").replaceAll("\\\\", "/");
-        String saveFolder = appdataPath + "/Optimal Heist/savedata";
-        load(saveFolder);
+        if (System.getProperty("os.name").contains("Windows")) {
+            String appdataPath = System.getenv("APPDATA");
+            String saveFolder = appdataPath + "/Optimal Heist/savedata";
+            load(saveFolder);
+        }else {
+            String homePath = System.getProperty("user.home", "Desktop");
+            String saveFolder = homePath + "/Optimal Heist/savedata";
+            load(saveFolder);
+        }
     }
 
     /**
