@@ -13,6 +13,13 @@ public class GUILevelDeciderPage {
 
     GUILevelPage[] guiLevelPages = new GUILevelPage[15];
 
+    public static void restart(Level level, JFrame frame, GUIManager manager) {
+        Container pane = frame.getContentPane();
+        guiLevelPages[level.getLevelNumber()] = new GUILevelPage(level);
+        manager.rePaintFrame(pane);
+        guiLevelPages[level.getLevelNumber()].startLevelFrame(frame, manager);
+    }
+
 
     public void openLevelDeciderPage(JFrame frame, GUIManager guiManager) {
 
