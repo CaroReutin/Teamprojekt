@@ -20,7 +20,8 @@ public class GUILevelPage {
 
 
     public void startLevelFrame(JFrame frame, GUIManager guiManager) {
-        frame.setLayout(new GridLayout(1,3));
+        Container pane = frame.getContentPane();
+        pane.setLayout(new GridLayout(1,3));
 
         //Füge Rucksack png ein und ändere größe
         URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
@@ -40,9 +41,9 @@ public class GUILevelPage {
 
         //alles zusammenpuzzeln
 
-        frame.add(leftPanel, BorderLayout.WEST);
-        frame.add(centerPanel, BorderLayout.CENTER);
-        frame.add(rightPanel, BorderLayout.EAST);
+        pane.add(leftPanel, BorderLayout.WEST);
+        pane.add(centerPanel, BorderLayout.CENTER);
+        pane.add(rightPanel, BorderLayout.EAST);
 
         frame.setVisible(true);
     }
@@ -68,13 +69,7 @@ public class GUILevelPage {
                         System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
                         break;
                     case 2:
-                        clearPage(leftPanel);
-                        frame.remove(leftPanel);
-                        clearPage(centerPanel);
-                        clearPage(rightPanel);
-                        clearRucksack(imageIcon);
-                        frame.revalidate();
-                        frame.repaint();
+                        guiManager.rePaintFrame(frame.getContentPane());
                         guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame, guiManager);
 
                         System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
