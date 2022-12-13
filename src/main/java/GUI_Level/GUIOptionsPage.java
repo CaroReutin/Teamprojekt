@@ -35,6 +35,9 @@ public class GUIOptionsPage {
         pane.add(passwordInput);
         pane.add(enterPassword);
         pane.add(back);
+        
+        pane.revalidate();
+        pane.repaint();
     }
     private static void confirmPassword(String pw, JFrame parent){
         if (pw.matches(GUIManager.getPasswords().get(0))){

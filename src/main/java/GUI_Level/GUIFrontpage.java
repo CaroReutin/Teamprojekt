@@ -47,6 +47,9 @@ public class GUIFrontpage {
             guiManager.rePaintFrame(pane);
             guiManager.getGuiOptionsPage().openOptionsPage(frame, guiManager);
         });
+
+        pane.revalidate();
+        pane.repaint();
     }
 
 }
