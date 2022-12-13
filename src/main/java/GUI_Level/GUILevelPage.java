@@ -67,10 +67,13 @@ public class GUILevelPage {
                         System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
                         break;
                     case 2:
+                        clearPage(leftPanel);
+                        frame.remove(leftPanel);
                         clearPage(centerPanel);
                         clearPage(rightPanel);
-                        clearPage(leftPanel);
                         clearRucksack(imageIcon);
+                        frame.revalidate();
+                        frame.repaint();
                         guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame, guiManager);
 
                         System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
