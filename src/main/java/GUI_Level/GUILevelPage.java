@@ -53,6 +53,7 @@ public class GUILevelPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (level.getRucksack().getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())){
+                    UserDataManager.newHighScore(level.getLevelNumber(),level.getRucksack().getCurrentValue());
                     UserDataManager.save();
                 }
                 String[] buttons = {"Erneut Spielen","Nächstes Level","Levelauswahl"};
