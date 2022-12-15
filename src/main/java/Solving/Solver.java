@@ -11,7 +11,7 @@ public class Solver {
      * @param level the level to solve
      * @return Returns an ArrayList of Items that a Greedy Algorithm would put in the Rucksack
      */
-    public ArrayList<Item> solveGreedy(Level level){
+    public static ArrayList<Item> solveGreedy(Level level){
         ArrayList<Item> items = level.getItemList();
         ArrayList<Integer> amount = level.getItemAmountList();
         int capacity = level.getRucksackCapacity();
@@ -26,7 +26,7 @@ public class Solver {
      * @param capacity The capacity of the Rucksack
      * @return Returns an ArrayList of Items that a Greedy Algorithm would put in the Rucksack
      */
-    public ArrayList<Item> solveGreedy(ArrayList<Item> items, ArrayList<Integer> amount, int capacity){
+    public static ArrayList<Item> solveGreedy(ArrayList<Item> items, ArrayList<Integer> amount, int capacity){
         int size = items.size();
         double[] ratio = new double[size];
         int[] indexes = new int[size];
@@ -88,7 +88,7 @@ public class Solver {
      * @param items an ArrayList of Items
      * @return returns the same items ordered by ratio, if tied ordered by value
      */
-    public ArrayList<Item> sortLikeGreedy(ArrayList<Item> items) {
+    public static ArrayList<Item> sortLikeGreedy(ArrayList<Item> items) {
         int size = items.size();
         double[] ratio = new double[size];
 
