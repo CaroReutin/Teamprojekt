@@ -13,7 +13,7 @@ public class Solver {
      */
     public ArrayList<Item> solveGreedy(Level level){
         ArrayList<Item> items = level.getItemList();
-        ArrayList<Integer> amount = level.getCurrentItemAmountList();
+        ArrayList<Integer> amount = level.getItemAmountList();
         int capacity = level.getRucksackCapacity();
         return solveGreedy(items,amount,capacity);
     }

@@ -52,8 +52,8 @@ public class GUILevelPage {
         flucht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (level.getRucksack().getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())){
-                    UserDataManager.newHighScore(level.getLevelNumber(),level.getRucksack().getCurrentValue());
+                if (level.getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())){
+                    UserDataManager.newHighScore(level.getLevelNumber(),level.getCurrentValue());
                     UserDataManager.save();
                 }
                 String[] buttons = {"Erneut Spielen","Nächstes Level","Levelauswahl"};
@@ -80,66 +80,70 @@ public class GUILevelPage {
         panel.add(flucht);
     }
 
+    JLabel[] labels;
+    JLabel[] rucksackLabels;
+    JLabel currentValueLabel;
+    JLabel currentWeightLabel;
+
     /**
      * fügt zur Verfügung stehende Items als Button ein
      * @param
      * @return
      */
     private void itemButtons(JPanel panelItems, JPanel panelRucksack) {
-        JLabel currentWeightLabel = new JLabel("0/" + level.getRucksack().getCurrentCapacity() + "g");
+        currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
         Font fCurrentWeightLabel = currentWeightLabel.getFont();
         currentWeightLabel.setFont(fCurrentWeightLabel.deriveFont(fCurrentWeightLabel.getStyle() | Font.BOLD));
 
-        JLabel currentValueLabel = new JLabel("0€");
+        currentValueLabel = new JLabel("0€");
         Font fcurrentValueLabel = currentValueLabel.getFont();
         currentValueLabel.setFont(fcurrentValueLabel.deriveFont(fcurrentValueLabel.getStyle() | Font.BOLD));
 
         ArrayList<Item> items = level.getItemList();
+        labels = new JLabel[items.size()];
+        rucksackLabels = new JLabel[items.size()];
         for (int i = 0; i<items.size(); i++) {
-            JReferencingButton current = new JReferencingButton(items.get(i).getName() + " (" + items.get(i).getWeight() + "g, " + items.get(i).getValue() + "€)", level,  i);
-            JLabel label = new JLabel(level.getCurrentItemAmountList().get(i).toString());
+            int finalI = i;
+            JButton current = new JButton(items.get(i).getName() + " (" + items.get(i).getWeight() + "g, " + items.get(i).getValue() + "€)");
+            labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
 
-            Font f = label.getFont();
-            label.setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+            Font f = labels[i].getFont();
+            labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
 
-            JReferencingButton currentRucksack = new JReferencingButton(items.get(i).getName(), level, i);
-            JLabel labelRucksack = new JLabel("0");
-            Font fRucksack = labelRucksack.getFont();
-            labelRucksack.setFont(fRucksack.deriveFont(fRucksack.getStyle() | Font.BOLD));
-            current.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if((level.getRucksack().getCurrentWeight() + current.getLevel().getRucksack().getItems().get(current.getPosition()).getWeight() )<= level.getRucksack().getCurrentCapacity()) {
-                        current.setItemAmount();
-                        label.setText(String.valueOf(current.getAmountLevelItem()));
-                        labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
-                        currentWeightLabel.setText(level.getRucksack().getCurrentWeight() + "/" + level.getRucksack().getCurrentCapacity() + "g");
-                        currentValueLabel.setText((level.getRucksack().getCurrentValue() + "€"));
-                    }
-
-
-
+            JButton currentRucksack = new JButton(items.get(i).getName());
+            rucksackLabels[i] = new JLabel("0");
+            Font fRucksack = rucksackLabels[i].getFont();
+            rucksackLabels[i].setFont(fRucksack.deriveFont(fRucksack.getStyle() | Font.BOLD));
+            current.addActionListener(e -> {
+                if (level.getItemAmountAvailable(finalI) <= 0){
+                    return;
+                }
+                if((level.getCurrentWeight() + level.getItemList().get(finalI).getWeight() )<= level.getCapacity()) {
+                    level.moveToRucksack(finalI);
+                    updateLabels(finalI);
                 }
             });
-            currentRucksack.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    currentRucksack.setRucksackItemAmount();
-                    labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
-                    label.setText(String.valueOf(current.getAmountLevelItem()));
-                    currentWeightLabel.setText(level.getRucksack().getCurrentWeight() + "/" + level.getRucksack().getCurrentCapacity() + "g");
-                    currentValueLabel.setText((level.getRucksack().getCurrentValue() + "€"));
+            currentRucksack.addActionListener(e -> {
+                if (level.getItemAmountInRucksack(finalI) <= 0){
+                    return;
                 }
+                level.moveFromRucksack(finalI);
+                updateLabels(finalI);
             });
             panelItems.add(current);
-            panelItems.add(label);
+            panelItems.add(labels[i]);
             panelRucksack.add(currentRucksack);
-            panelRucksack.add(labelRucksack);
+            panelRucksack.add(rucksackLabels[i]);
             panelRucksack.add(currentWeightLabel);
             panelRucksack.add(currentValueLabel);
-
         }
+    }
 
+    private void updateLabels(int i){
+        labels[i].setText(String.valueOf(level.getItemAmountAvailable(i)));
+        rucksackLabels[i].setText(String.valueOf(level.getItemAmountInRucksack(i)));
+        currentWeightLabel.setText(level.getCurrentWeight() + "/" + level.getCapacity() + "g");
+        currentValueLabel.setText((level.getCurrentValue() + "€"));
     }
 
     private void clearRucksack(Image image) {

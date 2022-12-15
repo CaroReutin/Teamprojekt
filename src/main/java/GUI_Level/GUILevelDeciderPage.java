@@ -3,7 +3,6 @@ package GUI_Level;
 
 import Rucksack.Item;
 import Rucksack.Level;
-import Rucksack.Rucksack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +36,6 @@ public class GUILevelDeciderPage {
         Item coin = new Item(5, 1, "coin");
         Item crown = new Item(50, 8, "crown");
         Item pearl = new Item(11, 2, "pearl");
-        Rucksack rucksack = new Rucksack(60);
 
         ArrayList<Item> items = new ArrayList<>();
         items.add(coin);
@@ -54,7 +52,7 @@ public class GUILevelDeciderPage {
         levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
         int levelindex = 0;
-        guiLevelPages[levelindex] = new GUILevelPage(new Level(rucksack,items, amount,levelindex));
+        guiLevelPages[levelindex] = new GUILevelPage(new Level(items, amount,levelindex,60));
         levelOne.addActionListener(e -> {
             GUIManager.rePaintFrame(pane);
             guiLevelPages[levelindex].startLevelFrame(frame);

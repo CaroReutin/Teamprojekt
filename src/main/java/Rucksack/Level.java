@@ -3,6 +3,36 @@ package Rucksack;
 import java.util.ArrayList;
 
 public class Level {
+    public int getLevelNumber() {
+        return this.levelindex;
+    }
+
+    public void moveToRucksack(int i) {
+        availableItemAmountList.set(i,availableItemAmountList.get(i) - 1);
+        inRucksackAmountList.set(i,inRucksackAmountList.get(i) + 1);
+        currentValue += itemList.get(i).getValue();
+        currentWeight += itemList.get(i).getWeight();
+    }
+    public void moveFromRucksack(int i) {
+        availableItemAmountList.set(i,availableItemAmountList.get(i) + 1);
+        inRucksackAmountList.set(i,inRucksackAmountList.get(i) - 1);
+        currentValue -= itemList.get(i).getValue();
+        currentWeight -= itemList.get(i).getWeight();
+    }
+
+    public int getCurrentValue() {
+        return currentValue;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCurrentWeight() {
+        return currentWeight;
+    }
+
+
     /**
      * Greedy -> Gieriger Ganove
      * Backtracking -> Backtracking Bandit
@@ -10,84 +40,81 @@ public class Level {
      */
     enum Robber{GIERIGER_GANOVE,BACKTRACKING_BANDIT,DR_META}
 
-    private Rucksack rucksack;
-    private ArrayList<Item> itemList;
-    private ArrayList<Item> availableItemList;
-    private final ArrayList<Integer> defaultItemAmountList;
-    private ArrayList<Integer> currentItemAmountList;
+    private final ArrayList<Item> itemList;
+    private final ArrayList<Integer> itemAmountList;
     private ArrayList<Integer> availableItemAmountList;
-    private ArrayList<String> tips;
-    private Robber robber;
-    private int levelindex;
+    private ArrayList<Integer> inRucksackAmountList;
+    private int currentValue;
+    private int currentWeight;
+    private final ArrayList<String> tips;
+    private final Robber robber;
+    private final int levelindex;
+    private final int capacity;
 
     /**
      * By default, has Dr.Meta as Robber.
      * Has no tips.
      *
-     * @param rucksack the Rucksack
-     * @param itemList ArrayList of available Items
+     * @param itemList       ArrayList of available Items
      * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
-     * @param levelindex the index of the level
+     * @param levelindex     the index of the level
      */
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, int levelindex) {
+    public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, int levelindex, int capacity) {
+        this.capacity = capacity;
         this.levelindex = levelindex;
-        this.rucksack = rucksack;
         this.itemList = itemList;
         this.tips = new ArrayList<>();
-        this.currentItemAmountList = new ArrayList<Integer>(itemAmountList);
-        this.defaultItemAmountList = new ArrayList<Integer>(itemAmountList);
-        this.availableItemAmountList = itemAmountList;
-        this.availableItemList = itemList;
-        this.robber = Robber.DR_META;
-
-        for (int i = 0; i < itemList.size(); i++) {
-            rucksack.getItems().add(itemList.get(i));
-            rucksack.getAmountList().add(0);
+        this.itemAmountList = itemAmountList;
+        this.availableItemAmountList =  new ArrayList<>();
+        for (int i = 0; i < itemAmountList.size(); i++) {
+            availableItemAmountList.add(itemAmountList.get(i));
         }
+        this.robber = Robber.DR_META;
+        inRucksackAmountList = new ArrayList<>();
+        for (int i = 0; i < itemAmountList.size(); i++) {
+            inRucksackAmountList.add(0);
+        }
+        currentWeight = 0;
+        currentValue = 0;
     }
 
 
     /**
      *
-     * @param rucksack the Rucksack
      * @param itemList ArrayList of available Items
      * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
      * @param tips ArrayList of String that are the tips
      * @param robber the Robber
      * @param levelindex the index of the level
      */
-    public Level(Rucksack rucksack, ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips, Robber robber, int levelindex) {
+    public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips, Robber robber, int levelindex, int capacity) {
+        this.capacity = capacity;
         this.levelindex = levelindex;
-        this.rucksack = rucksack;
         this.tips = tips;
         this.itemList = itemList;
-        this.currentItemAmountList = itemAmountList;
-        this.defaultItemAmountList = itemAmountList;
-        this.availableItemAmountList = itemAmountList;
-        this.availableItemList = itemList;
-        this.robber = robber;
-
-        for (int i = 0; i < itemList.size(); i++) {
-            rucksack.getItems().add(itemList.get(i));
-            rucksack.getAmountList().add(0);
+        this.itemAmountList = itemAmountList;
+        this.availableItemAmountList = new ArrayList<>();
+        for (int i = 0; i < itemAmountList.size(); i++) {
+            availableItemAmountList.add(itemAmountList.get(i));
         }
+        inRucksackAmountList = new ArrayList<>();
+        for (int i = 0; i < itemAmountList.size(); i++) {
+            inRucksackAmountList.add(0);
+        }
+        this.robber = robber;
+        currentWeight = 0;
+        currentValue = 0;
     }
 
-public void setCurrentItemAmountList(ArrayList<Integer> currentItemAmountList) {
-        this.currentItemAmountList = currentItemAmountList;
-        System.out.println("Item amount was changed");
-}
+
     /**
      *
      * @return Returns the capacity of the Rucksack
      */
     public int getRucksackCapacity(){
-        return rucksack.getCurrentCapacity();
+        return capacity;
     }
 
-    public Rucksack getRucksack() {
-        return rucksack;
-    }
 
     /**
      * NOTE: this does not return the items still available in the level (i.e. the ones not in the Backpack)
@@ -103,26 +130,19 @@ public void setCurrentItemAmountList(ArrayList<Integer> currentItemAmountList) {
      *
      * @return Returns the amounts of the items that exist in the Rucksack.Level
      */
-    public ArrayList<Integer> getCurrentItemAmountList() {
-        return currentItemAmountList;
+    public ArrayList<Integer> getItemAmountList() {
+        return itemAmountList;
     }
 
     /**
-     * Can be empty
-     *
-     * @return Returns the tips
+     * @return Returns the amounts of the items that are still available in the Rucksack.Level
      */
-    public ArrayList<String> getTips() {
-        return tips;
+    public int getItemAmountAvailable(int i) {
+        return availableItemAmountList.get(i);
     }
 
-    /**
-     * By default, tips are not allowed
-     *
-     * @param isAllowed true = tips are allowed, false = tips are locked
-     */
-    public static void tipsAllowed(boolean isAllowed){
-        //TODO
+    public int getItemAmountInRucksack(int i) {
+        return inRucksackAmountList.get(i);
     }
 
     public void endOfLevel() {
@@ -135,20 +155,13 @@ public void setCurrentItemAmountList(ArrayList<Integer> currentItemAmountList) {
         }
     }
 
-    /*
-    resets the level through resetting the rucksack first and after that the ItemAmounts are reset
-     */
-    public void resetLevel() {
-        rucksack.resetRucksack();
-        currentItemAmountList = new ArrayList<Integer>(defaultItemAmountList);
-        System.out.println("zur Verfügung stehende Itemanzahlen:" + getCurrentItemAmountList());
-    }
-
-    public int getLevelNumber() {
-        return this.levelindex;
-    }
-
-    public Robber getRobber() {
-        return this.robber;
+    public void resetLevel(){
+        inRucksackAmountList = new ArrayList<>();
+        for (int i = 0; i < itemAmountList.size(); i++) {
+            inRucksackAmountList.add(0);
+            availableItemAmountList.set(i,itemAmountList.get(i));
+        }
+        currentWeight = 0;
+        currentValue = 0;
     }
 }
