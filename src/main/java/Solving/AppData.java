@@ -5,6 +5,7 @@ import Rucksack.Item;
 import java.util.ArrayList;
 
 public class AppData {
+    public static final int LEVELAMOUNT = 15;
     private static ArrayList<String> passwords = new ArrayList<>();
     private static ArrayList<Item> items = new ArrayList<>();
 

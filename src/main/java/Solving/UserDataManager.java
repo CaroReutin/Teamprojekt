@@ -10,11 +10,6 @@ public class UserDataManager {
     private static UserData data = new UserData();
 
     /**
-     * Amount of non-Custom Levels
-     */
-    public static final int LEVELAMOUNT = 15;
-
-    /**
      * Set every current high score to 0
      */
     public static void newUser(){

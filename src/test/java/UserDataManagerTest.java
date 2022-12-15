@@ -1,3 +1,4 @@
+import Solving.AppData;
 import Solving.UserDataManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ public class UserDataManagerTest {
     @Test
     public void scoreEqualsLevel(){
         UserDataManager.load(testSaveFolder);
-        for (int i = 0; i < UserDataManager.LEVELAMOUNT; i++) {
+        for (int i = 0; i < AppData.LEVELAMOUNT; i++) {
             UserDataManager.newHighScore(i,i);
         }
         Assertions.assertEquals("0|1|2|3|4|5|6|7|8|9|10|11|12|13|14",UserDataManager.dataToString());
