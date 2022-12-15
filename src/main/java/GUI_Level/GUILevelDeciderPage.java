@@ -3,6 +3,7 @@ package GUI_Level;
 
 import Rucksack.Item;
 import Rucksack.Level;
+import Solving.AppData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,15 +33,10 @@ public class GUILevelDeciderPage {
         titel.setFont(fontStyle);
         pane.add(titel);
 
-        //Testlevel 1
-        Item coin = new Item(5, 1, "coin");
-        Item crown = new Item(50, 8, "crown");
-        Item pearl = new Item(11, 2, "pearl");
-
         ArrayList<Item> items = new ArrayList<>();
-        items.add(coin);
-        items.add(crown);
-        items.add(pearl);
+        items.add(AppData.generateItem("coin"));
+        items.add(AppData.generateItem("crown"));
+        items.add(AppData.generateItem("pearl"));
         ArrayList<Integer> amount = new ArrayList<>();
         amount.add(10);
         amount.add(7);

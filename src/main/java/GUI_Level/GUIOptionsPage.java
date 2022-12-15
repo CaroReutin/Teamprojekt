@@ -1,5 +1,7 @@
 package GUI_Level;
 
+import Solving.AppData;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,7 +42,7 @@ public class GUIOptionsPage {
         pane.repaint();
     }
     private static void confirmPassword(String pw, JFrame parent){
-        if (pw.matches(GUIManager.getPasswords().get(0))){
+        if (pw.matches(AppData.getPassword(0))){
             JOptionPane.showMessageDialog(parent,"Hinweise sind nun freigeschalten.","Erfolg",JOptionPane.INFORMATION_MESSAGE);
 
             //Level.tipsAllowed(true);
