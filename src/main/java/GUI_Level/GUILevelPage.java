@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 public class GUILevelPage {
     private final Level level;
+    private JLabel[] labels;
+    private JLabel[] rucksackLabels;
+    private JLabel currentValueLabel;
+    private JLabel currentWeightLabel;
 
     /**
      * @param level the level that can be played in this page
@@ -36,7 +40,7 @@ public class GUILevelPage {
                 case 0:
                     level.resetLevel();
                     for (int i = 0; i < level.getItemList().size(); i++) {
-                        updateLabels(i);
+                        updateLabel(i);
                     }
                     break;
                 case 1:
@@ -48,23 +52,16 @@ public class GUILevelPage {
                     System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
                     break;
             }
-            level.endOfLevel();
         });
         centerPanel.add(flucht);
     }
-
-
-    JLabel[] labels;
-    JLabel[] rucksackLabels;
-    JLabel currentValueLabel;
-    JLabel currentWeightLabel;
 
     /**
      * Adds the Buttons representing the items in and out of the Rucksack to the 2 panels
      * @param panelItems The right panel where the buttons for the items NOT IN the bag should go to
      * @param panelRucksack The left panel where the buttons for the items IN the bag should go to
      */
-    private void itemButtoms(JPanel panelItems, JPanel panelRucksack) {
+    private void itemButtons(JPanel panelItems, JPanel panelRucksack) {
         currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
         Font fCurrentWeightLabel = currentWeightLabel.getFont();
         currentWeightLabel.setFont(fCurrentWeightLabel.deriveFont(fCurrentWeightLabel.getStyle() | Font.BOLD));
@@ -94,7 +91,7 @@ public class GUILevelPage {
                 }
                 if((level.getCurrentWeight() + level.getItemList().get(finalI).getWeight() )<= level.getCapacity()) {
                     level.moveToRucksack(finalI);
-                    updateLabels(finalI);
+                    updateLabel(finalI);
                 }
             });
             currentRucksack.addActionListener(e -> {
@@ -102,7 +99,7 @@ public class GUILevelPage {
                     return;
                 }
                 level.moveFromRucksack(finalI);
-                updateLabels(finalI);
+                updateLabel(finalI);
             });
             panelItems.add(current);
             panelItems.add(labels[i]);
@@ -115,7 +112,7 @@ public class GUILevelPage {
 
     }
 
-    private void updateLabels(int i){
+    private void updateLabel(int i){
         labels[i].setText(String.valueOf(level.getItemAmountAvailable(i)));
         rucksackLabels[i].setText(String.valueOf(level.getItemAmountInRucksack(i)));
         currentWeightLabel.setText(level.getCurrentWeight() + "/" + level.getCapacity() + "g");
@@ -143,7 +140,7 @@ public class GUILevelPage {
 
         // erzeuge Buttons
         this.escapeButton(centerPanel);
-        this.itemButtoms(rightPanel, leftPanel);
+        this.itemButtons(rightPanel, leftPanel);
 
 
         //alles zusammenpuzzeln

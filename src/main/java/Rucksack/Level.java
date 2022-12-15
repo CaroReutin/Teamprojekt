@@ -3,36 +3,6 @@ package Rucksack;
 import java.util.ArrayList;
 
 public class Level {
-    public int getLevelNumber() {
-        return this.levelindex;
-    }
-
-    public void moveToRucksack(int i) {
-        availableItemAmountList.set(i,availableItemAmountList.get(i) - 1);
-        inRucksackAmountList.set(i,inRucksackAmountList.get(i) + 1);
-        currentValue += itemList.get(i).getValue();
-        currentWeight += itemList.get(i).getWeight();
-    }
-    public void moveFromRucksack(int i) {
-        availableItemAmountList.set(i,availableItemAmountList.get(i) + 1);
-        inRucksackAmountList.set(i,inRucksackAmountList.get(i) - 1);
-        currentValue -= itemList.get(i).getValue();
-        currentWeight -= itemList.get(i).getWeight();
-    }
-
-    public int getCurrentValue() {
-        return currentValue;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public int getCurrentWeight() {
-        return currentWeight;
-    }
-
-
     /**
      * Greedy -> Gieriger Ganove
      * Backtracking -> Backtracking Bandit
@@ -46,7 +16,6 @@ public class Level {
     private ArrayList<Integer> inRucksackAmountList;
     private int currentValue;
     private int currentWeight;
-    private final ArrayList<String> tips;
     private final Robber robber;
     private final int levelindex;
     private final int capacity;
@@ -63,7 +32,6 @@ public class Level {
         this.capacity = capacity;
         this.levelindex = levelindex;
         this.itemList = itemList;
-        this.tips = new ArrayList<>();
         this.itemAmountList = itemAmountList;
         this.availableItemAmountList =  new ArrayList<>();
         for (int i = 0; i < itemAmountList.size(); i++) {
@@ -83,14 +51,12 @@ public class Level {
      *
      * @param itemList ArrayList of available Items
      * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
-     * @param tips ArrayList of String that are the tips
      * @param robber the Robber
      * @param levelindex the index of the level
      */
-    public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, ArrayList<String> tips, Robber robber, int levelindex, int capacity) {
+    public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, Robber robber, int levelindex, int capacity) {
         this.capacity = capacity;
         this.levelindex = levelindex;
-        this.tips = tips;
         this.itemList = itemList;
         this.itemAmountList = itemAmountList;
         this.availableItemAmountList = new ArrayList<>();
@@ -145,16 +111,6 @@ public class Level {
         return inRucksackAmountList.get(i);
     }
 
-    public void endOfLevel() {
-        if(this.robber.equals(Robber.DR_META)) {
-            //TODO zu Levelauswahl führen - muss gemerged werden
-        } else if(this.robber.equals(Robber.GIERIGER_GANOVE)){
-            //TODO brauche Solver - muss gemerged werden
-        } else {
-            //TODO
-        }
-    }
-
     public void resetLevel(){
         inRucksackAmountList = new ArrayList<>();
         for (int i = 0; i < itemAmountList.size(); i++) {
@@ -164,4 +120,34 @@ public class Level {
         currentWeight = 0;
         currentValue = 0;
     }
+
+    public int getLevelNumber() {
+        return this.levelindex;
+    }
+
+    public void moveToRucksack(int i) {
+        availableItemAmountList.set(i,availableItemAmountList.get(i) - 1);
+        inRucksackAmountList.set(i,inRucksackAmountList.get(i) + 1);
+        currentValue += itemList.get(i).getValue();
+        currentWeight += itemList.get(i).getWeight();
+    }
+    public void moveFromRucksack(int i) {
+        availableItemAmountList.set(i,availableItemAmountList.get(i) + 1);
+        inRucksackAmountList.set(i,inRucksackAmountList.get(i) - 1);
+        currentValue -= itemList.get(i).getValue();
+        currentWeight -= itemList.get(i).getWeight();
+    }
+
+    public int getCurrentValue() {
+        return currentValue;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCurrentWeight() {
+        return currentWeight;
+    }
+
 }
