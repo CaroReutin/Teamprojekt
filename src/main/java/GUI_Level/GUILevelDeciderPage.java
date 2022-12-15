@@ -42,9 +42,8 @@ public class GUILevelDeciderPage {
         levelOne.setBounds(25, 200, 50, 50);
         levelOne.setBackground(Color.cyan);
         pane.add(levelOne);
-        int levelindex = 0;
-        guiLevelPages[levelindex] = new GUILevelPage(new Level(items, amount, levelindex,60));
-        levelOne.addActionListener(e -> GUIManager.openLevel(guiLevelPages[levelindex]));
+        guiLevelPages[0] = new GUILevelPage(new Level(items, amount, 0,60));
+        levelOne.addActionListener(e -> GUIManager.openLevel(guiLevelPages[0]));
 
         JLabel ganove = new JLabel("gieriger Ganove");
         ganove.setBounds(150, 80, 300, 40);
@@ -55,8 +54,9 @@ public class GUILevelDeciderPage {
         levelTwoGreedy.setBounds(60, 125, 50, 50);
         levelTwoGreedy.setBackground(Color.cyan);
         pane.add(levelTwoGreedy);
+        guiLevelPages[1] = new GUILevelPage(AppData.getLevel(1));
         levelTwoGreedy.addActionListener(e -> {
-
+           GUIManager.openLevel(guiLevelPages[1]);
         });
 
         JButton levelThreeGreedy = new JButton("3");
