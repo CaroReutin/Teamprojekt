@@ -2,61 +2,79 @@
 
 package GUI_Level;
 
-import Rucksack.LevelManager;
-
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 
 public class GUIManager {
-    // for now i'll put it here, not sure where it is most appropriate to put
-    private static ArrayList<String> passwords = new ArrayList<>();
-    public static ArrayList<String> getPasswords(){
-        return passwords;
-    }
-    // see comment above
+    private static final GUIFrontpage guiFrontPage = new GUIFrontpage();
+    private static final GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
+    private static final GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+    private static JFrame frame;
 
-    private void innit() {
-        passwords.add("Gr33dy");
-    }
-
-    private LevelManager lm = new LevelManager();
-
-
-    static GUIFrontpage guiFrontPage = new GUIFrontpage();
-    GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
-    static GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
-
+    /**
+     * Opens the main Menu
+     */
     public void launch(){
-        innit();
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setTitle("Optimal Heist");
         frame.setSize(500,500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setResizable(false);
-
-        guiFrontPage.getFrontPage(frame);
+        openMainMenu();
     }
 
-    public static void rePaintFrame(Container pane) {
-        pane.removeAll();
-        pane.revalidate();
-        pane.repaint();
+    /**
+     * Must be called after every pane change
+     */
+    private static void paint() {
+        frame.getContentPane().revalidate();
+        frame.getContentPane().repaint();
+        frame.revalidate();
+        frame.repaint();
     }
 
-    public static GUIFrontpage getGuiFrontPage() {
-        return guiFrontPage;
+    /**
+     * Opens the Options Menu
+     * (Currently after exiting the Options menu the Main-menu will always be opened
+     * regardless where the options menu was opened from)
+     */
+    public static void openOptionsMenu() {
+        frame.setContentPane(guiOptionsPage.getPane());
+        paint();
     }
 
-    public GUIOptionsPage getGuiOptionsPage() {
-        return guiOptionsPage;
+    /**
+     * Opens the LevelSelectionScreen
+     */
+    public static void openLevelSelectScreen() {
+        frame.setContentPane(guiLevelDeciderPage.getPane());
+        paint();
+    }
+
+    /**
+     * Opens the main Menu
+     */
+    public static void openMainMenu(){
+        frame.setContentPane(guiFrontPage.getPane());
+        paint();
     }
 
 
-    public static GUILevelDeciderPage getGuiLevelDeciderPage() {
-        return guiLevelDeciderPage;
+    /**
+     * Opens the Level
+     * @param levelPage the GUILevel page of the level that should be opened
+     */
+    public static void openLevel(GUILevelPage levelPage) {
+        frame.setContentPane(levelPage.getPane());
+        paint();
     }
 
+    /**
+     * Intended for Keyboard interactions with getInputMap and getActionMap
+     * @return returns the RootPane of frame
+     */
+    public static JComponent getRootPane() {
+        return frame.getRootPane();
+    }
 }

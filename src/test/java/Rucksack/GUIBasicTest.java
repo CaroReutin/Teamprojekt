@@ -13,7 +13,6 @@ class GUIBasicTest{
         Item coin = new Item(5, 1, "coin");
         Item crown = new Item(50, 8, "crown");
         Item pearl = new Item(11, 2, "pearl");
-        Rucksack rucksack = new Rucksack(60);
 
         ArrayList<Item> items = new ArrayList<>();
         items.add(coin);
@@ -24,7 +23,7 @@ class GUIBasicTest{
         amount.add(7);
         amount.add(4);
         //
-        GUILevelPage gui = new GUILevelPage(new Level(rucksack,items, amount,0));
+        GUILevelPage gui = new GUILevelPage(new Level(items, amount,0,60));
 
     }
 
