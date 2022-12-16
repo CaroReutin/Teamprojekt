@@ -25,7 +25,7 @@ public class UserData implements Serializable {
      */
     public void newUser(){
         bestLevelScores = new ArrayList<>();
-        for (int i = 0; i < UserDataManager.LEVELAMOUNT; i++) {
+        for (int i = 0; i < AppData.LEVELAMOUNT; i++) {
             bestLevelScores.add(0);
         }
     }
