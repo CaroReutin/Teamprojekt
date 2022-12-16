@@ -5,21 +5,126 @@ import Solving.UserDataManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ArrayList;
 
 
 public class GUILevelPage {
-    private Level level;
+    private final Level level;
+    private JLabel[] labels;
+    private JLabel[] rucksackLabels;
+    private JLabel currentValueLabel;
+    private JLabel currentWeightLabel;
 
+    /**
+     * @param level the level that can be played in this page
+     */
     public GUILevelPage(Level level) {
         this.level = level;
     }
 
-    public void startLevelFrame(JFrame frame) {
-        Container pane = frame.getContentPane();
+    /**
+     * Adds the Button to the Panel
+     * @param centerPanel the Panel that the escapeButton should be on
+     */
+    private void escapeButton(Container centerPanel){
+        JButton flucht = new JButton("Flucht");
+        flucht.addActionListener(e -> {
+            if (level.getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())){
+                UserDataManager.newHighScore(level.getLevelNumber(),level.getCurrentValue());
+                UserDataManager.save();
+            }
+            String[] buttons = {"Erneut Spielen","Nächstes Level","Levelauswahl"};
+            int chosenButton = JOptionPane.showOptionDialog(centerPanel,"Hier steht Tips / Feedback","Geflohen",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,buttons,buttons[0]);
+            switch (chosenButton) {
+                case 0:
+                    level.resetLevel();
+                    for (int i = 0; i < level.getItemList().size(); i++) {
+                        updateLabel(i);
+                    }
+                    break;
+                case 1:
+                    //LevelManager.nextLevel();
+                    System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+                    break;
+                case 2:
+                    GUIManager.openLevelSelectScreen();
+                    System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
+                    break;
+            }
+        });
+        centerPanel.add(flucht);
+    }
+
+    /**
+     * Adds the Buttons representing the items in and out of the Rucksack to the 2 panels
+     * @param panelItems The right panel where the buttons for the items NOT IN the bag should go to
+     * @param panelRucksack The left panel where the buttons for the items IN the bag should go to
+     */
+    private void itemButtons(JPanel panelItems, JPanel panelRucksack) {
+        currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
+        Font fCurrentWeightLabel = currentWeightLabel.getFont();
+        currentWeightLabel.setFont(fCurrentWeightLabel.deriveFont(fCurrentWeightLabel.getStyle() | Font.BOLD));
+
+        currentValueLabel = new JLabel("0€");
+        Font fcurrentValueLabel = currentValueLabel.getFont();
+        currentValueLabel.setFont(fcurrentValueLabel.deriveFont(fcurrentValueLabel.getStyle() | Font.BOLD));
+
+        ArrayList<Item> items = level.getItemList();
+        labels = new JLabel[items.size()];
+        rucksackLabels = new JLabel[items.size()];
+        for (int i = 0; i<items.size(); i++) {
+            int finalI = i;
+            JButton current = new JButton(items.get(i).getName() + " (" + items.get(i).getWeight() + "g, " + items.get(i).getValue() + "€)");
+            labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
+
+            Font f = labels[i].getFont();
+            labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+
+            JButton currentRucksack = new JButton(items.get(i).getName());
+            rucksackLabels[i] = new JLabel("0");
+            Font fRucksack = rucksackLabels[i].getFont();
+            rucksackLabels[i].setFont(fRucksack.deriveFont(fRucksack.getStyle() | Font.BOLD));
+            current.addActionListener(e -> {
+                if (level.getItemAmountAvailable(finalI) <= 0){
+                    return;
+                }
+                if((level.getCurrentWeight() + level.getItemList().get(finalI).getWeight() )<= level.getCapacity()) {
+                    level.moveToRucksack(finalI);
+                    updateLabel(finalI);
+                }
+            });
+            currentRucksack.addActionListener(e -> {
+                if (level.getItemAmountInRucksack(finalI) <= 0){
+                    return;
+                }
+                level.moveFromRucksack(finalI);
+                updateLabel(finalI);
+            });
+            panelItems.add(current);
+            panelItems.add(labels[i]);
+            panelRucksack.add(currentRucksack);
+            panelRucksack.add(rucksackLabels[i]);
+            panelRucksack.add(currentWeightLabel);
+            panelRucksack.add(currentValueLabel);
+
+        }
+
+    }
+
+    private void updateLabel(int i){
+        labels[i].setText(String.valueOf(level.getItemAmountAvailable(i)));
+        rucksackLabels[i].setText(String.valueOf(level.getItemAmountInRucksack(i)));
+        currentWeightLabel.setText(level.getCurrentWeight() + "/" + level.getCapacity() + "g");
+        currentValueLabel.setText((level.getCurrentValue() + "€"));
+    }
+
+    /**
+     * To be used with frame.setContentPane()
+     * @return returns the Container that contains the content of the level page
+     */
+    public Container getPane() {
+        Container pane = new Container();
         pane.setLayout(new GridLayout(1,3));
 
         //Füge Rucksack png ein und ändere größe
@@ -34,7 +139,7 @@ public class GUILevelPage {
         //JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
 
         // erzeuge Buttons
-        this.escapeButton(centerPanel, frame);
+        this.escapeButton(centerPanel);
         this.itemButtons(rightPanel, leftPanel);
 
 
@@ -44,114 +149,6 @@ public class GUILevelPage {
         pane.add(centerPanel, BorderLayout.CENTER);
         pane.add(rightPanel, BorderLayout.EAST);
 
-        frame.setVisible(true);
+        return pane;
     }
-
-    private void escapeButton(JPanel panel, JFrame frame){
-        JButton flucht = new JButton("Flucht");
-        flucht.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (level.getRucksack().getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())){
-                    UserDataManager.newHighScore(level.getLevelNumber(),level.getRucksack().getCurrentValue());
-                    UserDataManager.save();
-                }
-                String[] buttons = {"Erneut Spielen","Nächstes Level","Levelauswahl"};
-                int chosenButton = JOptionPane.showOptionDialog(panel,"Hier steht Tips / Feedback","Geflohen",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,buttons,buttons[0]);
-                switch (chosenButton) {
-                    case 0:
-                        LevelManager.resetLevel(level, frame);
-                        System.out.println("Es wurde auf " + buttons[0] + " geklickt.");
-                        break;
-                    case 1:
-                        //LevelManager.nextLevel();
-                        System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
-                        break;
-                    case 2:
-                        GUIManager.rePaintFrame(frame.getContentPane());
-                        GUIManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame);
-
-                        System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
-                        break;
-                }
-                level.endOfLevel();
-            }
-        });
-        panel.add(flucht);
-    }
-
-    /**
-     * fügt zur Verfügung stehende Items als Button ein
-     * @param
-     * @return
-     */
-    private void itemButtons(JPanel panelItems, JPanel panelRucksack) {
-        JLabel currentWeightLabel = new JLabel("0/" + level.getRucksack().getCurrentCapacity() + "g");
-        Font fCurrentWeightLabel = currentWeightLabel.getFont();
-        currentWeightLabel.setFont(fCurrentWeightLabel.deriveFont(fCurrentWeightLabel.getStyle() | Font.BOLD));
-
-        JLabel currentValueLabel = new JLabel("0€");
-        Font fcurrentValueLabel = currentValueLabel.getFont();
-        currentValueLabel.setFont(fcurrentValueLabel.deriveFont(fcurrentValueLabel.getStyle() | Font.BOLD));
-
-        ArrayList<Item> items = level.getItemList();
-        for (int i = 0; i<items.size(); i++) {
-            JReferencingButton current = new JReferencingButton(items.get(i).getName() + " (" + items.get(i).getWeight() + "g, " + items.get(i).getValue() + "€)", level,  i);
-            JLabel label = new JLabel(level.getCurrentItemAmountList().get(i).toString());
-
-            Font f = label.getFont();
-            label.setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
-
-            JReferencingButton currentRucksack = new JReferencingButton(items.get(i).getName(), level, i);
-            JLabel labelRucksack = new JLabel("0");
-            Font fRucksack = labelRucksack.getFont();
-            labelRucksack.setFont(fRucksack.deriveFont(fRucksack.getStyle() | Font.BOLD));
-            current.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if((level.getRucksack().getCurrentWeight() + current.getLevel().getRucksack().getItems().get(current.getPosition()).getWeight() )<= level.getRucksack().getCurrentCapacity()) {
-                        current.setItemAmount();
-                        label.setText(String.valueOf(current.getAmountLevelItem()));
-                        labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
-                        currentWeightLabel.setText(level.getRucksack().getCurrentWeight() + "/" + level.getRucksack().getCurrentCapacity() + "g");
-                        currentValueLabel.setText((level.getRucksack().getCurrentValue() + "€"));
-                    }
-
-
-
-                }
-            });
-            currentRucksack.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    currentRucksack.setRucksackItemAmount();
-                    labelRucksack.setText(String.valueOf(currentRucksack.getAmountRucksackItem()));
-                    label.setText(String.valueOf(current.getAmountLevelItem()));
-                    currentWeightLabel.setText(level.getRucksack().getCurrentWeight() + "/" + level.getRucksack().getCurrentCapacity() + "g");
-                    currentValueLabel.setText((level.getRucksack().getCurrentValue() + "€"));
-                }
-            });
-            panelItems.add(current);
-            panelItems.add(label);
-            panelRucksack.add(currentRucksack);
-            panelRucksack.add(labelRucksack);
-            panelRucksack.add(currentWeightLabel);
-            panelRucksack.add(currentValueLabel);
-
-        }
-
-    }
-
-    private void clearRucksack(Image image) {
-        //todo remove image method
-    }
-
-    private void clearPage(JPanel panel) {
-     panel.removeAll();
-     panel.revalidate();
-     panel.repaint();
-    }
-
-
-
 }

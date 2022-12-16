@@ -4,11 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUIFrontpage {
-    GUIManager guiManager;
-
-    public void getFrontPage(JFrame frame) {
-        guiManager = new GUIManager();
-        Container pane = frame.getContentPane();
+    /**
+     * To be used with frame.setContentPane()
+     * @return returns the Container that contains the content of the frontpage
+     */
+    public Container getPane() {
+        Container pane = new Container();
         pane.setLayout(null);
 
         Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
@@ -23,10 +24,7 @@ public class GUIFrontpage {
         levelButton.setBackground(Color.cyan);
         pane.add(levelButton);
 
-        levelButton.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
-            guiManager.getGuiLevelDeciderPage().openLevelDeciderPage(frame);
-        });
+        levelButton.addActionListener(e -> GUIManager.openLevelSelectScreen());
 
 
         JButton ownLevelButton = new JButton("Eigene Level");
@@ -35,7 +33,6 @@ public class GUIFrontpage {
         pane.add(ownLevelButton);
 
         ownLevelButton.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
         });
 
         JButton settingsButton = new JButton("Einstellungen");
@@ -43,13 +40,11 @@ public class GUIFrontpage {
         settingsButton.setBackground(Color.cyan);
         pane.add(settingsButton);
 
-        settingsButton.addActionListener(e -> {
-            guiManager.rePaintFrame(pane);
-            guiManager.getGuiOptionsPage().openOptionsPage(frame, guiManager);
-        });
+        settingsButton.addActionListener(e -> GUIManager.openOptionsMenu());
 
         pane.revalidate();
         pane.repaint();
-    }
 
+        return pane;
+    }
 }
