@@ -1,4 +1,4 @@
-package Rucksack;
+package rucksack;
 import gui.level.GUILevelPage;
 import org.junit.jupiter.api.Test;
 

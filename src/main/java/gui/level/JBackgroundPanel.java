@@ -1,26 +1,44 @@
 package gui.level;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
+
+/**
+ * The type J background panel.
+ */
 public class JBackgroundPanel extends JPanel {
 
-    private final Image background;
+  /**
+   * the image of the background of guiLevelPage.
+   */
+  private final Image background;
 
-    public JBackgroundPanel(LayoutManager layout, Image background) {
-        super(layout);
-        this.background = background;
-    }
+  /**
+   * Instantiates a new J background panel.
+   *
+   * @param layout     the layout
+   * @param background the background
+   */
+  public JBackgroundPanel(LayoutManager layout, Image background) {
+    super(layout);
+    this.background = background;
+  }
 
-    public JBackgroundPanel(Image background) {
-        this.background = background;
-    }
+  /**
+   * Instantiates a new J background panel.
+   *
+   * @param background the background
+   */
+  public JBackgroundPanel(Image background) {
+    this.background = background;
+  }
 
-    @Override
-    protected void paintComponent(Graphics g) {
+  @Override
+  protected void paintComponent(Graphics g) {
 
-        super.paintComponent(g);
-        g.drawImage(this.background, 0, 0, this);
-    }
+    super.paintComponent(g);
+    g.drawImage(this.background, 0, 0, this);
+  }
 
 }

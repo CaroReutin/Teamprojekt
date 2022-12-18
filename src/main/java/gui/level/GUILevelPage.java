@@ -1,7 +1,7 @@
 package gui.level;
 
-import Rucksack.*;
-import Solving.UserDataManager;
+import rucksack.*;
+import solving.UserDataManager;
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,10 +12,25 @@ import javax.swing.*;
  * This class holds the gui pane of the levelpage.
  */
 public class GUILevelPage {
+  /**
+   * the level which is currently played.
+   */
   private final Level level;
+  /**
+   * the labels of the page.
+   */
   private JLabel[] labels;
+  /**
+   * the label of the rucksack.
+   */
   private JLabel[] rucksackLabels;
+  /**
+   * the current value of the label.
+   */
   private JLabel currentValueLabel;
+  /**
+   * the current weight of the label.
+   */
   private JLabel currentWeightLabel;
 
   /**
@@ -74,12 +89,12 @@ public class GUILevelPage {
    */
   private void itemButtons(JPanel panelItems, JPanel panelRucksack) {
     currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
-    Font fCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(fCurrentWeightLabel.deriveFont(fCurrentWeightLabel.getStyle() | Font.BOLD));
+    Font fontCurrentWeightLabel = currentWeightLabel.getFont();
+    currentWeightLabel.setFont(fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle() | Font.BOLD));
 
     currentValueLabel = new JLabel("0€");
-    Font fcurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(fcurrentValueLabel.deriveFont(fcurrentValueLabel.getStyle() | Font.BOLD));
+    Font fontCurrentValueLabel = currentValueLabel.getFont();
+    currentValueLabel.setFont(fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle() | Font.BOLD));
 
     ArrayList<Item> items = level.getItemList();
     labels = new JLabel[items.size()];
@@ -95,8 +110,8 @@ public class GUILevelPage {
 
       JButton currentRucksack = new JButton(items.get(i).getName());
       rucksackLabels[i] = new JLabel("0");
-      Font fRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fRucksack.deriveFont(fRucksack.getStyle() | Font.BOLD));
+      Font fontRucksack = rucksackLabels[i].getFont();
+      rucksackLabels[i].setFont(fontRucksack.deriveFont(fontRucksack.getStyle() | Font.BOLD));
       current.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
@@ -131,7 +146,7 @@ public class GUILevelPage {
   }
 
   /**
-   * To be used with frame.setContentPane()
+   * To be used with frame.setContentPane().
    *
    * @return returns the Container that contains the content of the level page
    */

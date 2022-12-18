@@ -1,9 +1,9 @@
 
 package gui.level;
 
-import Rucksack.Item;
-import Rucksack.Level;
-import Solving.AppData;
+import rucksack.Item;
+import rucksack.Level;
+import solving.AppData;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
