@@ -1,6 +1,6 @@
 
 
-package GUI_Level;
+package gui.level;
 
 import javax.swing.*;
 

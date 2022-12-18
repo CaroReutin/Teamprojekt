@@ -1,9 +1,6 @@
 package Rucksack;
-import GUI_Level.GUILevelPage;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import gui.level.GUILevelPage;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 

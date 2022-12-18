@@ -1,5 +1,5 @@
 
-import GUI_Level.GUIManager;
+import gui.level.GUIManager;
 import Solving.*;
 
 public class Main{
