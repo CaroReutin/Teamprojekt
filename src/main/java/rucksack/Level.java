@@ -1,0 +1,243 @@
+package rucksack;
+
+import java.util.ArrayList;
+
+/**
+ * The class that holds the level information.
+ */
+public class Level {
+  /**
+   * Greedy -> Gieriger Ganove
+   * Backtracking -> Backtracking Bandit
+   * Else -> Dr. Meta
+   */
+  enum Robber {
+    /**
+     * Gieriger ganove robber.
+     */
+    GIERIGER_GANOVE,
+    /**
+     * Backtracking bandit robber.
+     */
+    BACKTRACKING_BANDIT,
+    /**
+     * Dr meta robber.
+     */
+    DR_META
+  }
+
+  /**
+   * the list with all items.
+   */
+  private final ArrayList<Item> itemList;
+  /**
+   * the list with the amout of the items.
+   */
+  private final ArrayList<Integer> itemAmountList;
+  /**
+   * the lsit with the amout of available items.
+   */
+  private ArrayList<Integer> availableItemAmountList;
+  /**
+   * the list of the amount in the rucksack.
+   */
+  private ArrayList<Integer> inRucksackAmountList;
+  /**
+   * the current value.
+   */
+  private int currentValue;
+  /**
+   * the current weight.
+   */
+  private int currentWeight;
+  /**
+   * the current robber.
+   */
+  private final Robber robber;
+  /**
+   * the level index.
+   */
+  private final int levelindex;
+  /**
+   * the capacity of the rucksack.
+   */
+  private final int capacity;
+
+  /**
+   * By default, has Dr.Meta as Robber.
+   * Has no tips.
+   *
+   * @param itemList       ArrayList of available Items
+   * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
+   * @param levelindex     the index of the level
+   * @param capacity       the capacity
+   */
+  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, int levelindex, int capacity) {
+    this.capacity = capacity;
+    this.levelindex = levelindex;
+    this.itemList = itemList;
+    this.itemAmountList = itemAmountList;
+    this.availableItemAmountList =  new ArrayList<>();
+    for (int i = 0; i < itemAmountList.size(); i++) {
+      availableItemAmountList.add(itemAmountList.get(i));
+    }
+    this.robber = Robber.DR_META;
+    inRucksackAmountList = new ArrayList<>();
+    for (int i = 0; i < itemAmountList.size(); i++) {
+      inRucksackAmountList.add(0);
+    }
+    currentWeight = 0;
+    currentValue = 0;
+  }
+
+
+  /**
+   * Instantiates a new Level.
+   *
+   * @param itemList       ArrayList of available Items
+   * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
+   * @param robber         the Robber
+   * @param levelindex     the index of the level
+   * @param capacity       the capacity
+   */
+  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, Robber robber, int levelindex, int capacity) {
+    this.capacity = capacity;
+    this.levelindex = levelindex;
+    this.itemList = itemList;
+    this.itemAmountList = itemAmountList;
+    this.availableItemAmountList = new ArrayList<>();
+    for (int i = 0; i < itemAmountList.size(); i++) {
+      availableItemAmountList.add(itemAmountList.get(i));
+    }
+    inRucksackAmountList = new ArrayList<>();
+    for (int i = 0; i < itemAmountList.size(); i++) {
+      inRucksackAmountList.add(0);
+    }
+    this.robber = robber;
+    currentWeight = 0;
+    currentValue = 0;
+  }
+
+
+  /**
+   * Get rucksack capacity int.
+   *
+   * @return Returns the capacity of the Rucksack
+   */
+  public int getRucksackCapacity() {
+    return capacity;
+  }
+
+
+  /**
+   * NOTE: this does not return the items still available in the level (i.e. the ones not in the Backpack)
+   *
+   * @return Returns the items that exist in the Rucksack.Level
+   */
+  public ArrayList<Item> getItemList() {
+    return itemList;
+  }
+
+  /**
+   * NOTE: this does not return the amounts of the items still available in the level (i.e. the ones not in the Backpack)
+   *
+   * @return Returns the amounts of the items that exist in the Rucksack.Level
+   */
+  public ArrayList<Integer> getItemAmountList() {
+    return itemAmountList;
+  }
+
+  /**
+   * Gets item amount available.
+   *
+   * @param i the
+   * @return Returns the amounts of the items that are still available in the Rucksack.Level
+   */
+  public int getItemAmountAvailable(int i) {
+    return availableItemAmountList.get(i);
+  }
+
+  /**
+   * Gets item amount in rucksack.
+   *
+   * @param i the
+   * @return the item amount in rucksack
+   */
+  public int getItemAmountInRucksack(int i) {
+    return inRucksackAmountList.get(i);
+  }
+
+  /**
+   * Reset level.
+   */
+  public void resetLevel() {
+    inRucksackAmountList = new ArrayList<>();
+    for (int i = 0; i < itemAmountList.size(); i++) {
+      inRucksackAmountList.add(0);
+      availableItemAmountList.set(i, itemAmountList.get(i));
+    }
+    currentWeight = 0;
+    currentValue = 0;
+  }
+
+  /**
+   * Gets level number.
+   *
+   * @return the level number
+   */
+  public int getLevelNumber() {
+    return this.levelindex;
+  }
+
+  /**
+   * Move to rucksack.
+   *
+   * @param i the
+   */
+  public void moveToRucksack(int i) {
+    availableItemAmountList.set(i, availableItemAmountList.get(i) - 1);
+    inRucksackAmountList.set(i, inRucksackAmountList.get(i) + 1);
+    currentValue += itemList.get(i).getValue();
+    currentWeight += itemList.get(i).getWeight();
+  }
+
+  /**
+   * Move from rucksack.
+   *
+   * @param i the
+   */
+  public void moveFromRucksack(int i) {
+    availableItemAmountList.set(i, availableItemAmountList.get(i) + 1);
+    inRucksackAmountList.set(i, inRucksackAmountList.get(i) - 1);
+    currentValue -= itemList.get(i).getValue();
+    currentWeight -= itemList.get(i).getWeight();
+  }
+
+  /**
+   * Gets current value.
+   *
+   * @return the current value
+   */
+  public int getCurrentValue() {
+    return currentValue;
+  }
+
+  /**
+   * Gets capacity.
+   *
+   * @return the capacity
+   */
+  public int getCapacity() {
+    return capacity;
+  }
+
+  /**
+   * Gets current weight.
+   *
+   * @return the current weight
+   */
+  public int getCurrentWeight() {
+    return currentWeight;
+  }
+
+}

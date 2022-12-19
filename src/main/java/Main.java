@@ -1,13 +1,21 @@
 
-import GUI_Level.GUIManager;
-import Solving.*;
+import gui.level.GUIManager;
+import solving.*;
 
-public class Main{
-    public static void main(String[] args) {
-        AppData.initialize();
-        UserDataManager.load();
+/**
+ * The type Main.
+ */
+public class Main {
+  /**
+   * The entry point of application.
+   *
+   * @param args the input arguments
+   */
+  public static void main(final String[] args) {
+    AppData.initialize();
+    UserDataManager.load();
 
-        GUIManager guiManager = new GUIManager();
-        guiManager.launch();
-    }
+    GUIManager guiManager = new GUIManager();
+    guiManager.launch();
+  }
 }

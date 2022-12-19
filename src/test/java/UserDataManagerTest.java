@@ -1,5 +1,5 @@
-import Solving.AppData;
-import Solving.UserDataManager;
+import solving.AppData;
+import solving.UserDataManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
