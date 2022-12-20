@@ -1,17 +1,21 @@
 package rucksack;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The class that holds the level information.
  */
-public class Level {
+@XmlRootElement
+public class Level implements Serializable {
   /**
    * Greedy -> Gieriger Ganove
    * Backtracking -> Backtracking Bandit
    * Else -> Dr. Meta
    */
-  enum Robber {
+  public enum Robber {
     /**
      * Gieriger ganove robber.
      */
@@ -29,10 +33,12 @@ public class Level {
   /**
    * the list with all items.
    */
+  @XmlElement
   private final ArrayList<Item> itemList;
   /**
    * the list with the amout of the items.
    */
+  @XmlElement
   private final ArrayList<Integer> itemAmountList;
   /**
    * the lsit with the amout of available items.
@@ -53,6 +59,7 @@ public class Level {
   /**
    * the current robber.
    */
+  @XmlElement
   private final Robber robber;
   /**
    * the level index.
@@ -61,6 +68,7 @@ public class Level {
   /**
    * the capacity of the rucksack.
    */
+  @XmlElement
   private final int capacity;
 
   /**
@@ -118,6 +126,17 @@ public class Level {
     currentValue = 0;
   }
 
+  private Level(){
+    this.capacity = -1;
+    this.levelindex = -1;
+    this.itemList = new ArrayList<>();
+    this.itemAmountList = new ArrayList<>();
+    this.availableItemAmountList = new ArrayList<>();
+    inRucksackAmountList = new ArrayList<>();
+    this.robber = null;
+    currentWeight = 0;
+    currentValue = 0;
+  }
 
   /**
    * Get rucksack capacity int.
