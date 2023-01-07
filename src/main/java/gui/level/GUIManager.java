@@ -16,10 +16,12 @@ public class GUIManager {
    * the current gui optionspage.
    */
   private static final GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
+
+
   /**
    * the current gui leveldeciderpage.
    */
-  private static final GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+  private static GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
   /**
    * the frame of all windows.
    */
@@ -94,4 +96,13 @@ public class GUIManager {
   public static JComponent getRootPane() {
     return frame.getRootPane();
   }
+
+  /**
+   * gets the GUILevelDeciderPage
+   * @return the leveldeciderpage
+   */
+  public static GUILevelDeciderPage getGuiLevelDeciderPage() {
+    return guiLevelDeciderPage;
+  }
+
 }
