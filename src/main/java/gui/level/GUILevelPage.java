@@ -65,10 +65,7 @@ public class GUILevelPage {
           }
           break;
         case 1:
-          //LevelManager.nextLevel();
-          //todo: guiLevelPages in GUILevelPage öffnen
-          //GUIManager.openLevel(guiLevelPages[level.getLevelNumber() + 1]);
-
+          GUIManager.openLevel(GUIManager.getGuiLevelDeciderPage().getGuiLevelPages()[level.getLevelNumber() + 1]);
           System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           break;
         case 2:
