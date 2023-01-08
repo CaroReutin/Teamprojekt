@@ -2,7 +2,9 @@
 
 package gui.level;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 /**
  * The class GUIManager combines the gui pages.
@@ -11,19 +13,35 @@ public class GUIManager {
   /**
    * the current gui frontpage.
    */
-  private static final GUIFrontpage guiFrontPage = new GUIFrontpage();
+  private static final GUIFrontpage GUI_FRONTPAGE = new GUIFrontpage();
   /**
    * the current gui optionspage.
    */
-  private static final GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
+  private static final GUIOptionsPage GUI_OPTIONS_PAGE = new GUIOptionsPage();
   /**
    * the current gui leveldeciderpage.
    */
-  private static final GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+  private static final GUILevelDeciderPage GUI_LEVEL_DECIDER_PAGE
+      = new GUILevelDeciderPage();
+  /**
+   * the current gui Level editor page.
+   */
+  private static final GuiLevelEditorPage GUI_LEVEL_EDITOR_PAGE
+      = new GuiLevelEditorPage();
+
+
   /**
    * the frame of all windows.
    */
   private static JFrame frame;
+
+  /**
+   * Opens the Leveleditor.
+   */
+  public static void openLevelEditor() {
+    frame.setContentPane(GUI_LEVEL_EDITOR_PAGE.getPane());
+    paint();
+  }
 
   /**
    * Opens the main Menu.
@@ -55,7 +73,7 @@ public class GUIManager {
    * regardless where the options menu was opened from).
    */
   public static void openOptionsMenu() {
-    frame.setContentPane(guiOptionsPage.getPane());
+    frame.setContentPane(GUI_OPTIONS_PAGE.getPane());
     paint();
   }
 
@@ -63,7 +81,7 @@ public class GUIManager {
    * Opens the LevelSelectionScreen.
    */
   public static void openLevelSelectScreen() {
-    frame.setContentPane(guiLevelDeciderPage.getPane());
+    frame.setContentPane(GUI_LEVEL_DECIDER_PAGE.getPane());
     paint();
   }
 
@@ -71,7 +89,7 @@ public class GUIManager {
    * Opens the main Menu.
    */
   public static void openMainMenu() {
-    frame.setContentPane(guiFrontPage.getPane());
+    frame.setContentPane(GUI_FRONTPAGE.getPane());
     paint();
   }
 

@@ -1,12 +1,23 @@
 package solving;
 
+import java.awt.Font;
 import java.util.ArrayList;
-import rucksack.*;
+import rucksack.Item;
+import rucksack.Level;
 
 /**
  * The type App data.
  */
 public class AppData {
+  /**
+   * The font to use for text.
+   */
+  public static final Font FONT_STYLE = new Font("Arial",
+      Font.BOLD + Font.ITALIC, 30);
+  /**
+   * Max amount of items in custom level, used to make the GUI.
+   */
+  public static final int MAXIMUM_ITEMS_IN_CUSTOM_LEVEL = 16;
   /**
    * The constant LEVELAMOUNT.
    */

@@ -1,8 +1,8 @@
 package rucksack;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 
 /**
  * Item that can be stolen.
@@ -13,29 +13,30 @@ public class Item implements Serializable {
    * the value of the item.
    */
   @XmlElement
-  private int value;
+  private final int value;
   /**
    * the weight of the item.
    */
   @XmlElement
-  private int weight;
+  private final int weight;
   /**
    * the name of the item.
    */
   @XmlElement
-  private String name;
+  private final String name;
 
   /**
    * Instantiates a new Item.
    *
-   * @param value  the value
-   * @param weight the weight
-   * @param name   the name
+   * @param itemValue  the Value
+   * @param itemWeight the Weight
+   * @param itemName   the Name
    */
-  public Item(int value, int weight, String name) {
-    this.value = value;
-    this.weight = weight;
-    this.name = name;
+  public Item(final int itemValue, final int itemWeight,
+              final String itemName) {
+    this.value = itemValue;
+    this.weight = itemWeight;
+    this.name = itemName;
   }
 
   /**
@@ -75,4 +76,13 @@ public class Item implements Serializable {
     return name;
   }
 
+  /**
+   * Prints the relevant info of the Item.
+   *
+   * @return returns name , Weight: weight , Value: value in 3 Lines
+   */
+  @Override
+  public String toString() {
+    return name + "\nWeight: " + weight + "\nValue: " + value;
+  }
 }
