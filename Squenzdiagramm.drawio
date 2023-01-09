@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-01-09T11:25:38.811Z" agent="5.0 (X11)" etag="8s47TWkFzmB3XBPH6nO1" version="20.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-09T11:26:01.213Z" agent="5.0 (X11)" etag="dvoskbtM0BM8lLHx6JP6" version="20.8.3" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
     <mxGraphModel dx="1062" dy="1299" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -112,13 +112,13 @@
         <mxCell id="2r4D0COfhXqqiY9Dbk7g-26" value="path" style="text;align=center;fontStyle=0;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="340" y="670" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="2r4D0COfhXqqiY9Dbk7g-32" value="chooser:JFileChooser" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontSize=11;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="2r4D0COfhXqqiY9Dbk7g-32" value="CustomLevelManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontSize=11;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="670" y="80" width="130" height="1020" as="geometry" />
         </mxCell>
         <mxCell id="2r4D0COfhXqqiY9Dbk7g-33" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontSize=11;fillColor=default;" vertex="1" parent="2r4D0COfhXqqiY9Dbk7g-32">
           <mxGeometry x="60" y="670" width="10" height="329" as="geometry" />
         </mxCell>
-        <mxCell id="2r4D0COfhXqqiY9Dbk7g-34" value="save(path,titel,customLevel)" style="html=1;verticalAlign=bottom;endArrow=open;endSize=8;rounded=0;fontSize=11;" edge="1" parent="1">
+        <mxCell id="2r4D0COfhXqqiY9Dbk7g-34" value="save(path,titel,customLevel) &amp;lt;&amp;lt;static&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;endSize=8;rounded=0;fontSize=11;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="180" y="790" as="sourcePoint" />
             <mxPoint x="723.36" y="790" as="targetPoint" />
