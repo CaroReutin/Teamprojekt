@@ -3,13 +3,21 @@ package gui.level;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.io.File;
 import java.text.NumberFormat;
+import java.util.Objects;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.NumberFormatter;
+import org.apache.commons.io.FileUtils;
 import rucksack.Item;
+import solving.AppData;
 
 /**
  * Item Panel have 1 Container with a Button that opens the
@@ -18,6 +26,10 @@ import rucksack.Item;
  * name , weight, value, amount
  */
 public class ItemPanel extends Container {
+  /**
+   * the index for the picture.
+   */
+  private final int index;
   /**
    * the current Icon.
    */
@@ -42,6 +54,10 @@ public class ItemPanel extends Container {
    * the container.
    */
   private final Container myContainer;
+  /**
+   * the parent panel.
+   */
+  private final Container parent;
 
   /**
    * Makes a new Item Panel.
@@ -49,8 +65,13 @@ public class ItemPanel extends Container {
    * Image Selection if pressed
    * As well as 1 Container with the 4 JPanel, JFormattedTextField pairs for
    * name , weight, value, amount
+   *
+   * @param myIndex  the index of the panel
+   * @param myParent the parent container
    */
-  public ItemPanel() {
+  public ItemPanel(final int myIndex, final Container myParent) {
+    parent = myParent;
+    index = myIndex;
     myContainer = new Container();
     myContainer.setLayout(new BorderLayout());
     Container itemInfoPane = new Container();
@@ -83,7 +104,33 @@ public class ItemPanel extends Container {
     myContainer.add(itemInfoPane, BorderLayout.EAST);
 
     JButton iconSelector = new JButton();
-    iconSelector.setIcon(new ImageIcon("Rucksack.jpeg"));
+    icon = new ImageIcon(Objects.requireNonNull(getClass()
+        .getResource("/RucksackPNG.png")));
+    iconSelector.setIcon(icon);
+    JFileChooser chooseIcon = new JFileChooser();
+    chooseIcon.setCurrentDirectory(new java.io.File("."));
+    chooseIcon.setDialogTitle("Speicherordner");
+    chooseIcon.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    FileFilter imageFilter = new FileNameExtensionFilter(
+        "Image files", ImageIO.getReaderFileSuffixes());
+    chooseIcon.setFileFilter(imageFilter);
+    iconSelector.addActionListener(e -> {
+      if (chooseIcon.showOpenDialog(parent) == JFileChooser
+          .APPROVE_OPTION) {
+        try {
+          icon = new ImageIcon(chooseIcon.getSelectedFile().getAbsolutePath());
+          File destination = new File(AppData
+              .getCustomLevelPictureFolder() + "/picture" + index);
+          if (destination.exists()) {
+            FileUtils.delete(destination);
+          }
+          FileUtils.copyFile(chooseIcon.getSelectedFile(), destination);
+          iconSelector.setIcon(icon);
+        } catch (Exception exception) {
+          exception.printStackTrace();
+        }
+      }
+    });
     myContainer.add(iconSelector);
   }
 
@@ -104,6 +151,11 @@ public class ItemPanel extends Container {
    *                              fields are empty
    */
   public Item generateItem() throws NullPointerException {
+    if (nameField.getValue().toString().equals("")
+        || amountField.getValue().toString().equals("")
+        || weightField.getValue().toString().equals("")) {
+      throw new NullPointerException("No field may be empty");
+    }
     int ignoreResult = Integer.parseInt(amountField.getValue().toString());
     return new Item(Integer.parseInt(valueField.getValue().toString()),
         Integer.parseInt(weightField.getValue().toString()),

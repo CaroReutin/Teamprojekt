@@ -1,6 +1,7 @@
 package solving;
 
 import java.awt.Font;
+import java.io.File;
 import java.util.ArrayList;
 import rucksack.Item;
 import rucksack.Level;
@@ -9,6 +10,10 @@ import rucksack.Level;
  * The type App data.
  */
 public class AppData {
+  /**
+   * The location where the images to be zipped are stored.
+   */
+  private static String customLevelPictureFolder;
   /**
    * The font to use for text.
    */
@@ -39,6 +44,14 @@ public class AppData {
    * Initialize.
    */
   public static void initialize() {
+    if (System.getProperty("os.name").contains("Windows")) {
+      String appdataPath = System.getenv("APPDATA");
+      customLevelPictureFolder = appdataPath + "/Optimal Heist/customLevel/temp";
+    } else {
+      String homePath = System.getProperty("user.home", "Desktop");
+      customLevelPictureFolder = homePath + "/Optimal Heist/customLevel/temp";
+    }
+    boolean ignoreResult = new File(customLevelPictureFolder).mkdirs();
     passwords.add("Gr33dy");
     items.add(new Item(5, 1, "coin"));
     items.add(new Item(50, 8, "crown"));
@@ -99,6 +112,15 @@ public class AppData {
     currentItems = new ArrayList<>();
     currentAmount = new ArrayList<>();
     // Greedy Level 2 ...
+  }
+
+  /**
+   * based on os.
+   *
+   * @return returns the path for the pictures
+   */
+  public static String getCustomLevelPictureFolder() {
+    return customLevelPictureFolder;
   }
 
   /**

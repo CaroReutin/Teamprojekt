@@ -5,6 +5,8 @@ import static javax.swing.JOptionPane.showConfirmDialog;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.JButton;
@@ -13,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
 import solving.AppData;
@@ -28,6 +31,11 @@ public final class GuiLevelEditorPage {
    * @return returns the Page containing the Level Editor.
    */
   public Container getPane() {
+    try {
+      FileUtils.cleanDirectory(new File(AppData.getCustomLevelPictureFolder()));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     Container pane = new Container();
     pane.setLayout(new BorderLayout());
 
@@ -106,7 +114,7 @@ public final class GuiLevelEditorPage {
         + 1) / 2, 2));
 
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
-      itemPanels.add(new ItemPanel());
+      itemPanels.add(new ItemPanel(i, pane));
       rightPane.add(itemPanels.get(i).getPanel());
     }
 
