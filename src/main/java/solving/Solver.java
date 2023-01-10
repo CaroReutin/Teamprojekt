@@ -132,4 +132,10 @@ public class Solver {
     }
     return items;
   }
+
+
+  public ArrayList<Item> solveBacktracking(ArrayList<Item> items, ArrayList<Integer> amount, int capacity){
+
+
+  }
 }
