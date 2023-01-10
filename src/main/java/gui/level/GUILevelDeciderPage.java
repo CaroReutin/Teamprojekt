@@ -36,9 +36,9 @@ public class GUILevelDeciderPage {
 
     //Testlevel 1
     ArrayList<Item> items = new ArrayList<>();
-    items.add(AppData.generateItem("coin"));
-    items.add(AppData.generateItem("crown"));
-    items.add(AppData.generateItem("pearl"));
+    items.add(AppData.generateItem(0));
+    items.add(AppData.generateItem(1));
+    items.add(AppData.generateItem(2));
     ArrayList<Integer> amount = new ArrayList<>();
     amount.add(10);
     amount.add(7);
