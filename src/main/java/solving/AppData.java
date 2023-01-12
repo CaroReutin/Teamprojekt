@@ -11,6 +11,10 @@ import rucksack.Level;
  */
 public class AppData {
   /**
+   * Byte size to be used when zipping files.
+   */
+  public static final int ZIP_BYTE_SIZE = 1024;
+  /**
    * The location where the images to be zipped are stored.
    */
   private static String customLevelPictureFolder;
