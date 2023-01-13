@@ -35,5 +35,6 @@ public class CustomLevelManagerTest {
     String identifier = "test";
     String testResourcesPath = "./src/test/resources/customLevel";
     CustomLevelManager.save(testResourcesPath,identifier,testLevel);
+    // Save with pictures
   }
 }

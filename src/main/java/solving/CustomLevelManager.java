@@ -15,10 +15,19 @@ import rucksack.Level;
 /**
  * Manages Custom Levels do not make an instance all methods are static.
  */
-public class CustomLevelManager {
+public final class CustomLevelManager {
+  /**
+   * do not make.
+   */
+  private CustomLevelManager() {
+
+  }
 
   /**
-   * @param identifier the unique identifier that will be the name of the zippedLevel
+   * saves the level (as zip) to the default path with identifier as name.
+   *
+   * @param identifier the unique identifier that will be the
+   *                   name of the zippedLevel
    * @param level      the level to save
    */
   public static void save(final String identifier, final Level level) {
@@ -34,8 +43,11 @@ public class CustomLevelManager {
   }
 
   /**
+   * saves the level (as zip) to the path with identifier as name.
+   *
    * @param path       the path where the zip should be saved
-   * @param identifier the unique identifier that will be the name of the zippedLevel
+   * @param identifier the unique identifier that will be the
+   *                   name of the zippedLevel
    * @param level      the level to save
    */
   public static void save(final String path, final String identifier,
@@ -53,16 +65,20 @@ public class CustomLevelManager {
 
       fos.close();
 
-      zipLevel(level, levelPath);
+      zipLevel(levelPath);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
-  private static void zipLevel(final Level level, final String levelPath) throws IOException {
+  private static void zipLevel(final String levelPath) throws IOException {
     ArrayList<String> srcFiles = new ArrayList<>();
     srcFiles.add(levelPath);
-    for (int i = 0; i < level.getItemList().size(); i++) {
+    for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
+      System.out.println(AppData
+          .getCustomLevelPictureFolder() + "/picture" + i);
+      System.out.println(new File(AppData
+          .getCustomLevelPictureFolder() + "/picture" + i).exists());
       if (new File(AppData
           .getCustomLevelPictureFolder() + "/picture" + i).exists()) {
         srcFiles.add(AppData
@@ -91,6 +107,7 @@ public class CustomLevelManager {
     fos2.close();
   }
 
+  /*
   public static void load(String path) {
     // String vs. File depends on file picker I guess
   }
@@ -102,4 +119,5 @@ public class CustomLevelManager {
   public static void cleanCustomLevelFolder() {
     // Delete all non Zip files/folder in folder ?
   }
+   */
 }

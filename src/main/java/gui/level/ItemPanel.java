@@ -77,6 +77,7 @@ public class ItemPanel extends Container {
     Container itemInfoPane = new Container();
     itemInfoPane.setLayout(new GridLayout(4, 2));
 
+    // Currently you cannot delete a number if you type it into a field
     NumberFormat format = NumberFormat.getInstance();
     NumberFormatter formatter = new NumberFormatter(format);
     formatter.setValueClass(Integer.class);
@@ -101,6 +102,8 @@ public class ItemPanel extends Container {
     amountField = new JFormattedTextField(formatter);
     itemInfoPane.add(amountField);
 
+    // If you type a long word into name and then select
+    // a picture everything resizes and the picture is hard to see
     myContainer.add(itemInfoPane, BorderLayout.EAST);
 
     JButton iconSelector = new JButton();
