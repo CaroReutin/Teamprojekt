@@ -11,7 +11,7 @@ public class Level {
    * Backtracking -> Backtracking Bandit
    * Else -> Dr. Meta
    */
-  enum Robber {
+  public enum Robber {
     /**
      * Gieriger ganove robber.
      */
@@ -240,4 +240,7 @@ public class Level {
     return currentWeight;
   }
 
+  public Robber getRobber() {
+    return robber;
+  }
 }

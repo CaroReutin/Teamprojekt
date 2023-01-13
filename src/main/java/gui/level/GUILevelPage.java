@@ -125,8 +125,11 @@ public class GUILevelPage {
         if (level.getItemAmountInRucksack(finalI) <= 0) {
           return;
         }
-        level.moveFromRucksack(finalI);
-        updateLabel(finalI);
+        if(!level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)){
+          level.moveFromRucksack(finalI);
+          updateLabel(finalI);
+        }
+
       });
       panelItems.add(current);
       panelItems.add(labels[i]);

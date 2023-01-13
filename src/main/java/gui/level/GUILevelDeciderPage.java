@@ -18,6 +18,7 @@ public class GUILevelDeciderPage {
    * the array GUILevelPage holds all levelpages.
    */
   private final GUILevelPage[] guiLevelPages = new GUILevelPage[15];
+
   /**
    * To be used with frame.setContentPane().
    *
@@ -34,7 +35,7 @@ public class GUILevelDeciderPage {
     titel.setFont(fontStyle);
     pane.add(titel);
 
-    //Testlevel 1
+    /*Testlevel 1
     ArrayList<Item> items = new ArrayList<>();
     items.add(AppData.generateItem(0));
     items.add(AppData.generateItem(1));
@@ -43,13 +44,14 @@ public class GUILevelDeciderPage {
     amount.add(10);
     amount.add(7);
     amount.add(4);
-    //
+    */
+
 
     JButton levelOne = new JButton("1");
     levelOne.setBounds(25, 200, 50, 50);
     levelOne.setBackground(Color.cyan);
     pane.add(levelOne);
-    guiLevelPages[0] = new GUILevelPage(new Level(items, amount, 0, 60));
+    guiLevelPages[0] = new GUILevelPage(AppData.getLevel(0));
     levelOne.addActionListener(e -> GUIManager.openLevel(guiLevelPages[0]));
 
     JLabel ganove = new JLabel("gieriger Ganove");

@@ -12,7 +12,8 @@ public class Main {
    * @param args the input arguments
    */
   public static void main(final String[] args) {
-    AppData.initialize();
+    AppData.InitializeBeginningLevel();
+    AppData.initializeGreedy();
     UserDataManager.load();
 
     GUIManager guiManager = new GUIManager();
