@@ -78,11 +78,11 @@ public class AppData {
     // Greedy Level 1
     ArrayList<Item> currentItems = new ArrayList<>();
     ArrayList<Integer> currentAmount = new ArrayList<>();
-    currentItems.add(generateItem("1"));
+    currentItems.add(generateItem(8));
     currentAmount.add(1);
-    currentItems.add(generateItem("2"));
+    currentItems.add(generateItem(10));
     currentAmount.add(1);
-    currentItems.add(generateItem("3"));
+    currentItems.add(generateItem(12));
     currentAmount.add(1);
     level[1] = new Level(currentItems, currentAmount, 1, 6);
     currentItems = new ArrayList<>();
@@ -112,16 +112,11 @@ public class AppData {
   /**
    * Generate item item.
    *
-   * @param name the unique name of the item
+   * @param index the unique index of the item
    * @return returns a new Instance of the wanted item if it is in the ArrayList else it returns null
    */
-  public static Item generateItem(String name) {
-    for (int i = 0; i < items.size(); i++) {
-      if (items.get(i).getName().matches(name)) {
-        return new Item(items.get(i).getValue(), items.get(i).getWeight(), items.get(i).getName());
-      }
-    }
-    return null;
+  public static Item generateItem(int index) {
+    return new Item(items.get(index).getValue(), items.get(index).getWeight(), items.get(index).getName());
   }
 
   /**
