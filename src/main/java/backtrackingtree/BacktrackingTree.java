@@ -1,4 +1,4 @@
-package backtrackingTree;
+package backtrackingtree;
 
 public class BacktrackingTree {
 
