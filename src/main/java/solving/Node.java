@@ -44,7 +44,9 @@ public class Node {
     return rightChildren;
   }
 
-
+  public Item getItem() {
+    return item;
+  }
 
   public boolean isPutInRucksack() {
     return putInRucksack;

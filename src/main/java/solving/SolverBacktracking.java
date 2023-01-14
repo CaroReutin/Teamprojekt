@@ -63,7 +63,7 @@ public class SolverBacktracking extends Solver {
     if (newWeight > capacity) {
       currentNode.setRightChildren(backtrackingRekursion(currentItem, currentNode.getRightChildren(), currentNode, capacity, selectedItems));
     } else {
-      selectedItems.add(currentItem);
+      selectedItems.add(currentNode.getItem());
       currentNode.setLeftChildren(backtrackingRekursion(currentItem, currentNode.getLeftChildren(),currentNode, capacity, selectedItems));
       if (newValue > bestValue) {
         bestValue = newValue;
