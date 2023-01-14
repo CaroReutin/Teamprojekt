@@ -17,28 +17,31 @@ public class SolverBacktracking extends Solver {
   }
 
   public ArrayList<Item> solveBacktracking(ArrayList<Item> items, ArrayList<Integer> amount, int capacity) {
-    //TODO gesamtgewicht aller items berechnen und prüfen ob dieses < capacity ist
+    //TODO gesamtgewicht aller items berechnen und prüfen ob dieses < capacity ist.
     ammountsCopy = amount;
-    this.backtrackingRekursion(items, amount, capacity, 0, 0, new ArrayList<Item>());
+    ArrayList<ArrayList<Item>> bestItems = new ArrayList<>();
+    for (int k = 0; k < items.size(); k++) {
+      bestItems.add(this.backtrackingRekursion(items, amount, capacity, 0, 0, new ArrayList<Item>()));
+    }
     System.out.println("Value: " + bestValue + " Weight: " + bestWeight);
     for (Item current : bestSelectedItems) {
-      System.out.println(current.getName() + " Weigt: " + current.getWeight() + " Value: " + current.getValue());
+      System.out.println(current.getName() + " Weight: " + current.getWeight() + " Value: " + current.getValue());
     }
     return bestSelectedItems;
   }
 
-  public void backtrackingRekursion(ArrayList<Item> items, ArrayList<Integer> amount, int capacity, int currentWeight,
+  public ArrayList<Item> backtrackingRekursion(ArrayList<Item> items, ArrayList<Integer> amount, int capacity, int currentWeight,
                                     int currentValue, ArrayList<Item> selectedItems) {
 
     for (int i = 0; i < items.size(); i++) {
-      for(int a = ammountsCopy.get(i); a>0; a--) {
+      for (int a = ammountsCopy.get(i); a > 0; a--) {
         if (currentWeight <= capacity) {
           int newWeight = currentWeight + items.get(i).getWeight();
           if (newWeight <= capacity) {
             currentWeight = newWeight;
             currentValue = currentValue + items.get(i).getValue();
             selectedItems.add(items.get(i));
-            ammountsCopy.set(i, ammountsCopy.get(i) -1);
+            ammountsCopy.set(i, ammountsCopy.get(i) - 1);
 
             //TEST
             System.out.println(
@@ -63,13 +66,13 @@ public class SolverBacktracking extends Solver {
           }
           currentWeight = currentWeight - items.get(i).getWeight();
           currentValue = currentValue - items.get(i).getValue();
-          ammountsCopy.set(i, ammountsCopy.get(i) +1);
+          ammountsCopy.set(i, ammountsCopy.get(i) + 1);
           selectedItems.remove(selectedItems.size() - 1);
           break;
         }
       }
-
     }
+    return bestSelectedItems;
 
   }
 
