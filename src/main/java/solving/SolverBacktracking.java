@@ -17,6 +17,7 @@ public class SolverBacktracking extends Solver {
   }
 
   public ArrayList<Item> solveBacktracking(ArrayList<Item> items, ArrayList<Integer> amount, int capacity) {
+
     //TODO gesamtgewicht aller items berechnen und prüfen ob dieses < capacity ist
     ArrayList<Item> allItemsOfLevel = new ArrayList<>();
     for (int i = 0; i < items.size(); i++) {
@@ -31,10 +32,11 @@ public class SolverBacktracking extends Solver {
 
     System.out.println("Value: " + bestValue + " Weight: " + bestWeight);
     for (Item current : bestSelectedItems) {
-      System.out.println(current.getName() + " Weigt: " + current.getWeight() + " Value: " + current.getValue());
+      System.out.println(current.getName() + " Weight: " + current.getWeight() + " Value: " + current.getValue());
     }
     return bestSelectedItems;
   }
+
 
   /**
    * Add a new Item recursiv in the binaryTree
@@ -73,13 +75,20 @@ public class SolverBacktracking extends Solver {
 
     /* for (int i = 0; i < items.size(); i++) {
       for(int a = ammountsCopy.get(i); a>0; a--) {
+=======
+  public ArrayList<Item> backtrackingRekursion(ArrayList<Item> items, ArrayList<Integer> amount, int capacity, int currentWeight,
+                                    int currentValue, ArrayList<Item> selectedItems) {
+
+    for (int i = 0; i < items.size(); i++) {
+      for (int a = ammountsCopy.get(i); a > 0; a--) {
+>>>>>>> 503e577e75d7e278d2625babbd1c438733bf3746
         if (currentWeight <= capacity) {
           int newWeight = currentWeight + items.get(i).getWeight();
           if (newWeight <= capacity) {
             currentWeight = newWeight;
             currentValue = currentValue + items.get(i).getValue();
             selectedItems.add(items.get(i));
-            ammountsCopy.set(i, ammountsCopy.get(i) -1);
+            ammountsCopy.set(i, ammountsCopy.get(i) - 1);
 
             //TEST
             System.out.println(
@@ -104,13 +113,15 @@ public class SolverBacktracking extends Solver {
           }
           currentWeight = currentWeight - items.get(i).getWeight();
           currentValue = currentValue - items.get(i).getValue();
-          ammountsCopy.set(i, ammountsCopy.get(i) +1);
+          ammountsCopy.set(i, ammountsCopy.get(i) + 1);
           selectedItems.remove(selectedItems.size() - 1);
           break;
         }
       }
+<<<<<<< HEAD
 
     }*/
+
 
   }
 
