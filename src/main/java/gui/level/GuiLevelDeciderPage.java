@@ -12,12 +12,12 @@ import javax.swing.*;
 /**
  * The class GuiLevelDeciderPage confugures the gui of the level decider page.
  */
-public class GUILevelDeciderPage {
+public class GuiLevelDeciderPage {
 
   /**
    * the array GUILevelPage holds all levelpages.
    */
-  private final GUILevelPage[] guiLevelPages = new GUILevelPage[15];
+  private final GuiLevelPage[] guiLevelPages = new GuiLevelPage[15];
   /**
    * To be used with frame.setContentPane().
    *
@@ -49,8 +49,8 @@ public class GUILevelDeciderPage {
     levelOne.setBounds(25, 200, 50, 50);
     levelOne.setBackground(Color.cyan);
     pane.add(levelOne);
-    guiLevelPages[0] = new GUILevelPage(new Level(items, amount, 0, 60));
-    levelOne.addActionListener(e -> GUIManager.openLevel(guiLevelPages[0]));
+    guiLevelPages[0] = new GuiLevelPage(new Level(items, amount, 0, 60));
+    levelOne.addActionListener(e -> GuiManager.openLevel(guiLevelPages[0]));
 
     JLabel ganove = new JLabel("gieriger Ganove");
     ganove.setBounds(150, 80, 300, 40);
@@ -61,9 +61,9 @@ public class GUILevelDeciderPage {
     levelTwoGreedy.setBounds(60, 125, 50, 50);
     levelTwoGreedy.setBackground(Color.cyan);
     pane.add(levelTwoGreedy);
-    guiLevelPages[1] = new GUILevelPage(AppData.getLevel(1));
+    guiLevelPages[1] = new GuiLevelPage(AppData.getLevel(1));
     levelTwoGreedy.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[1]);
+      GuiManager.openLevel(guiLevelPages[1]);
     });
 
 
@@ -72,7 +72,7 @@ public class GUILevelDeciderPage {
     levelThreeGreedy.setBackground(Color.cyan);
     pane.add(levelThreeGreedy);
     levelThreeGreedy.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[2]);
+      GuiManager.openLevel(guiLevelPages[2]);
     });
 
     JButton levelFourGreedy = new JButton("4");
@@ -80,7 +80,7 @@ public class GUILevelDeciderPage {
     levelFourGreedy.setBackground(Color.cyan);
     pane.add(levelFourGreedy);
     levelFourGreedy.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[3]);
+      GuiManager.openLevel(guiLevelPages[3]);
     });
 
     JButton levelFiveGreedy = new JButton("5");
@@ -88,7 +88,7 @@ public class GUILevelDeciderPage {
     levelFiveGreedy.setBackground(Color.cyan);
     pane.add(levelFiveGreedy);
     levelFiveGreedy.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[4]);
+      GuiManager.openLevel(guiLevelPages[4]);
     });
 
     JButton levelSixGreedy = new JButton("6");
@@ -96,7 +96,7 @@ public class GUILevelDeciderPage {
     levelSixGreedy.setBackground(Color.cyan);
     pane.add(levelSixGreedy);
     levelSixGreedy.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[5]);
+      GuiManager.openLevel(guiLevelPages[5]);
     });
 
     JButton levelSevenGreedy = new JButton("7");
@@ -104,7 +104,7 @@ public class GUILevelDeciderPage {
     levelSevenGreedy.setBackground(Color.cyan);
     pane.add(levelSevenGreedy);
     levelSevenGreedy.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[6]);
+      GuiManager.openLevel(guiLevelPages[6]);
     });
 
     JButton levelEightGreedy = new JButton("8");
@@ -112,7 +112,7 @@ public class GUILevelDeciderPage {
     levelEightGreedy.setBackground(Color.cyan);
     pane.add(levelEightGreedy);
     levelEightGreedy.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[7]);
+      GuiManager.openLevel(guiLevelPages[7]);
     });
 
     JLabel bandit = new JLabel("backtracking Bandit");
@@ -125,7 +125,7 @@ public class GUILevelDeciderPage {
     levelTwoBack.setBackground(Color.cyan);
     pane.add(levelTwoBack);
     levelTwoBack.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[8]);
+      GuiManager.openLevel(guiLevelPages[8]);
     });
 
     JButton levelThreeBack = new JButton("3");
@@ -133,7 +133,7 @@ public class GUILevelDeciderPage {
     levelThreeBack.setBackground(Color.cyan);
     pane.add(levelThreeBack);
     levelThreeBack.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[9]);
+      GuiManager.openLevel(guiLevelPages[9]);
     });
 
     JButton levelFourBack = new JButton("4");
@@ -141,7 +141,7 @@ public class GUILevelDeciderPage {
     levelFourBack.setBackground(Color.cyan);
     pane.add(levelFourBack);
     levelFourBack.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[10]);
+      GuiManager.openLevel(guiLevelPages[10]);
     });
 
     JButton levelFiveBack = new JButton("5");
@@ -149,7 +149,7 @@ public class GUILevelDeciderPage {
     levelFiveBack.setBackground(Color.cyan);
     pane.add(levelFiveBack);
     levelFiveBack.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[11]);
+      GuiManager.openLevel(guiLevelPages[11]);
     });
 
     JButton levelSixBack = new JButton("6");
@@ -157,7 +157,7 @@ public class GUILevelDeciderPage {
     levelSixBack.setBackground(Color.cyan);
     pane.add(levelSixBack);
     levelSixBack.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[12]);
+      GuiManager.openLevel(guiLevelPages[12]);
     });
 
     JButton levelSevenBack = new JButton("7");
@@ -165,7 +165,7 @@ public class GUILevelDeciderPage {
     levelSevenBack.setBackground(Color.cyan);
     pane.add(levelSevenBack);
     levelSevenBack.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[13]);
+      GuiManager.openLevel(guiLevelPages[13]);
     });
 
     JButton levelEightBack = new JButton("8");
@@ -173,13 +173,13 @@ public class GUILevelDeciderPage {
     levelEightBack.setBackground(Color.cyan);
     pane.add(levelEightBack);
     levelEightBack.addActionListener(e -> {
-      GUIManager.openLevel(guiLevelPages[14]);
+      GuiManager.openLevel(guiLevelPages[14]);
     });
 
     JButton backToFrontPage = new JButton("zurück");
     backToFrontPage.setBounds(25, 25, 80, 40);
     pane.add(backToFrontPage);
-    backToFrontPage.addActionListener(e -> GUIManager.openMainMenu());
+    backToFrontPage.addActionListener(e -> GuiManager.openMainMenu());
 
     return pane;
   }
@@ -188,7 +188,7 @@ public class GUILevelDeciderPage {
    * this getter gets all levelpages.
    * @return the levelpage.
    */
-  public GUILevelPage[] getGuiLevelPages() {
+  public GuiLevelPage[] getGuiLevelPages() {
     return guiLevelPages;
   }
 

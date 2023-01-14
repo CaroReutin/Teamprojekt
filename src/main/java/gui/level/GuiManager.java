@@ -7,7 +7,7 @@ import javax.swing.*;
 /**
  * The class GUIManager combines the gui pages.
  */
-public class GUIManager {
+public class GuiManager {
   /**
    * the current gui frontpage.
    */
@@ -15,7 +15,7 @@ public class GUIManager {
   /**
    * the current gui optionspage.
    */
-  private static final GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
+  private static final GuiOptionsPage guiOptionsPage = new GuiOptionsPage();
 
 
   /**

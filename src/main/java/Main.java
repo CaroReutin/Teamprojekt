@@ -1,5 +1,5 @@
 
-import gui.level.GUIManager;
+import gui.level.GuiManager;
 import solving.*;
 
 /**
@@ -15,7 +15,7 @@ public class Main {
     AppData.initialize();
     UserDataManager.load();
 
-    GUIManager guiManager = new GUIManager();
+    GuiManager guiManager = new GuiManager();
     guiManager.launch();
   }
 }

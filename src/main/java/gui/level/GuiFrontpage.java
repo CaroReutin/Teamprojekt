@@ -7,7 +7,7 @@ import javax.swing.*;
 /**
  * This class confugures the gui frontpage.
  */
-public class GUIFrontpage {
+public class GuiFrontpage {
   /**
    * To be used with frame.setContentPane().
    *
@@ -29,7 +29,7 @@ public class GUIFrontpage {
     levelButton.setBackground(Color.cyan);
     pane.add(levelButton);
 
-    levelButton.addActionListener(e -> GUIManager.openLevelSelectScreen());
+    levelButton.addActionListener(e -> GuiManager.openLevelSelectScreen());
 
 
     JButton ownLevelButton = new JButton("Eigene Level");
@@ -45,7 +45,7 @@ public class GUIFrontpage {
     settingsButton.setBackground(Color.cyan);
     pane.add(settingsButton);
 
-    settingsButton.addActionListener(e -> GUIManager.openOptionsMenu());
+    settingsButton.addActionListener(e -> GuiManager.openOptionsMenu());
 
     pane.revalidate();
     pane.repaint();
