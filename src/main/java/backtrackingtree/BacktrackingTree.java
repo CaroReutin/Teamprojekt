@@ -15,6 +15,11 @@ public class BacktrackingTree {
    */
   private final BacktrackingNode root;
 
+  /**
+   * current node where we can add children to
+   */
+  private BacktrackingNode currentNode;
+
 
   /**
    * constructor for backtracking tree.
@@ -26,6 +31,7 @@ public class BacktrackingTree {
                           final ArrayList<BacktrackingItem> itemArrayList) {
     root = new BacktrackingNode(new BacktrackingItem(0, 0, "root"),
             0, 0, bagCapacity, itemArrayList, null);
+    currentNode = root;
   }
 
   /**
@@ -48,12 +54,19 @@ public class BacktrackingTree {
    * @param pointer the Pointer
    * @param node    the current node
    */
-  public void traversePreOrder(final StringBuilder sb, final String padding, final String pointer,
+  public void traversePreOrder(final StringBuilder sb,
+                               final String padding, final String pointer,
                                final BacktrackingNode node) {
     if (node != null) {
       sb.append(padding);
       sb.append(pointer);
-      sb.append(node.getItem().getName());
+
+      if (node.getItem().getState()
+              == (BacktrackingItem.StateBacktracking.TRASH)) {
+        sb.append("not " + node.getItem().getName());
+      } else {
+        sb.append(node.getItem().getName());
+      }
       sb.append("\n");
 
       StringBuilder paddingBuilder = new StringBuilder(padding);
@@ -77,4 +90,40 @@ public class BacktrackingTree {
   public BacktrackingNode getRoot() {
     return root;
   }
+
+  /**
+   * adds an item to the rucksack (right child).
+   *
+   * @param item said item
+   * @return true in case of success
+   */
+  public boolean addToRucksack(final BacktrackingItem item) {
+    boolean addedSuccessfully = currentNode.addToRucksack(item);
+
+    if (addedSuccessfully) {
+      currentNode = currentNode.getRightChild();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * adds an item to the trash bin (left child).
+   *
+   * @param item said item
+   * @return true in case of success
+   */
+  public boolean addToTrash(final BacktrackingItem item) {
+    boolean addedSuccessfully = currentNode.addToTrash(item);
+
+    if (addedSuccessfully) {
+      currentNode = currentNode.getLeftChild();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
 }

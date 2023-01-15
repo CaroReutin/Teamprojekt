@@ -2,6 +2,7 @@ package backtrackingtree;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+
 import rucksack.BacktrackingItem;
 import rucksack.Item;
 
@@ -26,9 +27,10 @@ public class TestTree {
 
     tree = new BacktrackingTree(cap, list);
 
-    tree.getRoot().add(list.get(0));
-    tree.getRoot().getRightChild().add(list.get(1));
-//    tree.getRoot().getRightChild().getRightChild().add(list.get(2));
+    tree.addToRucksack(list.get(0));
+    tree.addToRucksack(list.get(1));
+    tree.addToTrash(list.get(1));
+    tree.addToRucksack(list.get(2));
 
     tree.print(System.out);
   }

@@ -68,9 +68,9 @@ public class BacktrackingNode {
                           final ArrayList<BacktrackingItem> sortedItemList,
                           final BacktrackingNode myParent) {
     item = bagItem;
-    if (item == null) {
-      currentValue = 0;
-      currentWeight = 0;
+    if (item.getState() == BacktrackingItem.StateBacktracking.TRASH) {
+      currentValue = oldValue;
+      currentWeight = oldWeight;
     } else {
       currentValue = oldValue + bagItem.getValue();
       currentWeight = oldWeight + bagItem.getWeight();
@@ -82,42 +82,50 @@ public class BacktrackingNode {
   }
 
   /**
-   * method adds a child.
-   * the index 0 is chosen if an item is not chosen to be in the bag (trash).
-   * the index 1 is chosen if an item is chosen to be in the bag (rucksack).
+   * adds an item to the trash bin from the rucksack or the available selection.
+   *
+   * @param childItem the item in the new node
+   * @return true if item got added successfully
+   */
+  public boolean addToTrash(final BacktrackingItem childItem) {
+    if (!isNextHeavyItem(childItem)) {
+      return false;
+    } else if (childItem.getState()
+            == BacktrackingItem.StateBacktracking.TRASH) {
+      return false;
+    }
+    childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
+    leftChild = new BacktrackingNode(childItem, currentWeight,
+            currentValue, capacity, itemList, this);
+    return true;
+  }
+
+  /**
+   * method adds a child to the rucksack.
    *
    * @param childItem is added as next to this instance
    * @return true if child got added successfully
    */
 
-  public boolean add(final BacktrackingItem childItem) {
-    if (isItemAllowed(childItem)) {
-      if (isEmptyItem(childItem)) {
-        //item is throws in the trash
-        leftChild = new BacktrackingNode(childItem, currentWeight,
-                currentValue, capacity, itemList, parent);
-        childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
-      } else {
-        //item gets added to the rucksack
-        rightChild = new BacktrackingNode(childItem, currentWeight,
-                currentValue, capacity, itemList, parent);
-        childItem.setState(BacktrackingItem.StateBacktracking.RUCKSACK);
-      }
+  public boolean addToRucksack(final BacktrackingItem childItem) {
+    if (itemFitsInRucksack(childItem)) {
+      childItem.setState(BacktrackingItem.StateBacktracking.RUCKSACK);
+      rightChild = new BacktrackingNode(childItem, currentWeight,
+              currentValue, capacity, itemList, this);
       System.out.println(childItem.getName() + " wurde hinzugefügt");
       return true;
+
     } else {
-      System.out.println("Item darf nicht hinzugefügt werden");
+      System.out.println("Item "
+              + childItem.getName() + "kann nicht hinzugefügt werden.");
       return false;
     }
-
   }
 
-  private boolean isItemAllowed(final BacktrackingItem bagItem) {
-    // if you want to put an item from the rucksack to the bin
-    if (isEmptyItem(bagItem)) {
-      return true;
+  private boolean itemFitsInRucksack(final BacktrackingItem bagItem) {
+    if (!isNextHeavyItem(bagItem)) {
+      return false;
     }
-
     // item can only be added if it is available
     if (bagItem.getState() != BacktrackingItem.StateBacktracking.AVAILABLE) {
       return false;
@@ -125,16 +133,23 @@ public class BacktrackingNode {
 
     // query in case that the item is not empty and is the next
     // more lightweight item after the item this instance
-    int itemIndex = itemList.indexOf(bagItem);
-    if (itemIndex == itemList.indexOf(this.item) + 1
-            && capacity >= currentWeight + bagItem.getWeight()) {
+    if (capacity >= currentWeight + bagItem.getWeight()) {
       return true;
     } else {
-      System.out.println("Item macht Rucksack zu schwer oder"
-              + "Item ist das nicht das schwerste Verfügbare");
+      System.out.println("Item "
+              + bagItem.getName() + " macht Rucksack zu schwer");
       return false;
     }
+  }
 
+  private boolean isNextHeavyItem(final BacktrackingItem bagItem) {
+    int itemIndex = itemList.indexOf(bagItem);
+    if (itemIndex != itemList.indexOf(this.item) + 1) {
+      System.out.println("Item " + bagItem.getName()
+              + " ist nicht das Nächstschwerere.");
+      return false;
+    }
+    return true;
   }
 
   private boolean isEmptyItem(final Item bagItem) {
