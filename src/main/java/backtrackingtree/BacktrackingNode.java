@@ -88,9 +88,17 @@ public class BacktrackingNode {
    * @return true if item got added successfully
    */
   public boolean addToTrash(final BacktrackingItem childItem) {
-    if (!isNextHeavyItem(childItem)) {
+    BacktrackingItem.StateBacktracking childState = childItem.getState();
+
+    //adds depending on if an item is in available, rucksack or trash
+    if (!isNextHeavyItem(childItem) && childState
+            == BacktrackingItem.StateBacktracking.AVAILABLE) {
       return false;
-    } else if (childItem.getState()
+    } else if (childState == BacktrackingItem.StateBacktracking.RUCKSACK) {
+
+      moveItemsIntoAvailable(childItem);
+
+    } else if (childState
             == BacktrackingItem.StateBacktracking.TRASH) {
       return false;
     }
@@ -100,6 +108,9 @@ public class BacktrackingNode {
     return true;
   }
 
+  private BacktrackingItem moveIntemsIntoAvailable(BacktrackingItem childItem) {
+
+  }
   /**
    * method adds a child to the rucksack.
    *

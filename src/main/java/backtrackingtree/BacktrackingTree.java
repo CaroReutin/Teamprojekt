@@ -124,6 +124,4 @@ public class BacktrackingTree {
       return false;
     }
   }
-
-
 }

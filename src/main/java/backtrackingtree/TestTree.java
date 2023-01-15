@@ -32,6 +32,8 @@ public class TestTree {
     tree.addToTrash(list.get(1));
     tree.addToRucksack(list.get(2));
 
+    tree.addToTrash(list.get(0));
+
     tree.print(System.out);
   }
 }
