@@ -1,4 +1,5 @@
 
+import backtrackingtree.TestTree;
 import gui.level.GUIManager;
 import solving.*;
 
@@ -12,10 +13,11 @@ public class Main {
    * @param args the input arguments
    */
   public static void main(final String[] args) {
-    AppData.initialize();
-    UserDataManager.load();
-
-    GUIManager guiManager = new GUIManager();
-    guiManager.launch();
+    TestTree tree = new TestTree();
+//    AppData.initialize();
+//    UserDataManager.load();
+//
+//    GUIManager guiManager = new GUIManager();
+//    guiManager.launch();
   }
 }
