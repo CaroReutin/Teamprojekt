@@ -52,7 +52,9 @@ public final class CustomLevelManager {
    */
   public static void save(final String path, final String identifier,
                           final Level level) {
+    // Make path if it does not exist already
     boolean ignoreResult = new File(path + "/temp").mkdirs();
+    // Use jaxb to turn Level into xml file
     String levelPath = path + "/" + identifier + ".xml";
     try {
       FileOutputStream fos = new FileOutputStream(levelPath);
@@ -65,6 +67,9 @@ public final class CustomLevelManager {
 
       fos.close();
 
+      // The pictures are not passed via code but
+      // instead by being in path+"/temp"
+      // see ItemPanel.java for more Info
       zipLevel(levelPath);
     } catch (Exception e) {
       throw new RuntimeException(e);
@@ -74,27 +79,27 @@ public final class CustomLevelManager {
   private static void zipLevel(final String levelPath) throws IOException {
     ArrayList<String> srcFiles = new ArrayList<>();
     srcFiles.add(levelPath);
+    // Check if there is a Picture associated with item
+    // See ItemPanel.java for more info
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
-      System.out.println(AppData
-          .getCustomLevelPictureFolder() + "/picture" + i);
-      System.out.println(new File(AppData
-          .getCustomLevelPictureFolder() + "/picture" + i).exists());
       if (new File(AppData
           .getCustomLevelPictureFolder() + "/picture" + i).exists()) {
         srcFiles.add(AppData
             .getCustomLevelPictureFolder() + "/picture" + i);
       }
     }
+    // The code below zips everything in srcFiles
     String zipPath = Paths.get(levelPath).toAbsolutePath().toString();
-    final FileOutputStream fos2 = new FileOutputStream(
+    final FileOutputStream fos = new FileOutputStream(
         zipPath.substring(0, zipPath.length() - 4) + ".zip");
-    ZipOutputStream zipOut = new ZipOutputStream(fos2);
+    ZipOutputStream zipOut = new ZipOutputStream(fos);
     for (String srcFile : srcFiles) {
       File fileToZip = new File(srcFile);
       FileInputStream fis = new FileInputStream(fileToZip);
       ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
       zipOut.putNextEntry(zipEntry);
 
+      // I do not know why this is needed, but it is
       byte[] bytes = new byte[AppData.ZIP_BYTE_SIZE];
       int length;
       while ((length = fis.read(bytes)) >= 0) {
@@ -104,20 +109,27 @@ public final class CustomLevelManager {
     }
 
     zipOut.close();
-    fos2.close();
+    fos.close();
   }
 
   /*
   public static void load(String path) {
-    // String vs. File depends on file picker I guess
+    // TODO String vs. File depends on file picker I guess
+
+    // Items with no picture associated to it
+    // should get the default picture
   }
 
   public static void load(File zippedLevel) {
 
   }
 
+  private static void unzip(File zip){
+
+  }
+
   public static void cleanCustomLevelFolder() {
-    // Delete all non Zip files/folder in folder ?
+    // TODO? Delete all non Zip files/folder in folder ?
   }
    */
 }

@@ -77,7 +77,10 @@ public class ItemPanel extends Container {
     Container itemInfoPane = new Container();
     itemInfoPane.setLayout(new GridLayout(4, 2));
 
-    // Currently you cannot delete a number if you type it into a field
+    // TODO? Currently you cannot delete a number if you type it into a field
+    // So "4" -> "" -> "5" is not possible
+    // You have to go "4" -> "45" -> "5"
+    // Or select the 4 and overwrite it with 5
     NumberFormat format = NumberFormat.getInstance();
     NumberFormatter formatter = new NumberFormatter(format);
     formatter.setValueClass(Integer.class);
@@ -102,11 +105,12 @@ public class ItemPanel extends Container {
     amountField = new JFormattedTextField(formatter);
     itemInfoPane.add(amountField);
 
-    // If you type a long word into name and then select
+    // TODO? If you type a long word into name and then select
     // a picture everything resizes and the picture is hard to see
     myContainer.add(itemInfoPane, BorderLayout.EAST);
 
     JButton iconSelector = new JButton();
+    // TODO? Default Image (does not currently work)
     icon = new ImageIcon(Objects.requireNonNull(getClass()
         .getResource("/RucksackPNG.png")));
     iconSelector.setIcon(icon);
@@ -121,6 +125,11 @@ public class ItemPanel extends Container {
       if (chooseIcon.showOpenDialog(parent) == JFileChooser
           .APPROVE_OPTION) {
         try {
+          // Set image as this Panels Icon then move a copy to temp
+          // The Index of the panel determines the pictures name
+          // If Item 1 and 3 are filled out and have pictures
+          // picture0 and picture2 will exist
+          // accounting for the skipped item has to be handled when zipping
           icon = new ImageIcon(chooseIcon.getSelectedFile().getAbsolutePath());
           File destination = new File(AppData
               .getCustomLevelPictureFolder() + "/picture" + index);
@@ -154,12 +163,12 @@ public class ItemPanel extends Container {
    *                              fields are empty
    */
   public Item generateItem() throws NullPointerException {
-    if (nameField.getValue().toString().equals("")
-        || amountField.getValue().toString().equals("")
+    if (amountField.getValue().toString().equals("")
         || weightField.getValue().toString().equals("")) {
       throw new NullPointerException("No field may be empty");
     }
-    int ignoreResult = Integer.parseInt(amountField.getValue().toString());
+    // Cannot be empty because of the if above
+    // => Must be an Integer because of the formatter
     return new Item(Integer.parseInt(valueField.getValue().toString()),
         Integer.parseInt(weightField.getValue().toString()),
         nameField.getValue().toString());
@@ -167,6 +176,7 @@ public class ItemPanel extends Container {
 
   /**
    * gets the amountField.
+   * amount could be "" so only call after generateItem()
    *
    * @return returns the amount specified in the AmountField
    */

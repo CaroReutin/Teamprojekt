@@ -50,6 +50,8 @@ public final class GuiLevelEditorPage {
     modus.setFont(AppData.FONT_STYLE);
 
     String[] robberOptions = new String[Level.Robber.values().length];
+    // Unless changed (which it currently is not) the option
+    // with Index 0 will be the default
     robberOptions[0] = Level.Robber.DR_META.name();
     robberOptions[1] = Level.Robber.GIERIGER_GANOVE.name();
     robberOptions[2] = Level.Robber.BACKTRACKING_BANDIT.name();
@@ -74,7 +76,8 @@ public final class GuiLevelEditorPage {
           itemList.add(itemPanel.generateItem());
           itemAmountList.add(itemPanel.getAmount());
         } catch (NullPointerException n) {
-          //This just means that item was not filled out
+          // This just means that item was not filled out fully
+          // Can be ignored
         }
       }
       Level customLevel = new Level(itemList, itemAmountList,
@@ -90,6 +93,7 @@ public final class GuiLevelEditorPage {
         CustomLevelManager.save(chooser.getSelectedFile().toString(),
             titelField.getText(), customLevel);
       } else {
+        // TODO? If no save location is picked, save to default or not at all?
         CustomLevelManager.save(titelField.getText(), customLevel);
       }
     });
@@ -110,6 +114,7 @@ public final class GuiLevelEditorPage {
     pane.add(leftPane, BorderLayout.WEST);
 
     Container rightPane = new Container();
+    // TODO Sprint 4, update this part of the GUI
     rightPane.setLayout(new GridLayout((AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL
         + 1) / 2, 2));
 
