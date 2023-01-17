@@ -30,7 +30,6 @@ public class BacktrackingAlgo {
     items.add(new Item(8, 6, "crown"));
     items.add(new Item(20, 4, "pearl"));
 
-
     amount.add(1);
     amount.add(1);
     amount.add(1);
@@ -94,8 +93,8 @@ public class BacktrackingAlgo {
 
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
+    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 20));
+    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 20));
   }
 
   @Test
@@ -120,8 +119,8 @@ public class BacktrackingAlgo {
 
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
+    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 14));
+    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 14));
   }
 
   @Test
@@ -147,8 +146,8 @@ public class BacktrackingAlgo {
 
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
+    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 20));
+    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 20));
   }
 
   @Test
@@ -174,8 +173,8 @@ public class BacktrackingAlgo {
 
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
+    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 25));
+    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 25));
   }
 
   @Test
@@ -203,8 +202,8 @@ public class BacktrackingAlgo {
 
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
+    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 42));
+    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 42));
   }
 
 
