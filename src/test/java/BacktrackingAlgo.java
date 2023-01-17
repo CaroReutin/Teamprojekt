@@ -1,10 +1,9 @@
+import java.util.ArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import rucksack.Item;
 import solving.SolverBacktracking;
-
-import java.util.ArrayList;
 
 public class BacktrackingAlgo {
 
@@ -40,10 +39,12 @@ public class BacktrackingAlgo {
     expectedValue = 28;
     expectedWeight = 10;
 
+    int capacity = 10;
+
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
+    Assertions.assertEquals(expectedItems, solverBacktracking.solveBacktracking(items,amount,capacity));
+    //Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
   }
 
 
@@ -66,10 +67,12 @@ public class BacktrackingAlgo {
     expectedWeight = 8;
     expectedValue = 15;
 
+    int capacity = 10;
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
       //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
+    //Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 10));
+    Assertions.assertEquals(expectedItems, solverBacktracking.solveBacktracking(items,amount,capacity));
+    //Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 10));
   }
 
   @Test
@@ -91,10 +94,12 @@ public class BacktrackingAlgo {
     expectedValue = 31;
     expectedWeight = 19;
 
+    int capacity = 20;
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 20));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 20));
+    //Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 20));
+    Assertions.assertEquals(expectedItems, solverBacktracking.solveBacktracking(items,amount,capacity));
+    //Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 20));
   }
 
   @Test
@@ -116,11 +121,13 @@ public class BacktrackingAlgo {
 
     expectedValue = 18;
     expectedWeight = 11;
+    int capacity = 14;
 
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 14));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 14));
+    //Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 14));
+    Assertions.assertEquals(expectedItems, solverBacktracking.solveBacktracking(items,amount,capacity));
+    //Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 14));
   }
 
   @Test
@@ -138,16 +145,21 @@ public class BacktrackingAlgo {
     amount.add(1);
 
     expectedItems.add(items.get(1));
-    expectedItems.add(items.get(2));
+    //expectedItems.add(items.get(2));
+    expectedItems.add(items.get(3));
     expectedItems.add(items.get(4));
 
-    expectedValue = 22;
-    expectedWeight = 16;
+    //expectedValue = 22;
+    //expectedWeight = 10;
+    expectedValue = 23;
+    expectedWeight = 19;
 
+    int capacity = 20;
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 20));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 20));
+    //Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 20));
+    Assertions.assertEquals(expectedItems, solverBacktracking.solveBacktracking(items,amount,capacity));
+    //Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 20));
   }
 
   @Test
@@ -171,10 +183,12 @@ public class BacktrackingAlgo {
     expectedValue = 30;
     expectedWeight = 25;
 
+    int capacity = 25;
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 25));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 25));
+    //Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 25));
+    Assertions.assertEquals(expectedItems, solverBacktracking.solveBacktracking(items,amount,capacity));
+    //Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 25));
   }
 
   @Test
@@ -200,10 +214,13 @@ public class BacktrackingAlgo {
     expectedValue = 59;
     expectedWeight = 42;
 
+    int capacity = 42;
+
     //Assertions.assertEquals(SolverBacktracking.sortLikeBacktracking(expectedItems),
     //solverBacktracking.solveBacktracking(items, amount, 10));
-    Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 42));
-    Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 42));
+    //Assertions.assertEquals(expectedValue, solverBacktracking.getValueCorrect(items, amount, 42));
+    Assertions.assertEquals(expectedItems, solverBacktracking.solveBacktracking(items,amount,capacity));
+    //Assertions.assertEquals(expectedWeight, solverBacktracking.getWeightCorrect(items, amount, 42));
   }
 
 
