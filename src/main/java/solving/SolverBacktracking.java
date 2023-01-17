@@ -61,14 +61,27 @@ public class SolverBacktracking extends Solver {
       newValue = parent.getCurrentValue() + currentItem.getValue();
       return new Node(newWeight, newValue, currentItem, true);
     }
-    newWeight = currentItem.getWeight() + currentNode.getCurrentWeight();
-    newValue = currentItem.getValue() + currentNode.getCurrentValue();
+    if(currentNode.isPutInRucksack()) {
+      newWeight = currentItem.getWeight() + currentNode.getCurrentWeight();
+      newValue = currentItem.getValue() + currentNode.getCurrentValue();
+    } else {
+      newWeight = currentNode.getCurrentWeight();
+      newValue = currentNode.getCurrentValue();
+    }
+
 
     if (newWeight > capacity) {
       currentNode.setPutInRucksack(false);
       currentNode.setRightChildren(backtrackingRekursion(currentItem, currentNode.getRightChildren(), currentNode, capacity, selectedItems));
     } else {
+
+      //Test
+      Node notNode = new Node(currentNode.getCurrentWeight(), currentNode.getCurrentValue(), currentNode.getItem(), false);
+      notNode.setRightChildren(backtrackingRekursion(currentItem, notNode.getRightChildren(), notNode, capacity, selectedItems));
+      //
       currentNode.setPutInRucksack(true);
+      currentNode.setCurrentWeight(newWeight);
+      currentNode.setCurrentValue(newValue);
       selectedItems.add(currentNode.getItem());
       currentNode.setLeftChildren(backtrackingRekursion(currentItem, currentNode.getLeftChildren(),currentNode, capacity, selectedItems));
       if (newValue > bestValue) {

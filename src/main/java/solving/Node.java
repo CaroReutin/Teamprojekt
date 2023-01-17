@@ -56,4 +56,12 @@ public class Node {
   public void setPutInRucksack(boolean putInRucksack) {
     this.putInRucksack = putInRucksack;
   }
+
+  public void setCurrentValue(int currentValue) {
+    this.currentValue = currentValue;
+  }
+
+  public void setCurrentWeight(int currentWeight) {
+    this.currentWeight = currentWeight;
+  }
 }
