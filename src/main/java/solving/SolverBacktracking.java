@@ -45,11 +45,8 @@ public class SolverBacktracking extends Solver {
     //}
 
     // TODO Fall wenn es keine Items gibt (gibt aktuell Error)
-    Item nextItem = remainingItems.get(0);
-    remainingItems.remove(0);
-
     // Alles andere wird in der Rekursion behandelt
-    return nextStep(new ArrayList<>(), remainingItems, nextItem, capacity);
+    return nextStep(new ArrayList<>(), remainingItems, capacity);
 
     // Momentan wird die Liste sortiert nach der Reihenfolge wie
     // sie in Level sind ausgegeben, zum Vergleichen von Lösungen sollten
@@ -57,27 +54,20 @@ public class SolverBacktracking extends Solver {
   }
 
   private ArrayList<Item> nextStep(final ArrayList<Item> itemsInRucksack,
-                                   final ArrayList<Item> remainingItems, final Item currentItem,
+                                   final ArrayList<Item> remainingItems,
                                    final int capacity) {
-
-    // Default Case (current Item muss noch behandelt werden)
+    // Default Case
     if (remainingItems.isEmpty()) {
-      if (currentItem.getWeight() > capacity) {
-        return itemsInRucksack;
-      } else {
-        ArrayList<Item> rucksackWithCurrent = new ArrayList<>(itemsInRucksack);
-        rucksackWithCurrent.add(currentItem);
-        return rucksackWithCurrent;
-      }
+      return itemsInRucksack;
     }
 
     // remainingItems ist final darum hier die extra Liste
     ArrayList<Item> nextRemainingItem = new ArrayList<>(remainingItems);
-    Item nextItem = nextRemainingItem.get(0);
+    Item currentItem = nextRemainingItem.get(0);
     nextRemainingItem.remove(0);
 
     // Fall aktuelles Item ist nicht in der Lösung
-    ArrayList<Item> excluded = nextStep(itemsInRucksack, nextRemainingItem, nextItem, capacity);
+    ArrayList<Item> excluded = nextStep(itemsInRucksack, nextRemainingItem, capacity);
 
     // Wenn das Item nicht mehr reinpasst, kann es nicht in der Lösung sein
     if (currentItem.getWeight() > capacity) {
@@ -91,7 +81,7 @@ public class SolverBacktracking extends Solver {
     int reducedCapacity = capacity - currentItem.getWeight();
     // Fall aktuelles Item ist in der Lösung
     ArrayList<Item> included =
-        nextStep(rucksackWithCurrent, nextRemainingItem, nextItem, reducedCapacity);
+        nextStep(rucksackWithCurrent, nextRemainingItem, reducedCapacity);
 
     // Werte zum Vergleichen was besser ist
     int excludedValue = getValue(excluded);
