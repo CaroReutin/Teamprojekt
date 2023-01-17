@@ -24,7 +24,7 @@ public class Item {
    * @param weight the weight
    * @param name   the name
    */
-  public Item(int value, int weight, String name) {
+  public Item(final int value, final int weight, final String name) {
     this.value = value;
     this.weight = weight;
     this.name = name;

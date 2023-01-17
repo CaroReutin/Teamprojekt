@@ -1,4 +1,5 @@
 
+import backtrackingtree.TestTree;
 import gui.level.GUIManager;
 import rucksack.Item;
 import solving.*;
@@ -15,6 +16,13 @@ public class Main {
    * @param args the input arguments
    */
   public static void main(final String[] args) {
+
+    TestTree tree = new TestTree();
+//    AppData.initialize();
+//    UserDataManager.load();
+//
+//    GUIManager guiManager = new GUIManager();
+//    guiManager.launch();
     ArrayList<Item> items = new ArrayList<>();
     Item coin = new Item(7, 6,"coin");
     Item crown = new Item(8, 6, "crown");
@@ -39,5 +47,6 @@ public class Main {
 
     GUIManager guiManager = new GUIManager();
     guiManager.launch();*/
+
   }
 }
