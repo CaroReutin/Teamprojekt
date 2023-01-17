@@ -113,6 +113,58 @@ public class SolverBacktracking extends Solver {
     }
    // return currentNode;
 
+
+
+  }
+
+  public Integer getValueCorrect(ArrayList<Item> items, ArrayList<Integer> amount, int capacity) {
+    //TODO gesamtgewicht aller items berechnen und prüfen ob dieses < capacity ist
+    ArrayList<Item> allItemsOfLevel = new ArrayList<>();
+    for (int i = 0; i < items.size(); i++) {
+      for (int j = 0; j < amount.get(i); j++) {
+        allItemsOfLevel.add(items.get(i));
+      }
+    }
+    Node root = new Node(0,0,new Item(0,0,"Wurzel"), false);
+    Node currentNode = root;
+    Node parent = null;
+    for (Item currentItem:allItemsOfLevel) {
+      Node newParent = currentNode;
+      currentNode = this.backtrackingRekursion(currentItem, currentNode,parent, capacity, new ArrayList<>());
+      parent = newParent;
+    }
+
+    System.out.println("Value: " + bestValue + " Weight: " + bestWeight);
+    for (Item current : bestSelectedItems) {
+      System.out.println(current.getName() + " Weight: " + current.getWeight() + " Value: " + current.getValue());
+    }
+    return bestValue;
+  }
+
+
+
+  public Integer getWeightCorrect(ArrayList<Item> items, ArrayList<Integer> amount, int capacity) {
+    //TODO gesamtgewicht aller items berechnen und prüfen ob dieses < capacity ist
+    ArrayList<Item> allItemsOfLevel = new ArrayList<>();
+    for (int i = 0; i < items.size(); i++) {
+      for (int j = 0; j < amount.get(i); j++) {
+        allItemsOfLevel.add(items.get(i));
+      }
+    }
+    Node root = new Node(0,0,new Item(0,0,"Wurzel"), false);
+    Node currentNode = root;
+    Node parent = null;
+    for (Item currentItem:allItemsOfLevel) {
+      Node newParent = currentNode;
+      currentNode = this.backtrackingRekursion(currentItem, currentNode,parent, capacity, new ArrayList<>());
+      parent = newParent;
+    }
+
+    System.out.println("Value: " + bestValue + " Weight: " + bestWeight);
+    for (Item current : bestSelectedItems) {
+      System.out.println(current.getName() + " Weight: " + current.getWeight() + " Value: " + current.getValue());
+    }
+    return bestWeight;
   }
 
 }
