@@ -57,6 +57,16 @@ public class GUILevelDeciderPage {
     ganove.setFont(fontStyle);
     pane.add(ganove);
 
+    //Level 2
+    ArrayList<Item> items2 = new ArrayList<>();
+    items2.add(AppData.generateItem("coin"));
+    items2.add(AppData.generateItem("crown"));
+    items2.add(AppData.generateItem("pearl"));
+    ArrayList<Integer> amount2 = new ArrayList<>();
+    amount2.add(1);
+    amount2.add(1);
+    amount2.add(1);
+    //
     JButton levelTwoGreedy = new JButton("2");
     levelTwoGreedy.setBounds(60, 125, 50, 50);
     levelTwoGreedy.setBackground(Color.cyan);
