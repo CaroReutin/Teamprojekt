@@ -1,10 +1,13 @@
 
+import backtrackingtree.BacktrackingTree;
 import backtrackingtree.TestTree;
 import gui.level.GUIManager;
+import rucksack.BacktrackingItem;
 import rucksack.Item;
 import solving.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * The type Main.
@@ -17,7 +20,7 @@ public class Main {
    */
   public static void main(final String[] args) {
 
-    TestTree tree = new TestTree();
+   // TestTree tree = new TestTree();
 //    AppData.initialize();
 //    UserDataManager.load();
 //
@@ -41,6 +44,17 @@ public class Main {
 
     SolverBacktracking solver = new SolverBacktracking();
     solver.solveBacktracking(items, amount, 10);
+/*
+    ArrayList<BacktrackingItem>backtrackingItems =new ArrayList<>();
+    BacktrackingItem item1 = new BacktrackingItem(7, 6, "Coin");
+    BacktrackingItem item2 = new BacktrackingItem(8, 6, "Pearl");
+    BacktrackingItem item3 = new BacktrackingItem(20, 4, "Crown");
+    backtrackingItems.add(item1);
+    backtrackingItems.add(item2);
+    backtrackingItems.add(item3);
+    items.sort(Comparator.comparingInt(Item::getWeight).reversed());
+    BacktrackingTree treeTest = new BacktrackingTree(10, backtrackingItems);
+    treeTest.print(System.out);*/
 
    /* AppData.initialize();
     UserDataManager.load();

@@ -26,8 +26,12 @@ public class SolverBacktracking extends Solver {
       }
     }
     Node root = new Node(0,0,new Item(0,0,"Wurzel"), false);
+    Node currentNode = root;
+    Node parent = null;
     for (Item currentItem:allItemsOfLevel) {
-      this.backtrackingRekursion(currentItem, root,null, capacity, new ArrayList<>());
+      Node newParent = currentNode;
+      currentNode = this.backtrackingRekursion(currentItem, currentNode,parent, capacity, new ArrayList<>());
+      parent = newParent;
     }
 
     System.out.println("Value: " + bestValue + " Weight: " + bestWeight);
@@ -61,8 +65,10 @@ public class SolverBacktracking extends Solver {
     newValue = currentItem.getValue() + currentNode.getCurrentValue();
 
     if (newWeight > capacity) {
+      currentNode.setPutInRucksack(false);
       currentNode.setRightChildren(backtrackingRekursion(currentItem, currentNode.getRightChildren(), currentNode, capacity, selectedItems));
     } else {
+      currentNode.setPutInRucksack(true);
       selectedItems.add(currentNode.getItem());
       currentNode.setLeftChildren(backtrackingRekursion(currentItem, currentNode.getLeftChildren(),currentNode, capacity, selectedItems));
       if (newValue > bestValue) {

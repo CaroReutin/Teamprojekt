@@ -96,7 +96,7 @@ public class BacktrackingNode {
       return false;
     } else if (childState == BacktrackingItem.StateBacktracking.RUCKSACK) {
 
-      moveItemsIntoAvailable(childItem);
+      //moveItemsIntoAvailable(childItem);
 
     } else if (childState
             == BacktrackingItem.StateBacktracking.TRASH) {
@@ -109,7 +109,7 @@ public class BacktrackingNode {
   }
 
   private BacktrackingItem moveIntemsIntoAvailable(BacktrackingItem childItem) {
-
+    return null;
   }
   /**
    * method adds a child to the rucksack.
