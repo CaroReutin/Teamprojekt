@@ -12,11 +12,14 @@ public class Node {
 
 
 
+
+
   public Node(int currentWeight, int currentValue, Item item, boolean putInRucksack) {
     this.currentValue = currentValue;
     this.currentWeight = currentWeight;
     this.item = item;
     this.putInRucksack = putInRucksack;
+
     leftChildren = null;
     rightChildren = null;
   }
@@ -64,4 +67,6 @@ public class Node {
   public void setCurrentWeight(int currentWeight) {
     this.currentWeight = currentWeight;
   }
+
+
 }

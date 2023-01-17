@@ -29,9 +29,10 @@ public class SolverBacktracking extends Solver {
     Node currentNode = root;
     Node parent = null;
     for (Item currentItem:allItemsOfLevel) {
-      Node newParent = currentNode;
-      currentNode = this.backtrackingRekursion(currentItem, currentNode,parent, capacity, new ArrayList<>());
-      parent = newParent;
+     // Node newParent = currentNode;
+      //currentNode = this.backtrackingRekursion(currentItem, currentNode,parent, capacity, new ArrayList<>());
+      this.backtrackingRekursion(currentItem, currentNode,parent, capacity, new ArrayList<>());
+      //parent = newParent;
     }
 
     System.out.println("Value: " + bestValue + " Weight: " + bestWeight);
@@ -61,86 +62,56 @@ public class SolverBacktracking extends Solver {
       newValue = parent.getCurrentValue() + currentItem.getValue();
       return new Node(newWeight, newValue, currentItem, true);
     }
-    if(currentNode.isPutInRucksack()) {
+   // if(currentNode.isPutInRucksack()) {
       newWeight = currentItem.getWeight() + currentNode.getCurrentWeight();
       newValue = currentItem.getValue() + currentNode.getCurrentValue();
-    } else {
-      newWeight = currentNode.getCurrentWeight();
-      newValue = currentNode.getCurrentValue();
-    }
+   /* } else {
+      newWeight = currentNode.getCurrentWeight() ;//parent.getCurrentWeight() + currentItem.getWeight();//currentNode.getCurrentWeight();
+      newValue = currentNode.getCurrentValue() ;//parent.getCurrentValue() + currentItem.getValue();//currentNode.getCurrentValue();
+    }*/
+
 
 
     if (newWeight > capacity) {
       currentNode.setPutInRucksack(false);
+      if(parent != null) {
+        currentNode.setCurrentValue(parent.getCurrentValue());
+        currentNode.setCurrentWeight(parent.getCurrentWeight());
+
+      } else {
+        currentNode.setCurrentWeight(0);
+        currentNode.setCurrentValue(0);
+      }
       currentNode.setRightChildren(backtrackingRekursion(currentItem, currentNode.getRightChildren(), currentNode, capacity, selectedItems));
+      return currentNode.getRightChildren();
     } else {
 
       //Test
-      Node notNode = new Node(currentNode.getCurrentWeight(), currentNode.getCurrentValue(), currentNode.getItem(), false);
-      notNode.setRightChildren(backtrackingRekursion(currentItem, notNode.getRightChildren(), notNode, capacity, selectedItems));
+      if(currentNode.getRightChildren() == null){
+        Node notNode = new Node(currentNode.getCurrentWeight(), currentNode.getCurrentValue(), currentNode.getItem(), false);
+        currentNode.setRightChildren(backtrackingRekursion(currentItem, notNode.getRightChildren(), notNode, capacity, selectedItems));
+      } else{
+        backtrackingRekursion(currentItem, currentNode.getRightChildren(), currentNode, capacity, selectedItems);
+      }
+
       //
-      currentNode.setPutInRucksack(true);
-      currentNode.setCurrentWeight(newWeight);
-      currentNode.setCurrentValue(newValue);
-      selectedItems.add(currentNode.getItem());
-      currentNode.setLeftChildren(backtrackingRekursion(currentItem, currentNode.getLeftChildren(),currentNode, capacity, selectedItems));
-      if (newValue > bestValue) {
-        bestValue = newValue;
-        bestWeight = newWeight;
-        bestSelectedItems = selectedItems;
-      }
-    }
-    return currentNode;
-
-    /* for (int i = 0; i < items.size(); i++) {
-      for(int a = ammountsCopy.get(i); a>0; a--) {
-=======
-  public ArrayList<Item> backtrackingRekursion(ArrayList<Item> items, ArrayList<Integer> amount, int capacity, int currentWeight,
-                                    int currentValue, ArrayList<Item> selectedItems) {
-
-    for (int i = 0; i < items.size(); i++) {
-      for (int a = ammountsCopy.get(i); a > 0; a--) {
->>>>>>> 503e577e75d7e278d2625babbd1c438733bf3746
-        if (currentWeight <= capacity) {
-          int newWeight = currentWeight + items.get(i).getWeight();
-          if (newWeight <= capacity) {
-            currentWeight = newWeight;
-            currentValue = currentValue + items.get(i).getValue();
-            selectedItems.add(items.get(i));
-            ammountsCopy.set(i, ammountsCopy.get(i) - 1);
-
-            //TEST
-            System.out.println(
-              " -----------  Weight: " + currentWeight + " Value: " + currentValue + "------------");
-            System.out.println("selectedItems: " + selectedItems.size());
-            //
-            backtrackingRekursion(items, amount, capacity, currentWeight, currentValue, selectedItems);
-          } else {
-            if (currentValue > bestValue) {
-              bestValue = currentValue;
-              bestWeight = currentWeight;
-              bestSelectedItems = selectedItems;
-            }
-            break;
-          }
-
-        } else {
-          if (currentValue > bestValue) {
-            bestValue = currentValue;
-            bestWeight = currentWeight;
-            bestSelectedItems = selectedItems;
-          }
-          currentWeight = currentWeight - items.get(i).getWeight();
-          currentValue = currentValue - items.get(i).getValue();
-          ammountsCopy.set(i, ammountsCopy.get(i) + 1);
-          selectedItems.remove(selectedItems.size() - 1);
-          break;
+      if(currentNode.getLeftChildren() == null){
+        currentNode.setPutInRucksack(true);
+        currentNode.setCurrentWeight(newWeight);
+        currentNode.setCurrentValue(newValue);
+        selectedItems.add(currentNode.getItem());
+        currentNode.setLeftChildren(backtrackingRekursion(currentItem, currentNode.getLeftChildren(),currentNode, capacity, selectedItems));
+        if (newValue > bestValue) {
+          bestValue = newValue;
+          bestWeight = newWeight;
+          bestSelectedItems = selectedItems;
         }
+      } else {
+        backtrackingRekursion(currentItem, currentNode.getLeftChildren(),currentNode, capacity, selectedItems);
       }
-<<<<<<< HEAD
-
-    }*/
-
+      return currentNode.getLeftChildren();
+    }
+   // return currentNode;
 
   }
 
