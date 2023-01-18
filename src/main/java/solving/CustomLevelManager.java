@@ -1,5 +1,7 @@
 package solving;
 
+import gui.level.GUILevelPage;
+import gui.level.GUIManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,9 +9,13 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import org.apache.commons.io.FileUtils;
 import rucksack.Level;
 
 /**
@@ -89,6 +95,7 @@ public final class CustomLevelManager {
       }
     }
     // The code below zips everything in srcFiles
+    // Source: https://www.baeldung.com/java-compress-and-uncompress
     String zipPath = Paths.get(levelPath).toAbsolutePath().toString();
     final FileOutputStream fos = new FileOutputStream(
         zipPath.substring(0, zipPath.length() - 4) + ".zip");
@@ -112,6 +119,87 @@ public final class CustomLevelManager {
     fos.close();
   }
 
+  /**
+   * unzips the level and opens it.
+   *
+   * @param zippedLevel the zip that contains the level
+   */
+  public static void load(final File zippedLevel) {
+    // Source: https://www.baeldung.com/java-compress-and-uncompress
+    File destDir = new File(AppData.getCustomLevelUnzipFolder());
+    File zip;
+    try {
+      if (destDir.exists()) {
+        FileUtils.cleanDirectory(destDir);
+      } else {
+        Boolean ignoreResult = destDir.mkdirs();
+      }
+      zip = new File(destDir + "/" + zippedLevel.getName());
+      FileUtils.copyFile(zippedLevel, zip);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    String levelname = null;
+
+    try {
+
+      byte[] buffer = new byte[AppData.ZIP_BYTE_SIZE];
+      ZipInputStream zis = new ZipInputStream(new FileInputStream(zip));
+      ZipEntry zipEntry = zis.getNextEntry();
+      while (zipEntry != null) {
+        if (zipEntry.getName().endsWith(".xml")) {
+          levelname = zipEntry.getName();
+        }
+        File newFile = new File(destDir, zipEntry.getName());
+        // https://security.snyk.io/research/zip-slip-vulnerability
+        System.out.println(newFile.getCanonicalPath());
+        if (!newFile.getCanonicalPath().startsWith(destDir.getCanonicalPath()
+            + File.separator)) {
+          throw new IOException("Entry is outside of the target dir: "
+              + zipEntry.getName());
+        }
+        if (zipEntry.isDirectory()) {
+          if (!newFile.isDirectory() && !newFile.mkdirs()) {
+            throw new IOException("Failed to create directory " + newFile);
+          }
+        } else {
+          File parent = newFile.getParentFile();
+          if (!parent.isDirectory() && !parent.mkdirs()) {
+            throw new IOException("Failed to create directory " + parent);
+          }
+
+          FileOutputStream fos = new FileOutputStream(newFile);
+          int len;
+          while ((len = zis.read(buffer)) > 0) {
+            fos.write(buffer, 0, len);
+          }
+          fos.close();
+        }
+        zipEntry = zis.getNextEntry();
+      }
+      zis.closeEntry();
+      zis.close();
+      if (levelname == null) {
+        throw new IOException("Level not found");
+      } else {
+        // TODO bilder in Level einfügen
+        File levelFile = new File(destDir + "/" + levelname);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Level.class);
+        Unmarshaller marsh = jaxbContext.createUnmarshaller();
+
+        Level level = (Level) marsh.unmarshal(levelFile);
+        level.resetLevel();
+        GUIManager.openLevel(new GUILevelPage(level));
+      }
+
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    } catch (JAXBException e) {
+      throw new RuntimeException(e);
+    }
+
+  }
+
   /*
   public static void load(String path) {
     // TODO String vs. File depends on file picker I guess
@@ -120,9 +208,7 @@ public final class CustomLevelManager {
     // should get the default picture
   }
 
-  public static void load(File zippedLevel) {
 
-  }
 
   private static void unzip(File zip){
 

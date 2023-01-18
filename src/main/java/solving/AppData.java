@@ -11,6 +11,10 @@ import rucksack.Level;
  */
 public class AppData {
   /**
+   * The size of Icons in the Leveleditor.
+   */
+  public static final int ICON_SIZE = 75;
+  /**
    * Byte size to be used when zipping files.
    */
   public static final int ZIP_BYTE_SIZE = 1024;
@@ -18,6 +22,20 @@ public class AppData {
    * The location where the images to be zipped are stored.
    */
   private static String customLevelPictureFolder;
+
+  /**
+   * The location where the images to be zipped are stored.
+   *
+   * @return returns the string with the folder path
+   */
+  public static String getCustomLevelUnzipFolder() {
+    return customLevelUnzipFolder;
+  }
+
+  /**
+   * The location where the level gets unzipped.
+   */
+  private static String customLevelUnzipFolder;
   /**
    * The font to use for text.
    */
@@ -51,9 +69,11 @@ public class AppData {
     if (System.getProperty("os.name").contains("Windows")) {
       String appdataPath = System.getenv("APPDATA");
       customLevelPictureFolder = appdataPath + "/Optimal Heist/customLevel/temp";
+      customLevelUnzipFolder = appdataPath + "/Optimal Heist/customLevel/unzip/";
     } else {
       String homePath = System.getProperty("user.home", "Desktop");
       customLevelPictureFolder = homePath + "/Optimal Heist/customLevel/temp";
+      customLevelUnzipFolder = homePath + "/Optimal Heist/customLevel/unzip/";
     }
     boolean ignoreResult = new File(customLevelPictureFolder).mkdirs();
     passwords.add("Gr33dy");

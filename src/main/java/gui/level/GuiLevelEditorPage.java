@@ -15,6 +15,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
@@ -40,7 +42,7 @@ public final class GuiLevelEditorPage {
     pane.setLayout(new BorderLayout());
 
     Container leftPane = new Container();
-    leftPane.setLayout(new GridLayout(4, 2));
+    leftPane.setLayout(new GridLayout(5, 2));
 
     JLabel titel = new JLabel("Titel: ");
     titel.setFont(AppData.FONT_STYLE);
@@ -110,6 +112,23 @@ public final class GuiLevelEditorPage {
 
     leftPane.add(save);
     leftPane.add(back);
+
+    JButton load = new JButton("Level öffnen");
+    load.addActionListener(e -> {
+      JFileChooser chooseIcon = new JFileChooser();
+      chooseIcon.setCurrentDirectory(new java.io.File("."));
+      chooseIcon.setDialogTitle("Speicherordner");
+      chooseIcon.setFileSelectionMode(JFileChooser.FILES_ONLY);
+      FileFilter zipFilter = new FileNameExtensionFilter("zip files", "zip");
+      chooseIcon.setFileFilter(zipFilter);
+      if (chooseIcon.showOpenDialog(pane) == JFileChooser.APPROVE_OPTION) {
+        File customLevel = new File(chooseIcon.getSelectedFile()
+            .getAbsolutePath());
+        CustomLevelManager.load(customLevel);
+      }
+    });
+
+    leftPane.add(load);
 
     pane.add(leftPane, BorderLayout.WEST);
 

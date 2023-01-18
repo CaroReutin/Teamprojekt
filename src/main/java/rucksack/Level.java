@@ -80,12 +80,13 @@ public class Level implements Serializable {
    * @param levelindex     the index of the level
    * @param capacity       the capacity
    */
-  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, int levelindex, int capacity) {
+  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, int levelindex,
+               int capacity) {
     this.capacity = capacity;
     this.levelindex = levelindex;
     this.itemList = itemList;
     this.itemAmountList = itemAmountList;
-    this.availableItemAmountList =  new ArrayList<>();
+    this.availableItemAmountList = new ArrayList<>();
     for (int i = 0; i < itemAmountList.size(); i++) {
       availableItemAmountList.add(itemAmountList.get(i));
     }
@@ -108,7 +109,8 @@ public class Level implements Serializable {
    * @param levelindex     the index of the level
    * @param capacity       the capacity
    */
-  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, Robber robber, int levelindex, int capacity) {
+  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, Robber robber,
+               int levelindex, int capacity) {
     this.capacity = capacity;
     this.levelindex = levelindex;
     this.itemList = itemList;
@@ -126,13 +128,16 @@ public class Level implements Serializable {
     currentValue = 0;
   }
 
-  private Level(){
+  /**
+   * Only for level editor.
+   */
+  private Level() {
     this.capacity = -1;
     this.levelindex = -1;
     this.itemList = new ArrayList<>();
     this.itemAmountList = new ArrayList<>();
     this.availableItemAmountList = new ArrayList<>();
-    inRucksackAmountList = new ArrayList<>();
+    this.inRucksackAmountList = new ArrayList<>();
     this.robber = null;
     currentWeight = 0;
     currentValue = 0;
@@ -191,9 +196,10 @@ public class Level implements Serializable {
    */
   public void resetLevel() {
     inRucksackAmountList = new ArrayList<>();
-    for (int i = 0; i < itemAmountList.size(); i++) {
+    availableItemAmountList = new ArrayList<>();
+    for (Integer amount : itemAmountList) {
       inRucksackAmountList.add(0);
-      availableItemAmountList.set(i, itemAmountList.get(i));
+      availableItemAmountList.add(amount);
     }
     currentWeight = 0;
     currentValue = 0;

@@ -3,6 +3,7 @@ package gui.level;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.Objects;
@@ -12,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.NumberFormatter;
@@ -77,7 +79,8 @@ public class ItemPanel extends Container {
     Container itemInfoPane = new Container();
     itemInfoPane.setLayout(new GridLayout(4, 2));
 
-    // TODO? Currently you cannot delete a number if you type it into a field
+    // TODO Sprint 4, Currently you cannot delete a number
+    // if you type it into a field
     // So "4" -> "" -> "5" is not possible
     // You have to go "4" -> "45" -> "5"
     // Or select the 4 and overwrite it with 5
@@ -105,14 +108,14 @@ public class ItemPanel extends Container {
     amountField = new JFormattedTextField(formatter);
     itemInfoPane.add(amountField);
 
-    // TODO? If you type a long word into name and then select
-    // a picture everything resizes and the picture is hard to see
     myContainer.add(itemInfoPane, BorderLayout.EAST);
 
     JButton iconSelector = new JButton();
-    // TODO? Default Image (does not currently work)
     icon = new ImageIcon(Objects.requireNonNull(getClass()
-        .getResource("/RucksackPNG.png")));
+        .getResource("/stern.png")));
+    Image image = icon.getImage();
+    icon = new ImageIcon(image.getScaledInstance(
+        AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
     iconSelector.setIcon(icon);
     JFileChooser chooseIcon = new JFileChooser();
     chooseIcon.setCurrentDirectory(new java.io.File("."));
@@ -130,20 +133,31 @@ public class ItemPanel extends Container {
           // If Item 1 and 3 are filled out and have pictures
           // picture0 and picture2 will exist
           // accounting for the skipped item has to be handled when zipping
-          icon = new ImageIcon(chooseIcon.getSelectedFile().getAbsolutePath());
-          File destination = new File(AppData
-              .getCustomLevelPictureFolder() + "/picture" + index);
-          if (destination.exists()) {
-            FileUtils.delete(destination);
+          Image readImage = ImageIO.read(new File(chooseIcon
+              .getSelectedFile().getAbsolutePath()));
+          if (readImage == null) {
+            JOptionPane.showMessageDialog(parent,
+                "Es gab ein Problem beim einfügen des Bildes.\n"
+                    + "Stellen Sie sicher, dass es sich um ein "
+                    + "PNG/JPG/JPEG handelt.");
+          } else {
+            icon = new ImageIcon(readImage);
+            File destination = new File(AppData
+                .getCustomLevelPictureFolder() + "/picture" + index);
+            if (destination.exists()) {
+              FileUtils.delete(destination);
+            }
+            FileUtils.copyFile(chooseIcon.getSelectedFile(), destination);
+            iconSelector.setIcon(new ImageIcon(icon.getImage()
+                .getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE,
+                    Image.SCALE_SMOOTH)));
           }
-          FileUtils.copyFile(chooseIcon.getSelectedFile(), destination);
-          iconSelector.setIcon(icon);
         } catch (Exception exception) {
           exception.printStackTrace();
         }
       }
     });
-    myContainer.add(iconSelector);
+    myContainer.add(iconSelector, BorderLayout.WEST);
   }
 
   /**
