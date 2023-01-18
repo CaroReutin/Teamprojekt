@@ -35,7 +35,7 @@ public class AppData {
   }
 
   public static void InitializeBeginningLevel() {
-
+    //Einführungslevel
     items.add(new Item(3, 5, "coin")); //0
     items.add(new Item(4, 5, "crown")); //1
     items.add(new Item(2, 2, "buch")); //2
@@ -107,7 +107,7 @@ public class AppData {
     //Backtracking
 
 
-    //Einfühungslevel
+    //Einführungslevel
     ArrayList<Item> currentItems = new ArrayList<>();
     ArrayList<Integer> currentAmount = new ArrayList<>();
     // Greedy Level 1
@@ -118,9 +118,44 @@ public class AppData {
     currentItems.add(generateItem(12));
     currentAmount.add(1);
     level[1] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 1, 6);
+
+    // Greedy Level 2
     currentItems = new ArrayList<>();
     currentAmount = new ArrayList<>();
-    // Greedy Level 2 ...
+    currentItems.add(generateItem(13));
+    currentAmount.add(1);
+    currentItems.add(generateItem(6));
+    currentAmount.add(1);
+    currentItems.add(generateItem(12));
+    currentAmount.add(1);
+    level[2] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 2, 9);
+
+    //Greedy Level 3
+    currentItems = new ArrayList<>();
+    currentAmount = new ArrayList<>();
+    currentItems.add(generateItem(4));
+    currentAmount.add(1);
+    currentItems.add(generateItem(18));
+    currentAmount.add(1);
+    level[3] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 3, 9);
+
+
+    //Greedy Level 4
+    level[4] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 4, 20);
+
+
+    //Greedy Level 5
+    level[5] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 5, 35);
+
+
+    //Greedy Level 6
+    level[6] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 6, 100);
+
+
+    //Greedy Level 7
+    level[7] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 7, 426);
+
+
   }
 
   /**
