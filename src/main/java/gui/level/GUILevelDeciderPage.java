@@ -35,18 +35,6 @@ public class GUILevelDeciderPage {
     titel.setFont(fontStyle);
     pane.add(titel);
 
-    /*Testlevel 1
-    ArrayList<Item> items = new ArrayList<>();
-    items.add(AppData.generateItem(0));
-    items.add(AppData.generateItem(1));
-    items.add(AppData.generateItem(2));
-    ArrayList<Integer> amount = new ArrayList<>();
-    amount.add(10);
-    amount.add(7);
-    amount.add(4);
-    */
-
-
     JButton levelOne = new JButton("1");
     levelOne.setBounds(25, 200, 50, 50);
     levelOne.setBackground(Color.cyan);
@@ -73,6 +61,7 @@ public class GUILevelDeciderPage {
     levelThreeGreedy.setBounds(120, 125, 50, 50);
     levelThreeGreedy.setBackground(Color.cyan);
     pane.add(levelThreeGreedy);
+    guiLevelPages[2] = new GUILevelPage(AppData.getLevel(2));
     levelThreeGreedy.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[2]);
     });
@@ -81,6 +70,7 @@ public class GUILevelDeciderPage {
     levelFourGreedy.setBounds(180, 125, 50, 50);
     levelFourGreedy.setBackground(Color.cyan);
     pane.add(levelFourGreedy);
+    guiLevelPages[3] = new GUILevelPage(AppData.getLevel(3));
     levelFourGreedy.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[3]);
     });
@@ -89,6 +79,7 @@ public class GUILevelDeciderPage {
     levelFiveGreedy.setBounds(240, 125, 50, 50);
     levelFiveGreedy.setBackground(Color.cyan);
     pane.add(levelFiveGreedy);
+    guiLevelPages[4] = new GUILevelPage(AppData.getLevel(4));
     levelFiveGreedy.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[4]);
     });
@@ -97,6 +88,7 @@ public class GUILevelDeciderPage {
     levelSixGreedy.setBounds(300, 125, 50, 50);
     levelSixGreedy.setBackground(Color.cyan);
     pane.add(levelSixGreedy);
+    guiLevelPages[5] = new GUILevelPage(AppData.getLevel(6));
     levelSixGreedy.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[5]);
     });
@@ -105,6 +97,7 @@ public class GUILevelDeciderPage {
     levelSevenGreedy.setBounds(360, 125, 50, 50);
     levelSevenGreedy.setBackground(Color.cyan);
     pane.add(levelSevenGreedy);
+    guiLevelPages[6] = new GUILevelPage(AppData.getLevel(6));
     levelSevenGreedy.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[6]);
     });
@@ -113,6 +106,7 @@ public class GUILevelDeciderPage {
     levelEightGreedy.setBounds(420, 125, 50, 50);
     levelEightGreedy.setBackground(Color.cyan);
     pane.add(levelEightGreedy);
+    guiLevelPages[7] = new GUILevelPage(AppData.getLevel(7));
     levelEightGreedy.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[7]);
     });
@@ -126,6 +120,7 @@ public class GUILevelDeciderPage {
     levelTwoBack.setBounds(60, 275, 50, 50);
     levelTwoBack.setBackground(Color.cyan);
     pane.add(levelTwoBack);
+    guiLevelPages[8] = new GUILevelPage(AppData.getLevel(8));
     levelTwoBack.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[8]);
     });
@@ -134,6 +129,7 @@ public class GUILevelDeciderPage {
     levelThreeBack.setBounds(120, 275, 50, 50);
     levelThreeBack.setBackground(Color.cyan);
     pane.add(levelThreeBack);
+    guiLevelPages[9] = new GUILevelPage(AppData.getLevel(9));
     levelThreeBack.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[9]);
     });
@@ -142,6 +138,7 @@ public class GUILevelDeciderPage {
     levelFourBack.setBounds(180, 275, 50, 50);
     levelFourBack.setBackground(Color.cyan);
     pane.add(levelFourBack);
+    guiLevelPages[10] = new GUILevelPage(AppData.getLevel(10));
     levelFourBack.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[10]);
     });
@@ -150,6 +147,7 @@ public class GUILevelDeciderPage {
     levelFiveBack.setBounds(240, 275, 50, 50);
     levelFiveBack.setBackground(Color.cyan);
     pane.add(levelFiveBack);
+    guiLevelPages[11] = new GUILevelPage(AppData.getLevel(11));
     levelFiveBack.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[11]);
     });
@@ -158,6 +156,7 @@ public class GUILevelDeciderPage {
     levelSixBack.setBounds(300, 275, 50, 50);
     levelSixBack.setBackground(Color.cyan);
     pane.add(levelSixBack);
+    guiLevelPages[12] = new GUILevelPage(AppData.getLevel(12));
     levelSixBack.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[12]);
     });
@@ -166,6 +165,7 @@ public class GUILevelDeciderPage {
     levelSevenBack.setBounds(360, 275, 50, 50);
     levelSevenBack.setBackground(Color.cyan);
     pane.add(levelSevenBack);
+    guiLevelPages[13] = new GUILevelPage(AppData.getLevel(13));
     levelSevenBack.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[13]);
     });
@@ -174,6 +174,7 @@ public class GUILevelDeciderPage {
     levelEightBack.setBounds(420, 275, 50, 50);
     levelEightBack.setBackground(Color.cyan);
     pane.add(levelEightBack);
+    guiLevelPages[14] = new GUILevelPage(AppData.getLevel(14));
     levelEightBack.addActionListener(e -> {
       GUIManager.openLevel(guiLevelPages[14]);
     });
