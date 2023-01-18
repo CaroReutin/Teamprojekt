@@ -10,7 +10,7 @@ import javax.swing.*;
 /**
  * The class GUIOptionsPage holds the pane of the optionspage.
  */
-public class GUIOptionsPage {
+public class GuiOptionsPage {
 
   /**
    * Compares the given String with the set of implemented passwords.
@@ -40,8 +40,8 @@ public class GUIOptionsPage {
     JButton back = new JButton("Zurück");
     JFormattedTextField passwordInput = new JFormattedTextField("");
     JButton enterPassword = new JButton("Eingabe");
-    GUIManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "callConfirmPassword");
-    GUIManager.getRootPane().getActionMap().put("callConfirmPassword", new AbstractAction() {
+    GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "callConfirmPassword");
+    GuiManager.getRootPane().getActionMap().put("callConfirmPassword", new AbstractAction() {
       @Override
       public void actionPerformed(ActionEvent e) {
         confirmPassword(passwordInput.getText(), pane);
@@ -52,8 +52,8 @@ public class GUIOptionsPage {
     enterPassword.addActionListener(e -> confirmPassword(passwordInput.getText(), pane));
     back.setBounds(4 * pane.getWidth() / 10, 3 * pane.getHeight() / 10 + passwordInput.getHeight() + enterPassword.getHeight(), 2 * pane.getWidth() /  10, pane.getHeight() / 10);
     back.addActionListener(e -> {
-      GUIManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
-      GUIManager.openMainMenu();
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+      GuiManager.openMainMenu();
     });
     passwordInput.setValue("");
     pane.add(passwordInput);

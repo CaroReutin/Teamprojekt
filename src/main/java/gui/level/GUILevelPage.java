@@ -11,7 +11,7 @@ import javax.swing.*;
 /**
  * This class holds the gui pane of the levelpage.
  */
-public class GUILevelPage {
+public class GuiLevelPage {
   /**
    * the level which is currently played.
    */
@@ -38,7 +38,7 @@ public class GUILevelPage {
    *
    * @param level the level that can be played in this page
    */
-  public GUILevelPage(Level level) {
+  public GuiLevelPage(Level level) {
     this.level = level;
   }
 
@@ -65,11 +65,11 @@ public class GUILevelPage {
           }
           break;
         case 1:
-          GUIManager.openLevel(GUIManager.getGuiLevelDeciderPage().getGuiLevelPages()[level.getLevelNumber() + 1]);
+          GuiManager.openLevel(GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()[level.getLevelNumber() + 1]);
           System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           break;
         case 2:
-          GUIManager.openLevelSelectScreen();
+          GuiManager.openLevelSelectScreen();
           System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
           break;
         default:

@@ -7,21 +7,21 @@ import javax.swing.*;
 /**
  * The class GUIManager combines the gui pages.
  */
-public class GUIManager {
+public class GuiManager {
   /**
    * the current gui frontpage.
    */
-  private static final GUIFrontpage guiFrontPage = new GUIFrontpage();
+  private static final GuiFrontpage guiFrontPage = new GuiFrontpage();
   /**
    * the current gui optionspage.
    */
-  private static final GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
+  private static final GuiOptionsPage guiOptionsPage = new GuiOptionsPage();
 
 
   /**
    * the current gui leveldeciderpage.
    */
-  private static GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+  private static GuiLevelDeciderPage guiLevelDeciderPage = new GuiLevelDeciderPage();
   /**
    * the frame of all windows.
    */
@@ -83,7 +83,7 @@ public class GUIManager {
    *
    * @param levelPage the GUILevel page of the level that should be opened.
    */
-  public static void openLevel(GUILevelPage levelPage) {
+  public static void openLevel(GuiLevelPage levelPage) {
     frame.setContentPane(levelPage.getPane());
     paint();
   }
@@ -101,7 +101,7 @@ public class GUIManager {
    * gets the GUILevelDeciderPage
    * @return the leveldeciderpage
    */
-  public static GUILevelDeciderPage getGuiLevelDeciderPage() {
+  public static GuiLevelDeciderPage getGuiLevelDeciderPage() {
     return guiLevelDeciderPage;
   }
 
