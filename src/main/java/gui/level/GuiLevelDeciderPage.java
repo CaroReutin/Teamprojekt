@@ -18,7 +18,6 @@ public class GuiLevelDeciderPage {
    * the array GUILevelPage holds all levelpages.
    */
   private final GuiLevelPage[] guiLevelPages = new GuiLevelPage[15];
-
   /**
    * To be used with frame.setContentPane().
    *
