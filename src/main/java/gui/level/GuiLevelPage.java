@@ -65,7 +65,11 @@ public class GuiLevelPage {
           }
           break;
         case 1:
-          GuiManager.openLevel(GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()[level.getLevelNumber() + 1]);
+          if (level.getLevelNumber() == 0 || level.getLevelNumber() == 7 || level.getLevelNumber() == 14) {
+            GuiManager.openLevelSelectScreen();
+          } else {
+            GuiManager.openLevel(GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()[level.getLevelNumber() + 1]);
+          }
           System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           break;
         case 2:

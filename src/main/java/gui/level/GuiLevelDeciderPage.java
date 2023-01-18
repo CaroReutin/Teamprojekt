@@ -38,6 +38,7 @@ public class GuiLevelDeciderPage {
     levelOne.setBounds(25, 200, 50, 50);
     levelOne.setBackground(Color.cyan);
     pane.add(levelOne);
+    guiLevelPages[0] = new GuiLevelPage(AppData.getLevel(0));
     levelOne.addActionListener(e -> GuiManager.openLevel(guiLevelPages[0]));
 
     JLabel ganove = new JLabel("gieriger Ganove");
