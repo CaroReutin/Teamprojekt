@@ -14,9 +14,9 @@ public class TestTree {
   public TestTree() {
     ArrayList<BacktrackingItem> list = new ArrayList<>();
 
-    BacktrackingItem item1 = new BacktrackingItem(7, 6, "Coin");
+    BacktrackingItem item1 = new BacktrackingItem(7, 6, "Crown");
     BacktrackingItem item2 = new BacktrackingItem(8, 6, "Pearl");
-    BacktrackingItem item3 = new BacktrackingItem(20, 4, "Crown");
+    BacktrackingItem item3 = new BacktrackingItem(20, 4, "Coin");
 
     list.add(item1);
     list.add(item2);
@@ -29,11 +29,10 @@ public class TestTree {
 
     tree.addToRucksack(list.get(0));
     tree.addToRucksack(list.get(1));
+
     tree.addToTrash(list.get(1));
     tree.addToRucksack(list.get(2));
-
-    tree.addToTrash(list.get(0));
-
     tree.print(System.out);
+    //tree.addToTrash(list.get(0));
   }
 }

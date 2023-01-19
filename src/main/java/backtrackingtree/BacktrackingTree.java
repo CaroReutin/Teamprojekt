@@ -119,9 +119,26 @@ public class BacktrackingTree {
 
     if (addedSuccessfully) {
       currentNode = currentNode.getLeftChild();
+      System.out.println("Item " + item.getName()
+              + " wurde in den Müll gelegt.");
       return true;
     } else {
       return false;
     }
+
+    /**
+     * if (currentNode.getLeftChild() == null) {
+     *         currentNode = currentNode.getLeftChild();
+     *         System.out.println("Item " + item.getName()
+     *                 + " wurde in den Müll gelegt.");
+     *         return true;
+     *       } else {
+     *         currentNode = new BacktrackingNode(item)
+     *       }
+     *     } else {
+     *       return false;
+     *     }
+     *   }
+     */
   }
 }

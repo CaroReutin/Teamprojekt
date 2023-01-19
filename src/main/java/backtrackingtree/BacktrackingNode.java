@@ -91,16 +91,19 @@ public class BacktrackingNode {
     BacktrackingItem.StateBacktracking childState = childItem.getState();
 
     //adds depending on if an item is in available, rucksack or trash
-    if (!isNextSelectableItemForBag(childItem) && childState
-            == BacktrackingItem.StateBacktracking.AVAILABLE) {
+    if (childState == BacktrackingItem.StateBacktracking.TRASH) {
       return false;
     } else if (childState == BacktrackingItem.StateBacktracking.RUCKSACK) {
       moveItemsIntoAvailable(childItem);
+      childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
+      leftChild = new BacktrackingNode(childItem, currentWeight,
+              currentValue, capacity, itemList, this);
       return true;
-
-    } else if (childState
-            == BacktrackingItem.StateBacktracking.TRASH) {
-      return false;
+    } else if (childState == BacktrackingItem.StateBacktracking.AVAILABLE) {
+      childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
+      leftChild = new BacktrackingNode(childItem, currentWeight,
+              currentValue, capacity, itemList, this);
+      return true;
     }
     childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
     leftChild = new BacktrackingNode(childItem, currentWeight,
@@ -140,7 +143,7 @@ public class BacktrackingNode {
 
     } else {
       System.out.println("Item "
-              + childItem.getName() + "kann nicht hinzugefügt werden.");
+              + childItem.getName() + " kann nicht hinzugefügt werden.");
       return false;
     }
   }
@@ -148,10 +151,12 @@ public class BacktrackingNode {
   private boolean itemFitsInRucksack(final BacktrackingItem bagItem) {
     // query if item can be selected or not
     if (!isNextSelectableItemForBag(bagItem)) {
+      System.out.println(bagItem.getName() + " ist nicht selectable.");
       return false;
     }
     // item can only be added if it is available
     if (bagItem.getState() != BacktrackingItem.StateBacktracking.AVAILABLE) {
+      System.out.println(bagItem.getName() + " ist nicht verfügbar.");
       return false;
     }
 
@@ -161,7 +166,8 @@ public class BacktrackingNode {
       return true;
     } else {
       System.out.println("Item "
-              + bagItem.getName() + " macht Rucksack zu schwer");
+              + bagItem.getName() + " macht Rucksack zu schwer "
+              + "und kann deswegen nicht hinzugefügt werden.");
       return false;
     }
   }
@@ -174,6 +180,7 @@ public class BacktrackingNode {
 
     //if item is in available
     if (newBagItem.getState() != BacktrackingItem.StateBacktracking.AVAILABLE) {
+      System.out.println(newBagItem.getName() + " ist nicht available");
       return false;
     }
 
@@ -193,14 +200,15 @@ public class BacktrackingNode {
         for (int i = indexThis - 1; i >= 0; i--) {
           if (itemList.get(i).getWeight() == weightThis) {
             if (itemList.get(i).getState() == BacktrackingItem.StateBacktracking.AVAILABLE) {
-              System.out.println("Item " + newBagItem.getName() + " ist nicht verfügbar.");
+              System.out.println("Item " + newBagItem.getName()
+                      + " ist nicht das nächstverfügbare.");
               return false;
             }
           } else {
             break;
           }
         }
-        return false;
+        return true;
       }
     }
 
@@ -218,7 +226,7 @@ public class BacktrackingNode {
             break;
           }
         }
-        return false;
+        return true;
       }
     }
 

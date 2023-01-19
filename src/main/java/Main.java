@@ -23,7 +23,7 @@ public class Main {
 //
 //    GUIManager guiManager = new GUIManager();
 //    guiManager.launch();
-    ArrayList<Item> items = new ArrayList<>();
+   /* ArrayList<Item> items = new ArrayList<>();
     Item coin = new Item(7, 6,"coin");
     Item crown = new Item(8, 6, "crown");
     Item pearl = new Item(20, 4, "pearl");
@@ -36,11 +36,7 @@ public class Main {
     ArrayList<Integer> amount = new ArrayList<>();
     amount.add(1);
     amount.add(1);
-    amount.add(1);
-
-
-    SolverBacktracking solver = new SolverBacktracking();
-    solver.solveBacktracking(items, amount, 10);
+    amount.add(1); */
 
    /* AppData.initialize();
     UserDataManager.load();
