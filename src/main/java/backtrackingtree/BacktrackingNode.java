@@ -96,15 +96,23 @@ public class BacktrackingNode {
     } else if (childState == BacktrackingItem.StateBacktracking.RUCKSACK) {
       moveItemsIntoAvailable(childItem);
       childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
-      leftChild = new BacktrackingNode(childItem, currentWeight,
-              currentValue, capacity, itemList, this);
+      BacktrackingNode currentParent = parent;
+      //getting up the tree so we can set the new left child correctly
+      while (currentParent.getItem().getName() != childItem.getName()) {
+        currentParent = currentParent.parent;
+      }
+      currentParent = currentParent.parent;
+      currentParent.leftChild = new BacktrackingNode(childItem, currentWeight,
+              currentValue, capacity, itemList, currentParent);
       return true;
+
     } else if (childState == BacktrackingItem.StateBacktracking.AVAILABLE) {
       childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
       leftChild = new BacktrackingNode(childItem, currentWeight,
               currentValue, capacity, itemList, this);
       return true;
     }
+
     childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
     leftChild = new BacktrackingNode(childItem, currentWeight,
             currentValue, capacity, itemList, this);
