@@ -91,12 +91,12 @@ public class BacktrackingNode {
     BacktrackingItem.StateBacktracking childState = childItem.getState();
 
     //adds depending on if an item is in available, rucksack or trash
-    if (!isNextHeavyItem(childItem) && childState
+    if (!isNextSelectableItemForBag(childItem) && childState
             == BacktrackingItem.StateBacktracking.AVAILABLE) {
       return false;
     } else if (childState == BacktrackingItem.StateBacktracking.RUCKSACK) {
-
       moveItemsIntoAvailable(childItem);
+      return true;
 
     } else if (childState
             == BacktrackingItem.StateBacktracking.TRASH) {
@@ -108,9 +108,21 @@ public class BacktrackingNode {
     return true;
   }
 
-  private BacktrackingItem moveIntemsIntoAvailable(BacktrackingItem childItem) {
+  /**
+   * puts all items which weights the same or less into available.
+   *
+   * @param trashItem which is thrown from rucksack into trash.
+   */
+  private void moveItemsIntoAvailable(BacktrackingItem trashItem) {
+    int weight = trashItem.getWeight();
 
+    for (BacktrackingItem currentItem : itemList) {
+      if (currentItem.getWeight() <= weight) {
+        currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
+      }
+    }
   }
+
   /**
    * method adds a child to the rucksack.
    *
@@ -134,7 +146,8 @@ public class BacktrackingNode {
   }
 
   private boolean itemFitsInRucksack(final BacktrackingItem bagItem) {
-    if (!isNextHeavyItem(bagItem)) {
+    // query if item can be selected or not
+    if (!isNextSelectableItemForBag(bagItem)) {
       return false;
     }
     // item can only be added if it is available
@@ -153,12 +166,86 @@ public class BacktrackingNode {
     }
   }
 
-  private boolean isNextHeavyItem(final BacktrackingItem bagItem) {
-    int itemIndex = itemList.indexOf(bagItem);
-    if (itemIndex != itemList.indexOf(this.item) + 1) {
-      System.out.println("Item " + bagItem.getName()
-              + " ist nicht das Nächstschwerere.");
+  private boolean isNextSelectableItemForBag(final BacktrackingItem newBagItem) {
+    final int indexNewBagItem = itemList.indexOf(newBagItem);
+    final int weightNewBagItem = newBagItem.getWeight();
+    final int indexThis = itemList.indexOf(this.getItem());
+    final int weightThis = this.item.getWeight();
+
+    //if item is in available
+    if (newBagItem.getState() != BacktrackingItem.StateBacktracking.AVAILABLE) {
       return false;
+    }
+
+    //first item to add to the tree
+    if (itemList.get(0).getWeight() == weightNewBagItem) {
+      return true;
+    }
+
+    // if new item has the same weight as this node
+    if (weightNewBagItem == weightThis) {
+      return true;
+    }
+
+    //case if left item has the same weight as the thisItem
+    if (indexThis != 0) {
+      if (itemList.get(indexThis - 1).getWeight() == weightThis) {
+        for (int i = indexThis - 1; i >= 0; i--) {
+          if (itemList.get(i).getWeight() == weightThis) {
+            if (itemList.get(i).getState() == BacktrackingItem.StateBacktracking.AVAILABLE) {
+              System.out.println("Item " + newBagItem.getName() + " ist nicht verfügbar.");
+              return false;
+            }
+          } else {
+            break;
+          }
+        }
+        return false;
+      }
+    }
+
+    //case if right item has the same weight as thisItem
+    if (indexThis != itemList.size() - 1) {
+      if (itemList.get(indexThis + 1).getWeight() == weightThis) {
+        for (int i = indexThis + 1; i <= itemList.size() - 1; i++) {
+          if (itemList.get(i).getWeight() == weightThis) {
+            if (itemList.get(i).getState()
+                    == BacktrackingItem.StateBacktracking.AVAILABLE) {
+              System.out.println("Item " + newBagItem.getName() + " ist nicht verfügbar.");
+              return false;
+            }
+          } else {
+            break;
+          }
+        }
+        return false;
+      }
+    }
+
+    //case when we want to add a lighter item.
+    // item is at a middle position in the list.
+    if (indexThis != 0 && indexThis != itemList.size() - 1) {
+      //case if left and right does not have the same weight as this
+      if (itemList.get(indexThis - 1).getWeight() != weightThis
+              && itemList.get(indexNewBagItem + 1).getWeight() != weightThis) {
+
+        int indexMostRightItem = indexThis;
+        for (int i = indexThis; i < itemList.size() - 1; i++) {
+          if (itemList.get(i).getWeight() == weightThis) {
+            indexMostRightItem = i;
+          } else {
+            break;
+          }
+        }
+        if (itemList.get(indexMostRightItem + 1).getWeight()
+                == weightNewBagItem) {
+          return true;
+        } else {
+          System.out.println("Item " + newBagItem.getName()
+                  + " ist nicht das Nächstleichtere!");
+          return false;
+        }
+      }
     }
     return true;
   }
