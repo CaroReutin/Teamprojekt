@@ -80,15 +80,6 @@ public class BacktrackingTree {
   }
 
   /**
-   * gets the root of this tree.
-   *
-   * @return said root
-   */
-  public BacktrackingNode getRoot() {
-    return root;
-  }
-
-  /**
    * adds an item to the rucksack (right child).
    *
    * @param item said item
@@ -109,18 +100,18 @@ public class BacktrackingTree {
    * adds an item to the trash bin (left child).
    *
    * @param item said item
-   * @return true in case of success
    */
-  public boolean addToTrash(final BacktrackingItem item) {
+  public void addToTrash(final BacktrackingItem item) {
     boolean addedSuccessfully = currentNode.addToTrash(item);
 
     if (addedSuccessfully) {
       currentNode = currentNode.getLeftChild();
+      System.out.println("Der current Node ist nun "
+              + currentNode.getItem().getName());
       System.out.println("Item " + item.getName()
               + " wurde in den Müll gelegt.");
-      return true;
     } else {
-      return false;
+      System.out.println("Item konnte nicht in den Müll gelegt werden");
     }
 
   }

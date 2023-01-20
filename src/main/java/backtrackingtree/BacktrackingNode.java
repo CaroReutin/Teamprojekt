@@ -98,7 +98,7 @@ public class BacktrackingNode {
       moveItemsIntoAvailable(childItem);
       childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
       BacktrackingNode currentParent = parent;
-      //getting up the tree so we can set the new left child correctly
+      //getting up the tree, so we can set the new left child correctly
       while (!Objects.equals(currentParent.getItem().getName(),
               childItem.getName())) {
         currentParent = currentParent.parent;
