@@ -98,12 +98,20 @@ public class GuiLevelPageBacktracking extends GuiLevelPage{
 
     JPanel leftPanel = new JBackgroundPanel(scaledRucksackImage);
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JPanel rightPanel = new JPanel();
+    JPanel rightPanel = new JPanel(new GridLayout(2, 1));
+    JPanel avaiblePanel = new JPanel();
+    avaiblePanel.add(new JLabel("Verfügbar:"));
+    JPanel trashPanel = new JPanel();
+    trashPanel.add(new JLabel("Müll:"));
+    rightPanel.add(avaiblePanel, BorderLayout.NORTH);
+    rightPanel.add(trashPanel, BorderLayout.SOUTH);
+
+
     //JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
-    this.itemButtons(rightPanel, leftPanel);
+    this.itemButtons(avaiblePanel, leftPanel);
 
 
     //alles zusammenpuzzeln
@@ -111,6 +119,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage{
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
     pane.add(rightPanel, BorderLayout.EAST);
+
 
     return pane;
 
