@@ -146,6 +146,15 @@ public class GUILevelPage {
   }
 
   /**
+   * To be used by GUIManager for the frame's title.
+   *
+   * @return the number of the current level
+   */
+  public int getLevelNumber() {
+    return this.level.getLevelNumber();
+  }
+
+  /**
    * To be used with frame.setContentPane().
    *
    * @return returns the Container that contains the content of the level page
