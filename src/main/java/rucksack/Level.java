@@ -90,6 +90,69 @@ public class Level {
     currentValue = 0;
   }
 
+  /**
+   * amount of steps needed until now
+   * a step is either "putting item in rucksack" or "removing items from rucksack"
+   */
+  private int counter = 0;
+
+
+  /**
+   * counts the number of steps needed; adding and removing items both count as a step
+   * @return current value of the counter
+   */
+  public int getCounter() {
+    return counter;
+  }
+
+
+  /**
+   * sets the counter to a new value
+   * @param counter the new value of the counter which overwrites the current one
+   */
+  public void setCounter(int counter) {
+    this.counter = counter;
+  }
+
+ /*  * updates value and weight of the rucksack if item is added
+   * @param item to be added
+   */
+  /*public void addItem(Item item) {
+    if((currentWeight + item.getWeight()) <= currentCapacity) {
+      if(items.contains(item)) {
+        int index = items.indexOf(item);
+        amount.set(index, amount.get(index) + 1);
+      } else{
+        items.add(item);
+        amount.add(1);
+      }
+      currentValue += item.getValue();
+      currentWeight += item.getWeight();
+      counter++;
+    }
+
+  }*/
+
+  /**
+   * updates value and weight of the rucksack if item is removed
+   * @param item to be removed
+   */
+ /* public void removeItem(Item item) {
+    if(items.contains(item)) {
+      int index = items.indexOf(item);
+      if(index == 1) {
+        items.remove(index);
+        amount.remove(index);
+      } else {
+        amount.set(index, amount.get(index) - 1);
+      }
+      currentValue -= item.getValue();
+      currentWeight -= item.getWeight();
+    }
+    counter++;
+  }*/
+
+
 
   /**
    * Instantiates a new Level.
