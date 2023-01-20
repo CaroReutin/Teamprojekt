@@ -2,8 +2,8 @@ package backtrackingtree;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-
 import rucksack.BacktrackingItem;
+
 
 
 /**
@@ -16,7 +16,7 @@ public class BacktrackingTree {
   private final BacktrackingNode root;
 
   /**
-   * current node where we can add children to
+   * current node where we can add children to.
    */
   private BacktrackingNode currentNode;
 
@@ -42,7 +42,7 @@ public class BacktrackingTree {
   public void print(final PrintStream ps) {
     StringBuilder sb = new StringBuilder();
     traversePreOrder(sb, "", "", root);
-    ps.print(sb.toString());
+    ps.print(sb);
   }
 
 
@@ -63,16 +63,13 @@ public class BacktrackingTree {
 
       if (node.getItem().getState()
               == (BacktrackingItem.StateBacktracking.TRASH)) {
-        sb.append("not " + node.getItem().getName());
+        sb.append("not ").append(node.getItem().getName());
       } else {
         sb.append(node.getItem().getName());
       }
       sb.append("\n");
 
-      StringBuilder paddingBuilder = new StringBuilder(padding);
-      paddingBuilder.append("│  ");
-
-      String paddingForBoth = paddingBuilder.toString();
+      String paddingForBoth = padding + "│  ";
       String pointerForRight = "└──";
       String pointerForLeft = (node.getRightChild() != null) ? "├──" : "└──";
 
@@ -126,19 +123,5 @@ public class BacktrackingTree {
       return false;
     }
 
-    /**
-     * if (currentNode.getLeftChild() == null) {
-     *         currentNode = currentNode.getLeftChild();
-     *         System.out.println("Item " + item.getName()
-     *                 + " wurde in den Müll gelegt.");
-     *         return true;
-     *       } else {
-     *         currentNode = new BacktrackingNode(item)
-     *       }
-     *     } else {
-     *       return false;
-     *     }
-     *   }
-     */
   }
 }

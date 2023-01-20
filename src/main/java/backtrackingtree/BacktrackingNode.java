@@ -1,9 +1,10 @@
 package backtrackingtree;
 
 import java.util.ArrayList;
-
+import java.util.Objects;
 import rucksack.BacktrackingItem;
 import rucksack.Item;
+
 
 
 /**
@@ -98,7 +99,8 @@ public class BacktrackingNode {
       childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
       BacktrackingNode currentParent = parent;
       //getting up the tree so we can set the new left child correctly
-      while (currentParent.getItem().getName() != childItem.getName()) {
+      while (!Objects.equals(currentParent.getItem().getName(),
+              childItem.getName())) {
         currentParent = currentParent.parent;
       }
       currentParent = currentParent.parent;
@@ -124,7 +126,7 @@ public class BacktrackingNode {
    *
    * @param trashItem which is thrown from rucksack into trash.
    */
-  private void moveItemsIntoAvailable(BacktrackingItem trashItem) {
+  private void moveItemsIntoAvailable(final BacktrackingItem trashItem) {
     int weight = trashItem.getWeight();
 
     for (BacktrackingItem currentItem : itemList) {
@@ -180,7 +182,8 @@ public class BacktrackingNode {
     }
   }
 
-  private boolean isNextSelectableItemForBag(final BacktrackingItem newBagItem) {
+  private boolean isNextSelectableItemForBag(final BacktrackingItem
+                                                     newBagItem) {
     final int indexNewBagItem = itemList.indexOf(newBagItem);
     final int weightNewBagItem = newBagItem.getWeight();
     final int indexThis = itemList.indexOf(this.getItem());
@@ -207,7 +210,8 @@ public class BacktrackingNode {
       if (itemList.get(indexThis - 1).getWeight() == weightThis) {
         for (int i = indexThis - 1; i >= 0; i--) {
           if (itemList.get(i).getWeight() == weightThis) {
-            if (itemList.get(i).getState() == BacktrackingItem.StateBacktracking.AVAILABLE) {
+            if (itemList.get(i).getState()
+                    == BacktrackingItem.StateBacktracking.AVAILABLE) {
               System.out.println("Item " + newBagItem.getName()
                       + " ist nicht das nächstverfügbare.");
               return false;
@@ -227,7 +231,8 @@ public class BacktrackingNode {
           if (itemList.get(i).getWeight() == weightThis) {
             if (itemList.get(i).getState()
                     == BacktrackingItem.StateBacktracking.AVAILABLE) {
-              System.out.println("Item " + newBagItem.getName() + " ist nicht verfügbar.");
+              System.out.println("Item " + newBagItem.getName()
+                      + " ist nicht verfügbar.");
               return false;
             }
           } else {
