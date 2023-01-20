@@ -1,5 +1,6 @@
 package solving;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,14 +26,7 @@ public class AppData {
   /**
    * the level.
    */
-  private static Level[] level = new Level[15];
-
-  public static void initializeItems() {
-    allItems.put(new Key(3, 5),"Münze");
-    allItems.put(new Key(4, 5),"Krone");
-    allItems.put(new Key(2, 2),"Buch");
-    allItems.put(new Key(4, 3),"Perle");
-  }
+  private static Level[] levelZero = new Level[1];
 
   public static void InitializeBeginningLevel() {
     //Einführungslevel
@@ -50,16 +44,11 @@ public class AppData {
     currentAmount.add(1);
     currentItems.add(generateItem(3));
     currentAmount.add(1);
-    level[0] = new Level(currentItems, currentAmount, Level.Robber.DR_META, 0, 5);
+    levelZero[0] = new Level(currentItems, currentAmount, Level.Robber.DR_META, 0, 5);
 
   }
-  /**
-   * Initialize.
-   */
-  public static void initializeGreedy() {
-    passwords.add("Gr33dy");
-    // Greedy Level Items
 
+  public static void initializeItems() {
     items.add(new Item(2, 2, "Muschel")); //4
     items.add(new Item(2, 3, "")); //5
     items.add(new Item(2, 4, "")); //6
@@ -132,237 +121,26 @@ public class AppData {
     items.add(new Item(10, 6, "")); //73
     items.add(new Item(16, 11, "")); //74
 
-
-    //Einführungslevel
     ArrayList<Item> currentItems = new ArrayList<>();
     ArrayList<Integer> currentAmount = new ArrayList<>();
-    // Greedy Level 1
-    currentItems.add(generateItem(9));
-    currentAmount.add(1);
-    currentItems.add(generateItem(11));
-    currentAmount.add(1);
-    currentItems.add(generateItem(13));
-    currentAmount.add(1);
-    level[1] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 1, 6);
 
-    // Greedy Level 2
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(13));
-    currentAmount.add(1);
-    currentItems.add(generateItem(6));
-    currentAmount.add(1);
-    currentItems.add(generateItem(12));
-    currentAmount.add(1);
-    level[2] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 2, 9);
+    GreedyLevel.initializeGreedy(items, currentItems, currentAmount);
+    BacktrackingLevel.initializeBacktracking(items, currentItems, currentAmount);
 
-    //Greedy Level 3
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(4));
-    currentAmount.add(1);
-    currentItems.add(generateItem(18));
-    currentAmount.add(1);
-    level[3] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 3, 9);
+  }
 
+  /**
+   * Initialize.
+   */
+  public static Level initializeGreedy(int level) {
+    passwords.add("Gr33dy");
+    return GreedyLevel.getLevelGreedy(level);
 
-    //Greedy Level 4
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(15));
-    currentAmount.add(1);
-    currentItems.add(generateItem(16));
-    currentAmount.add(1);
-    currentItems.add(generateItem(21));
-    currentAmount.add(1);
-    currentItems.add(generateItem(10));
-    currentAmount.add(1);
-    currentItems.add(generateItem(7));
-    currentAmount.add(2);
-    level[4] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 4, 20);
+  }
 
-
-    //Greedy Level 5
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(29));
-    currentAmount.add(1);
-    currentItems.add(generateItem(19));
-    currentAmount.add(1);
-    currentItems.add(generateItem(22));
-    currentAmount.add(1);
-    currentItems.add(generateItem(17));
-    currentAmount.add(1);
-    currentItems.add(generateItem(14));
-    currentAmount.add(1);
-    currentItems.add(generateItem(8));
-    currentAmount.add(1);
-    currentItems.add(generateItem(5));
-    currentAmount.add(1);
-    currentItems.add(generateItem(32));
-    currentAmount.add(1);
-    level[5] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 5, 35);
-
-
-    //Greedy Level 6
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(31));
-    currentAmount.add(1);
-    currentItems.add(generateItem(27));
-    currentAmount.add(1);
-    currentItems.add(generateItem(33));
-    currentAmount.add(1);
-    currentItems.add(generateItem(26));
-    currentAmount.add(1);
-    currentItems.add(generateItem(34));
-    currentAmount.add(1);
-    currentItems.add(generateItem(30));
-    currentAmount.add(1);
-    currentItems.add(generateItem(26));
-    currentAmount.add(1);
-    currentItems.add(generateItem(20));
-    currentAmount.add(1);
-    currentItems.add(generateItem(47));
-    currentAmount.add(1);
-    level[6] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 6, 100);
-
-
-    //Greedy Level 7
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(45));
-    currentAmount.add(1);
-    currentItems.add(generateItem(42));
-    currentAmount.add(1);
-    currentItems.add(generateItem(38));
-    currentAmount.add(1);
-    currentItems.add(generateItem(35));
-    currentAmount.add(1);
-    currentItems.add(generateItem(36));
-    currentAmount.add(1);
-    currentItems.add(generateItem(37));
-    currentAmount.add(1);
-    currentItems.add(generateItem(44));
-    currentAmount.add(1);
-    currentItems.add(generateItem(40));
-    currentAmount.add(1);
-    currentItems.add(generateItem(43));
-    currentAmount.add(1);
-    currentItems.add(generateItem(41));
-    currentAmount.add(1);
-    currentItems.add(generateItem(39));
-    currentAmount.add(2);
-    currentItems.add(generateItem(28));
-    currentAmount.add(1);
-    currentItems.add(generateItem(24));
-    currentAmount.add(2);
-    level[7] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 7, 426);
-
-
-    //Backtracking Level
-    //Backtracking Level 1
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(48));
-    currentAmount.add(1);
-    currentItems.add(generateItem(49));
-    currentAmount.add(1);
-    currentItems.add(generateItem(50));
-    currentAmount.add(1);
-    level[8] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 8, 10);
-
-
-    //Backtracking Level 2
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(51));
-    currentAmount.add(1);
-    currentItems.add(generateItem(10));
-    currentAmount.add(1);
-    currentItems.add(generateItem(52));
-    currentAmount.add(1);
-    currentItems.add(generateItem(17));
-    currentAmount.add(1);
-    level[9] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 9, 10);
-
-
-    //Backtracking Level 3
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(53));
-    currentAmount.add(1);
-    currentItems.add(generateItem(54));
-    currentAmount.add(1);
-    currentItems.add(generateItem(55));
-    currentAmount.add(1);
-    currentItems.add(generateItem(56));
-    currentAmount.add(1);
-    currentItems.add(generateItem(57));
-    currentAmount.add(1);
-    level[10] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 10, 20);
-
-    //Backtracking Level 4
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(58));
-    currentAmount.add(1);
-    currentItems.add(generateItem(59));
-    currentAmount.add(1);
-    currentItems.add(generateItem(14));
-    currentAmount.add(1);
-    currentItems.add(generateItem(60));
-    currentAmount.add(1);
-    currentItems.add(generateItem(61));
-    currentAmount.add(1);
-    level[11] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 11, 14);
-
-    //Backtracking Level 5
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(62));
-    currentAmount.add(1);
-    currentItems.add(generateItem(55));
-    currentAmount.add(1);
-    currentItems.add(generateItem(63));
-    currentAmount.add(1);
-    currentItems.add(generateItem(64));
-    currentAmount.add(1);
-    currentItems.add(generateItem(65));
-    currentAmount.add(1);
-    level[12] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 12, 20);
-
-    //Backtracking Level 6
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(66));
-    currentAmount.add(1);
-    currentItems.add(generateItem(67));
-    currentAmount.add(1);
-    currentItems.add(generateItem(68));
-    currentAmount.add(1);
-    currentItems.add(generateItem(17));
-    currentAmount.add(1);
-    currentItems.add(generateItem(69));
-    currentAmount.add(1);
-    level[13] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 13, 25);
-
-    //Backtracking Level 7
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(generateItem(70));
-    currentAmount.add(1);
-    currentItems.add(generateItem(71));
-    currentAmount.add(1);
-    currentItems.add(generateItem(72));
-    currentAmount.add(1);
-    currentItems.add(generateItem(73));
-    currentAmount.add(1);
-    currentItems.add(generateItem(66));
-    currentAmount.add(1);
-    currentItems.add(generateItem(74));
-    currentAmount.add(1);
-    level[14] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 14, 42);
+  public static Level initializeBacktracking(int level) {
+    passwords.add("");
+    return BacktrackingLevel.getLevelBacktracking(level);
   }
 
   /**
@@ -402,7 +180,7 @@ public class AppData {
    * @return the level
    */
   public static Level getLevel(int i) {
-    return level[i];
+    return levelZero[i];
   }
 
 }

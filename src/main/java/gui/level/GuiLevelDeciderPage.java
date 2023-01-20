@@ -38,6 +38,7 @@ public class GuiLevelDeciderPage {
     levelOne.setBounds(25, 200, 50, 50);
     levelOne.setBackground(Color.cyan);
     pane.add(levelOne);
+    //guiLevelPages[0] = new GuiLevelPage(AppData.getLevel(0));
     guiLevelPages[0] = new GuiLevelPage(AppData.getLevel(0));
     levelOne.addActionListener(e -> GuiManager.openLevel(guiLevelPages[0]));
 
@@ -50,7 +51,8 @@ public class GuiLevelDeciderPage {
     levelTwoGreedy.setBounds(60, 125, 50, 50);
     levelTwoGreedy.setBackground(Color.cyan);
     pane.add(levelTwoGreedy);
-    guiLevelPages[1] = new GuiLevelPage(AppData.getLevel(1));
+    //guiLevelPages[1] = new GuiLevelPage(AppData.getLevel(1));
+    guiLevelPages[1] = new GuiLevelPage(AppData.initializeGreedy(0));
     levelTwoGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[1]);
     });
@@ -60,7 +62,7 @@ public class GuiLevelDeciderPage {
     levelThreeGreedy.setBounds(120, 125, 50, 50);
     levelThreeGreedy.setBackground(Color.cyan);
     pane.add(levelThreeGreedy);
-    guiLevelPages[2] = new GuiLevelPage(AppData.getLevel(2));
+    guiLevelPages[2] = new GuiLevelPage(AppData.initializeGreedy(1));
     levelThreeGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[2]);
     });
@@ -69,7 +71,7 @@ public class GuiLevelDeciderPage {
     levelFourGreedy.setBounds(180, 125, 50, 50);
     levelFourGreedy.setBackground(Color.cyan);
     pane.add(levelFourGreedy);
-    guiLevelPages[3] = new GuiLevelPage(AppData.getLevel(3));
+    guiLevelPages[3] = new GuiLevelPage(AppData.initializeGreedy(2));
     levelFourGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[3]);
     });
@@ -78,7 +80,7 @@ public class GuiLevelDeciderPage {
     levelFiveGreedy.setBounds(240, 125, 50, 50);
     levelFiveGreedy.setBackground(Color.cyan);
     pane.add(levelFiveGreedy);
-    guiLevelPages[4] = new GuiLevelPage(AppData.getLevel(4));
+    guiLevelPages[4] = new GuiLevelPage(AppData.initializeGreedy(3));
     levelFiveGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[4]);
     });
@@ -87,7 +89,7 @@ public class GuiLevelDeciderPage {
     levelSixGreedy.setBounds(300, 125, 50, 50);
     levelSixGreedy.setBackground(Color.cyan);
     pane.add(levelSixGreedy);
-    guiLevelPages[5] = new GuiLevelPage(AppData.getLevel(6));
+    guiLevelPages[5] = new GuiLevelPage(AppData.initializeGreedy(4));
     levelSixGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[5]);
     });
@@ -96,7 +98,7 @@ public class GuiLevelDeciderPage {
     levelSevenGreedy.setBounds(360, 125, 50, 50);
     levelSevenGreedy.setBackground(Color.cyan);
     pane.add(levelSevenGreedy);
-    guiLevelPages[6] = new GuiLevelPage(AppData.getLevel(6));
+    guiLevelPages[6] = new GuiLevelPage(AppData.initializeGreedy(5));
     levelSevenGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[6]);
     });
@@ -105,7 +107,7 @@ public class GuiLevelDeciderPage {
     levelEightGreedy.setBounds(420, 125, 50, 50);
     levelEightGreedy.setBackground(Color.cyan);
     pane.add(levelEightGreedy);
-    guiLevelPages[7] = new GuiLevelPage(AppData.getLevel(7));
+    guiLevelPages[7] = new GuiLevelPage(AppData.initializeGreedy(6));
     levelEightGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[7]);
     });
@@ -119,7 +121,7 @@ public class GuiLevelDeciderPage {
     levelTwoBack.setBounds(60, 275, 50, 50);
     levelTwoBack.setBackground(Color.cyan);
     pane.add(levelTwoBack);
-    guiLevelPages[8] = new GuiLevelPage(AppData.getLevel(8));
+    guiLevelPages[8] = new GuiLevelPage(AppData.initializeBacktracking(0));
     levelTwoBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[8]);
     });
@@ -128,7 +130,7 @@ public class GuiLevelDeciderPage {
     levelThreeBack.setBounds(120, 275, 50, 50);
     levelThreeBack.setBackground(Color.cyan);
     pane.add(levelThreeBack);
-    guiLevelPages[9] = new GuiLevelPage(AppData.getLevel(9));
+    guiLevelPages[9] = new GuiLevelPage(AppData.initializeBacktracking(1));
     levelThreeBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[9]);
     });
@@ -137,7 +139,7 @@ public class GuiLevelDeciderPage {
     levelFourBack.setBounds(180, 275, 50, 50);
     levelFourBack.setBackground(Color.cyan);
     pane.add(levelFourBack);
-    guiLevelPages[10] = new GuiLevelPage(AppData.getLevel(10));
+    guiLevelPages[10] = new GuiLevelPage(AppData.initializeBacktracking(2));
     levelFourBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[10]);
     });
@@ -146,7 +148,7 @@ public class GuiLevelDeciderPage {
     levelFiveBack.setBounds(240, 275, 50, 50);
     levelFiveBack.setBackground(Color.cyan);
     pane.add(levelFiveBack);
-    guiLevelPages[11] = new GuiLevelPage(AppData.getLevel(11));
+    guiLevelPages[11] = new GuiLevelPage(AppData.initializeBacktracking(3));
     levelFiveBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[11]);
     });
@@ -155,7 +157,7 @@ public class GuiLevelDeciderPage {
     levelSixBack.setBounds(300, 275, 50, 50);
     levelSixBack.setBackground(Color.cyan);
     pane.add(levelSixBack);
-    guiLevelPages[12] = new GuiLevelPage(AppData.getLevel(12));
+    guiLevelPages[12] = new GuiLevelPage(AppData.initializeBacktracking(4));
     levelSixBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[12]);
     });
@@ -164,7 +166,7 @@ public class GuiLevelDeciderPage {
     levelSevenBack.setBounds(360, 275, 50, 50);
     levelSevenBack.setBackground(Color.cyan);
     pane.add(levelSevenBack);
-    guiLevelPages[13] = new GuiLevelPage(AppData.getLevel(13));
+    guiLevelPages[13] = new GuiLevelPage(AppData.initializeBacktracking(5));
     levelSevenBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[13]);
     });
@@ -173,7 +175,7 @@ public class GuiLevelDeciderPage {
     levelEightBack.setBounds(420, 275, 50, 50);
     levelEightBack.setBackground(Color.cyan);
     pane.add(levelEightBack);
-    guiLevelPages[14] = new GuiLevelPage(AppData.getLevel(14));
+    guiLevelPages[14] = new GuiLevelPage(AppData.initializeBacktracking(6));
     levelEightBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[14]);
     });
