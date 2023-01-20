@@ -115,7 +115,7 @@ public class GUIManager {
 
   /**
    * gets the GUILevelDeciderPage
-   * @return the leveldeciderpage
+   * @return the level decider page
    */
   public static GUILevelDeciderPage getGuiLevelDeciderPage() {
     return guiLevelDeciderPage;
