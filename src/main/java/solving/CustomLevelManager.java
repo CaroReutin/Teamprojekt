@@ -26,7 +26,6 @@ public final class CustomLevelManager {
    * do not make.
    */
   private CustomLevelManager() {
-
   }
 
   /**

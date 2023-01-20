@@ -95,7 +95,7 @@ public class ItemPanel extends Container {
     itemInfoPane.add(name);
     nameField = new JFormattedTextField("");
     itemInfoPane.add(nameField);
-    JLabel weight = new JLabel("Weight: ");
+    JLabel weight = new JLabel("Gewicht: ");
     itemInfoPane.add(weight);
     weightField = new JFormattedTextField(formatter);
     itemInfoPane.add(weightField);
@@ -142,8 +142,9 @@ public class ItemPanel extends Container {
                     + "PNG/JPG/JPEG handelt.");
           } else {
             icon = new ImageIcon(readImage);
+            //geht kaputt, wenn nicht png-Datei
             File destination = new File(AppData
-                .getCustomLevelPictureFolder() + "/picture" + index);
+                .getCustomLevelPictureFolder() + "/picture" + index + ".png");
             if (destination.exists()) {
               FileUtils.delete(destination);
             }

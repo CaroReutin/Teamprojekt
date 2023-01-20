@@ -7,16 +7,14 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Objects;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.NumberFormatter;
+
 import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
@@ -58,15 +56,30 @@ public final class GuiLevelEditorPage {
     robberOptions[1] = Level.Robber.GIERIGER_GANOVE.name();
     robberOptions[2] = Level.Robber.BACKTRACKING_BANDIT.name();
 
-    JTextField titelField = new JTextField("");
-    JTextField capacityField = new JTextField("");
-    JComboBox<String> modusDropdown = new JComboBox<>(robberOptions);
+    // TODO Sonderzeichen verbieten
+
+    JTextField titleField = new JTextField("");
+
+    // TODO Sprint 4, Currently you cannot delete a number
+    // if you type it into a field
+    // So "4" -> "" -> "5" is not possible
+    // You have to go "4" -> "45" -> "5"
+    // Or select the 4 and overwrite it with 5
+    NumberFormat format = NumberFormat.getInstance();
+    NumberFormatter formatter = new NumberFormatter(format);
+    formatter.setValueClass(Integer.class);
+    formatter.setMinimum(0);
+    formatter.setMaximum(Integer.MAX_VALUE);
+    formatter.setAllowsInvalid(false);
+
+    JFormattedTextField capacityField = new JFormattedTextField(formatter);
+    JComboBox<String> modeDropdown = new JComboBox<>(robberOptions);
     leftPane.add(titel);
-    leftPane.add(titelField);
+    leftPane.add(titleField);
     leftPane.add(capacity);
     leftPane.add(capacityField);
     leftPane.add(modus);
-    leftPane.add(modusDropdown);
+    leftPane.add(modeDropdown);
 
     ArrayList<ItemPanel> itemPanels = new ArrayList<>();
     JButton save = new JButton("Speichern");
@@ -83,7 +96,7 @@ public final class GuiLevelEditorPage {
         }
       }
       Level customLevel = new Level(itemList, itemAmountList,
-          Level.Robber.valueOf(Objects.requireNonNull(modusDropdown
+          Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
               .getSelectedItem()).toString()), -1,
           Integer.parseInt(capacityField.getText()));
       JFileChooser chooser = new JFileChooser();
@@ -93,10 +106,10 @@ public final class GuiLevelEditorPage {
       chooser.setAcceptAllFileFilterUsed(false);
       if (chooser.showOpenDialog(pane) == JFileChooser.APPROVE_OPTION) {
         CustomLevelManager.save(chooser.getSelectedFile().toString(),
-            titelField.getText(), customLevel);
+            titleField.getText(), customLevel);
       } else {
         // TODO? If no save location is picked, save to default or not at all?
-        CustomLevelManager.save(titelField.getText(), customLevel);
+        CustomLevelManager.save(titleField.getText(), customLevel);
       }
     });
     JButton back = new JButton("Abbrechen");
