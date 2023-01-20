@@ -47,7 +47,7 @@ public class GuiLevelPage {
    *
    * @param centerPanel the Panel that the escapeButton should be on.
    */
-  private void escapeButton(Container centerPanel) {
+  public void escapeButton(Container centerPanel) {
     JButton flucht = new JButton("Flucht");
     flucht.addActionListener(e -> {
       if (level.getCurrentValue() > UserDataManager.getScore(level.getLevelNumber())) {
@@ -91,7 +91,7 @@ public class GuiLevelPage {
    *
    * @param panelRucksack The left panel where the buttons for the items IN the bag should go to.
    */
-  private void itemButtons(JPanel panelItems, JPanel panelRucksack) {
+  public void itemButtons(JPanel panelItems, JPanel panelRucksack) {
     currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
     Font fontCurrentWeightLabel = currentWeightLabel.getFont();
     currentWeightLabel.setFont(fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle() | Font.BOLD));
@@ -145,7 +145,7 @@ public class GuiLevelPage {
     }
   }
 
-  private void updateLabel(int i) {
+  public void updateLabel(int i) {
     labels[i].setText(String.valueOf(level.getItemAmountAvailable(i)));
     rucksackLabels[i].setText(String.valueOf(level.getItemAmountInRucksack(i)));
     currentWeightLabel.setText(level.getCurrentWeight() + "/" + level.getCapacity() + "g");
@@ -157,7 +157,7 @@ public class GuiLevelPage {
    *
    * @return returns the Container that contains the content of the level page
    */
-  public Container getPane() {
+  public Container getPane(){
     Container pane = new Container();
     pane.setLayout(new GridLayout(1, 3));
 
@@ -185,4 +185,14 @@ public class GuiLevelPage {
 
     return pane;
   }
+
+  /**
+   * returns the level of this GUI-Page
+   * @return level
+   */
+  public Level getLevel() {
+    return level;
+  }
+
+
 }

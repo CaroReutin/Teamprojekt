@@ -114,7 +114,7 @@ public class Level {
     this.counter = counter;
   }
 
- /*  * updates value and weight of the rucksack if item is added
+ /** updates value and weight of the rucksack if item is added
    * @param item to be added
    */
   /*public void addItem(Item item) {

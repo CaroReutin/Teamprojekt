@@ -50,7 +50,7 @@ public class GuiLevelDeciderPage {
     levelTwoGreedy.setBounds(60, 125, 50, 50);
     levelTwoGreedy.setBackground(Color.cyan);
     pane.add(levelTwoGreedy);
-    guiLevelPages[1] = new GuiLevelPage(AppData.getLevel(1));
+    guiLevelPages[1] = new GuiLevelPageGreedy(AppData.getLevel(1));
     levelTwoGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[1]);
     });
