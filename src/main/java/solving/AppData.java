@@ -35,7 +35,7 @@ public class AppData {
     //Einführungslevel
     items.add(new Item(3, 5, "coin")); //0
     items.add(new Item(4, 5, "crown")); //1
-    items.add(new Item(2, 2, "buch")); //2
+    items.add(new Item(2, 2, "book")); //2
     items.add(new Item(4, 3, "pearl")); //3
     ArrayList<Item> currentItems = new ArrayList<>();
     ArrayList<Integer> currentAmount = new ArrayList<>();
@@ -55,77 +55,77 @@ public class AppData {
    * Initialize items. initialize greedy and backtracking level.
    */
   public static void initializeItems() {
-    items.add(new Item(2, 2, "Muschel")); //4
-    items.add(new Item(2, 3, "")); //5
-    items.add(new Item(2, 4, "")); //6
-    items.add(new Item(3, 2, "")); //7
-    items.add(new Item(3, 3, "")); //8
-    items.add(new Item(3, 4, "1")); //9
-    items.add(new Item(4, 3, "")); //10
-    items.add(new Item(4, 4, "2")); //11
-    items.add(new Item(5, 5, "")); //12
-    items.add(new Item(6, 2, "3")); //13
-    items.add(new Item(6, 4, "")); //14
-    items.add(new Item(6, 5, "")); //15
-    items.add(new Item(6, 7, "")); //16
-    items.add(new Item(7, 4, "")); //17
-    items.add(new Item(8, 9, "")); //18
-    items.add(new Item(9, 5, "")); //19
-    items.add(new Item(14, 7, "")); //20
-    items.add(new Item(14, 12, "")); //21
-    items.add(new Item(15, 7, "")); //22
-    items.add(new Item(16, 8, "")); //23
-    items.add(new Item(18, 6, "")); //24
-    items.add(new Item(18, 8, "")); //25
-    items.add(new Item(20, 8, "")); //26
-    items.add(new Item(26, 10, "")); //27
-    items.add(new Item(36, 12, "")); //28
-    items.add(new Item(38, 16, "")); //29
-    items.add(new Item(40, 16, "")); //30
-    items.add(new Item(42, 15, "")); //31
-    items.add(new Item(50, 20, "")); //32
-    items.add(new Item(51, 20, "")); //33
-    items.add(new Item(60, 24, "")); //34
-    items.add(new Item(84, 21, "")); //35
-    items.add(new Item(88, 22, "")); //36
-    items.add(new Item(120, 30, "")); //37
-    items.add(new Item(128, 32, "")); //38
-    items.add(new Item(210, 70, "")); //39
-    items.add(new Item(245, 70, "")); //40
-    items.add(new Item(350, 100, "")); //41
-    items.add(new Item(426, 426, "")); //42
-    items.add(new Item(882, 252, "")); //43
-    items.add(new Item(1127, 322, "")); //44
-    items.add(new Item(2155, 431, "")); //45
-    items.add(new Item(127, 322, "")); //46
-    items.add(new Item(18, 10, "")); //47
-    items.add(new Item(7,6,"")); //48
-    items.add(new Item(8, 6, "")); //49
-    items.add(new Item(20, 4, "")); //50
-    items.add(new Item(6, 6, "")); //51
-    items.add(new Item(4, 1, "")); //52
-    items.add(new Item(31, 19, "")); //53
-    items.add(new Item(14, 8, "")); //54
-    items.add(new Item(8, 6, "")); //55
-    items.add(new Item(8, 2, "")); //56
-    items.add(new Item(12, 12, "")); //57
-    items.add(new Item(2, 7, "")); //58
-    items.add(new Item(7, 3, "")); //59
-    items.add(new Item(9, 8, "")); //60
-    items.add(new Item(8, 11, "")); //61
-    items.add(new Item(7, 12, "")); //62
-    items.add(new Item(4, 2, "")); //63
-    items.add(new Item(5, 5, "")); //64
-    items.add(new Item(10, 8, "")); //65
-    items.add(new Item(16, 18, "")); //66
-    items.add(new Item(10, 7, "")); //67
-    items.add(new Item(7, 3, "")); //68
-    items.add(new Item(12, 14, "")); //69
-    items.add(new Item(25, 15, "")); //70
-    items.add(new Item(26, 25, "")); //71
-    items.add(new Item(21, 21, "")); //72
-    items.add(new Item(10, 6, "")); //73
-    items.add(new Item(16, 11, "")); //74
+    items.add(new Item(2, 2, "gem")); //4
+    items.add(new Item(2, 3, "gold bars")); //5
+    items.add(new Item(2, 4, "cup")); //6
+    items.add(new Item(3, 2, "piggy bank")); //7
+    items.add(new Item(3, 3, "dinosaur bones")); //8
+    items.add(new Item(3, 4, "painting")); //9
+    items.add(new Item(4, 3, "statue")); //10
+    items.add(new Item(4, 4, "vase")); //11
+    items.add(new Item(5, 5, "dagger")); //12
+    items.add(new Item(6, 2, "knife")); //13
+    items.add(new Item(6, 4, "compass")); //14
+    items.add(new Item(6, 5, "bust")); //15
+    items.add(new Item(6, 7, "banknote")); //16
+    items.add(new Item(7, 4, "safe")); //17
+    items.add(new Item(8, 9, "mummy")); //18
+    items.add(new Item(9, 5, "hieroglyphs")); //19
+    items.add(new Item(14, 7, "chains")); //20
+    items.add(new Item(14, 12, "bracelets")); //21
+    items.add(new Item(15, 7, "ring")); //22
+    items.add(new Item(16, 8, "headband")); //23
+    items.add(new Item(18, 6, "copper bars")); //24
+    items.add(new Item(18, 8, "silver bars")); //25
+    items.add(new Item(20, 8, "copper bracelet")); //26
+    items.add(new Item(26, 10, "silver bracelet")); //27
+    items.add(new Item(36, 12, "copper headband")); //28
+    items.add(new Item(38, 16, "silver headband")); //29
+    items.add(new Item(40, 16, "copper chain")); //30
+    items.add(new Item(42, 15, "silver chain")); //31
+    items.add(new Item(50, 20, "coffin")); //32
+    items.add(new Item(51, 20, "pharaoh")); //33
+    items.add(new Item(60, 24, "orb")); //34
+    items.add(new Item(84, 21, "scepter")); //35
+    items.add(new Item(88, 22, "ermine coat")); //36
+    items.add(new Item(120, 30, "rake")); //37
+    items.add(new Item(128, 32, "axe")); //38
+    items.add(new Item(210, 70, "sword")); //39
+    items.add(new Item(245, 70, "shield")); //40
+    items.add(new Item(350, 100, "pistol")); //41
+    items.add(new Item(426, 426, "chain mail")); //42
+    items.add(new Item(882, 252, "knight armor")); //43
+    items.add(new Item(1127, 322, "clothes")); //44
+    items.add(new Item(2155, 431, "quill")); //45
+    items.add(new Item(127, 322, "scroll")); //46
+    items.add(new Item(18, 10, "papyrus")); //47
+    items.add(new Item(7,6,"mirror")); //48
+    items.add(new Item(8, 6, "love letter")); //49
+    items.add(new Item(20, 4, "letter")); //50
+    items.add(new Item(6, 6, "basket")); //51
+    items.add(new Item(4, 1, "bed")); //52
+    items.add(new Item(31, 19, "chamber pot")); //53
+    items.add(new Item(14, 8, "computer")); //54
+    items.add(new Item(8, 6, "laptop")); //55
+    items.add(new Item(8, 2, "video game")); //56
+    items.add(new Item(12, 12, "printing press")); //57
+    items.add(new Item(2, 7, "garment")); //58
+    items.add(new Item(7, 3, "gown")); //59
+    items.add(new Item(9, 8, "stuffed animals")); //60
+    items.add(new Item(8, 11, "animals")); //61
+    items.add(new Item(7, 12, "bones")); //62
+    items.add(new Item(4, 2, "skin")); //63
+    items.add(new Item(5, 5, "clay pot")); //64
+    items.add(new Item(10, 8, "automobile")); //65
+    items.add(new Item(16, 18, "motorcycle")); //66
+    items.add(new Item(10, 7, "microscope")); //67
+    items.add(new Item(7, 3, "bacteria")); //68
+    items.add(new Item(12, 14, "viruses")); //69
+    items.add(new Item(25, 15, "preparations")); //70
+    items.add(new Item(26, 25, "torture tools")); //71
+    items.add(new Item(21, 21, "globe")); //72
+    items.add(new Item(10, 6, "key")); //73
+    items.add(new Item(16, 11, "frame")); //74
 
     ArrayList<Item> currentItems = new ArrayList<>();
     ArrayList<Integer> currentAmount = new ArrayList<>();
