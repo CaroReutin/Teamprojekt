@@ -129,7 +129,7 @@ public class GuiLevelDeciderPage {
     levelTwoBack.setBackground(Color.cyan);
     levelTwoBack.setFont(fontButtons);
     pane.add(levelTwoBack);
-    guiLevelPages[8] = new GuiLevelPage(AppData.initializeBacktracking(0));
+    guiLevelPages[8] = new GuiLevelPageBacktracking(AppData.initializeBacktracking(0));
     levelTwoBack.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[8]);
     });
