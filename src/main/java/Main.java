@@ -13,7 +13,7 @@ public class Main {
    */
   public static void main(final String[] args) {
     AppData.InitializeBeginningLevel();
-    AppData.initializeGreedy();
+    AppData.initializeItems();
     UserDataManager.load();
 
     GuiManager guiManager = new GuiManager();
