@@ -17,15 +17,17 @@ public class GuiFrontpage {
     Container pane = new Container();
     pane.setLayout(null);
 
-    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
+    Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
 
     JLabel titel = new JLabel("Optimal Heist");
-    titel.setBounds(150, 40, 300, 40);
+    titel.setBounds(360, 50, 400, 70);
     titel.setFont(fontStyle);
     pane.add(titel);
 
     JButton levelButton = new JButton("Level");
-    levelButton.setBounds(190, 100, 120, 40);
+    levelButton.setBounds(380, 150, 300, 60);
+    levelButton.setFont(fontButtons);
     levelButton.setBackground(Color.cyan);
     pane.add(levelButton);
 
@@ -33,16 +35,18 @@ public class GuiFrontpage {
 
 
     JButton ownLevelButton = new JButton("Eigene Level");
-    ownLevelButton.setBounds(190, 180, 120, 40);
+    ownLevelButton.setBounds(380, 220, 300, 60);
     ownLevelButton.setBackground(Color.cyan);
+    ownLevelButton.setFont(fontButtons);
     pane.add(ownLevelButton);
 
     ownLevelButton.addActionListener(e -> {
     });
 
     JButton settingsButton = new JButton("Einstellungen");
-    settingsButton.setBounds(190, 260, 120, 40);
+    settingsButton.setBounds(380, 300, 300, 60);
     settingsButton.setBackground(Color.cyan);
+    settingsButton.setFont(fontButtons);
     pane.add(settingsButton);
 
     settingsButton.addActionListener(e -> GuiManager.openOptionsMenu());

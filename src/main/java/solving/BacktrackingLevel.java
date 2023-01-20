@@ -5,10 +5,20 @@ import rucksack.Level;
 
 import java.util.ArrayList;
 
+/**
+ * The type Backtracking level.
+ */
 public class BacktrackingLevel {
 
   private static Level[] levelBacktracking = new Level[7];
 
+  /**
+   * Initialize backtracking.
+   *
+   * @param items         the items
+   * @param currentItems  the current items
+   * @param currentAmount the current amount
+   */
   public static void initializeBacktracking(ArrayList<Item> items, ArrayList<Item> currentItems, ArrayList<Integer> currentAmount) {
     //Backtracking Level
     //Backtracking Level 1
@@ -115,6 +125,12 @@ public class BacktrackingLevel {
     levelBacktracking[6] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 14, 42);
   }
 
+  /**
+   * Gets level backtracking.
+   *
+   * @param level the level
+   * @return the level backtracking
+   */
   public static Level getLevelBacktracking(int level) {
     return levelBacktracking[level];
   }

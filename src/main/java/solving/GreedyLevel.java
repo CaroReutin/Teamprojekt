@@ -5,10 +5,20 @@ import rucksack.Level;
 
 import java.util.ArrayList;
 
+/**
+ * The type Greedy level.
+ */
 public class GreedyLevel {
 
   private static Level[] levelGreedy = new Level[7];
 
+  /**
+   * Initialize greedy.
+   *
+   * @param items         the items
+   * @param currentItems  the current items
+   * @param currentAmount the current amount
+   */
   public static void initializeGreedy(ArrayList<Item> items, ArrayList<Item> currentItems, ArrayList<Integer> currentAmount) {
     // Greedy Level 1
     currentItems = new ArrayList<>();
@@ -137,6 +147,12 @@ public class GreedyLevel {
 
   }
 
+  /**
+   * Gets level greedy.
+   *
+   * @param level the level
+   * @return the level greedy
+   */
   public static Level getLevelGreedy(int level) {
     return levelGreedy[level];
   }

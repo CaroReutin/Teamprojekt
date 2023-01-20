@@ -27,41 +27,42 @@ public class GuiLevelDeciderPage {
     Container pane = new Container();
     pane.setLayout(null);
 
-    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
+    Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
 
     JLabel titel = new JLabel("Level");
-    titel.setBounds(200, 20, 300, 40);
+    titel.setBounds(430, 50, 250, 60);
     titel.setFont(fontStyle);
     pane.add(titel);
 
     JButton levelOne = new JButton("1");
-    levelOne.setBounds(25, 200, 50, 50);
+    levelOne.setBounds(120, 300, 60, 60);
     levelOne.setBackground(Color.cyan);
+    levelOne.setFont(fontButtons);
     pane.add(levelOne);
-    //guiLevelPages[0] = new GuiLevelPage(AppData.getLevel(0));
     guiLevelPages[0] = new GuiLevelPage(AppData.getLevel(0));
     levelOne.addActionListener(e -> GuiManager.openLevel(guiLevelPages[0]));
 
     JLabel ganove = new JLabel("gieriger Ganove");
-    ganove.setBounds(150, 80, 300, 40);
+    ganove.setBounds(280, 120, 400, 60);
     ganove.setFont(fontStyle);
     pane.add(ganove);
 
     JButton levelTwoGreedy = new JButton("2");
-    levelTwoGreedy.setBounds(60, 125, 50, 50);
+    levelTwoGreedy.setBounds(260, 210, 60, 60);
     levelTwoGreedy.setBackground(Color.cyan);
+    levelTwoGreedy.setFont(fontButtons);
     pane.add(levelTwoGreedy);
-
     guiLevelPages[1] = new GuiLevelPageGreedy(AppData.initializeGreedy(0));
-
     levelTwoGreedy.addActionListener(e -> {
       GuiManager.openLevel(guiLevelPages[1]);
     });
 
 
     JButton levelThreeGreedy = new JButton("3");
-    levelThreeGreedy.setBounds(120, 125, 50, 50);
+    levelThreeGreedy.setBounds(340, 210, 60, 60);
     levelThreeGreedy.setBackground(Color.cyan);
+    levelThreeGreedy.setFont(fontButtons);
     pane.add(levelThreeGreedy);
     guiLevelPages[2] = new GuiLevelPage(AppData.initializeGreedy(1));
     levelThreeGreedy.addActionListener(e -> {
@@ -69,8 +70,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelFourGreedy = new JButton("4");
-    levelFourGreedy.setBounds(180, 125, 50, 50);
+    levelFourGreedy.setBounds(420, 210, 60, 60);
     levelFourGreedy.setBackground(Color.cyan);
+    levelFourGreedy.setFont(fontButtons);
     pane.add(levelFourGreedy);
     guiLevelPages[3] = new GuiLevelPage(AppData.initializeGreedy(2));
     levelFourGreedy.addActionListener(e -> {
@@ -78,8 +80,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelFiveGreedy = new JButton("5");
-    levelFiveGreedy.setBounds(240, 125, 50, 50);
+    levelFiveGreedy.setBounds(500, 210, 60, 60);
     levelFiveGreedy.setBackground(Color.cyan);
+    levelFiveGreedy.setFont(fontButtons);
     pane.add(levelFiveGreedy);
     guiLevelPages[4] = new GuiLevelPage(AppData.initializeGreedy(3));
     levelFiveGreedy.addActionListener(e -> {
@@ -87,8 +90,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelSixGreedy = new JButton("6");
-    levelSixGreedy.setBounds(300, 125, 50, 50);
+    levelSixGreedy.setBounds(580, 210, 60, 60);
     levelSixGreedy.setBackground(Color.cyan);
+    levelSixGreedy.setFont(fontButtons);
     pane.add(levelSixGreedy);
     guiLevelPages[5] = new GuiLevelPage(AppData.initializeGreedy(4));
     levelSixGreedy.addActionListener(e -> {
@@ -96,8 +100,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelSevenGreedy = new JButton("7");
-    levelSevenGreedy.setBounds(360, 125, 50, 50);
+    levelSevenGreedy.setBounds(660, 210, 60, 60);
     levelSevenGreedy.setBackground(Color.cyan);
+    levelSevenGreedy.setFont(fontButtons);
     pane.add(levelSevenGreedy);
     guiLevelPages[6] = new GuiLevelPage(AppData.initializeGreedy(5));
     levelSevenGreedy.addActionListener(e -> {
@@ -105,8 +110,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelEightGreedy = new JButton("8");
-    levelEightGreedy.setBounds(420, 125, 50, 50);
+    levelEightGreedy.setBounds(740, 210, 60, 60);
     levelEightGreedy.setBackground(Color.cyan);
+    levelEightGreedy.setFont(fontButtons);
     pane.add(levelEightGreedy);
     guiLevelPages[7] = new GuiLevelPage(AppData.initializeGreedy(6));
     levelEightGreedy.addActionListener(e -> {
@@ -114,13 +120,14 @@ public class GuiLevelDeciderPage {
     });
 
     JLabel bandit = new JLabel("backtracking Bandit");
-    bandit.setBounds(130, 235, 300, 40);
+    bandit.setBounds(250, 300, 500, 60);
     bandit.setFont(fontStyle);
     pane.add(bandit);
 
     JButton levelTwoBack = new JButton("2");
-    levelTwoBack.setBounds(60, 275, 50, 50);
+    levelTwoBack.setBounds(260, 390, 60, 60);
     levelTwoBack.setBackground(Color.cyan);
+    levelTwoBack.setFont(fontButtons);
     pane.add(levelTwoBack);
     guiLevelPages[8] = new GuiLevelPage(AppData.initializeBacktracking(0));
     levelTwoBack.addActionListener(e -> {
@@ -128,8 +135,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelThreeBack = new JButton("3");
-    levelThreeBack.setBounds(120, 275, 50, 50);
+    levelThreeBack.setBounds(340, 390, 60, 60);
     levelThreeBack.setBackground(Color.cyan);
+    levelThreeBack.setFont(fontButtons);
     pane.add(levelThreeBack);
     guiLevelPages[9] = new GuiLevelPage(AppData.initializeBacktracking(1));
     levelThreeBack.addActionListener(e -> {
@@ -137,8 +145,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelFourBack = new JButton("4");
-    levelFourBack.setBounds(180, 275, 50, 50);
+    levelFourBack.setBounds(420, 390, 60, 60);
     levelFourBack.setBackground(Color.cyan);
+    levelFourBack.setFont(fontButtons);
     pane.add(levelFourBack);
     guiLevelPages[10] = new GuiLevelPage(AppData.initializeBacktracking(2));
     levelFourBack.addActionListener(e -> {
@@ -146,8 +155,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelFiveBack = new JButton("5");
-    levelFiveBack.setBounds(240, 275, 50, 50);
+    levelFiveBack.setBounds(500, 390, 60, 60);
     levelFiveBack.setBackground(Color.cyan);
+    levelFiveBack.setFont(fontButtons);
     pane.add(levelFiveBack);
     guiLevelPages[11] = new GuiLevelPage(AppData.initializeBacktracking(3));
     levelFiveBack.addActionListener(e -> {
@@ -155,8 +165,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelSixBack = new JButton("6");
-    levelSixBack.setBounds(300, 275, 50, 50);
+    levelSixBack.setBounds(580, 390, 60, 60);
     levelSixBack.setBackground(Color.cyan);
+    levelSixBack.setFont(fontButtons);
     pane.add(levelSixBack);
     guiLevelPages[12] = new GuiLevelPage(AppData.initializeBacktracking(4));
     levelSixBack.addActionListener(e -> {
@@ -164,8 +175,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelSevenBack = new JButton("7");
-    levelSevenBack.setBounds(360, 275, 50, 50);
+    levelSevenBack.setBounds(660, 390, 60, 60);
     levelSevenBack.setBackground(Color.cyan);
+    levelSevenBack.setFont(fontButtons);
     pane.add(levelSevenBack);
     guiLevelPages[13] = new GuiLevelPage(AppData.initializeBacktracking(5));
     levelSevenBack.addActionListener(e -> {
@@ -173,8 +185,9 @@ public class GuiLevelDeciderPage {
     });
 
     JButton levelEightBack = new JButton("8");
-    levelEightBack.setBounds(420, 275, 50, 50);
+    levelEightBack.setBounds(740, 390, 60, 60);
     levelEightBack.setBackground(Color.cyan);
+    levelEightBack.setFont(fontButtons);
     pane.add(levelEightBack);
     guiLevelPages[14] = new GuiLevelPage(AppData.initializeBacktracking(6));
     levelEightBack.addActionListener(e -> {

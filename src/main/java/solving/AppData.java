@@ -22,12 +22,15 @@ public class AppData {
    * the items.
    */
   private static ArrayList<Item> items = new ArrayList<>();
-  private static HashMap<Key, String> allItems = new HashMap<>();
+
   /**
    * the level.
    */
   private static Level[] levelZero = new Level[1];
 
+  /**
+   * Initialize beginning level.
+   */
   public static void InitializeBeginningLevel() {
     //Einführungslevel
     items.add(new Item(3, 5, "coin")); //0
@@ -48,6 +51,9 @@ public class AppData {
 
   }
 
+  /**
+   * Initialize items. initialize greedy and backtracking level.
+   */
   public static void initializeItems() {
     items.add(new Item(2, 2, "Muschel")); //4
     items.add(new Item(2, 3, "")); //5
@@ -131,15 +137,23 @@ public class AppData {
 
   /**
    * Initialize.
+   *
+   * @param level the level
+   * @return the level
    */
   public static Level initializeGreedy(int level) {
     passwords.add("Gr33dy");
     return GreedyLevel.getLevelGreedy(level);
-
   }
 
+  /**
+   * Initialize backtracking level.
+   *
+   * @param level the level
+   * @return the level
+   */
   public static Level initializeBacktracking(int level) {
-    passwords.add("");
+    passwords.add("B4cktr4cking");
     return BacktrackingLevel.getLevelBacktracking(level);
   }
 
@@ -169,7 +183,6 @@ public class AppData {
    * @return returns a new Instance of the wanted item if it is in the ArrayList else it returns null
    */
   public static Item generateItem(int index) {
-
     return new Item(items.get(index).getValue(), items.get(index).getWeight(), items.get(index).getName());
   }
 
