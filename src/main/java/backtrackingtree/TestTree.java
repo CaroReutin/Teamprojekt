@@ -41,7 +41,7 @@ public class TestTree {
     tree.print(System.out);
     //tree.addToTrash(list.get(0));
 
-
+  /*
     // Ihr könnt eine Datei als PrintStream übergeben und den inhalt
     // der Datei dann mit dem erwarteten vergleichen
     File treeFile = new File("./src/test/resources/treeOutput");
@@ -50,5 +50,6 @@ public class TestTree {
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
+   */
   }
 }
