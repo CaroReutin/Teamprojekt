@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Comparator;
-
 import rucksack.BacktrackingItem;
 import rucksack.Item;
 
@@ -41,15 +40,17 @@ public class TestTree {
     tree.print(System.out);
     //tree.addToTrash(list.get(0));
 
-  /*
+
     // Ihr könnt eine Datei als PrintStream übergeben und den inhalt
     // der Datei dann mit dem erwarteten vergleichen
-    File treeFile = new File("./src/test/resources/treeOutput");
+    File treeFileFolder = new File("./src/test/resources/");
+    treeFileFolder.mkdirs();
+    File treeFile = new File("./src/test/resources/treeOutput.txt");
     try {
       tree.print(new PrintStream(treeFile));
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
-   */
+
   }
 }
