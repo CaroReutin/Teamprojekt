@@ -76,14 +76,17 @@ public class Level implements Serializable {
    * Has no tips.
    *
    * @param itemList       ArrayList of available Items
-   * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
-   * @param levelindex     the index of the level
+   * @param itemAmountList ArrayList of Integers where itemAmountList.get(i)
+   *                       is the amount of itemList.get(i)
+   *                       that are present in the Rucksack.Level
+   * @param levelIndex     the index of the level
    * @param capacity       the capacity
    */
-  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, int levelindex,
-               int capacity) {
+  public Level(final ArrayList<Item> itemList,
+               final ArrayList<Integer> itemAmountList,
+               final int levelIndex, final int capacity) {
     this.capacity = capacity;
-    this.levelindex = levelindex;
+    this.levelindex = levelIndex;
     this.itemList = itemList;
     this.itemAmountList = itemAmountList;
     this.availableItemAmountList = new ArrayList<>();
@@ -104,15 +107,18 @@ public class Level implements Serializable {
    * Instantiates a new Level.
    *
    * @param itemList       ArrayList of available Items
-   * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is the amount of itemList.get(i) that are present in the Rucksack.Level
+   * @param itemAmountList ArrayList of Integers where itemAmountList.get(i) is
+   *                       the amount of itemList.get(i) that are present
+   *                       in the Rucksack.Level
    * @param robber         the Robber
-   * @param levelindex     the index of the level
+   * @param levelIndex     the index of the level
    * @param capacity       the capacity
    */
-  public Level(ArrayList<Item> itemList, ArrayList<Integer> itemAmountList, Robber robber,
-               int levelindex, int capacity) {
+  public Level(final ArrayList<Item> itemList,
+               final ArrayList<Integer> itemAmountList,
+               final Robber robber, final int levelIndex, final int capacity) {
     this.capacity = capacity;
-    this.levelindex = levelindex;
+    this.levelindex = levelIndex;
     this.itemList = itemList;
     this.itemAmountList = itemAmountList;
     this.availableItemAmountList = new ArrayList<>();
@@ -154,7 +160,8 @@ public class Level implements Serializable {
 
 
   /**
-   * NOTE: this does not return the items still available in the level (i.e. the ones not in the Backpack)
+   * NOTE: this does not return the items still available in the level
+   * (i.e. the ones not in the Backpack)
    *
    * @return Returns the items that exist in the Rucksack.Level
    */
@@ -163,7 +170,8 @@ public class Level implements Serializable {
   }
 
   /**
-   * NOTE: this does not return the amounts of the items still available in the level (i.e. the ones not in the Backpack)
+   * NOTE: this does not return the amounts of items still available
+   * in the level (i.e. the ones not in the Backpack)
    *
    * @return Returns the amounts of the items that exist in the Rucksack.Level
    */
@@ -175,9 +183,10 @@ public class Level implements Serializable {
    * Gets item amount available.
    *
    * @param i the
-   * @return Returns the amounts of the items that are still available in the Rucksack.Level
+   * @return Returns the amounts of the items that are still available
+   * in the Rucksack.Level
    */
-  public int getItemAmountAvailable(int i) {
+  public int getItemAmountAvailable(final int i) {
     return availableItemAmountList.get(i);
   }
 
@@ -187,7 +196,7 @@ public class Level implements Serializable {
    * @param i the
    * @return the item amount in rucksack
    */
-  public int getItemAmountInRucksack(int i) {
+  public int getItemAmountInRucksack(final int i) {
     return inRucksackAmountList.get(i);
   }
 
@@ -219,7 +228,7 @@ public class Level implements Serializable {
    *
    * @param i the
    */
-  public void moveToRucksack(int i) {
+  public void moveToRucksack(final int i) {
     availableItemAmountList.set(i, availableItemAmountList.get(i) - 1);
     inRucksackAmountList.set(i, inRucksackAmountList.get(i) + 1);
     currentValue += itemList.get(i).getValue();
@@ -231,7 +240,7 @@ public class Level implements Serializable {
    *
    * @param i the
    */
-  public void moveFromRucksack(int i) {
+  public void moveFromRucksack(final int i) {
     availableItemAmountList.set(i, availableItemAmountList.get(i) + 1);
     inRucksackAmountList.set(i, inRucksackAmountList.get(i) - 1);
     currentValue -= itemList.get(i).getValue();

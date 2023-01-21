@@ -61,7 +61,10 @@ public class ItemPanel extends Container {
    * the parent panel.
    */
   private final Container parent;
-
+  /**
+   * Amount of rows in the grid layout.
+   */
+  private final int gridRows = 4;
   /**
    * Makes a new Item Panel.
    * Item Panel have 1 Container with a Button that opens the
@@ -78,7 +81,7 @@ public class ItemPanel extends Container {
     myContainer = new Container();
     myContainer.setLayout(new BorderLayout());
     Container itemInfoPane = new Container();
-    itemInfoPane.setLayout(new GridLayout(4, 2));
+    itemInfoPane.setLayout(new GridLayout(gridRows, 2));
 
     // TODO Sprint 4, Currently you cannot delete a number
     // if you type it into a field

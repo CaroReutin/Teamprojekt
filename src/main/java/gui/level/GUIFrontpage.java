@@ -1,13 +1,58 @@
+
 package gui.level;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 
 /**
  * This class confugures the gui frontpage.
  */
 public class GUIFrontpage {
+
+  /**
+   * Size of the font.
+   */
+  private final int fontSize = 30;
+  /**
+   * X-coordinate position of the title.
+   */
+  private final int titleXPosition = 150;
+  /**
+   * Y-coordinate position of the title.
+   */
+  private final int titleYPosition = 40;
+  /**
+   * X-coordinate position of the JLabelButtons.
+   */
+  private final int labelXPosition = 190;
+  /**
+   * Y-coordinate position of the JLabelButton "Level".
+   */
+  private final int levelLabelYPosition = 100;
+  /**
+   * Y-coordinate position of the JLabelButton "Eigene Level".
+   */
+  private final int levelEditorLabelYPosition = 180;
+  /**
+   * Y-coordinate position of the JLabelButton "Einstellungen".
+   */
+  private final int optionsLabelYPosition = 260;
+  /**
+   * Width of a greater JLabel.
+   */
+  private final int bigLabelWidth = 300;
+  /**
+   * Width of a smaller JLabel.
+   */
+  private final int smallLabelWidth = 120;
+  /**
+   * Height of a JLabel.
+   */
+  private final int labelHeight = 40;
   /**
    * To be used with frame.setContentPane().
    *
@@ -17,15 +62,16 @@ public class GUIFrontpage {
     Container pane = new Container();
     pane.setLayout(null);
 
-    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, fontSize);
 
     JLabel titel = new JLabel("Optimal Heist");
-    titel.setBounds(150, 40, 300, 40);
+    titel.setBounds(titleXPosition, titleYPosition, bigLabelWidth, labelHeight);
     titel.setFont(fontStyle);
     pane.add(titel);
 
     JButton levelButton = new JButton("Level");
-    levelButton.setBounds(190, 100, 120, 40);
+    levelButton.setBounds(labelXPosition, levelLabelYPosition,
+            smallLabelWidth, labelHeight);
     levelButton.setBackground(Color.cyan);
     pane.add(levelButton);
 
@@ -33,7 +79,8 @@ public class GUIFrontpage {
 
 
     JButton ownLevelButton = new JButton("Eigene Level");
-    ownLevelButton.setBounds(190, 180, 120, 40);
+    ownLevelButton.setBounds(labelXPosition, levelEditorLabelYPosition,
+            smallLabelWidth, labelHeight);
     ownLevelButton.setBackground(Color.cyan);
     pane.add(ownLevelButton);
 
@@ -42,7 +89,8 @@ public class GUIFrontpage {
     });
 
     JButton settingsButton = new JButton("Einstellungen");
-    settingsButton.setBounds(190, 260, 120, 40);
+    settingsButton.setBounds(labelXPosition, optionsLabelYPosition,
+            smallLabelWidth, labelHeight);
     settingsButton.setBackground(Color.cyan);
     pane.add(settingsButton);
 

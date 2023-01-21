@@ -1,3 +1,4 @@
+
 package gui.level;
 
 import static javax.swing.JOptionPane.showConfirmDialog;
@@ -36,6 +37,10 @@ import solving.CustomLevelManager;
  */
 public final class GuiLevelEditorPage {
   /**
+   * Amount of rows for the grid layout.
+   */
+  private final int gridRows = 5;
+  /**
    * The Level Editor.
    *
    * @return returns the Page containing the Level Editor.
@@ -50,7 +55,7 @@ public final class GuiLevelEditorPage {
     pane.setLayout(new BorderLayout());
 
     Container leftPane = new Container();
-    leftPane.setLayout(new GridLayout(5, 2));
+    leftPane.setLayout(new GridLayout(gridRows, 2));
 
     JLabel titel = new JLabel("Titel: ");
     titel.setFont(AppData.FONT_STYLE);

@@ -1,7 +1,9 @@
 package gui.level;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.LayoutManager;
+import javax.swing.JPanel;
 
 
 /**
@@ -20,7 +22,7 @@ public class JBackgroundPanel extends JPanel {
    * @param layout     the layout
    * @param background the background
    */
-  public JBackgroundPanel(LayoutManager layout, Image background) {
+  public JBackgroundPanel(final LayoutManager layout, final Image background) {
     super(layout);
     this.background = background;
   }
@@ -30,15 +32,14 @@ public class JBackgroundPanel extends JPanel {
    *
    * @param background the background
    */
-  public JBackgroundPanel(Image background) {
+  public JBackgroundPanel(final Image background) {
     this.background = background;
   }
 
   @Override
-  protected void paintComponent(Graphics g) {
+  protected void paintComponent(final Graphics g) {
 
     super.paintComponent(g);
     g.drawImage(this.background, 0, 0, this);
   }
-
 }
