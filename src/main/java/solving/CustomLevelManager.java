@@ -152,7 +152,6 @@ public final class CustomLevelManager {
         }
         File newFile = new File(destDir, zipEntry.getName());
         // https://security.snyk.io/research/zip-slip-vulnerability
-        System.out.println(newFile.getCanonicalPath());
         if (!newFile.getCanonicalPath().startsWith(destDir.getCanonicalPath()
             + File.separator)) {
           throw new IOException("Entry is outside of the target dir: "
