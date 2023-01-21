@@ -123,7 +123,7 @@ public class BacktrackingNode {
       int newCurrentValue = currentParent.currentValue;
       currentParent.setLeftChild(new BacktrackingNode(childItem, newCurrentWeight,
               newCurrentValue, capacity, itemList, currentParent, false));
-      moveItemsIntoAvailable(childItem);
+      moveItemsIntoAvailable(this.parent);
       return currentParent.getLeftChild();
 
     } else if (childState == BacktrackingItem.StateBacktracking.AVAILABLE) {
@@ -140,25 +140,30 @@ public class BacktrackingNode {
    * puts all items which weights the same or less into available.
    * But already established parents do not get set to the state TRASH.
    *
-   * @param bagItem which is thrown from rucksack into trash.
+   * @param currentNode which is thrown from rucksack into trash.
    */
-  private void moveItemsIntoAvailable(BacktrackingItem bagItem) {
-    int weight = bagItem.getWeight();
-    /*ArrayList<BacktrackingItem> parentItems = new ArrayList<>();
-    while (currentNode.parent.item.getWeight() == weight) {
+  private void moveItemsIntoAvailable(BacktrackingNode currentNode) {
+    int weight = currentNode.item.getWeight();
+
+    ArrayList<BacktrackingItem> parentItems = new ArrayList<>();
+    while (currentNode.item.getWeight() == weight) {
       parentItems.add(currentNode.parent.item);
       currentNode = currentNode.parent;
     }
 
-    System.out.println(parentItems);*/
+    StringBuilder sb = new StringBuilder();
+    for (BacktrackingItem items : parentItems) {
+      sb.append(items.getName()).append(", ");
+    }
+    System.out.println("Liste der Item, dessen Status nicht verändert werden darf: " + sb);
 
     for (BacktrackingItem currentItem : itemList) {
+      //same weight or lower gets into available
       if (currentItem.getWeight() <= weight) {
-        //for (BacktrackingItem parentItem : parentItems) {
-         // if (currentItem != parentItem) {
-            currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
-        // }
-        //}
+        //items only get set to available if item is not a parent
+        if (!parentItems.contains(currentItem)) {
+          currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
+        }
       }
     }
   }
@@ -359,14 +364,5 @@ public class BacktrackingNode {
    */
   public void setLeftChild(BacktrackingNode leftChild) {
     this.leftChild = leftChild;
-  }
-
-  /**
-   * sets the right child of this node
-   *
-   * @param rightChild saif child which is going to be set
-   */
-  public void setRightChild(BacktrackingNode rightChild) {
-    this.rightChild = rightChild;
   }
 }

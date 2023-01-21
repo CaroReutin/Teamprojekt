@@ -1,8 +1,6 @@
 package backtrackingtree;
 
-import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import rucksack.BacktrackingItem;
 
@@ -86,12 +84,15 @@ public class BacktrackingTree {
    * @param item said item
    */
   public void addToRucksack(final BacktrackingItem item) {
+    System.out.println(item.getName() + " soll dem Rucksack hinzugefügt werden.");
     boolean addedSuccessfully = currentNode.addToRucksack(item);
 
     if (addedSuccessfully) {
       currentNode = currentNode.getRightChild();
       System.out.println("Der current Node ist nun " + currentNode.getName());
     }
+
+    System.out.println("-----------------");
   }
 
   /**
@@ -100,6 +101,7 @@ public class BacktrackingTree {
    * @param item said item
    */
   public void addToTrash(final BacktrackingItem item) {
+    System.out.println(item.getName() + " soll in den Müll geworfen werden.");
     BacktrackingNode newCurrent = currentNode.addToTrash(item);
     if (newCurrent != null) {
       currentNode = newCurrent;
@@ -108,5 +110,6 @@ public class BacktrackingTree {
       System.out.println("Der current Node ist nun "
               + currentNode.getName());
     }
+    System.out.println("-----------------");
   }
 }
