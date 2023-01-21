@@ -178,7 +178,8 @@ public class ItemPanel extends Container {
    *                              fields are empty
    */
   public Item generateItem() throws NullPointerException {
-    if (amountField.getValue().toString().equals("")
+    if (nameField.getValue().toString().equals("")
+        || amountField.getValue().toString().equals("")
         || weightField.getValue().toString().equals("")) {
       throw new NullPointerException("No field may be empty");
     }
