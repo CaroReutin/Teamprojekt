@@ -8,12 +8,7 @@ import java.io.File;
 import java.text.NumberFormat;
 import java.util.Objects;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.NumberFormatter;
@@ -39,7 +34,7 @@ public class ItemPanel extends Container {
   /**
    * the name field.
    */
-  private final JFormattedTextField nameField;
+  private final JTextField nameField;
   /**
    * the weight field.
    */
@@ -93,7 +88,7 @@ public class ItemPanel extends Container {
 
     JLabel name = new JLabel("Bezeichnung: ");
     itemInfoPane.add(name);
-    nameField = new JFormattedTextField("");
+    nameField = new JTextField("");
     itemInfoPane.add(nameField);
     JLabel weight = new JLabel("Gewicht: ");
     itemInfoPane.add(weight);
@@ -178,7 +173,7 @@ public class ItemPanel extends Container {
    *                              fields are empty
    */
   public Item generateItem() throws NullPointerException {
-    if (nameField.getValue().toString().equals("")
+    if (nameField.getText().equals("")
         || amountField.getValue().toString().equals("")
         || weightField.getValue().toString().equals("")) {
       throw new NullPointerException("No field may be empty");
@@ -187,7 +182,7 @@ public class ItemPanel extends Container {
     // => Must be an Integer because of the formatter
     return new Item(Integer.parseInt(valueField.getValue().toString()),
         Integer.parseInt(weightField.getValue().toString()),
-        nameField.getValue().toString());
+        nameField.getText());
   }
 
   /**
