@@ -10,11 +10,20 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Objects;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import javax.swing.text.NumberFormatter;
-
 import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
@@ -59,6 +68,9 @@ public final class GuiLevelEditorPage {
     // TODO Sonderzeichen verbieten
 
     JTextField titleField = new JTextField("");
+    AbstractDocument titleDocument = (AbstractDocument)
+        titleField.getDocument();
+    titleDocument.setDocumentFilter(new FieldListener());
 
     // TODO Sprint 4, Currently you cannot delete a number
     // if you type it into a field
@@ -68,7 +80,7 @@ public final class GuiLevelEditorPage {
     NumberFormat format = NumberFormat.getInstance();
     NumberFormatter formatter = new NumberFormatter(format);
     formatter.setValueClass(Integer.class);
-    formatter.setMinimum(0);
+    formatter.setMinimum(1);
     formatter.setMaximum(Integer.MAX_VALUE);
     formatter.setAllowsInvalid(false);
 
@@ -158,5 +170,53 @@ public final class GuiLevelEditorPage {
     pane.add(rightPane, BorderLayout.CENTER);
 
     return pane;
+  }
+
+  private static class FieldListener extends DocumentFilter {
+    /**
+     * accepted characters.
+     */
+    private final String acceptedCharacters = "0123456789 ABCDEFGHIJKLMNO"
+        + "PQRSTUVWXYZabcdefghijklmnopqrstuvwxyzäÄöÖüÜ";
+
+    @Override
+    public void insertString(final DocumentFilter.FilterBypass fb,
+                             final int offset, final String string,
+                             final AttributeSet attr) throws
+        BadLocationException {
+      for (int i = 0; i < string.length(); i++) {
+        if (!acceptedCharacters.contains(String.valueOf(string.charAt(i)))) {
+          return;
+        }
+      }
+
+      fb.insertString(offset, string, attr);
+
+    }
+
+
+    @Override
+    public void remove(final DocumentFilter.FilterBypass fb,
+                       final int offset, final int length) throws
+        BadLocationException {
+
+      fb.insertString(offset, "", null);
+    }
+
+
+    @Override
+    public void replace(final DocumentFilter.FilterBypass fb, final int offset,
+                        final int length, final String text,
+                        final AttributeSet attrs) throws BadLocationException {
+
+
+      for (int i = 0; i < text.length(); i++) {
+        if (!acceptedCharacters.contains(String.valueOf(text.charAt(i)))) {
+          return;
+        }
+      }
+
+      fb.insertString(offset, text, attrs);
+    }
   }
 }

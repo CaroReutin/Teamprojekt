@@ -87,7 +87,7 @@ public class ItemPanel extends Container {
     NumberFormat format = NumberFormat.getInstance();
     NumberFormatter formatter = new NumberFormatter(format);
     formatter.setValueClass(Integer.class);
-    formatter.setMinimum(0);
+    formatter.setMinimum(1);
     formatter.setMaximum(Integer.MAX_VALUE);
     formatter.setAllowsInvalid(false);
 
