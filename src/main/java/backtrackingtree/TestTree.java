@@ -1,5 +1,8 @@
 package backtrackingtree;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -32,8 +35,16 @@ public class TestTree {
 
     tree.addToTrash(list.get(1));
     tree.addToRucksack(list.get(2));
-    tree.addToTrash(list.get(0));
+    //tree.addToTrash(list.get(0));
     tree.print(System.out);
     //tree.addToTrash(list.get(0));
+
+
+    File treeFile = new File("./src/test/resources/treeOutput");
+    try {
+      tree.print(new PrintStream(treeFile));
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
