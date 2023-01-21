@@ -88,9 +88,9 @@ public final class CustomLevelManager {
     // See ItemPanel.java for more info
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
       if (new File(AppData
-          .getCustomLevelPictureFolder() + "/picture" + i).exists()) {
+          .getCustomLevelPictureFolder() + "/picture" + i + ".png").exists()) {
         srcFiles.add(AppData
-            .getCustomLevelPictureFolder() + "/picture" + i);
+            .getCustomLevelPictureFolder() + "/picture" + i + ".png");
       }
     }
     // The code below zips everything in srcFiles

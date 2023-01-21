@@ -196,15 +196,6 @@ public final class GuiLevelEditorPage {
 
 
     @Override
-    public void remove(final DocumentFilter.FilterBypass fb,
-                       final int offset, final int length) throws
-        BadLocationException {
-
-      fb.insertString(offset, "", null);
-    }
-
-
-    @Override
     public void replace(final DocumentFilter.FilterBypass fb, final int offset,
                         final int length, final String text,
                         final AttributeSet attrs) throws BadLocationException {
