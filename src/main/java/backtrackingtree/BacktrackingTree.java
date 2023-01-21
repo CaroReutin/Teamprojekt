@@ -1,6 +1,8 @@
 package backtrackingtree;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import rucksack.BacktrackingItem;
 
@@ -30,7 +32,7 @@ public class BacktrackingTree {
   public BacktrackingTree(final int bagCapacity,
                           final ArrayList<BacktrackingItem> itemArrayList) {
     root = new BacktrackingNode(new BacktrackingItem(0, 0, "root"),
-            0, 0, bagCapacity, itemArrayList, null);
+            0, 0, bagCapacity, itemArrayList, null, true);
     currentNode = root;
   }
 
@@ -61,12 +63,11 @@ public class BacktrackingTree {
       sb.append(padding);
       sb.append(pointer);
 
-      if (node.getItem().getState()
-              == (BacktrackingItem.StateBacktracking.TRASH)) {
-        sb.append("not ").append(node.getItem().getName());
-      } else {
-        sb.append(node.getItem().getName());
-      }
+      sb.append(node.getName()).append(" [cWeight:")
+              .append(node.getCurrentWeight())
+              .append(", cValue:")
+              .append(node.getCurrentValue())
+              .append("]");
       sb.append("\n");
 
       String paddingForBoth = padding + "│  ";
@@ -83,16 +84,13 @@ public class BacktrackingTree {
    * adds an item to the rucksack (right child).
    *
    * @param item said item
-   * @return true in case of success
    */
-  public boolean addToRucksack(final BacktrackingItem item) {
+  public void addToRucksack(final BacktrackingItem item) {
     boolean addedSuccessfully = currentNode.addToRucksack(item);
 
     if (addedSuccessfully) {
       currentNode = currentNode.getRightChild();
-      return true;
-    } else {
-      return false;
+      System.out.println("Der current Node ist nun " + currentNode.getName());
     }
   }
 
@@ -102,17 +100,13 @@ public class BacktrackingTree {
    * @param item said item
    */
   public void addToTrash(final BacktrackingItem item) {
-    boolean addedSuccessfully = currentNode.addToTrash(item);
-
-    if (addedSuccessfully) {
-      currentNode = currentNode.getLeftChild();
-      System.out.println("Der current Node ist nun "
-              + currentNode.getItem().getName());
+    BacktrackingNode newCurrent = currentNode.addToTrash(item);
+    if (newCurrent != null) {
+      currentNode = newCurrent;
       System.out.println("Item " + item.getName()
               + " wurde in den Müll gelegt.");
-    } else {
-      System.out.println("Item konnte nicht in den Müll gelegt werden");
+      System.out.println("Der current Node ist nun "
+              + currentNode.getName());
     }
-
   }
 }

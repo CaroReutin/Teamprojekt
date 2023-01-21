@@ -17,7 +17,27 @@ public class Main {
    */
   public static void main(final String[] args) {
 
-    TestTree tree = new TestTree();
+   /* ArrayList<Integer> list1 = new ArrayList<>();
+    int i1 = 1;
+    int i2 = 2;
+    int i3 = 3;
+    int i4 = 4;
+
+    list1.add(i1);
+    list1.add(i2);
+    list1.add(i3);
+    i3 = 5;
+    System.out.println(list1);
+
+
+    ArrayList<Integer> list2 = new ArrayList<>(list1);
+    list2.remove(1);
+
+    System.out.println(list2);*/
+
+
+
+   TestTree tree = new TestTree();
 //    AppData.initialize();
 //    UserDataManager.load();
 //
