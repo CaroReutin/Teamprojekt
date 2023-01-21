@@ -1,5 +1,6 @@
 import gui.level.GUIManager;
-import solving.*;
+import solving.AppData;
+import solving.UserDataManager;
 
 /**
  * The type Main.
