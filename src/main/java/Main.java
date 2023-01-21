@@ -1,4 +1,3 @@
-
 import gui.level.GUIManager;
 import solving.*;
 

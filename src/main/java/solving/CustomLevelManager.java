@@ -138,7 +138,7 @@ public final class CustomLevelManager {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    String levelname = null;
+    String levelName = null;
 
     try {
 
@@ -147,7 +147,7 @@ public final class CustomLevelManager {
       ZipEntry zipEntry = zis.getNextEntry();
       while (zipEntry != null) {
         if (zipEntry.getName().endsWith(".xml")) {
-          levelname = zipEntry.getName();
+          levelName = zipEntry.getName();
         }
         File newFile = new File(destDir, zipEntry.getName());
         // https://security.snyk.io/research/zip-slip-vulnerability
@@ -178,11 +178,11 @@ public final class CustomLevelManager {
       }
       zis.closeEntry();
       zis.close();
-      if (levelname == null) {
+      if (levelName == null) {
         throw new IOException("Level not found");
       } else {
-        // TODO bilder in Level einfügen
-        File levelFile = new File(destDir + "/" + levelname);
+        // TODO Sprint 4: Bilder in Level einfügen
+        File levelFile = new File(destDir + "/" + levelName);
         JAXBContext jaxbContext = JAXBContext.newInstance(Level.class);
         Unmarshaller marsh = jaxbContext.createUnmarshaller();
 
@@ -198,23 +198,4 @@ public final class CustomLevelManager {
     }
 
   }
-
-  /*
-  public static void load(String path) {
-    // TODO String vs. File depends on file picker I guess
-
-    // Items with no picture associated to it
-    // should get the default picture
-  }
-
-
-
-  private static void unzip(File zip){
-
-  }
-
-  public static void cleanCustomLevelFolder() {
-    // TODO? Delete all non Zip files/folder in folder ?
-  }
-   */
 }

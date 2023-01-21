@@ -1,6 +1,7 @@
 package gui.level;
 
 import static javax.swing.JOptionPane.showConfirmDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -65,8 +66,6 @@ public final class GuiLevelEditorPage {
     robberOptions[1] = Level.Robber.GIERIGER_GANOVE.name();
     robberOptions[2] = Level.Robber.BACKTRACKING_BANDIT.name();
 
-    // TODO Sonderzeichen verbieten
-
     JTextField titleField = new JTextField("");
     AbstractDocument titleDocument = (AbstractDocument)
         titleField.getDocument();
@@ -100,13 +99,28 @@ public final class GuiLevelEditorPage {
       ArrayList<Integer> itemAmountList = new ArrayList<>();
       for (ItemPanel itemPanel : itemPanels) {
         try {
-          itemList.add(itemPanel.generateItem());
+          Item nextItem = itemPanel.generateItem();
+          for (Item item : itemList) {
+            if (item.getValue() == nextItem.getValue()
+                    && item.getWeight() == nextItem.getWeight()) {
+              showMessageDialog(pane, "Kein Item darf denselben Wert"
+                      + " und dasselbe Gewicht wie ein anderes haben.");
+              return;
+            }
+          }
+          itemList.add(nextItem);
           itemAmountList.add(itemPanel.getAmount());
         } catch (NullPointerException n) {
           // This just means that item was not filled out fully
           // Can be ignored
         }
       }
+
+      if (titleField.getText().equals("")
+              || capacityField.getText().equals("")) {
+        showMessageDialog(pane, "Titel und Kapazität darf nicht leer sein!");
+      }
+
       Level customLevel = new Level(itemList, itemAmountList,
           Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
               .getSelectedItem()).toString()), -1,
@@ -119,9 +133,6 @@ public final class GuiLevelEditorPage {
       if (chooser.showOpenDialog(pane) == JFileChooser.APPROVE_OPTION) {
         CustomLevelManager.save(chooser.getSelectedFile().toString(),
             titleField.getText(), customLevel);
-      } else {
-        // TODO? If no save location is picked, save to default or not at all?
-        CustomLevelManager.save(titleField.getText(), customLevel);
       }
     });
     JButton back = new JButton("Abbrechen");
@@ -177,7 +188,7 @@ public final class GuiLevelEditorPage {
      * accepted characters.
      */
     private final String acceptedCharacters = "0123456789 ABCDEFGHIJKLMNO"
-        + "PQRSTUVWXYZabcdefghijklmnopqrstuvwxyzäÄöÖüÜ";
+        + "PQRSTUVWXYZabcdefghijklmnopqrstuvwxyzäÄöÖüÜßẞ";
 
     @Override
     public void insertString(final DocumentFilter.FilterBypass fb,
