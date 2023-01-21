@@ -84,8 +84,7 @@ public class GUILevelPage {
           }
         }
         case 1 ->
-            //LevelManager.nextLevel();
-            System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+          GUIManager.openLevel(GUIManager.getGuiLevelDeciderPage().getGuiLevelPages()[level.getLevelNumber() + 1]);
         case 2 -> {
           GUIManager.openLevelSelectScreen();
           System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
@@ -164,6 +163,15 @@ public class GUILevelPage {
     rucksackLabels[i].setText(String.valueOf(level.getItemAmountInRucksack(i)));
     currentWeightLabel.setText(level.getCurrentWeight() + "/" + level.getCapacity() + "g");
     currentValueLabel.setText((level.getCurrentValue() + "€"));
+  }
+
+  /**
+   * To be used by GUIManager for the frame's title.
+   *
+   * @return the number of the current level
+   */
+  public int getLevelNumber() {
+    return this.level.getLevelNumber();
   }
 
   /**

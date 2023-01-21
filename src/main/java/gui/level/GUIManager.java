@@ -40,6 +40,7 @@ public class GUIManager {
    */
   public static void openLevelEditor() {
     frame.setContentPane(GUI_LEVEL_EDITOR_PAGE.getPane());
+    frame.setTitle("Level-editor");
     paint();
   }
 
@@ -74,6 +75,7 @@ public class GUIManager {
    */
   public static void openOptionsMenu() {
     frame.setContentPane(GUI_OPTIONS_PAGE.getPane());
+    frame.setTitle("Optionsmenü");
     paint();
   }
 
@@ -82,6 +84,7 @@ public class GUIManager {
    */
   public static void openLevelSelectScreen() {
     frame.setContentPane(GUI_LEVEL_DECIDER_PAGE.getPane());
+    frame.setTitle("Levelauswahl");
     paint();
   }
 
@@ -90,6 +93,7 @@ public class GUIManager {
    */
   public static void openMainMenu() {
     frame.setContentPane(GUI_FRONTPAGE.getPane());
+    frame.setTitle("Hauptmenü");
     paint();
   }
 
@@ -101,6 +105,19 @@ public class GUIManager {
    */
   public static void openLevel(GUILevelPage levelPage) {
     frame.setContentPane(levelPage.getPane());
+
+    String title = "Level ";
+    int levelNumber = levelPage.getLevelNumber();
+    if (levelNumber >= 8) {
+      title = "Backtracking-" + title + (levelNumber - 7);
+    } else if (levelNumber >= 1) {
+      title = "Greedy-" + title + levelNumber;
+    } else if (levelNumber == 0) {
+      title = "Einführungs-" + title;
+    } else {
+      title = "Benutzerdefiniertes ";
+    }
+    frame.setTitle(title);
     paint();
   }
 
@@ -112,4 +129,13 @@ public class GUIManager {
   public static JComponent getRootPane() {
     return frame.getRootPane();
   }
+
+  /**
+   * gets the GUILevelDeciderPage
+   * @return the level decider page
+   */
+  public static GUILevelDeciderPage getGuiLevelDeciderPage() {
+    return GUI_LEVEL_DECIDER_PAGE;
+  }
+
 }
