@@ -37,44 +37,52 @@ public class BacktrackingTree {
   /**
    * prints the tree.
    *
-   * @param ps the print stream
+   * @param os the print stream
    */
-  public void print(final PrintStream ps) {
-    StringBuilder sb = new StringBuilder();
-    traversePreOrder(sb, "", "", root);
-    ps.print(sb);
+  public void print(PrintStream os) {
+    os.print(traversePreOrder(root));
   }
 
 
-  /**
-   * traverses the tree.
-   *
-   * @param sb      the StringBuilder
-   * @param padding the Padding
-   * @param pointer the Pointer
-   * @param node    the current node
-   */
-  public void traversePreOrder(final StringBuilder sb,
-                               final String padding, final String pointer,
-                               final BacktrackingNode node) {
+  private String traversePreOrder(BacktrackingNode root) {
+
+    if (root == null) {
+      return "";
+    }
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(root.getName());
+
+    String pointerRight = "└──";
+    String pointerLeft = (root.getRightChild() != null) ? "├──" : "└──";
+
+    traverseNodes(sb, "", pointerLeft, root.getLeftChild(), root.getRightChild() != null);
+    traverseNodes(sb, "", pointerRight, root.getRightChild(), false);
+
+    return sb.toString();
+  }
+
+  private void traverseNodes(StringBuilder sb, String padding, String pointer, BacktrackingNode node,
+                            boolean hasRightSibling) {
     if (node != null) {
+      sb.append("\n");
       sb.append(padding);
       sb.append(pointer);
+      sb.append(node.getName());
 
-      sb.append(node.getName()).append(" [cWeight:")
-              .append(node.getCurrentWeight())
-              .append(", cValue:")
-              .append(node.getCurrentValue())
-              .append("]");
-      sb.append("\n");
+      StringBuilder paddingBuilder = new StringBuilder(padding);
+      if (hasRightSibling) {
+        paddingBuilder.append("│  ");
+      } else {
+        paddingBuilder.append("   ");
+      }
 
-      String paddingForBoth = padding + "│  ";
-      String pointerForRight = "└──";
-      String pointerForLeft = (node.getRightChild() != null) ? "├──" : "└──";
+      String paddingForBoth = paddingBuilder.toString();
+      String pointerRight = "└──";
+      String pointerLeft = (node.getRightChild() != null) ? "├──" : "└──";
 
-      traversePreOrder(sb, paddingForBoth, pointerForLeft, node.getLeftChild());
-      traversePreOrder(sb, paddingForBoth, pointerForRight,
-              node.getRightChild());
+      traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeftChild(), node.getRightChild() != null);
+      traverseNodes(sb, paddingForBoth, pointerRight, node.getRightChild(), false);
     }
   }
 
