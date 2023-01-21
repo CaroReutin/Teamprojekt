@@ -1,9 +1,10 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import javax.swing.ImageIcon;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import rucksack.Item;
 import rucksack.Level;
@@ -11,28 +12,41 @@ import solving.CustomLevelManager;
 
 public class CustomLevelManagerTest {
   @BeforeAll
-  public static void deleteOldFiles(){
+  public static void deleteOldFiles() {
     File customlevelFolder = new File("./src/test/resources/customLevel");
-    for(File file: Objects.requireNonNull(customlevelFolder.listFiles()))
-      if (!file.isDirectory())
-        file.delete();
-    new File("./src/test/resources/customLevel/temp").delete();
+    try {
+      FileUtils.deleteDirectory(customlevelFolder);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    customlevelFolder.mkdirs();
+  }
+
+  @BeforeEach
+  public void deleteTempFolder() {
+    File customlevelFolder = new File("./src/test/resources/customLevel/temp");
+    try {
+      FileUtils.deleteDirectory(customlevelFolder);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    customlevelFolder.mkdirs();
   }
 
   @Test
-  public void save(){
+  public void save() {
     ArrayList<Item> itemList = new ArrayList<>();
-    itemList.add(new Item(3,4,"Test"));
-    itemList.add(new Item(3,2,"Item"));
-    itemList.add(new Item(5,6,"Three"));
+    itemList.add(new Item(3, 4, "Test"));
+    itemList.add(new Item(3, 2, "Item"));
+    itemList.add(new Item(5, 6, "Three"));
     ArrayList<Integer> itemAmountList = new ArrayList<>();
     itemAmountList.add(2);
     itemAmountList.add(5);
     itemAmountList.add(4);
-    Level testLevel = new Level(itemList,itemAmountList,Level.Robber.BACKTRACKING_BANDIT,-1,20);
+    Level testLevel = new Level(itemList, itemAmountList, Level.Robber.BACKTRACKING_BANDIT, -1, 20);
     String identifier = "save";
     String testResourcesPath = "./src/test/resources/customLevel";
-    CustomLevelManager.save(testResourcesPath,identifier,testLevel);
+    CustomLevelManager.save(testResourcesPath, identifier, testLevel);
     // Save with pictures
     try {
       ImageIcon rucksack = new ImageIcon("./src/test/resources/pngs/rucksack.png");
@@ -50,6 +64,30 @@ public class CustomLevelManagerTest {
     } catch (Exception exception) {
       exception.printStackTrace();
     }
-    CustomLevelManager.save(testResourcesPath,identifier,testLevel);
+    CustomLevelManager.save(testResourcesPath, identifier, testLevel);
+  }
+
+  @Test
+  public void zipTest1() {
+    ArrayList<Item> itemList = new ArrayList<>();
+    itemList.add(new Item(4, 3, "Guter Gegenstand"));
+    itemList.add(new Item(5, 3, "Besserer Gegenstand"));
+    ArrayList<Integer> itemAmountList = new ArrayList<>();
+    itemAmountList.add(1);
+    itemAmountList.add(1);
+    String testResourcesPath = "./src/test/resources/customLevel";
+    try {
+      ImageIcon stern = new ImageIcon("./src/test/resources/pngs/stern.png");
+      File destination = new File(testResourcesPath + "/temp/picture1.png");
+      if (destination.exists()) {
+        FileUtils.delete(destination);
+      }
+      FileUtils.copyFile(new File("./src/test/resources/pngs/stern.png"), destination);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    Level testLevel = new Level(itemList, itemAmountList, Level.Robber.BACKTRACKING_BANDIT, -1, 4);
+    String identifier = "Levelbezeichner";
+    CustomLevelManager.save(testResourcesPath, identifier, testLevel);
   }
 }

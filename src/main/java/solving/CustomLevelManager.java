@@ -31,31 +31,35 @@ public final class CustomLevelManager {
   /**
    * saves the level (as zip) to the default path with identifier as name.
    *
+   * @param path the folder where it should be saved
    * @param identifier the unique identifier that will be the
    *                   name of the zippedLevel
    * @param level      the level to save
    */
-  public static void save(final String identifier, final Level level) {
+  public static void save(final String path,
+                          final String identifier, final Level level) {
     String customLevelFolder;
     if (System.getProperty("os.name").contains("Windows")) {
       String appdataPath = System.getenv("APPDATA");
-      customLevelFolder = appdataPath + "/Optimal Heist/customLevel";
+      customLevelFolder = appdataPath + "/Optimal Heist/customLevel/temp";
     } else {
       String homePath = System.getProperty("user.home", "Desktop");
-      customLevelFolder = homePath + "/Optimal Heist/customLevel";
+      customLevelFolder = homePath + "/Optimal Heist/customLevel/temp";
     }
-    save(customLevelFolder, identifier, level);
+    save(customLevelFolder, path, identifier, level);
   }
 
   /**
    * saves the level (as zip) to the path with identifier as name.
    *
+   * @param pictureFolder the folder where the pictures are
    * @param path       the path where the zip should be saved
    * @param identifier the unique identifier that will be the
    *                   name of the zippedLevel
    * @param level      the level to save
    */
-  public static void save(final String path, final String identifier,
+  public static void save(final String pictureFolder,
+                          final String path, final String identifier,
                           final Level level) {
     // Make path if it does not exist already
     boolean ignoreResult = new File(path + "/temp").mkdirs();
@@ -72,25 +76,22 @@ public final class CustomLevelManager {
 
       fos.close();
 
-      // The pictures are not passed via code but
-      // instead by being in path+"/temp"
-      // see ItemPanel.java for more Info
-      zipLevel(levelPath);
+      zipLevel(pictureFolder, levelPath);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
-  private static void zipLevel(final String levelPath) throws IOException {
+  private static void zipLevel(final String customLevelPictureFolder,
+                               final String levelPath) throws IOException {
     ArrayList<String> srcFiles = new ArrayList<>();
     srcFiles.add(levelPath);
     // Check if there is a Picture associated with item
     // See ItemPanel.java for more info
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
-      if (new File(AppData
-          .getCustomLevelPictureFolder() + "/picture" + i + ".png").exists()) {
-        srcFiles.add(AppData
-            .getCustomLevelPictureFolder() + "/picture" + i + ".png");
+      if (new File(customLevelPictureFolder + "/picture" + i + ".png")
+          .exists()) {
+        srcFiles.add(customLevelPictureFolder + "/picture" + i + ".png");
       }
     }
     // The code below zips everything in srcFiles
