@@ -11,7 +11,7 @@ import rucksack.Item;
 
 public class TestTree {
 
-  private BacktrackingTree tree;
+  private final BacktrackingTree tree;
 
   public TestTree() {
     ArrayList<BacktrackingItem> list = new ArrayList<>();
@@ -38,7 +38,6 @@ public class TestTree {
     tree.addToRucksack(list.get(1));
     tree.addToRucksack(list.get(2));
     tree.print(System.out);
-    //tree.addToTrash(list.get(0));
 
 
     // Ihr könnt eine Datei als PrintStream übergeben und den inhalt
