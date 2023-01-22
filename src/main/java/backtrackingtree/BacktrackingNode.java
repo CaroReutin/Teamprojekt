@@ -304,24 +304,6 @@ public class BacktrackingNode {
   }
 
   /**
-   * gets the current weight of this node.
-   *
-   * @return said weight
-   */
-  public int getCurrentWeight() {
-    return currentWeight;
-  }
-
-  /**
-   * gets the current value of this node.
-   *
-   * @return said value
-   */
-  public int getCurrentValue() {
-    return currentValue;
-  }
-
-  /**
    * gets the item of the node.
    *
    * @return said item

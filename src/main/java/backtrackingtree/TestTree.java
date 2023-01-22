@@ -11,8 +11,6 @@ import rucksack.Item;
 
 public class TestTree {
 
-  private final BacktrackingTree tree;
-
   public TestTree() {
     ArrayList<BacktrackingItem> list = new ArrayList<>();
 
@@ -27,7 +25,7 @@ public class TestTree {
     list.sort(Comparator.comparingInt(Item::getWeight).reversed());
     final int cap = 10;
 
-    tree = new BacktrackingTree(cap, list);
+    BacktrackingTree tree = new BacktrackingTree(cap, list);
 
     tree.addToRucksack(list.get(0));
     tree.addToRucksack(list.get(1));
