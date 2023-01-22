@@ -70,7 +70,8 @@ public class BacktrackingTree {
       sb.append("\n");
       sb.append(padding);
       sb.append(pointer);
-      sb.append(node.getName());
+      sb.append(node.getName()).append(" [akt. Gewicht:").append(node.getCurrentWeight())
+              .append(", akt. Wert: ").append(node.getCurrentValue()).append("]");
 
       StringBuilder paddingBuilder = new StringBuilder(padding);
       if (hasRightSibling) {

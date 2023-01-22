@@ -354,4 +354,22 @@ public class BacktrackingNode {
   public void setLeftChild(BacktrackingNode leftChild) {
     this.leftChild = leftChild;
   }
+
+  /**
+   * return the current value
+   *
+   * @return said value
+   */
+  public int getCurrentWeight() {
+    return currentWeight;
+  }
+
+  /**
+   * returns the current weight
+   *
+   * @return said weight
+   */
+  public int getCurrentValue() {
+    return currentValue;
+  }
 }
