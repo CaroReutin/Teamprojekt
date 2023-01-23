@@ -2,6 +2,7 @@
 import gui.level.GuiManager;
 import solving.*;
 
+
 /**
  * The type Main.
  */
@@ -14,6 +15,7 @@ public class Main {
   public static void main(final String[] args) {
     AppData.InitializeBeginningLevel();
     AppData.initializeItems();
+    AppData.initialize();
     UserDataManager.load();
 
     GuiManager guiManager = new GuiManager();

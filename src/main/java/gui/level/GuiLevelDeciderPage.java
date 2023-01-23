@@ -7,6 +7,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import solving.AppData;
+import java.awt.*;
+import java.util.ArrayList;
+import javax.swing.*;
 
 
 /**

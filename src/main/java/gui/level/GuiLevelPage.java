@@ -63,20 +63,20 @@ public class GuiLevelPage {
     JButton flucht = new JButton("Flucht");
     int levelNumber = this.level.getLevelNumber();
     if (levelNumber <= 0 || levelNumber == LAST_GREEDY_LEVELNUMBER
-        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER) {
+      || levelNumber == LAST_BACKTRACKING_LEVELNUMBER) {
       flucht.addActionListener(e -> {
         if (level.getCurrentValue() > UserDataManager.getScore(
-            level.getLevelNumber())) {
+          level.getLevelNumber())) {
           UserDataManager.newHighScore(level.getLevelNumber(),
-              level.getCurrentValue());
+            level.getCurrentValue());
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
-            "Hier steht Tips / Feedback",
-            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
-                .INFORMATION_MESSAGE, null, buttons,
-            buttons[0]);
+          "Hier steht Tips / Feedback",
+          "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+            .INFORMATION_MESSAGE, null, buttons,
+          buttons[0]);
         switch (chosenButton) {
           case 0 -> {
             level.resetLevel();
@@ -96,17 +96,17 @@ public class GuiLevelPage {
     } else {
       flucht.addActionListener(e -> {
         if (level.getCurrentValue() > UserDataManager
-            .getScore(level.getLevelNumber())) {
+          .getScore(level.getLevelNumber())) {
           UserDataManager.newHighScore(level.getLevelNumber(),
-              level.getCurrentValue());
+            level.getCurrentValue());
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
-            "Hier steht Tips / Feedback",
-            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
-                .INFORMATION_MESSAGE, null, buttons,
-            buttons[0]);
+          "Hier steht Tips / Feedback",
+          "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+            .INFORMATION_MESSAGE, null, buttons,
+          buttons[0]);
         switch (chosenButton) {
           case 0 -> {
             level.resetLevel();
@@ -116,8 +116,8 @@ public class GuiLevelPage {
           }
           case 1 -> {
             GuiManager.openLevel(
-                GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
-                    [level.getLevelNumber() + 1]);
+              GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
+                [level.getLevelNumber() + 1]);
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
           case 2 -> {
@@ -147,14 +147,14 @@ public class GuiLevelPage {
     currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
     Font fontCurrentWeightLabel = currentWeightLabel.getFont();
     currentWeightLabel.setFont(
-        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel
-            .getStyle() | Font.BOLD));
+      fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel
+        .getStyle() | Font.BOLD));
 
     currentValueLabel = new JLabel("0€");
     Font fontCurrentValueLabel = currentValueLabel.getFont();
     currentValueLabel.setFont(
-        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel
-            .getStyle() | Font.BOLD));
+      fontCurrentValueLabel.deriveFont(fontCurrentValueLabel
+        .getStyle() | Font.BOLD));
 
     ArrayList<Item> items = level.getItemList();
     labels = new JLabel[items.size()];
@@ -168,17 +168,17 @@ public class GuiLevelPage {
       rucksackLabels[i] = new JLabel("0");
       Font fontRucksack = rucksackLabels[i].getFont();
       rucksackLabels[i].setFont(fontRucksack.deriveFont(
-          fontRucksack.getStyle() | Font.BOLD));
+        fontRucksack.getStyle() | Font.BOLD));
       int finalI = i;
       JButton current = new JButton(items.get(i).getName()
-          + " (" + items.get(i).getWeight() + "g, "
-          + items.get(i).getValue() + "€)");
+        + " (" + items.get(i).getWeight() + "g, "
+        + items.get(i).getValue() + "€)");
       current.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
         }
         if ((level.getCurrentWeight() + level.getItemList().get(finalI)
-            .getWeight()) <= level.getCapacity()) {
+          .getWeight()) <= level.getCapacity()) {
           level.moveToRucksack(finalI);
           updateLabel(finalI);
         }
@@ -213,8 +213,17 @@ public class GuiLevelPage {
     labels[i].setText(String.valueOf(level.getItemAmountAvailable(i)));
     rucksackLabels[i].setText(String.valueOf(level.getItemAmountInRucksack(i)));
     currentWeightLabel.setText(level.getCurrentWeight()
-        + "/" + level.getCapacity() + "g");
+      + "/" + level.getCapacity() + "g");
     currentValueLabel.setText((level.getCurrentValue() + "€"));
+  }
+
+  /**
+   * To be used by GUIManager for the frame's title.
+   *
+   * @return the number of the current level
+   */
+  public int getLevelNumber() {
+    return this.level.getLevelNumber();
   }
 
   /**
@@ -231,8 +240,8 @@ public class GuiLevelPage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance
-            (170, 300, java.awt.Image.SCALE_SMOOTH);
+      rucksackImage.getImage().getScaledInstance
+        (170, 300, java.awt.Image.SCALE_SMOOTH);
 
 
     JPanel leftPanel = new JBackgroundPanel(scaledRucksackImage);
@@ -263,6 +272,4 @@ public class GuiLevelPage {
   public Level getLevel() {
     return level;
   }
-
-
 }
