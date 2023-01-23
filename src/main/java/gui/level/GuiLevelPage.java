@@ -265,4 +265,7 @@ public class GuiLevelPage {
   }
 
 
+  public int getLevelNumber() {
+    return this.level.getLevelNumber();
+  }
 }

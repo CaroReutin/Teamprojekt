@@ -7,3 +7,5 @@ target
 *.bkp
 *.dtmp
 *.iml
+*.zip
+/src/test/resources/customLevel/temp/

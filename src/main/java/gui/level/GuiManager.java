@@ -2,7 +2,9 @@
 
 package gui.level;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 /**
  * The class GUIManager combines the gui pages.
@@ -17,7 +19,11 @@ public class GuiManager {
    */
   private static final GuiOptionsPage guiOptionsPage = new GuiOptionsPage();
 
-
+  /**
+   * the current gui Level editor page.
+   */
+  private static final GuiLevelEditorPage guiLevelEditorPage
+      = new GuiLevelEditorPage();
   /**
    * the current gui leveldeciderpage.
    */
@@ -26,6 +32,15 @@ public class GuiManager {
    * the frame of all windows.
    */
   private static JFrame frame;
+
+  /**
+   * Opens the Leveleditor.
+   */
+  public static void openLevelEditor() {
+    frame.setContentPane(guiLevelEditorPage.getPane());
+    frame.setTitle("Level-editor");
+    paint();
+  }
 
   /**
    * Opens the main Menu.
@@ -58,6 +73,7 @@ public class GuiManager {
    */
   public static void openOptionsMenu() {
     frame.setContentPane(guiOptionsPage.getPane());
+    frame.setTitle("Optionsmenü");
     paint();
   }
 
@@ -66,6 +82,7 @@ public class GuiManager {
    */
   public static void openLevelSelectScreen() {
     frame.setContentPane(guiLevelDeciderPage.getPane());
+    frame.setTitle("Levelauswahl");
     paint();
   }
 
@@ -74,6 +91,7 @@ public class GuiManager {
    */
   public static void openMainMenu() {
     frame.setContentPane(guiFrontPage.getPane());
+    frame.setTitle("Hauptmenü");
     paint();
   }
 
@@ -85,6 +103,19 @@ public class GuiManager {
    */
   public static void openLevel(GuiLevelPage levelPage) {
     frame.setContentPane(levelPage.getPane());
+
+    String title = "Level ";
+    int levelNumber = levelPage.getLevelNumber();
+    if (levelNumber >= 8) {
+      title = "Backtracking-" + title + (levelNumber - 7);
+    } else if (levelNumber >= 1) {
+      title = "Greedy-" + title + levelNumber;
+    } else if (levelNumber == 0) {
+      title = "Einführungs-" + title;
+    } else {
+      title = "Benutzerdefiniertes ";
+    }
+    frame.setTitle(title);
     paint();
   }
 
@@ -99,7 +130,7 @@ public class GuiManager {
 
   /**
    * gets the GUILevelDeciderPage
-   * @return the leveldeciderpage
+   * @return the level decider page
    */
   public static GuiLevelDeciderPage getGuiLevelDeciderPage() {
     return guiLevelDeciderPage;

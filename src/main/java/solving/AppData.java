@@ -1,15 +1,54 @@
 package solving;
 
 import java.lang.reflect.Array;
+import java.awt.Font;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import rucksack.*;
+import rucksack.Item;
+import rucksack.Level;
 
 /**
  * The type App data.
  */
 public class AppData {
+  /**
+   * The size of Icons in the Leveleditor.
+   */
+  public static final int ICON_SIZE = 75;
+  /**
+   * Byte size to be used when zipping files.
+   */
+  public static final int ZIP_BYTE_SIZE = 1024;
+  /**
+   * The location where the images to be zipped are stored.
+   */
+  private static String customLevelPictureFolder;
+
+  /**
+   * The location where the images to be zipped are stored.
+   *
+   * @return returns the string with the folder path
+   */
+  public static String getCustomLevelUnzipFolder() {
+    return customLevelUnzipFolder;
+  }
+
+  /**
+   * The location where the level gets unzipped.
+   */
+  private static String customLevelUnzipFolder;
+  /**
+   * The font to use for text.
+   */
+  public static final Font FONT_STYLE = new Font("Arial",
+      Font.BOLD + Font.ITALIC, 30);
+  /**
+   * Max amount of items in custom level, used to make the GUI.
+   */
+  public static final int MAXIMUM_ITEMS_IN_CUSTOM_LEVEL = 16;
   /**
    * The constant LEVELAMOUNT.
    */
@@ -27,6 +66,21 @@ public class AppData {
    * the level.
    */
   private static Level[] levelZero = new Level[1];
+
+  public static void initialize() {
+    if (System.getProperty("os.name").contains("Windows")) {
+      String appdataPath = System.getenv("APPDATA");
+      customLevelPictureFolder = appdataPath + "/Optimal Heist/customLevel/temp";
+      customLevelUnzipFolder = appdataPath + "/Optimal Heist/customLevel/unzip/";
+    } else {
+      String homePath = System.getProperty("user.home", "Desktop");
+      customLevelPictureFolder = homePath + "/Optimal Heist/customLevel/temp";
+      customLevelUnzipFolder = homePath + "/Optimal Heist/customLevel/unzip/";
+    }
+    boolean ignoreResult = new File(customLevelPictureFolder).mkdirs();
+    passwords.add("Gr33dy");
+    passwords.add("B4cktr4cking");
+  }
 
   /**
    * Initialize beginning level.
@@ -153,8 +207,16 @@ public class AppData {
    * @return the level
    */
   public static Level initializeBacktracking(int level) {
-    passwords.add("B4cktr4cking");
     return BacktrackingLevel.getLevelBacktracking(level);
+  }
+
+  /**
+   * based on os.
+   *
+   * @return returns the path for the pictures
+   */
+  public static String getCustomLevelPictureFolder() {
+    return customLevelPictureFolder;
   }
 
   /**
