@@ -1,12 +1,50 @@
 package solving;
 
+import java.awt.Font;
+import java.io.File;
 import java.util.ArrayList;
-import rucksack.*;
+import rucksack.Item;
+import rucksack.Level;
 
 /**
  * The type App data.
  */
 public class AppData {
+  /**
+   * The size of Icons in the Leveleditor.
+   */
+  public static final int ICON_SIZE = 75;
+  /**
+   * Byte size to be used when zipping files.
+   */
+  public static final int ZIP_BYTE_SIZE = 1024;
+  /**
+   * The location where the images to be zipped are stored.
+   */
+  private static String customLevelPictureFolder;
+
+  /**
+   * The location where the images to be zipped are stored.
+   *
+   * @return returns the string with the folder path
+   */
+  public static String getCustomLevelUnzipFolder() {
+    return customLevelUnzipFolder;
+  }
+
+  /**
+   * The location where the level gets unzipped.
+   */
+  private static String customLevelUnzipFolder;
+  /**
+   * The font to use for text.
+   */
+  public static final Font FONT_STYLE = new Font("Arial",
+      Font.BOLD + Font.ITALIC, 30);
+  /**
+   * Max amount of items in custom level, used to make the GUI.
+   */
+  public static final int MAXIMUM_ITEMS_IN_CUSTOM_LEVEL = 16;
   /**
    * The constant LEVELAMOUNT.
    */
@@ -28,6 +66,16 @@ public class AppData {
    * Initialize.
    */
   public static void initialize() {
+    if (System.getProperty("os.name").contains("Windows")) {
+      String appdataPath = System.getenv("APPDATA");
+      customLevelPictureFolder = appdataPath + "/Optimal Heist/customLevel/temp";
+      customLevelUnzipFolder = appdataPath + "/Optimal Heist/customLevel/unzip/";
+    } else {
+      String homePath = System.getProperty("user.home", "Desktop");
+      customLevelPictureFolder = homePath + "/Optimal Heist/customLevel/temp";
+      customLevelUnzipFolder = homePath + "/Optimal Heist/customLevel/unzip/";
+    }
+    boolean ignoreResult = new File(customLevelPictureFolder).mkdirs();
     passwords.add("Gr33dy");
     items.add(new Item(5, 1, "coin"));
     items.add(new Item(50, 8, "crown"));
@@ -78,16 +126,25 @@ public class AppData {
     // Greedy Level 1
     ArrayList<Item> currentItems = new ArrayList<>();
     ArrayList<Integer> currentAmount = new ArrayList<>();
-    currentItems.add(generateItem("1"));
+    currentItems.add(generateItem(8));
     currentAmount.add(1);
-    currentItems.add(generateItem("2"));
+    currentItems.add(generateItem(10));
     currentAmount.add(1);
-    currentItems.add(generateItem("3"));
+    currentItems.add(generateItem(12));
     currentAmount.add(1);
     level[1] = new Level(currentItems, currentAmount, 1, 6);
     currentItems = new ArrayList<>();
     currentAmount = new ArrayList<>();
     // Greedy Level 2 ...
+  }
+
+  /**
+   * based on os.
+   *
+   * @return returns the path for the pictures
+   */
+  public static String getCustomLevelPictureFolder() {
+    return customLevelPictureFolder;
   }
 
   /**
@@ -112,16 +169,11 @@ public class AppData {
   /**
    * Generate item item.
    *
-   * @param name the unique name of the item
+   * @param index the unique index of the item
    * @return returns a new Instance of the wanted item if it is in the ArrayList else it returns null
    */
-  public static Item generateItem(String name) {
-    for (int i = 0; i < items.size(); i++) {
-      if (items.get(i).getName().matches(name)) {
-        return new Item(items.get(i).getValue(), items.get(i).getWeight(), items.get(i).getName());
-      }
-    }
-    return null;
+  public static Item generateItem(int index) {
+    return new Item(items.get(index).getValue(), items.get(index).getWeight(), items.get(index).getName());
   }
 
   /**

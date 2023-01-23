@@ -1,25 +1,29 @@
 package rucksack;
 
+/**
+ * this class is a specific item named BacktrackingItem
+ * which is only used for Backtracking purposes.
+ */
 public class BacktrackingItem extends Item {
   /**
-   * state where the backtracking item is
+   * state where the backtracking item is.
    */
   private StateBacktracking state;
 
   /**
-   * the states a backtracking item can be in
+   * the states a backtracking item can be in.
    */
   public enum StateBacktracking {
     /**
-     * if item is in the trash bin
+     * if item is in the trash bin.
      */
     TRASH,
     /**
-     * if item got moved into the rucksack
+     * if item got moved into the rucksack.
      */
     RUCKSACK,
     /**
-     * if item is not in rucksack nor trash and is available (default)
+     * if item is not in rucksack nor trash and is available (default).
      */
     AVAILABLE
   }
@@ -38,7 +42,7 @@ public class BacktrackingItem extends Item {
   }
 
   /**
-   * sets the state of this item+
+   * sets the state of this item.
    *
    * @return said state
    */
@@ -47,11 +51,24 @@ public class BacktrackingItem extends Item {
   }
 
   /**
-   * sets a state for this item
+   * sets a state for this item.
    *
-   * @param state said state
+   * @param stateBacktracking said state
    */
-  public void setState(StateBacktracking state) {
-    this.state = state;
+  public void setState(final StateBacktracking stateBacktracking) {
+    this.state = stateBacktracking;
+  }
+
+  /**
+   * creates a new instance of this for the backtracking
+   * tree in case an item goes into the trash or rucksack.
+   *
+   * @return copied item
+   */
+  public BacktrackingItem newInstance() {
+    BacktrackingItem newItem = new BacktrackingItem(this.getValue(),
+            this.getWeight(), this.getName());
+    newItem.setState(this.state);
+    return newItem;
   }
 }

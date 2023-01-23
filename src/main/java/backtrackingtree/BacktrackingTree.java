@@ -2,8 +2,8 @@ package backtrackingtree;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-
 import rucksack.BacktrackingItem;
+
 
 
 /**
@@ -16,7 +16,7 @@ public class BacktrackingTree {
   private final BacktrackingNode root;
 
   /**
-   * current node where we can add children to
+   * current node where we can add children to.
    */
   private BacktrackingNode currentNode;
 
@@ -30,98 +30,97 @@ public class BacktrackingTree {
   public BacktrackingTree(final int bagCapacity,
                           final ArrayList<BacktrackingItem> itemArrayList) {
     root = new BacktrackingNode(new BacktrackingItem(0, 0, "root"),
-            0, 0, bagCapacity, itemArrayList, null);
+            0, 0, bagCapacity, itemArrayList, null, true);
     currentNode = root;
   }
 
   /**
    * prints the tree.
    *
-   * @param ps the print stream
+   * @param os the print stream
    */
-  public void print(final PrintStream ps) {
-    StringBuilder sb = new StringBuilder();
-    traversePreOrder(sb, "", "", root);
-    ps.print(sb.toString());
+  public void print(PrintStream os) {
+    os.print(traversePreOrder(root));
+    System.out.println(" ");
+    System.out.println("------------------");
   }
 
 
-  /**
-   * traverses the tree.
-   *
-   * @param sb      the StringBuilder
-   * @param padding the Padding
-   * @param pointer the Pointer
-   * @param node    the current node
-   */
-  public void traversePreOrder(final StringBuilder sb,
-                               final String padding, final String pointer,
-                               final BacktrackingNode node) {
+  private String traversePreOrder(BacktrackingNode root) {
+
+    if (root == null) {
+      return "";
+    }
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(root.getName());
+
+    String pointerRight = "└──";
+    String pointerLeft = (root.getRightChild() != null) ? "├──" : "└──";
+
+    traverseNodes(sb, "", pointerLeft, root.getLeftChild(), root.getRightChild() != null);
+    traverseNodes(sb, "", pointerRight, root.getRightChild(), false);
+
+    return sb.toString();
+  }
+
+  private void traverseNodes(StringBuilder sb, String padding, String pointer, BacktrackingNode node,
+                            boolean hasRightSibling) {
     if (node != null) {
+      sb.append("\n");
       sb.append(padding);
       sb.append(pointer);
-
-      if (node.getItem().getState()
-              == (BacktrackingItem.StateBacktracking.TRASH)) {
-        sb.append("not " + node.getItem().getName());
-      } else {
-        sb.append(node.getItem().getName());
-      }
-      sb.append("\n");
+      sb.append(node.getName()).append(" [akt. Gewicht:").append(node.getCurrentWeight())
+              .append(", akt. Wert: ").append(node.getCurrentValue()).append("]");
 
       StringBuilder paddingBuilder = new StringBuilder(padding);
-      paddingBuilder.append("│  ");
+      if (hasRightSibling) {
+        paddingBuilder.append("│  ");
+      } else {
+        paddingBuilder.append("   ");
+      }
 
       String paddingForBoth = paddingBuilder.toString();
-      String pointerForRight = "└──";
-      String pointerForLeft = (node.getRightChild() != null) ? "├──" : "└──";
+      String pointerRight = "└──";
+      String pointerLeft = (node.getRightChild() != null) ? "├──" : "└──";
 
-      traversePreOrder(sb, paddingForBoth, pointerForLeft, node.getLeftChild());
-      traversePreOrder(sb, paddingForBoth, pointerForRight,
-              node.getRightChild());
+      traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeftChild(), node.getRightChild() != null);
+      traverseNodes(sb, paddingForBoth, pointerRight, node.getRightChild(), false);
     }
-  }
-
-  /**
-   * gets the root of this tree.
-   *
-   * @return said root
-   */
-  public BacktrackingNode getRoot() {
-    return root;
   }
 
   /**
    * adds an item to the rucksack (right child).
    *
    * @param item said item
-   * @return true in case of success
    */
-  public boolean addToRucksack(final BacktrackingItem item) {
+  public void addToRucksack(final BacktrackingItem item) {
+    System.out.println(item.getName() + " soll dem Rucksack hinzugefügt werden.");
     boolean addedSuccessfully = currentNode.addToRucksack(item);
 
     if (addedSuccessfully) {
       currentNode = currentNode.getRightChild();
-      return true;
-    } else {
-      return false;
+      System.out.println("Der current Node ist nun " + currentNode.getName());
     }
+
+    System.out.println("-----------------");
   }
 
   /**
    * adds an item to the trash bin (left child).
    *
    * @param item said item
-   * @return true in case of success
    */
-  public boolean addToTrash(final BacktrackingItem item) {
-    boolean addedSuccessfully = currentNode.addToTrash(item);
-
-    if (addedSuccessfully) {
-      currentNode = currentNode.getLeftChild();
-      return true;
-    } else {
-      return false;
+  public void addToTrash(final BacktrackingItem item) {
+    System.out.println(item.getName() + " soll in den Müll geworfen werden.");
+    BacktrackingNode newCurrent = currentNode.addToTrash(item);
+    if (newCurrent != null) {
+      currentNode = newCurrent;
+      System.out.println("Item " + item.getName()
+              + " wurde in den Müll gelegt.");
+      System.out.println("Der current Node ist nun "
+              + currentNode.getName());
     }
+    System.out.println("-----------------");
   }
 }
