@@ -1,17 +1,20 @@
 package solving;
 
 import java.util.ArrayList;
-import rucksack.*;
+import rucksack.Item;
+import rucksack.Level;
 
 /**
  * The class Solver holds the solving algorithms (greedy and backtracking).
  */
 public abstract class Solver {
-  private ArrayList<Item> bestSelectedItems;
-  private int bestValue=0;
-  private int bestWeight = 0;
+  /**
+   * This is abstract why does it need a comment ?.
+   *
+   * @param level level
+   * @return return
+   */
+  public abstract ArrayList<Item> solveAlgorithm(Level level);
 
-  public abstract ArrayList solveAlgorithm(Level level);
-
-  }
+}
 
