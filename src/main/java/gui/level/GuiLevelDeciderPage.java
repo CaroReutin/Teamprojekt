@@ -34,7 +34,7 @@ public class GuiLevelDeciderPage {
     Container pane = new Container();
     pane.setLayout(null);
 
-    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
+    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
     Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
 
     JLabel titel = new JLabel("Level");

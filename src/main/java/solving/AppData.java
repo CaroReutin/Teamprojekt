@@ -6,7 +6,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import rucksack.*;
 import rucksack.Item;
 import rucksack.Level;
 
@@ -67,6 +66,9 @@ public class AppData {
    */
   private static Level[] levelZero = new Level[1];
 
+  /**
+   * Initialize.
+   */
   public static void initialize() {
     if (System.getProperty("os.name").contains("Windows")) {
       String appdataPath = System.getenv("APPDATA");
@@ -225,7 +227,7 @@ public class AppData {
    * @param i the
    * @return the string
    */
-  public static String getPassword(int i) {
+  public static String getPassword(final int i) {
     return passwords.get(i);
   }
 
@@ -244,19 +246,17 @@ public class AppData {
    * @param index the unique index of the item
    * @return returns a new Instance of the wanted item if it is in the ArrayList else it returns null
    */
-  public static Item generateItem(int index) {
+  public static Item generateItem(final int index) {
     return new Item(items.get(index).getValue(), items.get(index).getWeight(), items.get(index).getName());
   }
 
   /**
-   * Get level level.
+   * Get level.
    *
    * @param i the
    * @return the level
    */
-  public static Level getLevel(int i) {
+  public static Level getLevel(final int i) {
     return levelZero[i];
   }
-
 }
-

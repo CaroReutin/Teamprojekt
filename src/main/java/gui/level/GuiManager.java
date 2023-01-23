@@ -1,5 +1,4 @@
 
-
 package gui.level;
 
 import javax.swing.JComponent;
@@ -43,13 +42,21 @@ public class GuiManager {
   }
 
   /**
+   * Width of the game's frame.
+   */
+  private final int frameWidth = 1000;
+  /**
+   * Height of the game's frame.
+   */
+  private final int frameHeight = 750;
+  /**
    * Opens the main Menu.
    */
   public void launch() {
     frame = new JFrame();
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setTitle("Optimal Heist");
-    frame.setSize(1000, 750);
+    frame.setSize(frameWidth, frameHeight);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
     frame.setResizable(false);
@@ -68,8 +75,8 @@ public class GuiManager {
 
   /**
    * Opens the Options Menu.
-   * (Currently after exiting the Options menu the Main-menu will always be opened
-   * regardless where the options menu was opened from).
+   * (Currently after exiting the Options menu the Main-menu will
+   * always be opened, regardless where the options menu was opened from).
    */
   public static void openOptionsMenu() {
     frame.setContentPane(guiOptionsPage.getPane());
@@ -94,20 +101,18 @@ public class GuiManager {
     frame.setTitle("Hauptmenü");
     paint();
   }
-
-
   /**
    * Opens the Level.
    *
    * @param levelPage the GUILevel page of the level that should be opened.
    */
-  public static void openLevel(GuiLevelPage levelPage) {
+  public static void openLevel(final GuiLevelPage levelPage) {
     frame.setContentPane(levelPage.getPane());
-
+    final int lastGreedyNumber = 7;
     String title = "Level ";
     int levelNumber = levelPage.getLevelNumber();
-    if (levelNumber >= 8) {
-      title = "Backtracking-" + title + (levelNumber - 7);
+    if (levelNumber > lastGreedyNumber) {
+      title = "Backtracking-" + title + (levelNumber - lastGreedyNumber);
     } else if (levelNumber >= 1) {
       title = "Greedy-" + title + levelNumber;
     } else if (levelNumber == 0) {
@@ -129,11 +134,10 @@ public class GuiManager {
   }
 
   /**
-   * gets the GUILevelDeciderPage
+   * Gets the GUILevelDeciderPage.
    * @return the level decider page
    */
   public static GuiLevelDeciderPage getGuiLevelDeciderPage() {
     return guiLevelDeciderPage;
   }
-
 }
