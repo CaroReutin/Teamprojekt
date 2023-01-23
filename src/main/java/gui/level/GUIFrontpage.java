@@ -38,6 +38,7 @@ public class GUIFrontpage {
     pane.add(ownLevelButton);
 
     ownLevelButton.addActionListener(e -> {
+      GUIManager.openLevelEditor();
     });
 
     JButton settingsButton = new JButton("Einstellungen");

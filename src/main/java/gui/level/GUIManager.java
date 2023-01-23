@@ -2,7 +2,9 @@
 
 package gui.level;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 /**
  * The class GUIManager combines the gui pages.
@@ -11,21 +13,36 @@ public class GUIManager {
   /**
    * the current gui frontpage.
    */
-  private static final GUIFrontpage guiFrontPage = new GUIFrontpage();
+  private static final GUIFrontpage GUI_FRONTPAGE = new GUIFrontpage();
   /**
    * the current gui optionspage.
    */
-  private static final GUIOptionsPage guiOptionsPage = new GUIOptionsPage();
-
-
+  private static final GUIOptionsPage GUI_OPTIONS_PAGE = new GUIOptionsPage();
   /**
    * the current gui leveldeciderpage.
    */
-  private static GUILevelDeciderPage guiLevelDeciderPage = new GUILevelDeciderPage();
+  private static final GUILevelDeciderPage GUI_LEVEL_DECIDER_PAGE
+      = new GUILevelDeciderPage();
+  /**
+   * the current gui Level editor page.
+   */
+  private static final GuiLevelEditorPage GUI_LEVEL_EDITOR_PAGE
+      = new GuiLevelEditorPage();
+
+
   /**
    * the frame of all windows.
    */
   private static JFrame frame;
+
+  /**
+   * Opens the Leveleditor.
+   */
+  public static void openLevelEditor() {
+    frame.setContentPane(GUI_LEVEL_EDITOR_PAGE.getPane());
+    frame.setTitle("Level-editor");
+    paint();
+  }
 
   /**
    * Opens the main Menu.
@@ -57,7 +74,8 @@ public class GUIManager {
    * regardless where the options menu was opened from).
    */
   public static void openOptionsMenu() {
-    frame.setContentPane(guiOptionsPage.getPane());
+    frame.setContentPane(GUI_OPTIONS_PAGE.getPane());
+    frame.setTitle("Optionsmenü");
     paint();
   }
 
@@ -65,7 +83,8 @@ public class GUIManager {
    * Opens the LevelSelectionScreen.
    */
   public static void openLevelSelectScreen() {
-    frame.setContentPane(guiLevelDeciderPage.getPane());
+    frame.setContentPane(GUI_LEVEL_DECIDER_PAGE.getPane());
+    frame.setTitle("Levelauswahl");
     paint();
   }
 
@@ -73,7 +92,8 @@ public class GUIManager {
    * Opens the main Menu.
    */
   public static void openMainMenu() {
-    frame.setContentPane(guiFrontPage.getPane());
+    frame.setContentPane(GUI_FRONTPAGE.getPane());
+    frame.setTitle("Hauptmenü");
     paint();
   }
 
@@ -85,6 +105,19 @@ public class GUIManager {
    */
   public static void openLevel(GUILevelPage levelPage) {
     frame.setContentPane(levelPage.getPane());
+
+    String title = "Level ";
+    int levelNumber = levelPage.getLevelNumber();
+    if (levelNumber >= 8) {
+      title = "Backtracking-" + title + (levelNumber - 7);
+    } else if (levelNumber >= 1) {
+      title = "Greedy-" + title + levelNumber;
+    } else if (levelNumber == 0) {
+      title = "Einführungs-" + title;
+    } else {
+      title = "Benutzerdefiniertes ";
+    }
+    frame.setTitle(title);
     paint();
   }
 
@@ -99,10 +132,10 @@ public class GUIManager {
 
   /**
    * gets the GUILevelDeciderPage
-   * @return the leveldeciderpage
+   * @return the level decider page
    */
   public static GUILevelDeciderPage getGuiLevelDeciderPage() {
-    return guiLevelDeciderPage;
+    return GUI_LEVEL_DECIDER_PAGE;
   }
 
 }
