@@ -11,11 +11,15 @@ public class Node {
   private boolean putInRucksack;
 
 
+
+
+
   public Node(int currentWeight, int currentValue, Item item, boolean putInRucksack) {
     this.currentValue = currentValue;
     this.currentWeight = currentWeight;
     this.item = item;
     this.putInRucksack = putInRucksack;
+
     leftChildren = null;
     rightChildren = null;
   }
@@ -51,4 +55,18 @@ public class Node {
   public boolean isPutInRucksack() {
     return putInRucksack;
   }
+
+  public void setPutInRucksack(boolean putInRucksack) {
+    this.putInRucksack = putInRucksack;
+  }
+
+  public void setCurrentValue(int currentValue) {
+    this.currentValue = currentValue;
+  }
+
+  public void setCurrentWeight(int currentWeight) {
+    this.currentWeight = currentWeight;
+  }
+
+
 }

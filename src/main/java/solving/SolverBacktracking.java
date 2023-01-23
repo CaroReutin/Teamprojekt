@@ -1,128 +1,106 @@
 package solving;
 
+import java.util.ArrayList;
 import rucksack.Item;
 import rucksack.Level;
 
-import java.util.ArrayList;
-
+/**
+ * solver class for backtracking.
+ */
 public class SolverBacktracking extends Solver {
-  private ArrayList<Item> bestSelectedItems;
-  private int bestValue = 0;
-  private int bestWeight = 0;
-
-
-  @Override
-  public ArrayList solveAlgorithm(Level level) {
-    return null;
-  }
-
-  public ArrayList<Item> solveBacktracking(ArrayList<Item> items, ArrayList<Integer> amount, int capacity) {
-
-    //TODO gesamtgewicht aller items berechnen und prüfen ob dieses < capacity ist
-    ArrayList<Item> allItemsOfLevel = new ArrayList<>();
-    for (int i = 0; i < items.size(); i++) {
-      for (int j = 0; j < amount.get(i); j++) {
-        allItemsOfLevel.add(items.get(i));
-      }
-    }
-    Node root = new Node(0,0,new Item(0,0,"Wurzel"), false);
-    for (Item currentItem:allItemsOfLevel) {
-      this.backtrackingRekursion(currentItem, root,null, capacity, new ArrayList<>());
-    }
-
-    System.out.println("Value: " + bestValue + " Weight: " + bestWeight);
-    for (Item current : bestSelectedItems) {
-      System.out.println(current.getName() + " Weight: " + current.getWeight() + " Value: " + current.getValue());
-    }
-    return bestSelectedItems;
-  }
-
 
   /**
-   * Add a new Item recursiv in the binaryTree
-   * left children are Items that are put in rucksack
-   * right childern are Items that not put in rucksack
+   * solves an instance of the rucksack problem.
+   * Order of the returned list ist the same as the order
+   * of the itemList in level
    *
-   * @param currentItem
-   * @param currentNode
-   * @param capacity
-   * @return
+   * @param level level
+   * @return returns the list of items that are included in the optimal solution
    */
-  public Node backtrackingRekursion(Item currentItem, Node currentNode, Node parent, int capacity, ArrayList<Item> selectedItems) {
-    int newWeight;
-    int newValue;
+  @Override
+  public ArrayList<Item> solveAlgorithm(final Level level) {
+    return solveBacktracking(level.getItemList(), level.getItemAmountList(),
+        level.getCapacity());
+  }
 
-    if (currentNode == null) {
-      newWeight = parent.getCurrentWeight() + currentItem.getWeight();
-      newValue = parent.getCurrentValue() + currentItem.getValue();
-      return new Node(newWeight, newValue, currentItem, true);
-    }
-    newWeight = currentItem.getWeight() + currentNode.getCurrentWeight();
-    newValue = currentItem.getValue() + currentNode.getCurrentValue();
-
-    if (newWeight > capacity) {
-      currentNode.setRightChildren(backtrackingRekursion(currentItem, currentNode.getRightChildren(), currentNode, capacity, selectedItems));
-    } else {
-      selectedItems.add(currentNode.getItem());
-      currentNode.setLeftChildren(backtrackingRekursion(currentItem, currentNode.getLeftChildren(),currentNode, capacity, selectedItems));
-      if (newValue > bestValue) {
-        bestValue = newValue;
-        bestWeight = newWeight;
-        bestSelectedItems = selectedItems;
-      }
-    }
-    return currentNode;
-
-    /* for (int i = 0; i < items.size(); i++) {
-      for(int a = ammountsCopy.get(i); a>0; a--) {
-=======
-  public ArrayList<Item> backtrackingRekursion(ArrayList<Item> items, ArrayList<Integer> amount, int capacity, int currentWeight,
-                                    int currentValue, ArrayList<Item> selectedItems) {
-
+  /**
+   * solves an instance of the rucksack problem.
+   * Order of the returned list ist the same as the order of the itemList
+   *
+   * @param items    the available items
+   * @param amount   the amount of the items
+   * @param capacity the capacity of the level
+   * @return returns the list of items that are included in the optimal solution
+   */
+  public ArrayList<Item> solveBacktracking(final ArrayList<Item> items,
+                                           final ArrayList<Integer> amount,
+                                           final int capacity) {
+    // Vorbereitung für die Rekursion
+    ArrayList<Item> remainingItems = new ArrayList<>();
     for (int i = 0; i < items.size(); i++) {
-      for (int a = ammountsCopy.get(i); a > 0; a--) {
->>>>>>> 503e577e75d7e278d2625babbd1c438733bf3746
-        if (currentWeight <= capacity) {
-          int newWeight = currentWeight + items.get(i).getWeight();
-          if (newWeight <= capacity) {
-            currentWeight = newWeight;
-            currentValue = currentValue + items.get(i).getValue();
-            selectedItems.add(items.get(i));
-            ammountsCopy.set(i, ammountsCopy.get(i) - 1);
-
-            //TEST
-            System.out.println(
-              " -----------  Weight: " + currentWeight + " Value: " + currentValue + "------------");
-            System.out.println("selectedItems: " + selectedItems.size());
-            //
-            backtrackingRekursion(items, amount, capacity, currentWeight, currentValue, selectedItems);
-          } else {
-            if (currentValue > bestValue) {
-              bestValue = currentValue;
-              bestWeight = currentWeight;
-              bestSelectedItems = selectedItems;
-            }
-            break;
-          }
-
-        } else {
-          if (currentValue > bestValue) {
-            bestValue = currentValue;
-            bestWeight = currentWeight;
-            bestSelectedItems = selectedItems;
-          }
-          currentWeight = currentWeight - items.get(i).getWeight();
-          currentValue = currentValue - items.get(i).getValue();
-          ammountsCopy.set(i, ammountsCopy.get(i) + 1);
-          selectedItems.remove(selectedItems.size() - 1);
-          break;
-        }
+      for (int j = 0; j < amount.get(i); j++) {
+        remainingItems.add(items.get(i));
       }
-<<<<<<< HEAD
+    }
 
-    }*/
+    // Alles andere wird in der Rekursion behandelt
+    return nextStep(new ArrayList<>(), remainingItems, capacity);
 
+    // Momentan wird die Liste sortiert nach der Reihenfolge wie
+    // sie in Level sind ausgegeben, zum Vergleichen von Lösungen sollten
+    // sowohl diese Lösung als auch die zum Vergleichen sortiert werden
+  }
 
+  private ArrayList<Item> nextStep(final ArrayList<Item> itemsInRucksack,
+                                   final ArrayList<Item> remainingItems,
+                                   final int capacity) {
+    // Default Case
+    if (remainingItems.isEmpty()) {
+      return itemsInRucksack;
+    }
+
+    // remainingItems ist final darum hier die extra Liste
+    ArrayList<Item> nextRemainingItem = new ArrayList<>(remainingItems);
+    Item currentItem = nextRemainingItem.get(0);
+    nextRemainingItem.remove(0);
+
+    // Fall aktuelles Item ist nicht in der Lösung
+    ArrayList<Item> excluded = nextStep(itemsInRucksack,
+        nextRemainingItem, capacity);
+
+    // Wenn das Item nicht mehr reinpasst, kann es nicht in der Lösung sein
+    if (currentItem.getWeight() > capacity) {
+      return excluded;
+    }
+
+    // itemInRucksack ist final darum hier die extra Liste
+    ArrayList<Item> rucksackWithCurrent = new ArrayList<>(itemsInRucksack);
+    rucksackWithCurrent.add(currentItem);
+    // capacity ist final darum hier extra
+    int reducedCapacity = capacity - currentItem.getWeight();
+    // Fall aktuelles Item ist in der Lösung
+    ArrayList<Item> included =
+        nextStep(rucksackWithCurrent, nextRemainingItem, reducedCapacity);
+
+    // Werte zum Vergleichen was besser ist
+    int excludedValue = getValue(excluded);
+    int incudedValue = getValue(included);
+
+    // Momentan wird ein Item mit Wert 0 nicht in den Rucksack getan,
+    // kommt bei unseren leveln nicht vor
+    if (excludedValue >= incudedValue) {
+      return excluded;
+    } else {
+      return included;
+    }
+  }
+
+  private int getValue(final ArrayList<Item> included) {
+    int res = 0;
+    for (Item item : included) {
+      res += item.getValue();
+    }
+    return res;
   }
 
 }

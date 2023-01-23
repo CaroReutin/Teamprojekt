@@ -1,6 +1,7 @@
 import gui.level.GUIManager;
 import solving.*;
 
+
 /**
  * The type Main.
  */
@@ -11,10 +12,13 @@ public class Main {
    * @param args the input arguments
    */
   public static void main(final String[] args) {
-    AppData.initialize();
-    UserDataManager.load();
 
-    GUIManager guiManager = new GUIManager();
-    guiManager.launch();
+   AppData.initialize();
+   UserDataManager.load();
+
+   GUIManager guiManager = new GUIManager();
+   guiManager.launch();
+
+
   }
 }
