@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 
 public class TestGreedy {
-    Solver s = new Solver();
+    SolverGreedy s = new SolverGreedy();
     ArrayList<Integer> amount;
     ArrayList<Item> items;
     ArrayList<Item> expected;
@@ -32,7 +32,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,6));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // None Fit
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -41,7 +41,7 @@ public class TestGreedy {
         items.add(new Item(40,9,"3"));
         level = new Level(items,amount,0,6);
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,6));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Best does not Fit
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -51,7 +51,7 @@ public class TestGreedy {
         level = new Level(items,amount,0,6);
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,6));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Random Numbers
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -62,7 +62,7 @@ public class TestGreedy {
         expected.add(items.get(2));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,10));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Optimal Order
         amount = new ArrayList<>();
         items = new ArrayList<>();
@@ -116,7 +116,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(2));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,10));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class TestGreedy {
         level = new Level(items,amount,0,5);
         expected.add(items.get(0));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,5));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
     }
 
     @Test
@@ -146,7 +146,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(2));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Value 0
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -157,7 +157,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Weight and Value 0
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -168,7 +168,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Weight and Value Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -179,7 +179,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Weight Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -190,7 +190,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Value Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -201,7 +201,7 @@ public class TestGreedy {
         expected.add(items.get(0));
         expected.add(items.get(1));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,50));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Capacity Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -210,7 +210,7 @@ public class TestGreedy {
         items.add(new Item(200,30,"3"));
         level = new Level(items,amount,0,-10);
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,-10));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Capacity Zero
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -219,7 +219,7 @@ public class TestGreedy {
         items.add(new Item(200,30,"3"));
         level = new Level(items,amount,0,0);
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,0));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Randomly Sorted with 0 Weights
         items = new ArrayList<>();
         expected = new ArrayList<>();
@@ -246,6 +246,6 @@ public class TestGreedy {
         expected.add(items.get(3));
         expected.add(items.get(5));
         Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(items,amount,80));
-        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveGreedy(level));
+        Assertions.assertEquals(s.sortLikeGreedy(expected),s.solveAlgorithm(level));
     }
 }
