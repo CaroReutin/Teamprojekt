@@ -2,7 +2,6 @@ package gui.level;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.LayoutManager;
 import javax.swing.JPanel;
 
 
@@ -16,16 +15,6 @@ public class JBackgroundPanel extends JPanel {
    */
   private final Image background;
 
-  /**
-   * Instantiates a new J background panel.
-   *
-   * @param layout     the layout
-   * @param background the background
-   */
-  public JBackgroundPanel(final LayoutManager layout, final Image background) {
-    super(layout);
-    this.background = background;
-  }
 
   /**
    * Instantiates a new J background panel.

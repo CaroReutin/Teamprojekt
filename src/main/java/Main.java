@@ -1,4 +1,4 @@
-import gui.level.GUIManager;
+import gui.level.GuiManager;
 import solving.AppData;
 import solving.UserDataManager;
 
@@ -13,9 +13,11 @@ public class Main {
    */
   public static void main(final String[] args) {
     AppData.initialize();
+    AppData.InitializeBeginningLevel();
+    AppData.initializeItems();
     UserDataManager.load();
 
-    GUIManager guiManager = new GUIManager();
+    GuiManager guiManager = new GuiManager();
     guiManager.launch();
   }
 }
