@@ -20,10 +20,10 @@ public class JBackgroundPanel extends JPanel {
    * @param layout     the layout
    * @param background the background
    */
-  public JBackgroundPanel(LayoutManager layout, Image background) {
+ /* public JBackgroundPanel(LayoutManager layout, Image background) {
     super(layout);
     this.background = background;
-  }
+  }*/
 
   /**
    * Instantiates a new J background panel.

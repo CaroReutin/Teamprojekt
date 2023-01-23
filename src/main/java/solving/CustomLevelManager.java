@@ -1,7 +1,7 @@
 package solving;
 
-import gui.level.GUILevelPage;
-import gui.level.GUIManager;
+import gui.level.GuiLevelPage;
+import gui.level.GuiManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -188,7 +188,7 @@ public final class CustomLevelManager {
 
         Level level = (Level) marsh.unmarshal(levelFile);
         level.resetLevel();
-        GUIManager.openLevel(new GUILevelPage(level));
+        GuiManager.openLevel(new GuiLevelPage(level));
       }
 
     } catch (IOException ioException) {

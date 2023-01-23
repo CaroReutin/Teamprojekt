@@ -142,7 +142,7 @@ public final class GuiLevelEditorPage {
           "Sicher, dass Sie ohne zu Speichern zurück wollen ?",
           "Abbrechen", JOptionPane.YES_NO_OPTION,
           JOptionPane.QUESTION_MESSAGE)) {
-        GUIManager.openMainMenu();
+        GuiManager.openMainMenu();
       }
     });
 
