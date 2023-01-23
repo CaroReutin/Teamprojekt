@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -64,17 +63,17 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "├──not Crown");
+      Assertions.assertEquals(answer, "├──not Crown [akt. Gewicht:0, akt. Wert: 0]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "│  └──Pearl");
+      Assertions.assertEquals(answer, "│  └──Pearl [akt. Gewicht:6, akt. Wert: 8]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "│     └──Coin");
+      Assertions.assertEquals(answer, "│     └──Coin [akt. Gewicht:10, akt. Wert: 28]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Crown");
+      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 7]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "   └──not Pearl");
+      Assertions.assertEquals(answer, "   └──not Pearl [akt. Gewicht:6, akt. Wert: 7]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "      └──Coin");
+      Assertions.assertEquals(answer, "      └──Coin [akt. Gewicht:10, akt. Wert: 27]");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
@@ -121,9 +120,9 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Crown");
+      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 6]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "   └──Pearl");
+      Assertions.assertEquals(answer, "   └──Pearl [akt. Gewicht:10, akt. Wert: 13]");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
@@ -172,9 +171,9 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Crown");
+      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 6]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "   └──Pearl");
+      Assertions.assertEquals(answer, "   └──Pearl [akt. Gewicht:10, akt. Wert: 13]");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
@@ -182,7 +181,7 @@ public class BackTrackingTreeTest {
 
   /**
    * this test tests if an already added item gets added again
-   * and if the lightest item can be added even if its not
+   * and if the lightest item can be added even if it is not
    */
   @Test
   public void test4() {
@@ -204,7 +203,7 @@ public class BackTrackingTreeTest {
     tree.addToRucksack(pearl);
     tree.addToTrash(pearl);
     tree.addToTrash(pearl);
-
+    tree.print(System.out);
 
     // Ihr könnt eine Datei als PrintStream übergeben und den inhalt
     // der Datei dann mit dem erwarteten vergleichen
@@ -219,9 +218,11 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──not Pearl");
+      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 6]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Pearl");
+      Assertions.assertEquals(answer, "   ├──not Pearl [akt. Gewicht:6, akt. Wert: 6]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "   └──Pearl [akt. Gewicht:10, akt. Wert: 13]");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }

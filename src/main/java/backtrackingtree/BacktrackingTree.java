@@ -41,7 +41,7 @@ public class BacktrackingTree {
    */
   public void print(PrintStream os) {
     os.print(traversePreOrder(root));
-    System.out.println("");
+    System.out.println(" ");
     System.out.println("------------------");
   }
 

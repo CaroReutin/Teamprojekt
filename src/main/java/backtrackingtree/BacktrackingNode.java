@@ -122,12 +122,12 @@ public class BacktrackingNode {
           if (currentParent.getName().equals("root")) {
             break;
           }
-          currentParent = currentParent.parent;
+          currentParent = currentParent.getParent();
         }
       }
-      currentParent = currentParent.parent;
-      int newCurrentWeight = currentParent.currentWeight;
-      int newCurrentValue = currentParent.currentValue;
+      currentParent = currentParent.getParent();
+      int newCurrentWeight = currentParent.getCurrentWeight();
+      int newCurrentValue = currentParent.getCurrentValue();
       currentParent.setLeftChild(new BacktrackingNode(childItem, newCurrentWeight,
               newCurrentValue, capacity, itemList, currentParent, false));
       moveItemsIntoAvailable(currentParent.rightChild);
@@ -147,12 +147,14 @@ public class BacktrackingNode {
    * puts all items which weights the same or less into available.
    * But already established parents do not get set to the state TRASH.
    *
-   * @param currentNode which is thrown from rucksack into trash.
+   * @param gotIntoTrashNode which is thrown from rucksack into trash.
    */
-  private void moveItemsIntoAvailable(BacktrackingNode currentNode) {
+  private void moveItemsIntoAvailable(final BacktrackingNode gotIntoTrashNode) {
+    BacktrackingNode currentNode = gotIntoTrashNode;
     int weight = currentNode.item.getWeight();
 
     ArrayList<BacktrackingItem> parentItems = new ArrayList<>();
+    currentNode = currentNode.parent;
     while (currentNode.item.getWeight() == weight) {
       parentItems.add(currentNode.parent.item);
       currentNode = currentNode.parent;
@@ -162,11 +164,11 @@ public class BacktrackingNode {
     for (BacktrackingItem items : parentItems) {
       sb.append(items.getName()).append(", ");
     }
-    System.out.println("Liste der Item, dessen Status nicht verändert werden darf: " + sb);
+    System.out.println("Liste der Items mit gleichem Gewicht, dessen Status nicht verändert werden darf: " + sb);
 
     for (BacktrackingItem currentItem : itemList) {
       //same weight or lower gets into available
-      if (currentItem.getWeight() <= weight && !currentItem.getName().equals(currentNode.item.getName())) {
+      if (currentItem.getWeight() <= weight && !currentItem.getName().equals(gotIntoTrashNode.item.getName())) {
         //items only get set to available if item is not a parent
         if (!parentItems.contains(currentItem)) {
           currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
@@ -371,5 +373,14 @@ public class BacktrackingNode {
    */
   public int getCurrentValue() {
     return currentValue;
+  }
+
+  /**
+   * returns the parent of this class
+   *
+   * @return the parent of this instance
+   */
+  public BacktrackingNode getParent() {
+    return parent;
   }
 }
