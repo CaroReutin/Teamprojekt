@@ -1,6 +1,7 @@
 package solving;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -9,7 +10,16 @@ import javax.xml.bind.Unmarshaller;
 /**
  * The type User data manager.
  */
-public class UserDataManager {
+public final class UserDataManager {
+
+  /**
+   * do not make.
+   */
+  private UserDataManager() {
+
+  }
+
+
   /**
    * the new user data.
    */
@@ -23,7 +33,8 @@ public class UserDataManager {
   }
 
   /**
-   * Tries to get default save location based on OS then calls save(String saveFolder) with that location.
+   * Tries to get default save location
+   * based on OS then calls save(String saveFolder) with that location.
    * Always Overwrites old save file if it exists in default save location.
    */
   public static void save() {
@@ -41,10 +52,10 @@ public class UserDataManager {
   /**
    * Always Overwrites old save file if it exists in saveFolder.
    *
-   * @param saveFolder the Folder in which userData.save should be saved in
+   * @param saveFolder the Folder in which userData.xml should be saved in
    */
-  public static void save(String saveFolder) {
-    new File(saveFolder).mkdirs();
+  public static void save(final String saveFolder) {
+    Boolean ignoreResult = new File(saveFolder).mkdirs();
     String saveFilePath = saveFolder + "/userData.xml";
     try {
       FileOutputStream fos = new FileOutputStream(saveFilePath);
@@ -62,8 +73,10 @@ public class UserDataManager {
   }
 
   /**
-   * Tries to get default save location based on OS then calls load(String saveFolder) with that location.
-   * If the userData.save file is not in the specified directory a new User will be created and saved in that directory
+   * Tries to get default save location based on OS,
+   * then calls load(String saveFolder) with that location.
+   * If the userData.xml file is not in the specified directory,
+   * a new User will be created and saved in that directory.
    */
   public static void load() {
     if (System.getProperty("os.name").contains("Windows")) {
@@ -78,12 +91,13 @@ public class UserDataManager {
   }
 
   /**
-   * If the userData.save file is not in the specified directory a new User will be created and saved in that directory.
+   * If the userData.save file is not in the specified directory,
+   * a new User will be created and saved in that directory.
    *
    * @param saveFolder the Folder that contains userData.save
    */
-  public static void load(String saveFolder) {
-    new File(saveFolder).mkdirs();
+  public static void load(final String saveFolder) {
+    Boolean ignoreResult = new File(saveFolder).mkdirs();
     String saveFilePath = saveFolder + "/userData.xml";
     File saveFile = new File(saveFilePath);
     if (!saveFile.exists()) {
@@ -108,18 +122,19 @@ public class UserDataManager {
    * @return returns the current high score
    * @throws IndexOutOfBoundsException if there is no entry for level
    */
-  public static int getScore(int level) throws IndexOutOfBoundsException {
+  public static int getScore(final int level) throws IndexOutOfBoundsException {
     return data.getScore(level);
   }
 
   /**
-   * There is no check whether the newHighScore is actually higher than the old one.
+   * There is no check whether the newHighScore is actually higher than before.
    *
    * @param level the index of the level
    * @param score the new high score
    * @throws IndexOutOfBoundsException if there is no entry for level
    */
-  public static void newHighScore(int level, int score) throws IndexOutOfBoundsException {
+  public static void newHighScore(final int level, final int score)
+      throws IndexOutOfBoundsException {
     data.newHighScore(level, score);
   }
 
@@ -134,7 +149,8 @@ public class UserDataManager {
   /**
    * Data to string string.
    *
-   * @return returns the Scores in format x1|x2|...|x14|x15 where xn is the score of the nth Level
+   * @return returns the Scores in format x1|x2|...|x14|x15
+   *      where xn is the score of the nth Level
    */
   public static String dataToString() {
     return data.toString();

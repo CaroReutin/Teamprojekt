@@ -13,7 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 // !§$%/()=?"+#*~'`sèé^°,.;:_-@|äÄ were as saved correctly
 
 /**
- * Do not make a Solving.UserData object, use the static methods in UserDataManager instead.
+ * Do not make a Solving.UserData object,
+ * use the static methods in UserDataManager instead.
  */
 @XmlRootElement
 public class UserData implements Serializable {
@@ -34,13 +35,14 @@ public class UserData implements Serializable {
   }
 
   /**
-   * There is no check whether the newHighScore is actually higher than the old one.
+   * There is no check whether the newHighScore is actually higher than before.
    *
    * @param level the index of the level
    * @param score the new high score
    * @throws IndexOutOfBoundsException if there is no entry for level
    */
-  public void newHighScore(int level, int score) throws IndexOutOfBoundsException {
+  public void newHighScore(final int level, final int score)
+          throws IndexOutOfBoundsException {
     bestLevelScores.set(level, score);
   }
 
@@ -51,14 +53,15 @@ public class UserData implements Serializable {
    * @return returns the current high score
    * @throws IndexOutOfBoundsException if there is no entry for level
    */
-  public int getScore(int level) throws IndexOutOfBoundsException {
+  public int getScore(final int level) throws IndexOutOfBoundsException {
     return bestLevelScores.get(level);
   }
 
   /**
    * Changes the format to string.
    *
-   * @return returns the Scores in format x1|x2|...|x14|x15 where xn is the score of the nth Level
+   * @return returns the Scores in format x1|x2|...|x14|x15
+   *      where xn is the score of the nth Level
    */
   @Override
   public String toString() {
