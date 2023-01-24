@@ -22,13 +22,13 @@ public class GuiFrontpage {
     pane.setLayout(null);
 
     Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
-    Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
 
     JLabel titel = new JLabel("Optimal Heist");
     titel.setBounds(360, 50, 400, 70);
     titel.setFont(fontStyle);
     pane.add(titel);
 
+    Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
     JButton levelButton = new JButton("Level");
     levelButton.setBounds(380, 150, 300, 60);
     levelButton.setFont(fontButtons);
@@ -44,9 +44,7 @@ public class GuiFrontpage {
     ownLevelButton.setFont(fontButtons);
     pane.add(ownLevelButton);
 
-    ownLevelButton.addActionListener(e -> {
-      GuiManager.openLevelEditor();
-    });
+    ownLevelButton.addActionListener(e -> GuiManager.openLevelEditor());
 
     JButton settingsButton = new JButton("Einstellungen");
     settingsButton.setBounds(380, 300, 300, 60);

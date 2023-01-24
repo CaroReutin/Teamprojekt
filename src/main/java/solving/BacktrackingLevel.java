@@ -1,36 +1,42 @@
 package solving;
 
+import java.util.ArrayList;
 import rucksack.Item;
 import rucksack.Level;
-
-import java.util.ArrayList;
 
 /**
  * The type Backtracking level.
  */
-public class BacktrackingLevel {
+public final class BacktrackingLevel {
+  /**
+   * do not make.
+   */
+  private BacktrackingLevel() {
 
-  private static Level[] levelBacktracking = new Level[7];
+  }
+
+  /**
+   * The Backtracking level.
+   */
+  private static final Level[] LEVEL_BACKTRACKING = new Level[7];
 
   /**
    * Initialize backtracking.
-   *
-   * @param items         the items
-   * @param currentItems  the current items
-   * @param currentAmount the current amount
    */
-  public static void initializeBacktracking(ArrayList<Item> items, ArrayList<Item> currentItems, ArrayList<Integer> currentAmount) {
+  public static void initializeBacktracking() {
     //Backtracking Level
     //Backtracking Level 1
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
+    ArrayList<Item> currentItems = new ArrayList<>();
+    ArrayList<Integer> currentAmount = new ArrayList<>();
     currentItems.add(AppData.generateItem(48));
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(49));
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(50));
     currentAmount.add(1);
-    levelBacktracking[0] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 8, 10);
+    LEVEL_BACKTRACKING[0] =
+        new Level(currentItems, currentAmount,
+            Level.Robber.BACKTRACKING_BANDIT, 8, 10);
 
 
     //Backtracking Level 2
@@ -44,7 +50,9 @@ public class BacktrackingLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(17));
     currentAmount.add(1);
-    levelBacktracking[1] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 9, 10);
+    LEVEL_BACKTRACKING[1] =
+        new Level(currentItems, currentAmount,
+            Level.Robber.BACKTRACKING_BANDIT, 9, 10);
 
 
     //Backtracking Level 3
@@ -60,7 +68,9 @@ public class BacktrackingLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(57));
     currentAmount.add(1);
-    levelBacktracking[2] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 10, 20);
+    LEVEL_BACKTRACKING[2] =
+        new Level(currentItems, currentAmount,
+            Level.Robber.BACKTRACKING_BANDIT, 10, 20);
 
     //Backtracking Level 4
     currentItems = new ArrayList<>();
@@ -75,7 +85,9 @@ public class BacktrackingLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(61));
     currentAmount.add(1);
-    levelBacktracking[3] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 11, 14);
+    LEVEL_BACKTRACKING[3] =
+        new Level(currentItems, currentAmount,
+            Level.Robber.BACKTRACKING_BANDIT, 11, 14);
 
     //Backtracking Level 5
     currentItems = new ArrayList<>();
@@ -90,7 +102,9 @@ public class BacktrackingLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(65));
     currentAmount.add(1);
-    levelBacktracking[4] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 12, 20);
+    LEVEL_BACKTRACKING[4] =
+        new Level(currentItems, currentAmount,
+            Level.Robber.BACKTRACKING_BANDIT, 12, 20);
 
     //Backtracking Level 6
     currentItems = new ArrayList<>();
@@ -105,7 +119,9 @@ public class BacktrackingLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(69));
     currentAmount.add(1);
-    levelBacktracking[5] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 13, 25);
+    LEVEL_BACKTRACKING[5] =
+        new Level(currentItems, currentAmount,
+            Level.Robber.BACKTRACKING_BANDIT, 13, 25);
 
     //Backtracking Level 7
     currentItems = new ArrayList<>();
@@ -122,7 +138,9 @@ public class BacktrackingLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(74));
     currentAmount.add(1);
-    levelBacktracking[6] = new Level(currentItems, currentAmount, Level.Robber.BACKTRACKING_BANDIT, 14, 42);
+    LEVEL_BACKTRACKING[6] =
+        new Level(currentItems, currentAmount,
+            Level.Robber.BACKTRACKING_BANDIT, 14, 42);
   }
 
   /**
@@ -131,8 +149,8 @@ public class BacktrackingLevel {
    * @param level the level
    * @return the level backtracking
    */
-  public static Level getLevelBacktracking(int level) {
-    return levelBacktracking[level];
+  public static Level getLevelBacktracking(final int level) {
+    return LEVEL_BACKTRACKING[level];
   }
 
 }

@@ -5,7 +5,15 @@ import solving.UserDataManager;
 /**
  * The type Main.
  */
-public class Main {
+public final class Main {
+  /**
+   * do not make.
+   */
+  private Main() {
+
+  }
+
+
   /**
    * The entry point of application.
    *
@@ -13,7 +21,7 @@ public class Main {
    */
   public static void main(final String[] args) {
     AppData.initialize();
-    AppData.InitializeBeginningLevel();
+    AppData.initializeBeginningLevel();
     AppData.initializeItems();
     UserDataManager.load();
 

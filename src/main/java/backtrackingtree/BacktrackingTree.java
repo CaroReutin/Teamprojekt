@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import rucksack.BacktrackingItem;
 
 
-
 /**
  * this class represents the backtracking tree.
  */
@@ -30,7 +29,7 @@ public class BacktrackingTree {
   public BacktrackingTree(final int bagCapacity,
                           final ArrayList<BacktrackingItem> itemArrayList) {
     root = new BacktrackingNode(new BacktrackingItem(0, 0, "root"),
-            0, 0, bagCapacity, itemArrayList, null, true);
+        0, 0, bagCapacity, itemArrayList, null, true);
     currentNode = root;
   }
 
@@ -39,39 +38,43 @@ public class BacktrackingTree {
    *
    * @param os the print stream
    */
-  public void print(PrintStream os) {
+  public void print(final PrintStream os) {
     os.print(traversePreOrder(root));
     System.out.println(" ");
     System.out.println("------------------");
   }
 
 
-  private String traversePreOrder(BacktrackingNode root) {
+  private String traversePreOrder(final BacktrackingNode myRoot) {
 
-    if (root == null) {
+    if (myRoot == null) {
       return "";
     }
 
     StringBuilder sb = new StringBuilder();
-    sb.append(root.getName());
+    sb.append(myRoot.getName());
 
     String pointerRight = "└──";
-    String pointerLeft = (root.getRightChild() != null) ? "├──" : "└──";
+    String pointerLeft = (myRoot.getRightChild() != null) ? "├──" : "└──";
 
-    traverseNodes(sb, "", pointerLeft, root.getLeftChild(), root.getRightChild() != null);
-    traverseNodes(sb, "", pointerRight, root.getRightChild(), false);
+    traverseNodes(sb, "", pointerLeft, myRoot.getLeftChild(),
+        myRoot.getRightChild() != null);
+    traverseNodes(sb, "", pointerRight, myRoot.getRightChild(), false);
 
     return sb.toString();
   }
 
-  private void traverseNodes(StringBuilder sb, String padding, String pointer, BacktrackingNode node,
-                            boolean hasRightSibling) {
+  private void traverseNodes(final StringBuilder sb, final String padding,
+                             final String pointer,
+                             final BacktrackingNode node,
+                             final boolean hasRightSibling) {
     if (node != null) {
       sb.append("\n");
       sb.append(padding);
       sb.append(pointer);
-      sb.append(node.getName()).append(" [akt. Gewicht:").append(node.getCurrentWeight())
-              .append(", akt. Wert: ").append(node.getCurrentValue()).append("]");
+      sb.append(node.getName()).append(" [akt. Gewicht:")
+          .append(node.getCurrentWeight())
+          .append(", akt. Wert: ").append(node.getCurrentValue()).append("]");
 
       StringBuilder paddingBuilder = new StringBuilder(padding);
       if (hasRightSibling) {
@@ -84,8 +87,10 @@ public class BacktrackingTree {
       String pointerRight = "└──";
       String pointerLeft = (node.getRightChild() != null) ? "├──" : "└──";
 
-      traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeftChild(), node.getRightChild() != null);
-      traverseNodes(sb, paddingForBoth, pointerRight, node.getRightChild(), false);
+      traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeftChild(),
+          node.getRightChild() != null);
+      traverseNodes(sb, paddingForBoth, pointerRight,
+          node.getRightChild(), false);
     }
   }
 
@@ -95,7 +100,8 @@ public class BacktrackingTree {
    * @param item said item
    */
   public void addToRucksack(final BacktrackingItem item) {
-    System.out.println(item.getName() + " soll dem Rucksack hinzugefügt werden.");
+    System.out.println(item.getName()
+        + " soll dem Rucksack hinzugefügt werden.");
     boolean addedSuccessfully = currentNode.addToRucksack(item);
 
     if (addedSuccessfully) {
@@ -117,9 +123,9 @@ public class BacktrackingTree {
     if (newCurrent != null) {
       currentNode = newCurrent;
       System.out.println("Item " + item.getName()
-              + " wurde in den Müll gelegt.");
+          + " wurde in den Müll gelegt.");
       System.out.println("Der current Node ist nun "
-              + currentNode.getName());
+          + currentNode.getName());
     }
     System.out.println("-----------------");
   }

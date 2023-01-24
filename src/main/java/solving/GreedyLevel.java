@@ -1,35 +1,41 @@
 package solving;
 
+import java.util.ArrayList;
 import rucksack.Item;
 import rucksack.Level;
 
-import java.util.ArrayList;
 
 /**
  * The type Greedy level.
  */
-public class GreedyLevel {
+public final class GreedyLevel {
+  /**
+   * do not make.
+   */
+  private GreedyLevel() {
 
-  private static Level[] levelGreedy = new Level[7];
+  }
+
+  /**
+   * The Greedy level.
+   */
+  private static final Level[] LEVEL_GREEDY = new Level[7];
 
   /**
    * Initialize greedy.
-   *
-   * @param items         the items
-   * @param currentItems  the current items
-   * @param currentAmount the current amount
    */
-  public static void initializeGreedy(ArrayList<Item> items, ArrayList<Item> currentItems, ArrayList<Integer> currentAmount) {
+  public static void initializeGreedy() {
     // Greedy Level 1
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
+    ArrayList<Item> currentItems = new ArrayList<>();
+    ArrayList<Integer> currentAmount = new ArrayList<>();
     currentItems.add(AppData.generateItem(9));
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(11));
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(13));
     currentAmount.add(1);
-    levelGreedy[0] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 1, 6);
+    LEVEL_GREEDY[0] = new Level(currentItems, currentAmount,
+        rucksack.Level.Robber.GIERIGER_GANOVE, 1, 6);
 
     // Greedy Level 2
     currentItems = new ArrayList<>();
@@ -40,7 +46,8 @@ public class GreedyLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(12));
     currentAmount.add(1);
-    levelGreedy[1] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 2, 9);
+    LEVEL_GREEDY[1] = new Level(currentItems, currentAmount,
+        rucksack.Level.Robber.GIERIGER_GANOVE, 2, 9);
 
     //Greedy Level 3
     currentItems = new ArrayList<>();
@@ -49,7 +56,8 @@ public class GreedyLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(18));
     currentAmount.add(1);
-    levelGreedy[2] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 3, 9);
+    LEVEL_GREEDY[2] = new Level(currentItems, currentAmount,
+        Level.Robber.GIERIGER_GANOVE, 3, 9);
 
 
     //Greedy Level 4
@@ -65,7 +73,8 @@ public class GreedyLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(7));
     currentAmount.add(2);
-    levelGreedy[3] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 4, 20);
+    LEVEL_GREEDY[3] = new Level(currentItems, currentAmount,
+        Level.Robber.GIERIGER_GANOVE, 4, 20);
 
 
     //Greedy Level 5
@@ -87,7 +96,8 @@ public class GreedyLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(32));
     currentAmount.add(1);
-    levelGreedy[4] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 5, 35);
+    LEVEL_GREEDY[4] = new Level(currentItems, currentAmount,
+        Level.Robber.GIERIGER_GANOVE, 5, 35);
 
 
     //Greedy Level 6
@@ -111,7 +121,8 @@ public class GreedyLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(47));
     currentAmount.add(1);
-    levelGreedy[5] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 6, 100);
+    LEVEL_GREEDY[5] = new Level(currentItems, currentAmount,
+        Level.Robber.GIERIGER_GANOVE, 6, 100);
 
 
     //Greedy Level 7
@@ -143,7 +154,8 @@ public class GreedyLevel {
     currentAmount.add(1);
     currentItems.add(AppData.generateItem(24));
     currentAmount.add(2);
-    levelGreedy[6] = new Level(currentItems, currentAmount, Level.Robber.GIERIGER_GANOVE, 7, 426);
+    LEVEL_GREEDY[6] = new Level(currentItems, currentAmount,
+        Level.Robber.GIERIGER_GANOVE, 7, 426);
 
   }
 
@@ -153,8 +165,8 @@ public class GreedyLevel {
    * @param level the level
    * @return the level greedy
    */
-  public static Level getLevelGreedy(int level) {
-    return levelGreedy[level];
+  public static Level getLevelGreedy(final int level) {
+    return LEVEL_GREEDY[level];
   }
 
 

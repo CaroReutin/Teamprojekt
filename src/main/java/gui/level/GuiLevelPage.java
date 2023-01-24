@@ -22,7 +22,13 @@ import solving.UserDataManager;
  * This class holds the gui pane of the levelpage.
  */
 public class GuiLevelPage {
+  /**
+   * last backtracking level index.
+   */
   public static final int LAST_BACKTRACKING_LEVELNUMBER = 14;
+  /**
+   * last greedy level index.
+   */
   public static final int LAST_GREEDY_LEVELNUMBER = 7;
   /**
    * the level which is currently played.
@@ -231,11 +237,11 @@ public class GuiLevelPage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance
-            (170, 300, java.awt.Image.SCALE_SMOOTH);
+        rucksackImage.getImage().getScaledInstance(
+            170, 300, java.awt.Image.SCALE_SMOOTH);
 
 
-    JPanel leftPanel = new JBackgroundPanel(scaledRucksackImage);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage);
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel rightPanel = new JPanel();
     //JPanel rightPanel = new JPanel
@@ -265,6 +271,11 @@ public class GuiLevelPage {
   }
 
 
+  /**
+   * returns the level number.
+   *
+   * @return the level number.
+   */
   public int getLevelNumber() {
     return this.level.getLevelNumber();
   }
