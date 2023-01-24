@@ -1,9 +1,9 @@
 /**
  * this package contains all necessary classes to implement the
- * rucksack.
+ * gui.
  *
  * @version 0.1
  * @author Erber, Fohrer
  */
 
-package rucksack;
+package gui.level;
