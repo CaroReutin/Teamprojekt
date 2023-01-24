@@ -61,7 +61,7 @@ public class UserData implements Serializable {
    * Changes the format to string.
    *
    * @return returns the Scores in format x1|x2|...|x14|x15
-   * where xn is the score of the nth Level
+   *      where xn is the score of the nth Level
    */
   @Override
   public String toString() {
