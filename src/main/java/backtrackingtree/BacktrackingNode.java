@@ -1,9 +1,8 @@
 package backtrackingtree;
 
-import rucksack.BacktrackingItem;
-
 import java.util.ArrayList;
 import java.util.Objects;
+import rucksack.BacktrackingItem;
 
 
 /**
@@ -69,12 +68,14 @@ public class BacktrackingNode {
    * @param bagCapacity    the maximum capacity of the bag
    * @param sortedItemList list of the items of the level
    * @param myParent       parent of this node
-   * @param isInBag        true if item is in the bag, false if it's in the trash
+   * @param isInBag        true if item is in the bag, false if
+   *                      it's in the trash
    */
   public BacktrackingNode(final BacktrackingItem bagItem, final int oldWeight,
                           final int oldValue, final int bagCapacity,
                           final ArrayList<BacktrackingItem> sortedItemList,
-                          final BacktrackingNode myParent, boolean isInBag) {
+                          final BacktrackingNode myParent,
+                          final boolean isInBag) {
     item = bagItem;
     if (item.getState() == BacktrackingItem.StateBacktracking.TRASH) {
       currentValue = oldValue;
@@ -128,8 +129,9 @@ public class BacktrackingNode {
       currentParent = currentParent.getParent();
       int newCurrentWeight = currentParent.getCurrentWeight();
       int newCurrentValue = currentParent.getCurrentValue();
-      currentParent.setLeftChild(new BacktrackingNode(childItem, newCurrentWeight,
-              newCurrentValue, capacity, itemList, currentParent, false));
+      currentParent.setLeftChild(new BacktrackingNode(childItem,
+          newCurrentWeight, newCurrentValue, capacity, itemList,
+          currentParent, false));
       moveItemsIntoAvailable(currentParent.rightChild);
       return currentParent.getLeftChild();
 
@@ -139,7 +141,8 @@ public class BacktrackingNode {
               currentValue, capacity, itemList, this, false);
       return leftChild;
     }
-    System.out.println(childItem.getName() + " konnte nicht in den Müll geworfen werden.");
+    System.out.println(childItem.getName()
+        + " konnte nicht in den Müll geworfen werden.");
     return null;
   }
 
@@ -164,11 +167,13 @@ public class BacktrackingNode {
     for (BacktrackingItem items : parentItems) {
       sb.append(items.getName()).append(", ");
     }
-    System.out.println("Liste der Items mit gleichem Gewicht, dessen Status nicht verändert werden darf: " + sb);
+    System.out.println("Liste der Items mit gleichem Gewicht"
+        + ", dessen Status nicht verändert werden darf: " + sb);
 
     for (BacktrackingItem currentItem : itemList) {
       //same weight or lower gets into available
-      if (currentItem.getWeight() <= weight && !currentItem.getName().equals(gotIntoTrashNode.item.getName())) {
+      if (currentItem.getWeight() <= weight && !currentItem
+          .getName().equals(gotIntoTrashNode.item.getName())) {
         //items only get set to available if item is not a parent
         if (!parentItems.contains(currentItem)) {
           currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
@@ -254,7 +259,8 @@ public class BacktrackingNode {
                     == BacktrackingItem.StateBacktracking.AVAILABLE) {
               System.out.println("Item " + newBagItem.getName()
                       + " ist nicht das nächstverfügbare,"
-                      + " weil es noch verfügbare schwerere Items gibt. Dieses ist zB "
+                      + " weil es noch verfügbare "
+                      + "schwerere Items gibt. Dieses ist zB "
                       + itemList.get(i).getName());
               return false;
             }
@@ -284,7 +290,8 @@ public class BacktrackingNode {
     }
 
     //case when we want to add a lighter item.
-    //index of this node's item is not the first one or the last one of the itemList
+    //index of this node's item is not the first one
+    // or the last one of the itemList
     //if (indexThis != 0 && indexThis != itemList.size() - 1) {
     // thisItem is at a middle position in the list.
     //case if left and right does not have the same weight as this
@@ -340,7 +347,7 @@ public class BacktrackingNode {
   }
 
   /**
-   * returns the name of this node
+   * returns the name of this node.
    *
    * @return said name
    */
@@ -349,16 +356,16 @@ public class BacktrackingNode {
   }
 
   /**
-   * sets the left child of this node
+   * sets the left child of this node.
    *
-   * @param leftChild saif child which is going to be set
+   * @param myLeftChild saif child which is going to be set
    */
-  public void setLeftChild(BacktrackingNode leftChild) {
-    this.leftChild = leftChild;
+  public void setLeftChild(final BacktrackingNode myLeftChild) {
+    this.leftChild = myLeftChild;
   }
 
   /**
-   * return the current value
+   * return the current value.
    *
    * @return said value
    */
@@ -367,7 +374,7 @@ public class BacktrackingNode {
   }
 
   /**
-   * returns the current weight
+   * returns the current weight.
    *
    * @return said weight
    */
@@ -376,7 +383,7 @@ public class BacktrackingNode {
   }
 
   /**
-   * returns the parent of this class
+   * returns the parent of this class.
    *
    * @return the parent of this instance
    */
