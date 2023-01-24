@@ -196,22 +196,22 @@ public final class AppData {
   }
 
   /**
-   * Initialize.
+   * gets the level.
    *
    * @param level the level
    * @return the level
    */
-  public static Level initializeGreedy(final int level) {
+  public static Level getGreedyLevel(final int level) {
     return GreedyLevel.getLevelGreedy(level);
   }
 
   /**
-   * Initialize backtracking level.
+   * gets the level.
    *
    * @param level the level
    * @return the level
    */
-  public static Level initializeBacktracking(final int level) {
+  public static Level getBacktrackingLevel(final int level) {
     return BacktrackingLevel.getLevelBacktracking(level);
   }
 

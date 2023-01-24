@@ -21,7 +21,7 @@ public class SolverGreedy extends Solver {
   public ArrayList<Item> solveAlgorithm(final Level level) {
     ArrayList<Item> items = level.getItemList();
     ArrayList<Integer> amount = level.getItemAmountList();
-    int capacity = level.getRucksackCapacity();
+    int capacity = level.getCapacity();
     return solveGreedy(items, amount, capacity);
   }
 
