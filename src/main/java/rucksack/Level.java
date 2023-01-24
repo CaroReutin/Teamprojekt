@@ -176,16 +176,6 @@ public class Level implements Serializable {
   }
 
   /**
-   * Get rucksack capacity int.
-   *
-   * @return Returns the capacity of the Rucksack
-   */
-  public int getRucksackCapacity() {
-    return capacity;
-  }
-
-
-  /**
    * NOTE: this does not return the items still available in the level
    * (i.e. the ones not in the Backpack)
    *
