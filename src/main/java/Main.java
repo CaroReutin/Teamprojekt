@@ -5,7 +5,15 @@ import solving.UserDataManager;
 /**
  * The type Main.
  */
-public class Main {
+public final class Main {
+  /**
+   * do not make.
+   */
+  private Main() {
+
+  }
+
+
   /**
    * The entry point of application.
    *
