@@ -12,21 +12,22 @@ public class GuiManager {
   /**
    * the current gui frontpage.
    */
-  private static final GuiFrontpage guiFrontPage = new GuiFrontpage();
+  private static final GuiFrontpage GUI_FRONTPAGE = new GuiFrontpage();
   /**
    * the current gui optionspage.
    */
-  private static final GuiOptionsPage guiOptionsPage = new GuiOptionsPage();
+  private static final GuiOptionsPage GUI_OPTIONS_PAGE = new GuiOptionsPage();
 
   /**
    * the current gui Level editor page.
    */
-  private static final GuiLevelEditorPage guiLevelEditorPage
+  private static final GuiLevelEditorPage GUI_LEVEL_EDITOR_PAGE
       = new GuiLevelEditorPage();
   /**
    * the current gui leveldeciderpage.
    */
-  private static GuiLevelDeciderPage guiLevelDeciderPage = new GuiLevelDeciderPage();
+  private static final GuiLevelDeciderPage GUI_LEVEL_DECIDER_PAGE
+      = new GuiLevelDeciderPage();
   /**
    * the frame of all windows.
    */
@@ -36,19 +37,11 @@ public class GuiManager {
    * Opens the Leveleditor.
    */
   public static void openLevelEditor() {
-    frame.setContentPane(guiLevelEditorPage.getPane());
+    frame.setContentPane(GUI_LEVEL_EDITOR_PAGE.getPane());
     frame.setTitle("Level-editor");
     paint();
   }
 
-  /**
-   * Width of the game's frame.
-   */
-  private final int frameWidth = 1000;
-  /**
-   * Height of the game's frame.
-   */
-  private final int frameHeight = 750;
   /**
    * Opens the main Menu.
    */
@@ -56,7 +49,7 @@ public class GuiManager {
     frame = new JFrame();
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setTitle("Optimal Heist");
-    frame.setSize(frameWidth, frameHeight);
+    frame.setSize(1000, 750);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
     frame.setResizable(false);
@@ -79,7 +72,7 @@ public class GuiManager {
    * always be opened, regardless where the options menu was opened from).
    */
   public static void openOptionsMenu() {
-    frame.setContentPane(guiOptionsPage.getPane());
+    frame.setContentPane(GUI_OPTIONS_PAGE.getPane());
     frame.setTitle("Optionsmenü");
     paint();
   }
@@ -88,7 +81,7 @@ public class GuiManager {
    * Opens the LevelSelectionScreen.
    */
   public static void openLevelSelectScreen() {
-    frame.setContentPane(guiLevelDeciderPage.getPane());
+    frame.setContentPane(GUI_LEVEL_DECIDER_PAGE.getPane());
     frame.setTitle("Levelauswahl");
     paint();
   }
@@ -97,10 +90,11 @@ public class GuiManager {
    * Opens the main Menu.
    */
   public static void openMainMenu() {
-    frame.setContentPane(guiFrontPage.getPane());
+    frame.setContentPane(GUI_FRONTPAGE.getPane());
     frame.setTitle("Hauptmenü");
     paint();
   }
+
   /**
    * Opens the Level.
    *
@@ -135,9 +129,10 @@ public class GuiManager {
 
   /**
    * Gets the GUILevelDeciderPage.
+   *
    * @return the level decider page
    */
   public static GuiLevelDeciderPage getGuiLevelDeciderPage() {
-    return guiLevelDeciderPage;
+    return GUI_LEVEL_DECIDER_PAGE;
   }
 }

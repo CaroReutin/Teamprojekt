@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 /**
  * The type J background panel.
  */
-public class JBackgroundPanel extends JPanel {
+public class JbackgroundPanel extends JPanel {
 
   /**
    * the image of the background of guiLevelPage.
@@ -19,12 +19,15 @@ public class JBackgroundPanel extends JPanel {
   /**
    * Instantiates a new J background panel.
    *
-   * @param background the background
+   * @param myBackground the background
    */
-  public JBackgroundPanel(final Image background) {
-    this.background = background;
+  public JbackgroundPanel(final Image myBackground) {
+    this.background = myBackground;
   }
 
+  /**
+   * paints.
+   */
   @Override
   protected void paintComponent(final Graphics g) {
 

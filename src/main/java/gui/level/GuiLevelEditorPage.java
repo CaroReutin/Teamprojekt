@@ -36,10 +36,7 @@ import solving.CustomLevelManager;
  * The Level Editor Class.
  */
 public final class GuiLevelEditorPage {
-  /**
-   * Amount of rows for the grid layout.
-   */
-  private final int gridRows = 5;
+
   /**
    * The Level Editor.
    *
@@ -55,7 +52,7 @@ public final class GuiLevelEditorPage {
     pane.setLayout(new BorderLayout());
 
     Container leftPane = new Container();
-    leftPane.setLayout(new GridLayout(gridRows, 2));
+    leftPane.setLayout(new GridLayout(5, 2));
 
     JLabel titel = new JLabel("Titel: ");
     titel.setFont(AppData.FONT_STYLE);
@@ -107,9 +104,9 @@ public final class GuiLevelEditorPage {
           Item nextItem = itemPanel.generateItem();
           for (Item item : itemList) {
             if (item.getValue() == nextItem.getValue()
-                    && item.getWeight() == nextItem.getWeight()) {
+                && item.getWeight() == nextItem.getWeight()) {
               showMessageDialog(pane, "Kein Item darf denselben Wert"
-                      + " und dasselbe Gewicht wie ein anderes haben.");
+                  + " und dasselbe Gewicht wie ein anderes haben.");
               return;
             }
           }
@@ -122,7 +119,7 @@ public final class GuiLevelEditorPage {
       }
 
       if (titleField.getText().equals("")
-              || capacityField.getText().equals("")) {
+          || capacityField.getText().equals("")) {
         showMessageDialog(pane, "Titel und Kapazität darf nicht leer sein!");
       }
 

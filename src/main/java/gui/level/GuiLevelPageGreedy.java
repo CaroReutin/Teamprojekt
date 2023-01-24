@@ -1,14 +1,24 @@
 package gui.level;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.net.URL;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import rucksack.Item;
 import rucksack.Level;
 
-import javax.swing.*;
-import java.awt.*;
-import java.net.URL;
-import java.util.ArrayList;
-
-public class GuiLevelPageGreedy extends GuiLevelPage{
+/**
+ * greedy level pages.
+ */
+public class GuiLevelPageGreedy extends GuiLevelPage {
   /**
    * the labels of the page.
    */
@@ -26,45 +36,66 @@ public class GuiLevelPageGreedy extends GuiLevelPage{
    */
   private JLabel currentWeightLabel;
 
-  public GuiLevelPageGreedy(Level level) {
+  /**
+   * make a new greedy level page.
+   *
+   * @param level the level
+   */
+  public GuiLevelPageGreedy(final Level level) {
     super(level);
   }
 
+  /**
+   * makes the Item Buttons.
+   *
+   * @param panelItems    The right panel where the buttons for
+   *                      the items NOT IN the bag should go to.
+   * @param panelRucksack The left panel where the buttons for
+   *                      the items IN the bag should go to.
+   */
   @Override
-  public void itemButtons(JPanel panelItems, JPanel panelRucksack) {
+  public void itemButtons(final JPanel panelItems,
+                          final JPanel panelRucksack) {
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
     Font fontCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle() | Font.BOLD));
+    currentWeightLabel.setFont(
+        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle()
+            | Font.BOLD));
 
     currentValueLabel = new JLabel("0€");
     Font fontCurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle() | Font.BOLD));
+    currentValueLabel.setFont(
+        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle()
+            | Font.BOLD));
 
     ArrayList<Item> items = getLevel().getItemList();
     labels = new JLabel[items.size()];
     rucksackLabels = new JLabel[items.size()];
     for (int i = 0; i < items.size(); i++) {
-      int finalI = i;
-      JButton current = new JButton(items.get(i).getName() + " (" + items.get(i).getWeight() + "g, "
-        + items.get(i).getValue() + "€)");
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
 
       Font f = labels[i].getFont();
       labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
 
-      JButton currentRucksack = new JButton(items.get(i).getName());
       rucksackLabels[i] = new JLabel("0");
       Font fontRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fontRucksack.deriveFont(fontRucksack.getStyle() | Font.BOLD));
+      rucksackLabels[i].setFont(fontRucksack
+          .deriveFont(fontRucksack.getStyle() | Font.BOLD));
+      int finalI = i;
+      JButton current = new JButton(items.get(i)
+          .getName() + " (" + items.get(i).getWeight() + "g, "
+          + items.get(i).getValue() + "€)");
       current.addActionListener(e -> {
         if (getLevel().getItemAmountAvailable(finalI) <= 0) {
           return;
         }
-        if ((getLevel().getCurrentWeight() + getLevel().getItemList().get(finalI).getWeight()) <= getLevel().getCapacity()) {
+        if ((getLevel().getCurrentWeight() + getLevel().getItemList()
+            .get(finalI).getWeight()) <= getLevel().getCapacity()) {
           getLevel().moveToRucksack(finalI);
           updateLabel(finalI);
         }
       });
+      JButton currentRucksack = new JButton(items.get(i).getName());
       currentRucksack.addActionListener(e -> {
         if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
           return;
@@ -85,6 +116,11 @@ public class GuiLevelPageGreedy extends GuiLevelPage{
     }
   }
 
+  /**
+   * returns the pane for the greedy Gui level page.
+   *
+   * @return the pane
+   */
   @Override
   public Container getPane() {
     Container pane = new Container();
@@ -92,14 +128,18 @@ public class GuiLevelPageGreedy extends GuiLevelPage{
 
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
+    assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
-    Image scaledRucksackImage = rucksackImage.getImage().getScaledInstance(170, 300, java.awt.Image.SCALE_SMOOTH);
+    Image scaledRucksackImage =
+        rucksackImage.getImage().getScaledInstance(170, 300,
+            java.awt.Image.SCALE_SMOOTH);
 
 
-    JPanel leftPanel = new JBackgroundPanel(scaledRucksackImage);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage);
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel rightPanel = new JPanel();
-    //JPanel rightPanel = new JPanel(new GridLayout(level.getItemList().size(), 1));
+    //JPanel rightPanel = new JPanel(new GridLayout
+    // (level.getItemList().size(), 1));
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
@@ -116,11 +156,18 @@ public class GuiLevelPageGreedy extends GuiLevelPage{
 
   }
 
+  /**
+   * updates Labels.
+   *
+   * @param i the index of the labels to update
+   */
   @Override
-  public void updateLabel(int i) {
+  public void updateLabel(final int i) {
     labels[i].setText(String.valueOf(getLevel().getItemAmountAvailable(i)));
-    rucksackLabels[i].setText(String.valueOf(getLevel().getItemAmountInRucksack(i)));
-    currentWeightLabel.setText(getLevel().getCurrentWeight() + "/" + getLevel().getCapacity() + "g");
+    rucksackLabels[i].setText(String.valueOf(getLevel()
+        .getItemAmountInRucksack(i)));
+    currentWeightLabel.setText(
+        getLevel().getCurrentWeight() + "/" + getLevel().getCapacity() + "g");
     currentValueLabel.setText((getLevel().getCurrentValue() + "€"));
   }
 }
