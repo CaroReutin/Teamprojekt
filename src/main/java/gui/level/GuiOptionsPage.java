@@ -1,0 +1,88 @@
+package gui.level;
+
+
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+import solving.AppData;
+
+
+/**
+ * The class GUIOptionsPage holds the pane of the optionspage.
+ */
+public class GuiOptionsPage {
+
+  /**
+   * Compares the given String with the set of implemented passwords.
+   *
+   * @param pw     the password that should be checked.
+   * @param parent the Container that dictates where the dialog should appear
+   *               (center of the container).
+   */
+  private static void confirmPassword(final String pw, final Container parent) {
+    if (pw.matches(AppData.getPassword(0))) {
+      JOptionPane.showMessageDialog(parent,
+          "Hinweise sind nun freigeschalten.",
+          "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+
+      //Level.tipsAllowed(true);
+    }
+  }
+
+  /**
+   * To be used with frame.setContentPane().
+   *
+   * @return returns the Container that contains the content of the options page
+   */
+  public Container getPane() {
+    Container pane = new Container();
+    pane.setSize(500, 500);
+    pane.setLayout(null);
+
+    JFormattedTextField passwordInput = new JFormattedTextField("");
+    GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+            "callConfirmPassword");
+    GuiManager.getRootPane().getActionMap()
+        .put("callConfirmPassword", new AbstractAction() {
+          @Override
+          public void actionPerformed(final ActionEvent e) {
+            confirmPassword(passwordInput.getText(), pane);
+          }
+        });
+    passwordInput.setBounds(3 * pane.getWidth() / 10,
+        pane.getHeight() / 10,
+        4 * pane.getWidth() / 10,
+        pane.getHeight() / 10);
+    JButton enterPassword = new JButton("Eingabe");
+    enterPassword.setBounds(4 * pane.getWidth() / 10,
+        2 * pane.getHeight() / 10 + passwordInput.getHeight(),
+        2 * pane.getWidth() / 10,
+        pane.getHeight() / 10);
+    enterPassword.addActionListener(e ->
+        confirmPassword(passwordInput.getText(), pane));
+    JButton back = new JButton("Zurück");
+    back.setBounds(4 * pane.getWidth() / 10,
+        3 * pane.getHeight() / 10 + passwordInput.getHeight()
+            + enterPassword.getHeight(),
+        2 * pane.getWidth() / 10,
+        pane.getHeight() / 10);
+    back.addActionListener(e -> {
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+          .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+      GuiManager.openMainMenu();
+    });
+    passwordInput.setValue("");
+    pane.add(passwordInput);
+    pane.add(enterPassword);
+    pane.add(back);
+
+    return pane;
+  }
+}
