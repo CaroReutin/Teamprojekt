@@ -71,11 +71,13 @@ public class GuiLevelPage {
     if (levelNumber <= 0 || levelNumber == LAST_GREEDY_LEVELNUMBER
         || levelNumber == LAST_BACKTRACKING_LEVELNUMBER) {
       flucht.addActionListener(e -> {
-        if (level.getCurrentValue() > UserDataManager.getScore(
-            level.getLevelNumber())) {
-          UserDataManager.newHighScore(level.getLevelNumber(),
-              level.getCurrentValue());
-          UserDataManager.save();
+        if (levelNumber >= 0) {
+          if (level.getCurrentValue() > UserDataManager.getScore(
+              level.getLevelNumber())) {
+            UserDataManager.newHighScore(level.getLevelNumber(),
+                level.getCurrentValue());
+            UserDataManager.save();
+          }
         }
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
