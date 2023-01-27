@@ -85,4 +85,20 @@ public class Item implements Serializable {
   public String toString() {
     return name + "\nWeight: " + weight + "\nValue: " + value;
   }
+
+  /**
+   * .
+   *
+   * @param depthRemaining .
+   * @return "
+   */
+  public String getBacktrackingName(final int depthRemaining) {
+    // TODO fix depth
+    int spacesPerDepth = 4;
+    assert name != null;
+    StringBuilder res = new StringBuilder(name);
+    int spacesRemaing = 10 + depthRemaining * spacesPerDepth - name.length();
+    res.append(" ".repeat(Math.max(0, spacesRemaing)));
+    return res.toString();
+  }
 }
