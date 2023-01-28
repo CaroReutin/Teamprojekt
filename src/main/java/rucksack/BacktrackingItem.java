@@ -58,17 +58,4 @@ public class BacktrackingItem extends Item {
   public void setState(final StateBacktracking stateBacktracking) {
     this.state = stateBacktracking;
   }
-
-  /**
-   * creates a new instance of this for the backtracking
-   * tree in case an item goes into the trash or rucksack.
-   *
-   * @return copied item
-   */
-  public BacktrackingItem newInstance() {
-    BacktrackingItem newItem = new BacktrackingItem(this.getValue(),
-            this.getWeight(), this.getName());
-    newItem.setState(this.state);
-    return newItem;
-  }
 }
