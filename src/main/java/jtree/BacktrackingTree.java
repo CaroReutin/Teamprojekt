@@ -15,6 +15,7 @@ public class BacktrackingTree {
    * .
    */
   private final JTree tree;
+  JFrame frame = new JFrame();
 
   /**
    * .
@@ -32,9 +33,13 @@ public class BacktrackingTree {
     tree = new JTree(root);
     tree.setRootVisible(true);
     tree.setVisible(true);
-    JFrame frame = new JFrame();
-    frame.setSize(400, 400);
+    frame.setSize(500, 500);
     frame.add(tree);
+    frame.setVisible(false);
+    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+  }
+
+  public void show() {
     frame.setVisible(true);
   }
 

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import jtree.BacktrackingTree;
 import rucksack.Item;
 import rucksack.Level;
 
@@ -156,6 +157,12 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
     //alles zusammenpuzzeln
 
+    BacktrackingTree tree = new BacktrackingTree(super.getLevel());
+    JButton treeButton = new JButton("Zeige Baum");
+    treeButton.addActionListener(e -> {
+      tree.show();
+    });
+    centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
     pane.add(rightPanel, BorderLayout.EAST);
