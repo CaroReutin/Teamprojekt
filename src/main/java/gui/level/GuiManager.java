@@ -4,6 +4,7 @@ package gui.level;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import java.awt.*;
 
 /**
  * The class GUIManager combines the gui pages.
@@ -52,7 +53,7 @@ public class GuiManager {
     frame.setSize(1000, 750);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
-    frame.setResizable(false);
+    frame.setResizable(true);
     openMainMenu();
   }
 
@@ -135,4 +136,5 @@ public class GuiManager {
   public static GuiLevelDeciderPage getGuiLevelDeciderPage() {
     return GUI_LEVEL_DECIDER_PAGE;
   }
+
 }

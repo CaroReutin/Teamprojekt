@@ -1,11 +1,9 @@
 
 package gui.level;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.awt.*;
+import java.net.URL;
+import javax.swing.*;
 
 
 /**
@@ -17,46 +15,82 @@ public class GuiFrontpage {
    *
    * @return returns the Container that contains the content of the frontpage
    */
-  public Container getPane() {
+ public Container getPane() {
     Container pane = new Container();
-    pane.setLayout(null);
+    pane.setLayout(new BorderLayout());
 
-    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
+    Container subPane = new Container();
+    subPane.setLayout(new GridLayout(7,1));
 
-    JLabel titel = new JLabel("Optimal Heist");
-    titel.setBounds(360, 50, 400, 70);
-    titel.setFont(fontStyle);
-    pane.add(titel);
+    //Container subSubPane = new Container();
+    //subSubPane.setLayout(new GridLayout(0,3));
 
-    Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
-    JButton levelButton = new JButton("Level");
-    levelButton.setBounds(380, 150, 300, 60);
-    levelButton.setFont(fontButtons);
-    levelButton.setBackground(Color.cyan);
-    pane.add(levelButton);
+    //erzeuge Panels
+   JPanel titlePanel = new JPanel();
+   JPanel levelPanel = new JPanel();
+   JPanel ownLevelPanel = new JPanel();
+   JPanel settingsPanel = new JPanel();
+   JPanel emptyPanel = new JPanel();
 
-    levelButton.addActionListener(e -> GuiManager.openLevelSelectScreen());
+   //füge Text und Buttons hinzu
+   Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
+   Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+
+   JLabel titel = new JLabel("Optimal Heist");
+   titel.setFont(fontStyle);
+
+   JButton levelButton = new JButton("Level");
+   levelButton.setFont(fontButtons);
+   levelButton.setBackground(Color.cyan);
+
+   JButton ownLevelButton = new JButton("Eigene Level");
+   ownLevelButton.setBackground(Color.cyan);
+   ownLevelButton.setFont(fontButtons);
+
+   JButton settingsButton = new JButton("Einstellungen");
+   settingsButton.setBackground(Color.cyan);
+   settingsButton.setFont(fontButtons);
+
+   //add functions
+   levelButton.addActionListener(e -> GuiManager.openLevelSelectScreen());
+   ownLevelButton.addActionListener(e -> GuiManager.openLevelEditor());
+   settingsButton.addActionListener(e -> GuiManager.openOptionsMenu());
+
+   //füge Text und Buttons auf panels hinzu
+   titlePanel.add(titel);
+   levelPanel.add(levelButton);
+   ownLevelPanel.add(ownLevelButton);
+   settingsPanel.add(settingsButton);
+
+   //rucksack image add
+   //Füge Rucksack png ein und ändere größe
+   /*URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
+   assert url != null;
+   ImageIcon rucksackImage = new ImageIcon(url);
+   Image scaledRucksackImage =
+     rucksackImage.getImage().getScaledInstance(
+       170, 300, java.awt.Image.SCALE_SMOOTH);
 
 
-    JButton ownLevelButton = new JButton("Eigene Level");
-    ownLevelButton.setBounds(380, 220, 300, 60);
-    ownLevelButton.setBackground(Color.cyan);
-    ownLevelButton.setFont(fontButtons);
-    pane.add(ownLevelButton);
+   JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage);*/
 
-    ownLevelButton.addActionListener(e -> GuiManager.openLevelEditor());
+   //add panels on subpane
+   subPane.add(levelPanel);
+   subPane.add(ownLevelPanel);
+   subPane.add(settingsPanel);
+   subPane.add(emptyPanel);
+   subPane.add(emptyPanel);
+   subPane.add(emptyPanel);
+   subPane.add(emptyPanel);
 
-    JButton settingsButton = new JButton("Einstellungen");
-    settingsButton.setBounds(380, 300, 300, 60);
-    settingsButton.setBackground(Color.cyan);
-    settingsButton.setFont(fontButtons);
-    pane.add(settingsButton);
 
-    settingsButton.addActionListener(e -> GuiManager.openOptionsMenu());
+   //subSubPane.add(rucksackPanel);
 
-    pane.revalidate();
-    pane.repaint();
+   //puzzle panels and subpane zusammen
+   pane.add(titlePanel, BorderLayout.NORTH);
+   pane.add(subPane, BorderLayout.CENTER);
+   //pane.add(subSubPane, BorderLayout.PAGE_END);
 
-    return pane;
+   return pane;
   }
 }
