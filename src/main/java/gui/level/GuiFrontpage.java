@@ -2,7 +2,6 @@
 package gui.level;
 
 import java.awt.*;
-import java.net.URL;
 import javax.swing.*;
 
 
@@ -20,7 +19,7 @@ public class GuiFrontpage {
     pane.setLayout(new BorderLayout());
 
     Container subPane = new Container();
-    subPane.setLayout(new GridLayout(7,1));
+    subPane.setLayout(new GridLayout(7, 1));
 
     //Container subSubPane = new Container();
     //subSubPane.setLayout(new GridLayout(0,3));
