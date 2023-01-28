@@ -105,27 +105,35 @@ public class BacktrackingNode {
    */
   public BacktrackingNode addToTrash(final BacktrackingItem childItem) {
     BacktrackingItem.StateBacktracking childState = childItem.getState();
-
     //adds depending on if an item is in available, rucksack or trash
     if (childState == BacktrackingItem.StateBacktracking.TRASH) {
       System.out.println(childItem.getName() + " ist schon im Müll.");
       return null;
 
     } else if (childState == BacktrackingItem.StateBacktracking.RUCKSACK) {
-      childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
+
       //getting up the tree, so we can set the new left child correctly
       BacktrackingNode currentParent = parent;
       if (this.getItem().getName().equals(childItem.getName())) {
         currentParent = this;
       } else {
+        if (this.getItem().getState() != BacktrackingItem.StateBacktracking.TRASH) {
+          System.out.println(this.getItem().getName() + " muss zuerst in den Müll bewegt werden.");
+          return null;
+        }
         while (!Objects.equals(currentParent.getItem().getName(),
                 childItem.getName())) {
           if (currentParent.getName().equals("root")) {
             break;
+          } else if (currentParent.getItem().getState() != BacktrackingItem.StateBacktracking.TRASH) {
+            System.out.println(currentParent.getItem().getName() + " muss zuerst in den Müll bewegt werden.");
+            return null;
           }
           currentParent = currentParent.getParent();
         }
       }
+      childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
+
       currentParent = currentParent.getParent();
       int newCurrentWeight = currentParent.getCurrentWeight();
       int newCurrentValue = currentParent.getCurrentValue();
@@ -158,8 +166,8 @@ public class BacktrackingNode {
 
     ArrayList<BacktrackingItem> parentItems = new ArrayList<>();
     currentNode = currentNode.parent;
-    while (currentNode.item.getWeight() == weight) {
-      parentItems.add(currentNode.parent.item);
+    while (!Objects.equals(currentNode.getName(), "root")) {
+      parentItems.add(currentNode.item);
       currentNode = currentNode.parent;
     }
 
@@ -170,8 +178,15 @@ public class BacktrackingNode {
     System.out.println("Liste der Items mit gleichem Gewicht"
         + ", dessen Status nicht verändert werden darf: " + sb);
 
+    /*ArrayList<BacktrackingItem> sameWeightParentList = new ArrayList<>();
+    BacktrackingNode sameWeightParentNode = gotIntoTrashNode.getParent();
+    while (sameWeightParentNode.getItem().getWeight() == gotIntoTrashNode.getItem().getWeight()) {
+      sameWeightParentList.add(sameWeightParentNode.getItem());
+      sameWeightParentNode = sameWeightParentNode.getParent();
+    }*/
+
     for (BacktrackingItem currentItem : itemList) {
-      //same weight or lower gets into available
+      //lower weight gets into available
       if (currentItem.getWeight() <= weight && !currentItem
           .getName().equals(gotIntoTrashNode.item.getName())) {
         //items only get set to available if item is not a parent
@@ -179,6 +194,16 @@ public class BacktrackingNode {
           currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
         }
       }
+      /*//
+      if (currentItem.getWeight() == weight && !currentItem
+              .getName().equals(gotIntoTrashNode.item.getName())) {
+        //items only get set to available if item is not a parent
+        if (!sameWeightParentList.contains(currentItem)) {
+          currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
+        }
+      }*/
+
+
     }
   }
 
