@@ -176,7 +176,8 @@ public class ItemPanel extends Container {
   public Item generateItem() throws NullPointerException {
     if (nameField.getText().equals("")
         || amountField.getText().equals("")
-        || weightField.getText().equals("")) {
+        || weightField.getText().equals("")
+        || valueField.getText().equals("")) {
       throw new NullPointerException("No field may be empty");
     }
     // Cannot be empty because of the if above
@@ -194,5 +195,14 @@ public class ItemPanel extends Container {
    */
   public int getAmount() {
     return Integer.parseInt(amountField.getText());
+  }
+
+  /**
+   * sets the visibility of the container.
+   *
+   * @param visibility the visibility
+   */
+  public void setContainerVisible(final boolean visibility) {
+    myContainer.setVisible(visibility);
   }
 }

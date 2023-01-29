@@ -10,6 +10,8 @@ import rucksack.Level;
  * The type App data.
  */
 public final class AppData {
+  public static final int DEFAULT_ITEMS_IN_CUSTOM_LEVEL = 1;
+
   /**
    * do not make.
    */

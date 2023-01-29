@@ -63,7 +63,8 @@ public class GuiManager {
         try {
           evt.acceptDrop(DnDConstants.ACTION_COPY);
           List<File> droppedFiles = (List<File>)
-              evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+              evt.getTransferable().getTransferData(DataFlavor
+                  .javaFileListFlavor);
           for (File file : droppedFiles) {
             CustomLevelManager.load(file);
           }
@@ -73,7 +74,7 @@ public class GuiManager {
       }
     });
     frame.setVisible(true);
-    frame.setResizable(false);
+    frame.setResizable(true);
     openMainMenu();
   }
 

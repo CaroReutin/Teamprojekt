@@ -7,10 +7,12 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -33,6 +35,11 @@ import solving.CustomLevelManager;
  * The Level Editor Class.
  */
 public final class GuiLevelEditorPage {
+
+  /**
+   * counts the item Panels.
+   */
+  private int panelCounter = 1;
 
   /**
    * The Level Editor.
@@ -59,8 +66,6 @@ public final class GuiLevelEditorPage {
     modus.setFont(AppData.FONT_STYLE);
 
     String[] robberOptions = new String[Level.Robber.values().length];
-    // Unless changed (which it currently is not) the option
-    // with Index 0 will be the default
     robberOptions[0] = Level.Robber.DR_META.name();
     robberOptions[1] = Level.Robber.GIERIGER_GANOVE.name();
     robberOptions[2] = Level.Robber.BACKTRACKING_BANDIT.name();
@@ -101,8 +106,6 @@ public final class GuiLevelEditorPage {
           itemList.add(nextItem);
           itemAmountList.add(itemPanel.getAmount());
         } catch (NullPointerException n) {
-          // This just means that item was not filled out fully
-          // Can be ignored
         }
       }
 
@@ -153,23 +156,44 @@ public final class GuiLevelEditorPage {
         CustomLevelManager.load(customLevel);
       }
     });
-
     leftPane.add(load);
+
+    JButton reset = new JButton("Felder leeren");
+    reset.addActionListener(e -> GuiManager.openLevelEditor());
+
+    leftPane.add(reset);
 
     pane.add(leftPane, BorderLayout.WEST);
 
     Container rightPane = new Container();
-    // TODO Sprint 4, update this part of the GUI
     rightPane.setLayout(new GridLayout((AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL
         + 1) / 2, 2));
 
-    for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
+    for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL - 1; i++) {
       itemPanels.add(new ItemPanel(i, pane));
+      itemPanels.get(i).setContainerVisible(false);
       rightPane.add(itemPanels.get(i).getPanel());
     }
+    for (int i = 0; i < AppData.DEFAULT_ITEMS_IN_CUSTOM_LEVEL; i++) {
+      itemPanels.get(i).setContainerVisible(true);
+    }
+    JButton moreItemsButton = new JButton("");
+    ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass()
+        .getResource("/icons/Plus.png")));
+    Image image = icon.getImage();
+    icon = new ImageIcon(image.getScaledInstance(
+        AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
+    moreItemsButton.setIcon(icon);
 
+    moreItemsButton.addActionListener(e -> {
+      if (panelCounter < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL) {
+        itemPanels.get(panelCounter).setContainerVisible(true);
+        panelCounter++;
+      }
+    });
+
+    rightPane.add(moreItemsButton);
     pane.add(rightPane, BorderLayout.CENTER);
-
     return pane;
   }
 
