@@ -164,6 +164,10 @@ public final class GuiLevelEditorPage {
                                 final JTextField capacityField,
                                 final JComboBox<String> modeDropdown,
                                 final ArrayList<ItemPanel> itemPanels) {
+    if (Integer.parseInt(capacityField.getText()) == 0) {
+      showMessageDialog(pane, "Kapazität darf nicht 0 sein.");
+      return;
+    }
     ArrayList<Item> itemList = new ArrayList<>();
     ArrayList<Integer> validItems = new ArrayList<>();
     ArrayList<Integer> itemAmountList = new ArrayList<>();
@@ -171,7 +175,18 @@ public final class GuiLevelEditorPage {
       ItemPanel itemPanel = itemPanels.get(i);
       try {
         Item nextItem = itemPanel.generateItem();
+        if (nextItem.getWeight() == 0 || nextItem.getValue() == 0
+            || itemPanel.getAmount() == 0) {
+          showMessageDialog(pane, "Wert, Gewicht und "
+              + "Anzahl müssen mindestens 1 sein.");
+          return;
+        }
         for (Item item : itemList) {
+          if (item.getName().equals(nextItem.getName())) {
+            showMessageDialog(pane, "Kein Item darf denselben Namen"
+                + " wie ein anderes haben.");
+            return;
+          }
           if (item.getValue() == nextItem.getValue()
               && item.getWeight() == nextItem.getWeight()) {
             showMessageDialog(pane, "Kein Item darf denselben Wert"
@@ -186,7 +201,10 @@ public final class GuiLevelEditorPage {
         n.printStackTrace();
       }
       if (itemList.size()
-          > AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL) {
+          > AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL
+          && Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
+              .getSelectedItem()).toString()).equals(
+                  Level.Robber.BACKTRACKING_BANDIT)) {
         showMessageDialog(pane, "Backtracking Level dürfen Maximal "
             + AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL
             + " verschiedene Items haben.");
@@ -197,6 +215,7 @@ public final class GuiLevelEditorPage {
     if (titleField.getText().equals("")
         || capacityField.getText().equals("")) {
       showMessageDialog(pane, "Titel und Kapazität darf nicht leer sein!");
+      return;
     }
 
     Level customLevel = new Level(itemList, itemAmountList,
