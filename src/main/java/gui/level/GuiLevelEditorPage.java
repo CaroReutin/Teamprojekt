@@ -89,46 +89,8 @@ public final class GuiLevelEditorPage {
 
     ArrayList<ItemPanel> itemPanels = new ArrayList<>();
     JButton save = new JButton("Speichern");
-    save.addActionListener(e -> {
-      ArrayList<Item> itemList = new ArrayList<>();
-      ArrayList<Integer> itemAmountList = new ArrayList<>();
-      for (ItemPanel itemPanel : itemPanels) {
-        try {
-          Item nextItem = itemPanel.generateItem();
-          for (Item item : itemList) {
-            if (item.getValue() == nextItem.getValue()
-                && item.getWeight() == nextItem.getWeight()) {
-              showMessageDialog(pane, "Kein Item darf denselben Wert"
-                  + " und dasselbe Gewicht wie ein anderes haben.");
-              return;
-            }
-          }
-          itemList.add(nextItem);
-          itemAmountList.add(itemPanel.getAmount());
-        } catch (NullPointerException n) {
-          n.printStackTrace();
-        }
-      }
-
-      if (titleField.getText().equals("")
-          || capacityField.getText().equals("")) {
-        showMessageDialog(pane, "Titel und Kapazität darf nicht leer sein!");
-      }
-
-      Level customLevel = new Level(itemList, itemAmountList,
-          Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
-              .getSelectedItem()).toString()), -1,
-          Integer.parseInt(capacityField.getText()));
-      JFileChooser chooser = new JFileChooser();
-      chooser.setCurrentDirectory(new java.io.File("."));
-      chooser.setDialogTitle("Speicherordner");
-      chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-      chooser.setAcceptAllFileFilterUsed(false);
-      if (chooser.showSaveDialog(pane) == JFileChooser.APPROVE_OPTION) {
-        CustomLevelManager.save(chooser.getSelectedFile().toString(),
-            titleField.getText(), customLevel);
-      }
-    });
+    save.addActionListener(e -> saveLevel(pane,
+        titleField, capacityField, modeDropdown, itemPanels));
     JButton back = new JButton("Abbrechen");
     back.addActionListener(e -> {
       if (JOptionPane.YES_OPTION
@@ -195,6 +157,61 @@ public final class GuiLevelEditorPage {
     rightPane.add(moreItemsButton);
     pane.add(rightPane, BorderLayout.CENTER);
     return pane;
+  }
+
+  private static void saveLevel(final Container pane,
+                                final JTextField titleField,
+                                final JTextField capacityField,
+                                final JComboBox<String> modeDropdown,
+                                final ArrayList<ItemPanel> itemPanels) {
+    ArrayList<Item> itemList = new ArrayList<>();
+    ArrayList<Integer> validItems = new ArrayList<>();
+    ArrayList<Integer> itemAmountList = new ArrayList<>();
+    for (int i = 0; i < itemPanels.size(); i++) {
+      ItemPanel itemPanel = itemPanels.get(i);
+      try {
+        Item nextItem = itemPanel.generateItem();
+        for (Item item : itemList) {
+          if (item.getValue() == nextItem.getValue()
+              && item.getWeight() == nextItem.getWeight()) {
+            showMessageDialog(pane, "Kein Item darf denselben Wert"
+                + " und dasselbe Gewicht wie ein anderes haben.");
+            return;
+          }
+        }
+        itemList.add(nextItem);
+        validItems.add(i);
+        itemAmountList.add(itemPanel.getAmount());
+      } catch (NullPointerException n) {
+        n.printStackTrace();
+      }
+      if (itemList.size()
+          > AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL) {
+        showMessageDialog(pane, "Backtracking Level dürfen Maximal "
+            + AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL
+            + " verschiedene Items haben.");
+        return;
+      }
+    }
+
+    if (titleField.getText().equals("")
+        || capacityField.getText().equals("")) {
+      showMessageDialog(pane, "Titel und Kapazität darf nicht leer sein!");
+    }
+
+    Level customLevel = new Level(itemList, itemAmountList,
+        Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
+            .getSelectedItem()).toString()), -1,
+        Integer.parseInt(capacityField.getText()));
+    JFileChooser chooser = new JFileChooser();
+    chooser.setCurrentDirectory(new File("."));
+    chooser.setDialogTitle("Speicherordner");
+    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    chooser.setAcceptAllFileFilterUsed(false);
+    if (chooser.showSaveDialog(pane) == JFileChooser.APPROVE_OPTION) {
+      CustomLevelManager.save(chooser.getSelectedFile().toString(),
+          titleField.getText(), customLevel, validItems);
+    }
   }
 
   private static class FieldListener extends DocumentFilter {
