@@ -64,7 +64,6 @@ public final class GuiLevelEditorPage {
     capacity.setFont(AppData.FONT_STYLE);
     JLabel modus = new JLabel("Modus: ");
     modus.setFont(AppData.FONT_STYLE);
-
     String[] robberOptions = new String[Level.Robber.values().length];
     robberOptions[0] = Level.Robber.DR_META.name();
     robberOptions[1] = Level.Robber.GIERIGER_GANOVE.name();
@@ -106,6 +105,7 @@ public final class GuiLevelEditorPage {
           itemList.add(nextItem);
           itemAmountList.add(itemPanel.getAmount());
         } catch (NullPointerException n) {
+          n.printStackTrace();
         }
       }
 
@@ -123,7 +123,7 @@ public final class GuiLevelEditorPage {
       chooser.setDialogTitle("Speicherordner");
       chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
       chooser.setAcceptAllFileFilterUsed(false);
-      if (chooser.showOpenDialog(pane) == JFileChooser.APPROVE_OPTION) {
+      if (chooser.showSaveDialog(pane) == JFileChooser.APPROVE_OPTION) {
         CustomLevelManager.save(chooser.getSelectedFile().toString(),
             titleField.getText(), customLevel);
       }
