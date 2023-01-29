@@ -133,7 +133,7 @@ public class GuiManager {
     } else if (levelNumber == 0) {
       title = "Einführungs-" + title;
     } else {
-      title = "Benutzerdefiniertes ";
+      title = "Benutzerdefiniertes " + title;
     }
     frame.setTitle(title);
     paint();
