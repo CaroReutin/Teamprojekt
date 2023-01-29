@@ -52,6 +52,7 @@ public final class GuiLevelEditorPage {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    panelCounter = 1;
     Container pane = new Container();
     pane.setLayout(new BorderLayout());
 
@@ -158,7 +159,7 @@ public final class GuiLevelEditorPage {
     });
     leftPane.add(load);
 
-    JButton reset = new JButton("Felder leeren");
+    JButton reset = new JButton("Reset");
     reset.addActionListener(e -> GuiManager.openLevelEditor());
 
     leftPane.add(reset);
@@ -191,7 +192,6 @@ public final class GuiLevelEditorPage {
         panelCounter++;
       }
     });
-
     rightPane.add(moreItemsButton);
     pane.add(rightPane, BorderLayout.CENTER);
     return pane;
