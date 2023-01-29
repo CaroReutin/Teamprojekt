@@ -1,6 +1,8 @@
 package solving;
 
 import gui.level.GuiLevelPage;
+import gui.level.GuiLevelPageBacktracking;
+import gui.level.GuiLevelPageGreedy;
 import gui.level.GuiManager;
 import java.io.File;
 import java.io.FileInputStream;
@@ -187,8 +189,15 @@ public final class CustomLevelManager {
         Unmarshaller marsh = jaxbContext.createUnmarshaller();
 
         Level level = (Level) marsh.unmarshal(levelFile);
+        level.turnIntoBacktracking();
         level.resetLevel();
-        GuiManager.openLevel(new GuiLevelPage(level));
+        if (level.getRobber().equals(Level.Robber.DR_META)) {
+          GuiManager.openLevel(new GuiLevelPage(level));
+        } else if (level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
+          GuiManager.openLevel(new GuiLevelPageGreedy(level));
+        } else {
+          GuiManager.openLevel(new GuiLevelPageBacktracking(level));
+        }
       }
 
     } catch (IOException | JAXBException e) {
