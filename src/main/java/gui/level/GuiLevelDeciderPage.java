@@ -32,7 +32,7 @@ public class GuiLevelDeciderPage {
   /**
    * the number of the rows of the subpane.
    */
-  public static final int NUM_ROWS_SUBPANE = 11;
+  public static final int NUM_ROWS_SUBPANE = 8;
 
   /**
    * the number of the colums on the algorithm panes.
@@ -245,23 +245,18 @@ public class GuiLevelDeciderPage {
     backtrackingTitle.add(backtracking);
     JPanel levelOneTitlePanel = new JPanel();
     levelOneTitlePanel.add(levelOneTitle);
+
     //add panels on subpane
+    subPane.add(titlePanel);
     subPane.add(levelOneTitlePanel);
     subPane.add(levelOne);
     subPane.add(greedyTitle);
     subPane.add(greedyLevel);
-    JPanel emptyPanel = new JPanel();
-    subPane.add(emptyPanel);
     subPane.add(backtrackingTitle);
     subPane.add(backtrackingLevel);
-    subPane.add(emptyPanel);
-    subPane.add(emptyPanel);
     subPane.add(backToFrontPagePanel);
-    //puzzle panels und subpane zusammen
-    pane.add(titlePanel, BorderLayout.NORTH);
-    pane.add(subPane, BorderLayout.CENTER);
 
-    return pane;
+    return subPane;
   }
 
   /**

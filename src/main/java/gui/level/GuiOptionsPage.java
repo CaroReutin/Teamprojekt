@@ -1,6 +1,5 @@
 package gui.level;
 
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -16,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import solving.AppData;
 
-
 /**
  * The class GUIOptionsPage holds the pane of the optionspage.
  */
@@ -25,7 +23,7 @@ public class GuiOptionsPage {
   /**
    * the number of rows on the pane.
    */
-  public static final int ROWS_ON_PANE = 7;
+  public static final int ROWS_ON_PANE = 3;
 
   /**
    * the preferred length of the field.
@@ -104,8 +102,6 @@ public class GuiOptionsPage {
     JPanel emptyPanel = new JPanel();
 
     //add panels on subpane
-    subPane.add(emptyPanel);
-    subPane.add(emptyPanel);
     subPane.add(passwordInputPanel);
     subPane.add(enterPasswordPanel);
     subPane.add(backPanel);
