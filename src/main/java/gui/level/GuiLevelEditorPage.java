@@ -9,13 +9,11 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,7 +23,6 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.NumberFormatter;
 import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
@@ -73,19 +70,10 @@ public final class GuiLevelEditorPage {
         titleField.getDocument();
     titleDocument.setDocumentFilter(new FieldListener());
 
-    // TODO Sprint 4, Currently you cannot delete a number
-    // if you type it into a field
-    // So "4" -> "" -> "5" is not possible
-    // You have to go "4" -> "45" -> "5"
-    // Or select the 4 and overwrite it with 5
-    NumberFormat format = NumberFormat.getInstance();
-    NumberFormatter formatter = new NumberFormatter(format);
-    formatter.setValueClass(Integer.class);
-    formatter.setMinimum(1);
-    formatter.setMaximum(Integer.MAX_VALUE);
-    formatter.setAllowsInvalid(false);
-
-    JFormattedTextField capacityField = new JFormattedTextField(formatter);
+    JTextField capacityField = new JTextField("");
+    AbstractDocument capacityDocument = (AbstractDocument)
+        capacityField.getDocument();
+    capacityDocument.setDocumentFilter(new NumberListener());
     JComboBox<String> modeDropdown = new JComboBox<>(robberOptions);
     leftPane.add(titel);
     leftPane.add(titleField);
