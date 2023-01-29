@@ -2,6 +2,7 @@
 package gui.level;
 
 import java.awt.*;
+import java.net.URL;
 import javax.swing.*;
 
 
@@ -62,8 +63,8 @@ public class GuiFrontpage {
    settingsPanel.add(settingsButton);
 
    //rucksack image add
-   //Füge Rucksack png ein und ändere größe
-   /*URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
+   //Füge Rucksack png ein und ändere Größe
+   URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
    assert url != null;
    ImageIcon rucksackImage = new ImageIcon(url);
    Image scaledRucksackImage =
@@ -71,7 +72,7 @@ public class GuiFrontpage {
        170, 300, java.awt.Image.SCALE_SMOOTH);
 
 
-   JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage);*/
+   JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage);
 
    //add panels on subpane
    subPane.add(levelPanel);
@@ -88,6 +89,7 @@ public class GuiFrontpage {
    //puzzle panels and subpane zusammen
    pane.add(titlePanel, BorderLayout.NORTH);
    pane.add(subPane, BorderLayout.CENTER);
+   pane.add(rucksackPanel, BorderLayout.WEST);
    //pane.add(subSubPane, BorderLayout.PAGE_END);
 
    return pane;

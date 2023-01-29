@@ -1,14 +1,9 @@
 
 package gui.level;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
+
 import solving.AppData;
 import solving.BacktrackingLevel;
 import solving.GreedyLevel;
@@ -39,7 +34,7 @@ public class GuiLevelDeciderPage {
     pane.setLayout(new BorderLayout());
 
     Container subPane = new Container();
-    subPane.setLayout(new GridLayout(8, 1));
+    subPane.setLayout(new GridLayout(11, 1));
 
     Container subPaneGreedy = new Container();
     subPaneGreedy.setLayout(new GridLayout(1, 7));
@@ -47,8 +42,6 @@ public class GuiLevelDeciderPage {
     Container subPaneBacktracking = new Container();
     subPaneBacktracking.setLayout(new GridLayout(1, 7));
 
-    Container levelOneContainer = new Container();
-    levelOneContainer.setLayout(new GridLayout(7, 1));
 
     Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
 
@@ -121,10 +114,15 @@ public class GuiLevelDeciderPage {
     guiLevelButtons[14].addActionListener(e -> GuiManager.openLevel(guiLevelPages[14]));
 
     //erzeuge Buttons
-    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
+    Font fontBig = new Font("Arial", Font.BOLD + Font.ITALIC, 50);
+    Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, 40);
+    Font fontSmall = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
 
     JLabel titel = new JLabel("Level");
-    titel.setFont(fontStyle);
+    titel.setFont(fontBig);
+
+    JLabel levelOneTitle = new JLabel("Einführungslevel");
+    levelOneTitle.setFont(fontSmall);
 
     JLabel greedy = new JLabel("Gieriger Ganove");
     greedy.setFont(fontStyle);
@@ -146,29 +144,27 @@ public class GuiLevelDeciderPage {
     greedyTitle.add(greedy);
     JPanel backtrackingTitle = new JPanel();
     backtrackingTitle.add(backtracking);
+    JPanel levelOneTitlePanel = new JPanel();
+    levelOneTitlePanel.add(levelOneTitle);
+
 
     //add panels on subpane
+    subPane.add(levelOneTitlePanel);
+    subPane.add(levelOne);
     subPane.add(greedyTitle);
     subPane.add(greedyLevel);
+    JPanel emptyPanel = new JPanel();
+    subPane.add(emptyPanel);
     subPane.add(backtrackingTitle);
     subPane.add(backtrackingLevel);
-    JPanel emptyPanel = new JPanel();
     subPane.add(emptyPanel);
     subPane.add(emptyPanel);
     subPane.add(backToFrontPagePanel);
-
-    levelOneContainer.add(emptyPanel);
-    levelOneContainer.add(emptyPanel);
-    levelOneContainer.add(emptyPanel);
-    levelOneContainer.add(emptyPanel);
-    levelOneContainer.add(emptyPanel);
-    levelOneContainer.add(levelOne);
 
 
     //puzzle panels und subpane zusammen
     pane.add(titlePanel, BorderLayout.NORTH);
     pane.add(subPane, BorderLayout.CENTER);
-    pane.add(levelOneContainer, BorderLayout.WEST);
 
     return pane;
   }
