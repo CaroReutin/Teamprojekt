@@ -101,7 +101,11 @@ public class GuiOptionsPage {
       GuiManager.openMainMenu();
     });
 
+    JPanel emptyPanel = new JPanel();
+
     //add panels on subpane
+    subPane.add(emptyPanel);
+    subPane.add(emptyPanel);
     subPane.add(passwordInputPanel);
     subPane.add(enterPasswordPanel);
     subPane.add(backPanel);
