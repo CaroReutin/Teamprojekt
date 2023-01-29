@@ -68,7 +68,31 @@ public class GuiLevelPage {
   public void escapeButton(final Container centerPanel) {
     JButton flucht = new JButton("Flucht");
     int levelNumber = this.level.getLevelNumber();
-    if (levelNumber <= 0 || levelNumber == LAST_GREEDY_LEVELNUMBER
+    if (levelNumber == -1) {
+      flucht.addActionListener(e -> {
+        String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+            "Hier steht Tips / Feedback",
+            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+                .INFORMATION_MESSAGE, null, buttons,
+            buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
+          }
+          case 1 -> {
+            GuiManager.openMainMenu();
+            System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
         || levelNumber == LAST_BACKTRACKING_LEVELNUMBER) {
       flucht.addActionListener(e -> {
         if (levelNumber >= 0) {

@@ -137,12 +137,12 @@ public final class CustomLevelManager {
       zip = new File(destDir + "/" + zippedLevel.getName());
       FileUtils.copyFile(zippedLevel, zip);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
+      return;
     }
     String levelName = null;
 
     try {
-
       byte[] buffer = new byte[AppData.ZIP_BYTE_SIZE];
       ZipInputStream zis = new ZipInputStream(new FileInputStream(zip));
       ZipEntry zipEntry = zis.getNextEntry();
@@ -191,10 +191,8 @@ public final class CustomLevelManager {
         GuiManager.openLevel(new GuiLevelPage(level));
       }
 
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
-    } catch (JAXBException e) {
-      throw new RuntimeException(e);
+    } catch (IOException | JAXBException e) {
+      e.printStackTrace();
     }
 
   }
