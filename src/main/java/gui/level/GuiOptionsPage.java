@@ -62,6 +62,7 @@ public class GuiOptionsPage {
     subPane.setLayout(new GridLayout(7,1));
 
     JFormattedTextField passwordInput = new JFormattedTextField("");
+    passwordInput.setPreferredSize(new Dimension(200, 50));
     GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
       .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
         "callConfirmPassword");
