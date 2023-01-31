@@ -148,7 +148,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(170, 300,
             java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     this.escapeButton(centerPanel);
     this.itemButtons(avaiblePanel, leftPanel);

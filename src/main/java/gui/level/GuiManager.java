@@ -74,7 +74,7 @@ public class GuiManager {
       }
     });
     frame.setVisible(true);
-    frame.setResizable(false);
+    frame.setResizable(true);
     openMainMenu();
   }
 
