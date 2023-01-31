@@ -135,7 +135,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
             java.awt.Image.SCALE_SMOOTH);
 
 
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel rightPanel = new JPanel();
     //JPanel rightPanel = new JPanel(new GridLayout
