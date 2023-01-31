@@ -1,5 +1,7 @@
+import betaTree.Tree;
 import gui.level.GuiManager;
 import solving.AppData;
+import solving.BacktrackingLevel;
 import solving.UserDataManager;
 
 /**
@@ -25,6 +27,7 @@ public final class Main {
     AppData.initializeItems();
     UserDataManager.load();
     GuiManager guiManager = new GuiManager();
-    guiManager.launch();
+    Tree t = new Tree(BacktrackingLevel.getLevelBacktracking(0));
+    //guiManager.launch();
   }
 }

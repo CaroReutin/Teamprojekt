@@ -1,6 +1,8 @@
 package rucksack;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -100,5 +102,10 @@ public class Item implements Serializable {
     int spacesRemaing = 10 + depthRemaining * spacesPerDepth - name.length();
     res.append(" ".repeat(Math.max(0, spacesRemaing)));
     return res.toString();
+  }
+
+  public ImageIcon getIcon() {
+    return new ImageIcon(Objects.requireNonNull(getClass()
+        .getResource("/stern.png")));
   }
 }
