@@ -11,6 +11,15 @@ import rucksack.Level;
  */
 public final class AppData {
   /**
+   * the default amount of item panels.
+   */
+  public static final int DEFAULT_ITEMS_IN_CUSTOM_LEVEL = 1;
+  /**
+   * the maximum amount of different items in backtracking levels
+   */
+  public static final int MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL = 5;
+
+  /**
    * do not make.
    */
   private AppData() {

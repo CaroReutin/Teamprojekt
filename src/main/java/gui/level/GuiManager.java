@@ -1,10 +1,16 @@
 
 package gui.level;
 
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
+import java.io.File;
+import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import java.awt.*;
+import solving.CustomLevelManager;
 
 /**
  * The class GUIManager combines the gui pages.
@@ -52,6 +58,21 @@ public class GuiManager {
     frame.setTitle("Optimal Heist");
     frame.setSize(1000, 750);
     frame.setLocationRelativeTo(null);
+    frame.setDropTarget(new DropTarget() {
+      public synchronized void drop(final DropTargetDropEvent evt) {
+        try {
+          evt.acceptDrop(DnDConstants.ACTION_COPY);
+          List<File> droppedFiles = (List<File>)
+              evt.getTransferable().getTransferData(DataFlavor
+                  .javaFileListFlavor);
+          for (File file : droppedFiles) {
+            CustomLevelManager.load(file);
+          }
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
+      }
+    });
     frame.setVisible(true);
     frame.setResizable(true);
     openMainMenu();
@@ -113,7 +134,7 @@ public class GuiManager {
     } else if (levelNumber == 0) {
       title = "Einführungs-" + title;
     } else {
-      title = "Benutzerdefiniertes ";
+      title = "Benutzerdefiniertes " + title;
     }
     frame.setTitle(title);
     paint();
@@ -136,5 +157,4 @@ public class GuiManager {
   public static GuiLevelDeciderPage getGuiLevelDeciderPage() {
     return GUI_LEVEL_DECIDER_PAGE;
   }
-
 }

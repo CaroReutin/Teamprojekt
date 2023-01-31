@@ -34,7 +34,7 @@ public class Level implements Serializable {
    * the list with all items.
    */
   @XmlElement
-  private final ArrayList<Item> itemList;
+  private ArrayList<Item> itemList;
   /**
    * the list with the amout of the items.
    */
@@ -298,4 +298,20 @@ public class Level implements Serializable {
   public Robber getRobber() {
     return robber;
   }
+
+  /**
+   * Turns level into backtracking level if needed.
+   */
+  public void turnIntoBacktracking() {
+    if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
+      ArrayList<Item> temp = new ArrayList<Item>();
+      for (int i = 0; i < itemList.size(); i++) {
+        Item tempItem = itemList.get(i);
+        BacktrackingItem newItem = new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
+        temp.add(newItem);
+      }
+      itemList = temp;
+    }
+  }
+
 }
