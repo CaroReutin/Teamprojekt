@@ -415,6 +415,16 @@ public final class GuiLevelEditorPage {
       CustomLevelManager.save(chooser.getSelectedFile().toString(),
           titleField.getText(), customLevel, validItems);
     }
+
+    showMessageDialog(pane, "Level mit " + itemList.size()
+        + " verschiedenen Gegenständen gespeichert.\n\n"
+        + "Lade das Level entweder durch den Level öffnen"
+        + " Knopf im Level-editor\noder ziehe die Zip Datei"
+        + " irgendwo (außer auf ein Textfeld) in das Programm.\n\n"
+        + "Falls eine höhere Anzahl an Gegenständen erwartet wurde,"
+        + " überprüfe ob\njedes der 4 Felder aller Items, welche in das Level"
+        + " sollen ausgefüllt wurden.",
+        "Erfolgreich gespeichert", JOptionPane.PLAIN_MESSAGE);
   }
 
   private static Item generateItem(final int i) {
