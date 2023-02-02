@@ -2,6 +2,7 @@ package rucksack;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -35,6 +36,8 @@ public class Level implements Serializable {
    */
   @XmlElement
   private ArrayList<Item> itemList;
+
+  private ArrayList<BacktrackingItem> backtrackingItemList;
   /**
    * the list with the amout of the items.
    */
@@ -48,6 +51,10 @@ public class Level implements Serializable {
    * the list of the amount in the rucksack.
    */
   private ArrayList<Integer> inRucksackAmountList;
+  /**
+   * the list of the amount in the trash.
+   */
+  private ArrayList<Integer> inTrashAmountList = new ArrayList<>();
   /**
    * the current value.
    */
@@ -304,14 +311,30 @@ public class Level implements Serializable {
    */
   public void turnIntoBacktracking() {
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
-      ArrayList<Item> temp = new ArrayList<Item>();
+      ArrayList<BacktrackingItem> temp = new ArrayList<BacktrackingItem>();
       for (int i = 0; i < itemList.size(); i++) {
         Item tempItem = itemList.get(i);
         BacktrackingItem newItem = new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
         temp.add(newItem);
+        //set Item is in trash to 0
+        inTrashAmountList.add(0);
       }
-      itemList = temp;
+      backtrackingItemList = temp;
+      //backtrackingItemList has to be sorted for BacktrackingNode
+      backtrackingItemList.sort(Comparator.comparingInt(Item::getWeight).reversed());
     }
+
   }
 
+  public ArrayList<Integer> getInTrashAmountList() {
+    return inTrashAmountList;
+  }
+
+  public void setInTrashAmountList(ArrayList<Integer> inTrashAmountList) {
+    this.inTrashAmountList = inTrashAmountList;
+  }
+
+  public ArrayList<BacktrackingItem> getBacktrackingItemList() {
+    return backtrackingItemList;
+  }
 }

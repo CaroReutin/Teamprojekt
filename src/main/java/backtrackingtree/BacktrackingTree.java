@@ -129,4 +129,12 @@ public class BacktrackingTree {
     }
     System.out.println("-----------------");
   }
+
+  /**
+   * returns the Node, where we actually are in the tree
+   * @return Node, where we actually are in the tree
+   */
+  public BacktrackingNode getCurrentNode() {
+    return currentNode;
+  }
 }
