@@ -27,6 +27,8 @@ public class BackTrackingTreeTest {
    * - is not the next selectable item
    * and if item can be added to trash which has children
    * which are going to be available again
+   * - should be first added to rucksack
+   * - the subtree of this item is not full
    */
   @Test
   public void test1() {
@@ -39,7 +41,7 @@ public class BackTrackingTreeTest {
     items.add(coin);
     items.sort(Comparator.comparingInt(Item::getWeight).reversed());
 
-    BacktrackingTree tree = new BacktrackingTree(10, items);
+    BacktrackingTree tree = new BacktrackingTree(12, items);
 
     tree.addToRucksack(crown);
     tree.addToRucksack(pearl);
@@ -50,6 +52,8 @@ public class BackTrackingTreeTest {
     tree.addToTrash(crown);
     tree.addToRucksack(pearl);
     tree.addToRucksack(coin);
+    tree.addToRucksack(crown);
+    tree.addToTrash(coin);
     tree.print(System.out);
 
     File treeFileFolder = new File("./src/test/resources/");
@@ -63,11 +67,11 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 7]");
+      Assertions.assertEquals(answer, "└──Pearl [akt. Gewicht:6, akt. Wert: 8]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "   └──not Pearl [akt. Gewicht:6, akt. Wert: 7]");
+      Assertions.assertEquals(answer, "   └──Crown [akt. Gewicht:12, akt. Wert: 15]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "      └──Coin [akt. Gewicht:10, akt. Wert: 27]");
+      Assertions.assertEquals(answer, "      └──not Coin [akt. Gewicht:12, akt. Wert: 15]");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
@@ -93,7 +97,7 @@ public class BackTrackingTreeTest {
     items.add(feather);
     items.sort(Comparator.comparingInt(Item::getWeight).reversed());
 
-    BacktrackingTree tree = new BacktrackingTree(10, items);
+    BacktrackingTree tree = new BacktrackingTree(11, items);
 
     tree.addToRucksack(crown);
     tree.addToRucksack(pearl);
@@ -174,8 +178,11 @@ public class BackTrackingTreeTest {
   }
 
   /**
-   * this test tests if an already added item gets added again
+   * this test tests
+   * -if an item can be add to trash if in this branch no other lighter item can be put to rucksack
+   * -if an already added item gets added again
    * and if the lightest item can be added even if it is not
+   *
    */
   @Test
   public void test4() {
@@ -224,8 +231,9 @@ public class BackTrackingTreeTest {
 
   /**
    * this test tests:
-   * - item from rucksack into trash in the right order
-   * - full tree with all its possible outcomes
+   * - try to add an item into trash even through there are heavier items to look at first
+   * - try to put an item into trash even through it should be add to the rucksack first
+   * - add an item into trash and his subtree is full (should be succsess)
    */
   @Test
   public void test5() {
@@ -248,6 +256,7 @@ public class BackTrackingTreeTest {
     tree.addToTrash(coin);
     tree.addToTrash(crown);
     tree.addToRucksack(pearl);
+    tree.addToTrash(coin);
     tree.addToRucksack(coin);
     tree.addToTrash(coin);
     tree.addToTrash(pearl);
@@ -266,27 +275,16 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "├──not Crown [akt. Gewicht:0, akt. Wert: 0]");
+      Assertions.assertEquals(answer, "├──not Pearl [akt. Gewicht:0, akt. Wert: 0]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "│  ├──not Pearl [akt. Gewicht:0, akt. Wert: 0]");
+      Assertions.assertEquals(answer, "└──Pearl [akt. Gewicht:6, akt. Wert: 8]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "│  │  ├──not Coin [akt. Gewicht:0, akt. Wert: 0]");
+      Assertions.assertEquals(answer, "   └──not Crown [akt. Gewicht:6, akt. Wert: 8]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "│  │  └──Coin [akt. Gewicht:4, akt. Wert: 20]");
+      Assertions.assertEquals(answer, "      ├──not Coin [akt. Gewicht:6, akt. Wert: 8]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "│  └──Pearl [akt. Gewicht:6, akt. Wert: 8]");
-      answer = input.nextLine();
-      Assertions.assertEquals(answer, "│     ├──not Coin [akt. Gewicht:6, akt. Wert: 8]");
-      answer = input.nextLine();
-      Assertions.assertEquals(answer, "│     └──Coin [akt. Gewicht:10, akt. Wert: 28]");
-      answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 7]");
-      answer = input.nextLine();
-      Assertions.assertEquals(answer, "   └──not Pearl [akt. Gewicht:6, akt. Wert: 7]");
-      answer = input.nextLine();
-      Assertions.assertEquals(answer, "      ├──not Coin [akt. Gewicht:6, akt. Wert: 7]");
-      answer = input.nextLine();
-      Assertions.assertEquals(answer, "      └──Coin [akt. Gewicht:10, akt. Wert: 27]");
+      Assertions.assertEquals(answer, "      └──Coin [akt. Gewicht:10, akt. Wert: 28]");
+
 
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
@@ -294,22 +292,29 @@ public class BackTrackingTreeTest {
   }
 
   /**
-   * tests if an item can be added trash again, which already is in trash
+   * tests
+   * - if an item can be added trash again, which already is in trash
+   * - try to add an item into trash even through there are same weighted but more valuable items to look at first
+   * - try to put an item into trash even through it should be add to the rucksack first
+   * - try to put an non selectable item to rucksack
+   *
    */
   @Test
   public void test6() {
     BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown");
     BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl");
-    BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin");
+    //BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin");
 
     items.add(crown);
     items.add(pearl);
-    items.add(coin);
+    //items.add(coin);
     items.sort(Comparator.comparingInt(Item::getWeight).reversed());
 
     BacktrackingTree tree = new BacktrackingTree(10, items);
 
+    tree.addToTrash(pearl);
     tree.addToRucksack(crown);
+    tree.addToTrash(crown);
     tree.addToRucksack(pearl);
     tree.addToTrash(pearl);
     tree.addToTrash(pearl);
@@ -326,9 +331,9 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 7]");
+      Assertions.assertEquals(answer, "├──not Pearl [akt. Gewicht:0, akt. Wert: 0]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "   └──not Pearl [akt. Gewicht:6, akt. Wert: 7]");
+      Assertions.assertEquals(answer, "└──Pearl [akt. Gewicht:6, akt. Wert: 8]");
 
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
@@ -351,10 +356,10 @@ public class BackTrackingTreeTest {
 
     BacktrackingTree tree = new BacktrackingTree(10, items);
 
+    tree.addToRucksack(pearl);
     tree.addToRucksack(crown);
-    tree.addToRucksack(pearl);
-    tree.addToTrash(pearl);
-    tree.addToRucksack(pearl);
+    tree.addToTrash(crown);
+    tree.addToRucksack(crown);
     tree.print(System.out);
 
     File treeFileFolder = new File("./src/test/resources/");
@@ -368,10 +373,78 @@ public class BackTrackingTreeTest {
       String answer = input.nextLine();
       Assertions.assertEquals(answer, "root");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 7]");
+      Assertions.assertEquals(answer, "└──Pearl [akt. Gewicht:6, akt. Wert: 8]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "   └──not Pearl [akt. Gewicht:6, akt. Wert: 7]");
+      Assertions.assertEquals(answer, "   └──not Crown [akt. Gewicht:6, akt. Wert: 8]");
 
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  /**
+   * tests if in it is possible to add an item with next possible weight but lower value than another possible item
+   * -> so in one high in the tree there is look at only one item
+   */
+  @Test
+  public void test8() {
+    BacktrackingItem i1 = new BacktrackingItem(7, 6, "i1");
+    BacktrackingItem i2 = new BacktrackingItem(8, 6, "i2");
+    BacktrackingItem i3 = new BacktrackingItem(9, 6, "i3");
+
+    items.add(i2);
+    items.add(i1);
+    items.add(i3);
+    items.sort(Comparator.comparingInt(Item::getWeight).reversed());
+
+    BacktrackingTree tree = new BacktrackingTree(18, items);
+
+    tree.addToRucksack(i3);
+    tree.addToRucksack(i2);
+    tree.addToRucksack(i1);
+    tree.addToTrash(i1);
+    tree.addToTrash(i3);
+
+    tree.addToTrash(i2);
+    tree.addToTrash(i3);
+    tree. addToTrash(i2);
+    tree.addToRucksack(i1);
+    tree.addToTrash(i1);
+
+    tree.addToTrash(i3);
+    tree.addToRucksack(i1);
+    tree.addToRucksack(i2);
+
+    tree.print(System.out);
+
+    File treeFileFolder = new File("./src/test/resources/");
+    treeFileFolder.mkdirs();
+    File treeFile = new File("./src/test/resources/treeOutput.txt");
+    try {
+      tree.print(new PrintStream(treeFile));
+      FileInputStream fis = new FileInputStream("./src/test/resources/treeOutput.txt");
+      Scanner input = new Scanner(fis);
+
+      String answer = input.nextLine();
+      Assertions.assertEquals(answer, "root");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "├──not i3 [akt. Gewicht:0, akt. Wert: 0]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "│  └──i2 [akt. Gewicht:6, akt. Wert: 8]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "└──i3 [akt. Gewicht:6, akt. Wert: 9]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "   ├──not i2 [akt. Gewicht:6, akt. Wert: 9]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "   │  ├──not i1 [akt. Gewicht:6, akt. Wert: 9]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "   │  └──i1 [akt. Gewicht:12, akt. Wert: 16]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "   └──i2 [akt. Gewicht:12, akt. Wert: 17]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "      ├──not i1 [akt. Gewicht:12, akt. Wert: 17]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "      └──i1 [akt. Gewicht:18, akt. Wert: 24]");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
