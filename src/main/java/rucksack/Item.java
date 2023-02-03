@@ -25,6 +25,7 @@ public class Item implements Serializable {
   @XmlElement
   private final String name;
 
+
   /**
    * Instantiates a new Item.
    *
