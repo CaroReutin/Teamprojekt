@@ -1,17 +1,23 @@
 package gui.level;
 
+import betatree.Tree;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import jtree.BacktrackingTree;
 import rucksack.Item;
 import rucksack.Level;
@@ -21,6 +27,14 @@ import rucksack.Level;
  * backtracking level pages.
  */
 public class GuiLevelPageBacktracking extends GuiLevelPage {
+  /**
+   * the beta tree.
+   */
+  private Tree betaTree;
+  /**
+   * the backtrackingTree (JTree).
+   */
+  private BacktrackingTree tree;
 
   /**
    * the labels of the page.
@@ -157,12 +171,85 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
     //alles zusammenpuzzeln
 
-    BacktrackingTree tree = new BacktrackingTree(super.getLevel());
-    JButton treeButton = new JButton("Zeige Baum");
-    treeButton.addActionListener(e -> {
-      tree.show();
-    });
-    centerPanel.add(treeButton);
+    if (!GuiOptionsPage.BETA_TREE.isSelected()) {
+      betaTree = new Tree(super.getLevel());
+      JButton treeButton = new JButton("Zeige Baum");
+      treeButton.addActionListener(e -> betaTree.show());
+      // To Test until GUI works.
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+          .put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
+              "add");
+      GuiManager.getRootPane().getActionMap()
+          .put("add", new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+              betaTree.putInBag();
+              System.out.println("Add");
+            }
+          });
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+          .put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0),
+              "rem");
+      GuiManager.getRootPane().getActionMap()
+          .put("rem", new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+              betaTree.back();
+              System.out.println("Remove");
+            }
+          });
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+          .put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
+              "trash");
+      GuiManager.getRootPane().getActionMap()
+          .put("trash", new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+              betaTree.putInTrash();
+              System.out.println("Trash");
+            }
+          });
+      centerPanel.add(treeButton);
+    } else {
+      tree = new BacktrackingTree(super.getLevel());
+      JButton treeButton = new JButton("Zeige Baum");
+      treeButton.addActionListener(e -> tree.show());
+      // To Test until GUI works.
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+          .put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
+              "add2");
+      GuiManager.getRootPane().getActionMap()
+          .put("add2", new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+              tree.putInBag();
+              System.out.println("Add");
+            }
+          });
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+          .put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0),
+              "rem2");
+      GuiManager.getRootPane().getActionMap()
+          .put("rem2", new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+              tree.back();
+              System.out.println("Remove");
+            }
+          });
+      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+          .put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
+              "trash2");
+      GuiManager.getRootPane().getActionMap()
+          .put("trash2", new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+              tree.putInTrash();
+              System.out.println("Trash");
+            }
+          });
+      centerPanel.add(treeButton);
+    }
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
     pane.add(rightPanel, BorderLayout.EAST);

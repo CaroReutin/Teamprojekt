@@ -53,6 +53,7 @@ public class GuiManager {
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
     frame.setResizable(false);
+    GuiOptionsPage.BETA_TREE.setSelected(true);
     openMainMenu();
   }
 
