@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * the rucksack.
+ */
 @XmlRootElement
 public class Rucksack {
   /**
@@ -38,6 +41,13 @@ public class Rucksack {
   @XmlElement
   private final int capacity;
 
+  /**
+   * makes a new Rucksack.
+   *
+   * @param myItemList       the item list
+   * @param myItemAmountList the item amount list
+   * @param myCapacity       the capacity
+   */
   public Rucksack(final ArrayList<Item> myItemList,
                   final ArrayList<Integer> myItemAmountList,
                   final int myCapacity) {
@@ -54,6 +64,9 @@ public class Rucksack {
     currentValue = 0;
   }
 
+  /**
+   * level editor only.
+   */
   private Rucksack() {
     this.itemList = new ArrayList<>();
     this.itemAmountList = new ArrayList<>();
@@ -64,6 +77,9 @@ public class Rucksack {
     capacity = -1;
   }
 
+  /**
+   * resets the content of the Rucksack to its original content.
+   */
   public void reset() {
     inRucksackAmountList = new ArrayList<>();
     availableItemAmountList = new ArrayList<>();
@@ -75,6 +91,11 @@ public class Rucksack {
     currentValue = 0;
   }
 
+  /**
+   * Move to rucksack.
+   *
+   * @param i the index of the item to be moved
+   */
   public void moveToRucksack(final int i) {
     availableItemAmountList.set(i, availableItemAmountList.get(i) - 1);
     inRucksackAmountList.set(i, inRucksackAmountList.get(i) + 1);
@@ -82,6 +103,11 @@ public class Rucksack {
     currentWeight += itemList.get(i).getWeight();
   }
 
+  /**
+   * Move from rucksack.
+   *
+   * @param i the index of the item to be moved
+   */
   public void moveFromRucksack(final int i) {
     availableItemAmountList.set(i, availableItemAmountList.get(i) + 1);
     inRucksackAmountList.set(i, inRucksackAmountList.get(i) - 1);
@@ -89,41 +115,81 @@ public class Rucksack {
     currentWeight -= itemList.get(i).getWeight();
   }
 
+  /**
+   * Turns the items into backtracking items.
+   */
   public void turnIntoBacktracking() {
     ArrayList<Item> temp = new ArrayList<>();
-    for (int i = 0; i < itemList.size(); i++) {
-      Item tempItem = itemList.get(i);
+    for (Item tempItem : itemList) {
       BacktrackingItem newItem =
-          new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
+          new BacktrackingItem(tempItem.getValue(),
+              tempItem.getWeight(), tempItem.getName());
       temp.add(newItem);
     }
     itemList = temp;
   }
 
+  /**
+   * returns the amount list.
+   *
+   * @return the amount list
+   */
   public ArrayList<Integer> getItemAmountList() {
     return itemAmountList;
   }
 
+  /**
+   * returns the current value.
+   *
+   * @return the current value
+   */
   public int getCurrentValue() {
     return currentValue;
   }
 
+  /**
+   * returns the current Weight.
+   *
+   * @return the current weight
+   */
   public int getCurrentWeight() {
     return currentWeight;
   }
 
+  /**
+   * returns the capacity.
+   *
+   * @return the capacity
+   */
   public int getCapacity() {
     return capacity;
   }
 
-  public int getInRucksackAmount(int i) {
+  /**
+   * returns the rucksack amount list at index i.
+   *
+   * @param i the index
+   * @return the rucksack amount list
+   */
+  public int getInRucksackAmount(final int i) {
     return inRucksackAmountList.get(i);
   }
 
-  public int getAvailableItemAmount(int i) {
+  /**
+   * returns the available amount at index i.
+   *
+   * @param i the index
+   * @return the available amount list
+   */
+  public int getAvailableItemAmount(final int i) {
     return availableItemAmountList.get(i);
   }
 
+  /**
+   * returns the item list.
+   *
+   * @return the item list
+   */
   public ArrayList<Item> getItemList() {
     return itemList;
   }

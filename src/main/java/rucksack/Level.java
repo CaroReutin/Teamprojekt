@@ -40,7 +40,7 @@ public class Level implements Serializable {
    */
   private final int levelindex;
   /**
-   * the rucksack of this level
+   * the rucksack of this level.
    */
   @XmlElement
   private final Rucksack myRucksack;
@@ -119,7 +119,7 @@ public class Level implements Serializable {
    *
    * @param i the
    * @return Returns the amounts of the items that are still available
-   * in the Rucksack.Level
+   *          in the Rucksack.Level
    */
   public int getItemAmountAvailable(final int i) {
     return myRucksack.getAvailableItemAmount(i);
@@ -154,7 +154,7 @@ public class Level implements Serializable {
   /**
    * Move to rucksack.
    *
-   * @param i the
+   * @param i the index of the item to be moved
    */
   public void moveToRucksack(final int i) {
     myRucksack.moveToRucksack(i);
@@ -163,7 +163,7 @@ public class Level implements Serializable {
   /**
    * Move from rucksack.
    *
-   * @param i the
+   * @param i the index of the item to be moved
    */
   public void moveFromRucksack(final int i) {
     myRucksack.moveFromRucksack(i);
@@ -209,6 +209,7 @@ public class Level implements Serializable {
    * Turns level into backtracking level if needed.
    */
   public void turnIntoBacktracking() {
+    assert this.robber != null;
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
       myRucksack.turnIntoBacktracking();
     }
