@@ -1,11 +1,13 @@
 
 package gui.level;
 
+import static gui.level.GuiFrontpage.SIZE_FONT_SMALL;
 import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.File;
@@ -18,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -87,10 +90,16 @@ public final class GuiLevelEditorPage {
     leftPane.add(modus);
     leftPane.add(modeDropdown);
 
+    Font fontButtons = new Font("Arial",
+        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL);
+
     ArrayList<ItemPanel> itemPanels = new ArrayList<>();
     JButton save = new JButton("Speichern");
     save.addActionListener(e -> saveLevel(pane,
         titleField, capacityField, modeDropdown, itemPanels));
+    save.setFont(fontButtons);
+
+
     JButton back = new JButton("Abbrechen");
     back.addActionListener(e -> {
       if (JOptionPane.YES_OPTION
@@ -101,10 +110,15 @@ public final class GuiLevelEditorPage {
         GuiManager.openMainMenu();
       }
     });
+    back.setFont(fontButtons);
+    JPanel savePanel = new JPanel();
+    savePanel.add(save);
+    leftPane.add(savePanel);
+    JPanel backPanel = new JPanel();
+    backPanel.add(back);
+    leftPane.add(backPanel);
 
-    leftPane.add(save);
-    leftPane.add(back);
-
+    JPanel loadPanel = new JPanel();
     JButton load = new JButton("Level öffnen");
     load.addActionListener(e -> {
       JFileChooser chooseIcon = new JFileChooser();
@@ -119,12 +133,17 @@ public final class GuiLevelEditorPage {
         CustomLevelManager.load(customLevel);
       }
     });
-    leftPane.add(load);
+    load.setFont(fontButtons);
+    loadPanel.add(load);
+    leftPane.add(loadPanel);
 
+    JPanel resetPanel = new JPanel();
     JButton reset = new JButton("Reset");
     reset.addActionListener(e -> GuiManager.openLevelEditor());
+    reset.setFont(fontButtons);
+    resetPanel.add(reset);
 
-    leftPane.add(reset);
+    leftPane.add(resetPanel);
 
     pane.add(leftPane, BorderLayout.WEST);
 
@@ -203,8 +222,8 @@ public final class GuiLevelEditorPage {
       if (itemList.size()
           > AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL
           && Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
-              .getSelectedItem()).toString()).equals(
-                  Level.Robber.BACKTRACKING_BANDIT)) {
+          .getSelectedItem()).toString()).equals(
+          Level.Robber.BACKTRACKING_BANDIT)) {
         showMessageDialog(pane, "Backtracking Level dürfen Maximal "
             + AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL
             + " verschiedene Items haben.");
