@@ -145,6 +145,7 @@ public class BacktrackingTree {
   }
 
   /**
+
    * adds an item to the trash bin from the rucksack or the available selection.
    *
    * @param childItem the item in the new node (trash)
@@ -275,5 +276,11 @@ public class BacktrackingTree {
       this.moveDownTheSubtree(nodeItemToTrash.getLeftChild());
       this.moveDownTheSubtree(nodeItemToTrash.getRightChild());
     }
+   }
+   * returns the Node, where we actually are in the tree
+   * @return Node, where we actually are in the tree
+   */
+  public BacktrackingNode getCurrentNode() {
+    return currentNode;
   }
 }
