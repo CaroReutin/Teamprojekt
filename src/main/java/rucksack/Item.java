@@ -1,6 +1,7 @@
 package rucksack;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -85,5 +86,18 @@ public class Item implements Serializable {
   @Override
   public String toString() {
     return name + "\nWeight: " + weight + "\nValue: " + value;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Item item = (Item) o;
+    return value == item.value && weight == item.weight && Objects.equals(name, item.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value, weight, name);
   }
 }
