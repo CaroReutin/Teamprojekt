@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import rucksack.BacktrackingItem;
 
+import javax.swing.*;
+
 
 /**
  * this class represents the backtracking tree.
@@ -28,7 +30,7 @@ public class BacktrackingTree {
    */
   public BacktrackingTree(final int bagCapacity,
                           final ArrayList<BacktrackingItem> itemArrayList) {
-    root = new BacktrackingNode(new BacktrackingItem(0, 0, "root"),
+    root = new BacktrackingNode(new BacktrackingItem(0, 0, "root", new ImageIcon()),
         0, 0, bagCapacity, itemArrayList, null, true);
     currentNode = root;
   }

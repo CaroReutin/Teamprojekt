@@ -307,7 +307,7 @@ public class Level implements Serializable {
       ArrayList<Item> temp = new ArrayList<Item>();
       for (int i = 0; i < itemList.size(); i++) {
         Item tempItem = itemList.get(i);
-        BacktrackingItem newItem = new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
+        BacktrackingItem newItem = new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName(), tempItem.getImageIcon());
         temp.add(newItem);
       }
       itemList = temp;

@@ -1,6 +1,7 @@
 package rucksack;
 
 import java.io.Serializable;
+import javax.swing.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,6 +26,8 @@ public class Item implements Serializable {
   @XmlElement
   private final String name;
 
+  private final ImageIcon imageIcon;
+
   /**
    * Instantiates a new Item.
    *
@@ -33,10 +36,11 @@ public class Item implements Serializable {
    * @param itemName   the Name
    */
   public Item(final int itemValue, final int itemWeight,
-              final String itemName) {
+              final String itemName, final ImageIcon imageIcon) {
     this.value = itemValue;
     this.weight = itemWeight;
     this.name = itemName;
+    this.imageIcon = imageIcon;
   }
 
   /**
@@ -46,6 +50,7 @@ public class Item implements Serializable {
     this.value = -1;
     this.weight = -1;
     this.name = null;
+    this.imageIcon = null;
   }
 
   /**
@@ -84,5 +89,9 @@ public class Item implements Serializable {
   @Override
   public String toString() {
     return name + "\nWeight: " + weight + "\nValue: " + value;
+  }
+
+  public ImageIcon getImageIcon() {
+    return imageIcon;
   }
 }
