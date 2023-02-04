@@ -31,32 +31,6 @@ public class Level implements Serializable {
   }
 
   /**
-   * the list with all items.
-   */
-  @XmlElement
-  private ArrayList<Item> itemList;
-  /**
-   * the list with the amout of the items.
-   */
-  @XmlElement
-  private final ArrayList<Integer> itemAmountList;
-  /**
-   * the lsit with the amout of available items.
-   */
-  private ArrayList<Integer> availableItemAmountList;
-  /**
-   * the list of the amount in the rucksack.
-   */
-  private ArrayList<Integer> inRucksackAmountList;
-  /**
-   * the current value.
-   */
-  private int currentValue;
-  /**
-   * the current weight.
-   */
-  private int currentWeight;
-  /**
    * the current robber.
    */
   @XmlElement
@@ -66,10 +40,10 @@ public class Level implements Serializable {
    */
   private final int levelindex;
   /**
-   * the capacity of the rucksack.
+   * the rucksack of this level.
    */
   @XmlElement
-  private final int capacity;
+  private final Rucksack myRucksack;
 
   /**
    * By default, has Dr.Meta as Robber.
@@ -85,48 +59,9 @@ public class Level implements Serializable {
   public Level(final ArrayList<Item> myItemList,
                final ArrayList<Integer> myItemAmountList,
                final int levelIndex, final int myCapacity) {
-    this.capacity = myCapacity;
+    this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
     this.levelindex = levelIndex;
-    this.itemList = myItemList;
-    this.itemAmountList = myItemAmountList;
-    this.availableItemAmountList = new ArrayList<>();
-    availableItemAmountList.addAll(myItemAmountList);
     this.robber = Robber.DR_META;
-    inRucksackAmountList = new ArrayList<>();
-    for (int i = 0; i < myItemAmountList.size(); i++) {
-      inRucksackAmountList.add(0);
-    }
-    currentWeight = 0;
-    currentValue = 0;
-  }
-
-  /**
-   * amount of steps needed until now
-   * a step is either "putting item in rucksack"
-   * or "removing items from rucksack".
-   */
-  private int counter = 0;
-
-
-  /**
-   * counts the number of steps needed;
-   * adding and removing items both count as a step.
-   *
-   * @return current value of the counter
-   */
-  public int getCounter() {
-    return counter;
-  }
-
-
-  /**
-   * sets the counter to a new value.
-   *
-   * @param myCounter the new value of the counter
-   *                  which overwrites the current one
-   */
-  public void setCounter(final int myCounter) {
-    this.counter = myCounter;
   }
 
   /**
@@ -145,34 +80,18 @@ public class Level implements Serializable {
                final ArrayList<Integer> myItemAmountList,
                final Robber myRobber, final int levelIndex,
                final int myCapacity) {
-    this.capacity = myCapacity;
+    this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
     this.levelindex = levelIndex;
-    this.itemList = myItemList;
-    this.itemAmountList = myItemAmountList;
-    this.availableItemAmountList = new ArrayList<>();
-    availableItemAmountList.addAll(myItemAmountList);
-    inRucksackAmountList = new ArrayList<>();
-    for (int i = 0; i < myItemAmountList.size(); i++) {
-      inRucksackAmountList.add(0);
-    }
     this.robber = myRobber;
-    currentWeight = 0;
-    currentValue = 0;
   }
 
   /**
    * Only for level editor.
    */
   private Level() {
-    this.capacity = -1;
+    this.myRucksack = new Rucksack(new ArrayList<>(), new ArrayList<>(), -1);
     this.levelindex = -1;
-    this.itemList = new ArrayList<>();
-    this.itemAmountList = new ArrayList<>();
-    this.availableItemAmountList = new ArrayList<>();
-    this.inRucksackAmountList = new ArrayList<>();
     this.robber = null;
-    currentWeight = 0;
-    currentValue = 0;
   }
 
   /**
@@ -182,7 +101,7 @@ public class Level implements Serializable {
    * @return Returns the items that exist in the Rucksack.Level
    */
   public ArrayList<Item> getItemList() {
-    return itemList;
+    return myRucksack.getItemList();
   }
 
   /**
@@ -192,7 +111,7 @@ public class Level implements Serializable {
    * @return Returns the amounts of the items that exist in the Rucksack.Level
    */
   public ArrayList<Integer> getItemAmountList() {
-    return itemAmountList;
+    return myRucksack.getItemAmountList();
   }
 
   /**
@@ -200,10 +119,10 @@ public class Level implements Serializable {
    *
    * @param i the
    * @return Returns the amounts of the items that are still available
-   *      in the Rucksack.Level
+   *          in the Rucksack.Level
    */
   public int getItemAmountAvailable(final int i) {
-    return availableItemAmountList.get(i);
+    return myRucksack.getAvailableItemAmount(i);
   }
 
   /**
@@ -213,21 +132,14 @@ public class Level implements Serializable {
    * @return the item amount in rucksack
    */
   public int getItemAmountInRucksack(final int i) {
-    return inRucksackAmountList.get(i);
+    return myRucksack.getInRucksackAmount(i);
   }
 
   /**
    * Reset level.
    */
   public void resetLevel() {
-    inRucksackAmountList = new ArrayList<>();
-    availableItemAmountList = new ArrayList<>();
-    for (Integer amount : itemAmountList) {
-      inRucksackAmountList.add(0);
-      availableItemAmountList.add(amount);
-    }
-    currentWeight = 0;
-    currentValue = 0;
+    myRucksack.reset();
   }
 
   /**
@@ -242,25 +154,19 @@ public class Level implements Serializable {
   /**
    * Move to rucksack.
    *
-   * @param i the
+   * @param i the index of the item to be moved
    */
   public void moveToRucksack(final int i) {
-    availableItemAmountList.set(i, availableItemAmountList.get(i) - 1);
-    inRucksackAmountList.set(i, inRucksackAmountList.get(i) + 1);
-    currentValue += itemList.get(i).getValue();
-    currentWeight += itemList.get(i).getWeight();
+    myRucksack.moveToRucksack(i);
   }
 
   /**
    * Move from rucksack.
    *
-   * @param i the
+   * @param i the index of the item to be moved
    */
   public void moveFromRucksack(final int i) {
-    availableItemAmountList.set(i, availableItemAmountList.get(i) + 1);
-    inRucksackAmountList.set(i, inRucksackAmountList.get(i) - 1);
-    currentValue -= itemList.get(i).getValue();
-    currentWeight -= itemList.get(i).getWeight();
+    myRucksack.moveFromRucksack(i);
   }
 
   /**
@@ -269,7 +175,7 @@ public class Level implements Serializable {
    * @return the current value
    */
   public int getCurrentValue() {
-    return currentValue;
+    return myRucksack.getCurrentValue();
   }
 
   /**
@@ -278,7 +184,7 @@ public class Level implements Serializable {
    * @return the capacity
    */
   public int getCapacity() {
-    return capacity;
+    return myRucksack.getCapacity();
   }
 
   /**
@@ -287,7 +193,7 @@ public class Level implements Serializable {
    * @return the current weight
    */
   public int getCurrentWeight() {
-    return currentWeight;
+    return myRucksack.getCurrentWeight();
   }
 
   /**
@@ -303,14 +209,9 @@ public class Level implements Serializable {
    * Turns level into backtracking level if needed.
    */
   public void turnIntoBacktracking() {
+    assert this.robber != null;
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
-      ArrayList<Item> temp = new ArrayList<Item>();
-      for (int i = 0; i < itemList.size(); i++) {
-        Item tempItem = itemList.get(i);
-        BacktrackingItem newItem = new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
-        temp.add(newItem);
-      }
-      itemList = temp;
+      myRucksack.turnIntoBacktracking();
     }
   }
 
