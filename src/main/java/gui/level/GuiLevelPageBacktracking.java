@@ -16,11 +16,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import jtree.BacktrackingTree;
 import rucksack.Item;
 import rucksack.Level;
+import solving.ButtonEventHandlerTable;
 
 
 /**
@@ -172,9 +174,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //alles zusammenpuzzeln
 
     if (!GuiOptionsPage.BETA_TREE.isSelected()) {
-      betaTree = new Tree(super.getLevel());
+      ButtonEventHandlerTable handler = new ButtonEventHandlerTable(this.getLevel());
       JButton treeButton = new JButton("Zeige Baum");
-      treeButton.addActionListener(e -> betaTree.show());
+      treeButton.addActionListener(e -> handler.show());
       // To Test until GUI works.
       GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
           .put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
@@ -183,19 +185,8 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           .put("add", new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-              betaTree.putInBag();
+              handler.addToRucksack(Integer.parseInt(JOptionPane.showInputDialog("Index:")));
               System.out.println("Add");
-            }
-          });
-      GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-          .put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0),
-              "rem");
-      GuiManager.getRootPane().getActionMap()
-          .put("rem", new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-              betaTree.back();
-              System.out.println("Remove");
             }
           });
       GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -205,7 +196,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           .put("trash", new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-              betaTree.putInTrash();
+              handler.addToTrash(Integer.parseInt(JOptionPane.showInputDialog("Index:")));
               System.out.println("Trash");
             }
           });
