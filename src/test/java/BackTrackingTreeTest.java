@@ -449,4 +449,73 @@ public class BackTrackingTreeTest {
       throw new RuntimeException(e);
     }
   }
+
+  /**
+   * full tree of BacktrackingLevel 1
+   */
+  @Test
+  public void test9() {
+    BacktrackingItem drawing = new BacktrackingItem(8, 6, "Zeichnung");
+    BacktrackingItem letter = new BacktrackingItem(7, 6, "Brief");
+    BacktrackingItem diamond = new BacktrackingItem(20, 4, "Diamant");
+
+    items.add(diamond);
+    items.add(drawing);
+    items.add(letter);
+    items.sort(Comparator.comparingInt(Item::getWeight).reversed());
+
+    BacktrackingTree tree = new BacktrackingTree(10, items);
+
+    tree.addToRucksack(drawing);
+    tree.addToTrash(letter);
+    tree.addToRucksack(diamond);
+    tree.addToTrash(diamond);
+    tree.addToTrash(drawing);
+    tree.addToRucksack(letter);
+    tree.addToRucksack(diamond);
+    tree.addToTrash(diamond);
+    tree.addToTrash(letter);
+    tree.addToRucksack(diamond);
+    tree.addToTrash(diamond);
+
+    tree.print(System.out);
+
+    File treeFileFolder = new File("./src/test/resources/");
+    treeFileFolder.mkdirs();
+    File treeFile = new File("./src/test/resources/treeOutput.txt");
+    try {
+      tree.print(new PrintStream(treeFile));
+      FileInputStream fis = new FileInputStream("./src/test/resources/treeOutput.txt");
+      Scanner input = new Scanner(fis);
+
+      String answer = input.nextLine();
+      Assertions.assertEquals(answer, "root");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "├──not Zeichnung [akt. Gewicht:0, akt. Wert: 0]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "│  ├──not Brief [akt. Gewicht:0, akt. Wert: 0]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "│  │  ├──not Diamant [akt. Gewicht:0, akt. Wert: 0]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "│  │  └──Diamant [akt. Gewicht:4, akt. Wert: 20]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "│  └──Brief [akt. Gewicht:6, akt. Wert: 7]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "│     ├──not Diamant [akt. Gewicht:6, akt. Wert: 7]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "│     └──Diamant [akt. Gewicht:10, akt. Wert: 27]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "└──Zeichnung [akt. Gewicht:6, akt. Wert: 8]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "   └──not Brief [akt. Gewicht:6, akt. Wert: 8]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "      ├──not Diamant [akt. Gewicht:6, akt. Wert: 8]");
+      answer = input.nextLine();
+      Assertions.assertEquals(answer, "      └──Diamant [akt. Gewicht:10, akt. Wert: 28]");
+
+
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
