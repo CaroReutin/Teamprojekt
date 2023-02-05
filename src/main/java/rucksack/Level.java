@@ -330,8 +330,20 @@ public class Level implements Serializable {
     return inTrashAmountList;
   }
 
-  public void setInTrashAmountList(ArrayList<Integer> inTrashAmountList) {
-    this.inTrashAmountList = inTrashAmountList;
+  public void setInTrashAmountList(int index, int newAmount) {
+    inTrashAmountList.set(index, newAmount);
+  }
+
+  public void setAvailableItemAmountList(int index, int newAmount) {
+    availableItemAmountList.set(index, newAmount);
+  }
+
+  public void setInRucksackAmountList(int index, int newAmount) {
+    inRucksackAmountList.set(index, newAmount);
+  }
+
+  public ArrayList<Integer> getInRucksackAmountList() {
+    return inRucksackAmountList;
   }
 
   public ArrayList<BacktrackingItem> getBacktrackingItemList() {

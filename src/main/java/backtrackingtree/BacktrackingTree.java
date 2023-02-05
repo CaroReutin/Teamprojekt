@@ -112,7 +112,7 @@ public class BacktrackingTree {
    *
    * @param item said item
    */
-  public void addToRucksack(final BacktrackingItem item) {
+  public boolean addToRucksack(final BacktrackingItem item) {
     System.out.println(item.getName()
       + " soll dem Rucksack hinzugefügt werden.");
     boolean addedSuccessfully = currentNode.addToRucksack(item);
@@ -120,9 +120,12 @@ public class BacktrackingTree {
     if (addedSuccessfully) {
       currentNode = currentNode.getRightChild();
       System.out.println("Der current Node ist nun " + currentNode.getName());
+      System.out.println("-----------------");
+      return true;
     }
 
     System.out.println("-----------------");
+    return false;
   }
 
   /**
@@ -130,7 +133,7 @@ public class BacktrackingTree {
    *
    * @param item said item
    */
-  public void addToTrash(final BacktrackingItem item) {
+  public boolean addToTrash(final BacktrackingItem item) {
     System.out.println(item.getName() + " soll in den Müll geworfen werden.");
     BacktrackingNode newCurrent = helpAddToTrash(item);
     if (newCurrent != null) {
@@ -139,8 +142,11 @@ public class BacktrackingTree {
         + " wurde in den Müll gelegt.");
       System.out.println("Der current Node ist nun "
         + currentNode.getName());
+      System.out.println("-----------------");
+      return true;
     }
     System.out.println("-----------------");
+    return false;
   }
 
   /**
