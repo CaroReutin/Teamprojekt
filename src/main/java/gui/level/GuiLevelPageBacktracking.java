@@ -127,14 +127,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
       putToTrash.addActionListener(e -> {
-
         handleButtons(finalI, false);
       });
       JButton currentRucksack = new JButton(items.get(i).getName());
       currentRucksack.addActionListener(e -> {
-        if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
-          return;
-        }
         handleButtons(finalI, false);
       });
 
@@ -164,11 +160,15 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   private void handleButtons(final int index,
                              final boolean toRucksack) {
     if (toRucksack) {
-      buttonHandler.addToRucksack(index);
+      buttonHandler.addToRucksack(index, getLevel());
+      updateLabel(index);
     } else {
-      buttonHandler.addToTrash(index);
+      buttonHandler.addToTrash(index, getLevel());
+      for (int i = index; i < getLevel()
+          .getBacktrackingItemList().size(); i++) {
+        updateLabel(i);
+      }
     }
-    updateLabel(index);
   }
 
   /**

@@ -13,9 +13,9 @@ public abstract class ButtonEventHandler {
 
   private int indexOfLastItem;
 
-  public abstract void addToRucksack(int itemButtonIndex);
+  public abstract void addToRucksack(int itemButtonIndex, Level level);
 
-  public abstract void addToTrash(int itemButtonIndex);
+  public abstract void addToTrash(int itemButtonIndex, Level level);
 
   public abstract void show();
 }

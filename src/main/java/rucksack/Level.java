@@ -11,6 +11,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Level implements Serializable {
+  public void setCurrentValue(final int i) {
+    this.currentValue = i;
+  }
+
+  public void setCurrentWeight(final int i) {
+    this.currentWeight = i;
+  }
+
   /**
    * Greedy -> Gieriger Ganove
    * Backtracking -> Backtracking Bandit
@@ -207,7 +215,7 @@ public class Level implements Serializable {
    *
    * @param i the
    * @return Returns the amounts of the items that are still available
-   *      in the Rucksack.Level
+   * in the Rucksack.Level
    */
   public int getItemAmountAvailable(final int i) {
     return availableItemAmountList.get(i);

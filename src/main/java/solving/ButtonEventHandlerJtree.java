@@ -11,6 +11,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
   private int lastDepth;
 
   public ButtonEventHandlerJtree(final Level level) {
+    // TODO not tested might be broken
     lastDepth = 0;
     tree = new BacktrackingTree(level);
     myLevel = level;
@@ -30,7 +31,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
   }
 
   @Override
-  public void addToRucksack(final int itemButtonIndex) {
+  public void addToRucksack(final int itemButtonIndex, final Level level) {
     if (this.backtrackingTree.addToRucksack(
         this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
 
@@ -41,7 +42,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
   }
 
   @Override
-  public void addToTrash(final int itemButtonIndex) {
+  public void addToTrash(final int itemButtonIndex, final Level level) {
     if (this.backtrackingTree.addToTrash(
         this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
       //this.myLevel.moveToTrash(itemButtonIndex);
