@@ -1,9 +1,8 @@
 package gui.level;
 
-
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -13,20 +12,27 @@ import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import solving.AppData;
-
 
 /**
  * The class GUIOptionsPage holds the pane of the optionspage.
  */
 public class GuiOptionsPage {
+  /**
+   * the number of rows on the pane.
+   */
+  public static final int ROWS_ON_PANE = 3;
 
   /**
-   * .
+   * the preferred length of the field.
    */
-  public static final JToggleButton BETA_TREE = new JToggleButton("Beta Baum");
+  public static final int LENGTH_OF_FIELD = 200;
+
+  /**
+   * the preferred width of the field.
+   */
+  public static final int HIGHT_OF_FIELD = 50;
 
   /**
    * Compares the given String with the set of implemented passwords.
@@ -55,12 +61,14 @@ public class GuiOptionsPage {
     pane.setLayout(new BorderLayout());
 
     Container subPane = new Container();
-    subPane.setLayout(new GridLayout(7, 1));
+    subPane.setLayout(new GridLayout(ROWS_ON_PANE, 1));
 
     JFormattedTextField passwordInput = new JFormattedTextField("");
+    passwordInput.setPreferredSize(
+      new Dimension(LENGTH_OF_FIELD, HIGHT_OF_FIELD));
     GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
         .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-            "callConfirmPassword");
+         "callConfirmPassword");
     GuiManager.getRootPane().getActionMap()
         .put("callConfirmPassword", new AbstractAction() {
           @Override
@@ -70,43 +78,35 @@ public class GuiOptionsPage {
         });
 
     //erzeuge JPanels
-    JPanel treeTogglePanel = new JPanel();
-
-    treeTogglePanel.add(BETA_TREE);
-    BETA_TREE.addActionListener(e ->
-        BETA_TREE.setBackground(new Color(255, 0, 0)));
-
+    JPanel enterPasswordPanel = new JPanel();
     JPanel passwordInputPanel = new JPanel();
     passwordInputPanel.add(passwordInput);
     passwordInput.setValue("");
 
     //erzeuge Buttons
-    JPanel enterPasswordPanel = new JPanel();
     JButton enterPassword = new JButton("Eingabe");
     enterPasswordPanel.add(enterPassword);
     enterPassword.addActionListener(e ->
         confirmPassword(passwordInput.getText(), pane));
 
-    JButton back = new JButton("Zurück");
     JPanel backPanel = new JPanel();
+    JButton back = new JButton("Zurück");
     backPanel.add(back);
     back.addActionListener(e -> {
       GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-          .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+        .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
       GuiManager.openMainMenu();
     });
+
+    JPanel emptyPanel = new JPanel();
 
     //add panels on subpane
     subPane.add(passwordInputPanel);
     subPane.add(enterPasswordPanel);
-    subPane.add(treeTogglePanel);
     subPane.add(backPanel);
-
-
     //add panels and subpane on pane
     pane.add(subPane, BorderLayout.CENTER);
-
-
     return pane;
   }
+
 }

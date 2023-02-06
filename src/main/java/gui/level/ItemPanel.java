@@ -5,19 +5,17 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.File;
-import java.text.NumberFormat;
 import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.NumberFormatter;
+import javax.swing.text.AbstractDocument;
 import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import solving.AppData;
@@ -44,15 +42,15 @@ public class ItemPanel extends Container {
   /**
    * the weight field.
    */
-  private final JFormattedTextField weightField;
+  private final JTextField weightField;
   /**
    * the value field.
    */
-  private final JFormattedTextField valueField;
+  private final JTextField valueField;
   /**
    * the amount field.
    */
-  private final JFormattedTextField amountField;
+  private final JTextField amountField;
   /**
    * the container.
    */
@@ -80,33 +78,30 @@ public class ItemPanel extends Container {
     Container itemInfoPane = new Container();
     itemInfoPane.setLayout(new GridLayout(4, 2));
 
-    // TODO Sprint 4, Currently you cannot delete a number
-    // if you type it into a field
-    // So "4" -> "" -> "5" is not possible
-    // You have to go "4" -> "45" -> "5"
-    // Or select the 4 and overwrite it with 5
-    NumberFormat format = NumberFormat.getInstance();
-    NumberFormatter formatter = new NumberFormatter(format);
-    formatter.setValueClass(Integer.class);
-    formatter.setMinimum(1);
-    formatter.setMaximum(Integer.MAX_VALUE);
-    formatter.setAllowsInvalid(false);
-
     JLabel name = new JLabel("Bezeichnung: ");
     itemInfoPane.add(name);
     nameField = new JTextField("");
     itemInfoPane.add(nameField);
     JLabel weight = new JLabel("Gewicht: ");
     itemInfoPane.add(weight);
-    weightField = new JFormattedTextField(formatter);
+    weightField = new JTextField("");
+    AbstractDocument weightDocument = (AbstractDocument)
+        weightField.getDocument();
+    weightDocument.setDocumentFilter(new NumberListener());
     itemInfoPane.add(weightField);
     JLabel value = new JLabel("Wert: ");
     itemInfoPane.add(value);
-    valueField = new JFormattedTextField(formatter);
+    valueField = new JTextField("");
+    AbstractDocument valueDocument = (AbstractDocument)
+        valueField.getDocument();
+    valueDocument.setDocumentFilter(new NumberListener());
     itemInfoPane.add(valueField);
     JLabel amount = new JLabel("Anzahl: ");
     itemInfoPane.add(amount);
-    amountField = new JFormattedTextField(formatter);
+    amountField = new JTextField("");
+    AbstractDocument amountDocument = (AbstractDocument)
+        amountField.getDocument();
+    amountDocument.setDocumentFilter(new NumberListener());
     itemInfoPane.add(amountField);
 
     myContainer.add(itemInfoPane, BorderLayout.EAST);
@@ -180,14 +175,15 @@ public class ItemPanel extends Container {
    */
   public Item generateItem() throws NullPointerException {
     if (nameField.getText().equals("")
-        || amountField.getValue().toString().equals("")
-        || weightField.getValue().toString().equals("")) {
+        || amountField.getText().equals("")
+        || weightField.getText().equals("")
+        || valueField.getText().equals("")) {
       throw new NullPointerException("No field may be empty");
     }
     // Cannot be empty because of the if above
     // => Must be an Integer because of the formatter
-    return new Item(Integer.parseInt(valueField.getValue().toString()),
-        Integer.parseInt(weightField.getValue().toString()),
+    return new Item(Integer.parseInt(valueField.getText()),
+        Integer.parseInt(weightField.getText()),
         nameField.getText());
   }
 
@@ -198,6 +194,15 @@ public class ItemPanel extends Container {
    * @return returns the amount specified in the AmountField
    */
   public int getAmount() {
-    return Integer.parseInt(amountField.getValue().toString());
+    return Integer.parseInt(amountField.getText());
+  }
+
+  /**
+   * sets the visibility of the container.
+   *
+   * @param visibility the visibility
+   */
+  public void setContainerVisible(final boolean visibility) {
+    myContainer.setVisible(visibility);
   }
 }

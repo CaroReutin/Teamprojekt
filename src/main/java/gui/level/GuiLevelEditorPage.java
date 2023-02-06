@@ -7,15 +7,15 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,7 +25,6 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.NumberFormatter;
 import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
@@ -38,6 +37,11 @@ import solving.CustomLevelManager;
 public final class GuiLevelEditorPage {
 
   /**
+   * counts the item Panels.
+   */
+  private int panelCounter = 1;
+
+  /**
    * The Level Editor.
    *
    * @return returns the Page containing the Level Editor.
@@ -48,6 +52,7 @@ public final class GuiLevelEditorPage {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    panelCounter = 1;
     Container pane = new Container();
     pane.setLayout(new BorderLayout());
 
@@ -60,10 +65,7 @@ public final class GuiLevelEditorPage {
     capacity.setFont(AppData.FONT_STYLE);
     JLabel modus = new JLabel("Modus: ");
     modus.setFont(AppData.FONT_STYLE);
-
     String[] robberOptions = new String[Level.Robber.values().length];
-    // Unless changed (which it currently is not) the option
-    // with Index 0 will be the default
     robberOptions[0] = Level.Robber.DR_META.name();
     robberOptions[1] = Level.Robber.GIERIGER_GANOVE.name();
     robberOptions[2] = Level.Robber.BACKTRACKING_BANDIT.name();
@@ -73,19 +75,10 @@ public final class GuiLevelEditorPage {
         titleField.getDocument();
     titleDocument.setDocumentFilter(new FieldListener());
 
-    // TODO Sprint 4, Currently you cannot delete a number
-    // if you type it into a field
-    // So "4" -> "" -> "5" is not possible
-    // You have to go "4" -> "45" -> "5"
-    // Or select the 4 and overwrite it with 5
-    NumberFormat format = NumberFormat.getInstance();
-    NumberFormatter formatter = new NumberFormatter(format);
-    formatter.setValueClass(Integer.class);
-    formatter.setMinimum(1);
-    formatter.setMaximum(Integer.MAX_VALUE);
-    formatter.setAllowsInvalid(false);
-
-    JFormattedTextField capacityField = new JFormattedTextField(formatter);
+    JTextField capacityField = new JTextField("");
+    AbstractDocument capacityDocument = (AbstractDocument)
+        capacityField.getDocument();
+    capacityDocument.setDocumentFilter(new NumberListener());
     JComboBox<String> modeDropdown = new JComboBox<>(robberOptions);
     leftPane.add(titel);
     leftPane.add(titleField);
@@ -96,47 +89,8 @@ public final class GuiLevelEditorPage {
 
     ArrayList<ItemPanel> itemPanels = new ArrayList<>();
     JButton save = new JButton("Speichern");
-    save.addActionListener(e -> {
-      ArrayList<Item> itemList = new ArrayList<>();
-      ArrayList<Integer> itemAmountList = new ArrayList<>();
-      for (ItemPanel itemPanel : itemPanels) {
-        try {
-          Item nextItem = itemPanel.generateItem();
-          for (Item item : itemList) {
-            if (item.getValue() == nextItem.getValue()
-                && item.getWeight() == nextItem.getWeight()) {
-              showMessageDialog(pane, "Kein Item darf denselben Wert"
-                  + " und dasselbe Gewicht wie ein anderes haben.");
-              return;
-            }
-          }
-          itemList.add(nextItem);
-          itemAmountList.add(itemPanel.getAmount());
-        } catch (NullPointerException n) {
-          // This just means that item was not filled out fully
-          // Can be ignored
-        }
-      }
-
-      if (titleField.getText().equals("")
-          || capacityField.getText().equals("")) {
-        showMessageDialog(pane, "Titel und Kapazität darf nicht leer sein!");
-      }
-
-      Level customLevel = new Level(itemList, itemAmountList,
-          Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
-              .getSelectedItem()).toString()), -1,
-          Integer.parseInt(capacityField.getText()));
-      JFileChooser chooser = new JFileChooser();
-      chooser.setCurrentDirectory(new java.io.File("."));
-      chooser.setDialogTitle("Speicherordner");
-      chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-      chooser.setAcceptAllFileFilterUsed(false);
-      if (chooser.showOpenDialog(pane) == JFileChooser.APPROVE_OPTION) {
-        CustomLevelManager.save(chooser.getSelectedFile().toString(),
-            titleField.getText(), customLevel);
-      }
-    });
+    save.addActionListener(e -> saveLevel(pane,
+        titleField, capacityField, modeDropdown, itemPanels));
     JButton back = new JButton("Abbrechen");
     back.addActionListener(e -> {
       if (JOptionPane.YES_OPTION
@@ -165,24 +119,118 @@ public final class GuiLevelEditorPage {
         CustomLevelManager.load(customLevel);
       }
     });
-
     leftPane.add(load);
+
+    JButton reset = new JButton("Reset");
+    reset.addActionListener(e -> GuiManager.openLevelEditor());
+
+    leftPane.add(reset);
 
     pane.add(leftPane, BorderLayout.WEST);
 
     Container rightPane = new Container();
-    // TODO Sprint 4, update this part of the GUI
     rightPane.setLayout(new GridLayout((AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL
         + 1) / 2, 2));
 
-    for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
+    for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL - 1; i++) {
       itemPanels.add(new ItemPanel(i, pane));
+      itemPanels.get(i).setContainerVisible(false);
       rightPane.add(itemPanels.get(i).getPanel());
     }
+    for (int i = 0; i < AppData.DEFAULT_ITEMS_IN_CUSTOM_LEVEL; i++) {
+      itemPanels.get(i).setContainerVisible(true);
+    }
+    JButton moreItemsButton = new JButton("");
+    ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass()
+        .getResource("/icons/Plus.png")));
+    Image image = icon.getImage();
+    icon = new ImageIcon(image.getScaledInstance(
+        AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
+    moreItemsButton.setIcon(icon);
 
+    moreItemsButton.addActionListener(e -> {
+      if (panelCounter < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL) {
+        itemPanels.get(panelCounter).setContainerVisible(true);
+        panelCounter++;
+      }
+    });
+    rightPane.add(moreItemsButton);
     pane.add(rightPane, BorderLayout.CENTER);
-
     return pane;
+  }
+
+  private static void saveLevel(final Container pane,
+                                final JTextField titleField,
+                                final JTextField capacityField,
+                                final JComboBox<String> modeDropdown,
+                                final ArrayList<ItemPanel> itemPanels) {
+    if (Integer.parseInt(capacityField.getText()) == 0) {
+      showMessageDialog(pane, "Kapazität darf nicht 0 sein.");
+      return;
+    }
+    ArrayList<Item> itemList = new ArrayList<>();
+    ArrayList<Integer> validItems = new ArrayList<>();
+    ArrayList<Integer> itemAmountList = new ArrayList<>();
+    for (int i = 0; i < itemPanels.size(); i++) {
+      ItemPanel itemPanel = itemPanels.get(i);
+      try {
+        Item nextItem = itemPanel.generateItem();
+        if (nextItem.getWeight() == 0 || nextItem.getValue() == 0
+            || itemPanel.getAmount() == 0) {
+          showMessageDialog(pane, "Wert, Gewicht und "
+              + "Anzahl müssen mindestens 1 sein.");
+          return;
+        }
+        for (Item item : itemList) {
+          if (item.getName().equals(nextItem.getName())) {
+            showMessageDialog(pane, "Kein Item darf denselben Namen"
+                + " wie ein anderes haben.");
+            return;
+          }
+          if (item.getValue() == nextItem.getValue()
+              && item.getWeight() == nextItem.getWeight()) {
+            showMessageDialog(pane, "Kein Item darf denselben Wert"
+                + " und dasselbe Gewicht wie ein anderes haben.");
+            return;
+          }
+        }
+        itemList.add(nextItem);
+        validItems.add(i);
+        itemAmountList.add(itemPanel.getAmount());
+      } catch (NullPointerException n) {
+        n.printStackTrace();
+      }
+      if (itemList.size()
+          > AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL
+          && Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
+              .getSelectedItem()).toString()).equals(
+                  Level.Robber.BACKTRACKING_BANDIT)) {
+        showMessageDialog(pane, "Backtracking Level dürfen Maximal "
+            + AppData.MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL
+            + " verschiedene Items haben.");
+        return;
+      }
+    }
+
+    if (titleField.getText().equals("")
+        || capacityField.getText().equals("")) {
+      showMessageDialog(pane, "Titel und Kapazität darf nicht leer sein!");
+      return;
+    }
+
+    Level customLevel = new Level(itemList, itemAmountList,
+        Level.Robber.valueOf(Objects.requireNonNull(modeDropdown
+            .getSelectedItem()).toString()), -1,
+        Integer.parseInt(capacityField.getText()));
+    JFileChooser chooser = new JFileChooser();
+    chooser.setCurrentDirectory(new File("."));
+    chooser.setDialogTitle("Speicherordner");
+    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    chooser.setAcceptAllFileFilterUsed(false);
+    if (chooser.showSaveDialog(pane) == JFileChooser.APPROVE_OPTION) {
+      CustomLevelManager.save(chooser.getSelectedFile().toString(),
+          titleField.getText(), customLevel, validItems);
+    }
   }
 
   private static class FieldListener extends DocumentFilter {

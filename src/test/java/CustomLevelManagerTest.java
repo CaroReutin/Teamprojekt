@@ -46,7 +46,11 @@ public class CustomLevelManagerTest {
     Level testLevel = new Level(itemList, itemAmountList, Level.Robber.BACKTRACKING_BANDIT, -1, 20);
     String identifier = "save";
     String testResourcesPath = "./src/test/resources/customLevel";
-    CustomLevelManager.save(testResourcesPath+"/temp",testResourcesPath, identifier, testLevel);
+    ArrayList<Integer> validItems = new ArrayList<>();
+    validItems.add(0);
+    validItems.add(1);
+    validItems.add(2);
+    CustomLevelManager.save(testResourcesPath+"/temp",testResourcesPath, identifier, testLevel, validItems);
     // Save with pictures
     try {
       ImageIcon rucksack = new ImageIcon("./src/test/resources/pngs/rucksack.png");
@@ -64,7 +68,7 @@ public class CustomLevelManagerTest {
     } catch (Exception exception) {
       exception.printStackTrace();
     }
-    CustomLevelManager.save(testResourcesPath+"/temp",testResourcesPath, identifier, testLevel);
+    CustomLevelManager.save(testResourcesPath+"/temp",testResourcesPath, identifier, testLevel, validItems);
   }
 
   @Test
@@ -86,8 +90,11 @@ public class CustomLevelManagerTest {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    ArrayList<Integer> validItems = new ArrayList<>();
+    validItems.add(0);
+    validItems.add(1);
     Level testLevel = new Level(itemList, itemAmountList, Level.Robber.BACKTRACKING_BANDIT, -1, 4);
     String identifier = "Levelbezeichner";
-    CustomLevelManager.save(testResourcesPath+"/temp",testResourcesPath, identifier, testLevel);
+    CustomLevelManager.save(testResourcesPath+"/temp",testResourcesPath, identifier, testLevel, validItems);
   }
 }

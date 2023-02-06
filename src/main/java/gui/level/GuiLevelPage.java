@@ -1,11 +1,6 @@
 package gui.level;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -68,8 +63,32 @@ public class GuiLevelPage {
   public void escapeButton(final Container centerPanel) {
     JButton flucht = new JButton("Flucht");
     int levelNumber = this.level.getLevelNumber();
-    if (levelNumber <= 0 || levelNumber == LAST_GREEDY_LEVELNUMBER
-        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER) {
+    if (levelNumber == -1) {
+      flucht.addActionListener(e -> {
+        String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+            "Hier steht Tips / Feedback",
+            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+                .INFORMATION_MESSAGE, null, buttons,
+            buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
+          }
+          case 1 -> {
+            GuiManager.openMainMenu();
+            System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
+        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
       flucht.addActionListener(e -> {
         if (levelNumber >= 0) {
           if (level.getCurrentValue() > UserDataManager.getScore(
@@ -243,7 +262,7 @@ public class GuiLevelPage {
             170, 300, java.awt.Image.SCALE_SMOOTH);
 
 
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel rightPanel = new JPanel();
     //JPanel rightPanel = new JPanel
