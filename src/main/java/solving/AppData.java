@@ -180,13 +180,7 @@ public final class AppData {
         Level level = (Level) marsh.unmarshal(levelFile);
         level.turnIntoBacktracking();
         level.resetLevel();
-        if (level.getRobber().equals(Level.Robber.DR_META)) {
-          return level;
-        } else if (level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          return level;
-        } else {
-          return level;
-        }
+        return level;
       }
 
     } catch (IOException | JAXBException e) {
@@ -276,7 +270,7 @@ public final class AppData {
    */
   public static Item generateItem(final int index) {
     return new Item(ITEMS.get(index).getValue(), ITEMS.get(index).getWeight(),
-        ITEMS.get(index).getName());
+        ITEMS.get(index).getName(), ITEMS.get(index).getImageIcon());
   }
 
   /**

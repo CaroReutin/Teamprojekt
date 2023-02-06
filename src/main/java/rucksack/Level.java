@@ -269,7 +269,7 @@ public class Level implements Serializable {
   /**
    * Move from rucksack.
    *
-   * @param i the
+   * @param i the index of the item to be moved
    */
   public void moveFromRucksack(final int i) {
     availableItemAmountList.set(i, availableItemAmountList.get(i) + 1);
@@ -323,7 +323,7 @@ public class Level implements Serializable {
       for (int i = 0; i < itemList.size(); i++) {
         Item tempItem = itemList.get(i);
         BacktrackingItem newItem = new BacktrackingItem(
-            tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
+            tempItem.getValue(), tempItem.getWeight(), tempItem.getName(), tempItem.getImageIcon());
         temp.add(newItem);
         //set Item is in trash to 0
         inTrashAmountList.add(0);

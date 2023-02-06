@@ -36,9 +36,9 @@ public class CustomLevelManagerTest {
   @Test
   public void save() {
     ArrayList<Item> itemList = new ArrayList<>();
-    itemList.add(new Item(3, 4, "Test"));
-    itemList.add(new Item(3, 2, "Item"));
-    itemList.add(new Item(5, 6, "Three"));
+    itemList.add(new Item(3, 4, "Test", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+    itemList.add(new Item(3, 2, "Item", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+    itemList.add(new Item(5, 6, "Three", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
     ArrayList<Integer> itemAmountList = new ArrayList<>();
     itemAmountList.add(2);
     itemAmountList.add(5);
@@ -74,8 +74,8 @@ public class CustomLevelManagerTest {
   @Test
   public void zipTest1() {
     ArrayList<Item> itemList = new ArrayList<>();
-    itemList.add(new Item(4, 3, "Guter Gegenstand"));
-    itemList.add(new Item(5, 3, "Besserer Gegenstand"));
+    itemList.add(new Item(4, 3, "Guter Gegenstand", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+    itemList.add(new Item(5, 3, "Besserer Gegenstand", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
     ArrayList<Integer> itemAmountList = new ArrayList<>();
     itemAmountList.add(1);
     itemAmountList.add(1);

@@ -7,6 +7,8 @@ import java.util.Objects;
 import rucksack.BacktrackingItem;
 import rucksack.Item;
 
+import javax.swing.*;
+
 
 /**
  * this class represents the backtracking tree.
@@ -41,7 +43,7 @@ public class BacktrackingTree {
         Comparator.comparingInt(Item::getWeight)
             .thenComparingInt(Item::getValue).reversed());
     this.itemArrayList = myItemArrayList;
-    root = new BacktrackingNode(new BacktrackingItem(0, 0, "root"),
+    root = new BacktrackingNode(new BacktrackingItem(0, 0, "root", new ImageIcon()),
         0, 0, myBagCapacity, myItemArrayList, null, true);
     currentNode = root;
     this.bagCapacity = myBagCapacity;

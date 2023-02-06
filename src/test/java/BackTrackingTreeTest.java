@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import rucksack.BacktrackingItem;
 import rucksack.Item;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,9 +33,9 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test1() {
-    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown");
-    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl");
-    BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin");
+    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown", new ImageIcon("src/main/resources/icons/Krone.png"));
+    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl", new ImageIcon("src/main/resources/icons/Perle.png"));
+    BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin", new ImageIcon("src/main/resources/icons/Münze.png"));
 
     items.add(crown);
     items.add(pearl);
@@ -86,15 +87,15 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test2() {
-    BacktrackingItem crown = new BacktrackingItem(6, 6, "Crown");
-    BacktrackingItem coin = new BacktrackingItem(4, 3, "Coin");
-    BacktrackingItem feather = new BacktrackingItem(4, 1, "Feather");
-    BacktrackingItem pearl = new BacktrackingItem(7, 4, "Pearl");
+    BacktrackingItem crown = new BacktrackingItem(6, 6, "Crown", new ImageIcon("src/main/resources/icons/Krone.png"));
+    BacktrackingItem coin = new BacktrackingItem(4, 3, "Coin", new ImageIcon("src/main/resources/icons/Münze.png"));
+    BacktrackingItem letter = new BacktrackingItem(4, 1, "Letter", new ImageIcon("src/main/resources/icons/letter.png"));
+    BacktrackingItem pearl = new BacktrackingItem(7, 4, "Pearl", new ImageIcon("src/main/resources/icons/Perle.png"));
 
     items.add(crown);
     items.add(pearl);
     items.add(coin);
-    items.add(feather);
+    items.add(letter);
     items.sort(Comparator.comparingInt(Item::getWeight).reversed());
 
     BacktrackingTree tree = new BacktrackingTree(11, items);
@@ -102,7 +103,7 @@ public class BackTrackingTreeTest {
     tree.addToRucksack(crown);
     tree.addToRucksack(pearl);
     tree.addToRucksack(coin);
-    tree.addToRucksack(feather);
+    tree.addToRucksack(letter);
     tree.print(System.out);
 
     // Ihr könnt eine Datei als PrintStream übergeben und den inhalt
@@ -131,15 +132,15 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test3() {
-    BacktrackingItem crown = new BacktrackingItem(6, 6, "Crown");
-    BacktrackingItem coin = new BacktrackingItem(4, 3, "Coin");
-    BacktrackingItem feather = new BacktrackingItem(4, 1, "Feather");
-    BacktrackingItem pearl = new BacktrackingItem(7, 4, "Pearl");
+    BacktrackingItem crown = new BacktrackingItem(6, 6, "Crown", new ImageIcon("src/main/resources/icons/Krone.png"));
+    BacktrackingItem coin = new BacktrackingItem(4, 3, "Coin", new ImageIcon("src/main/resources/icons/Münze.png"));
+    BacktrackingItem letter = new BacktrackingItem(4, 1, "letter", new ImageIcon("src/main/resources/icons/letter.png"));
+    BacktrackingItem pearl = new BacktrackingItem(7, 4, "Pearl", new ImageIcon("src/main/resources/icons/Perle.png"));
 
     items.add(crown);
     items.add(pearl);
     items.add(coin);
-    items.add(feather);
+    items.add(letter);
     items.sort(Comparator.comparingInt(Item::getWeight).reversed());
 
     BacktrackingTree tree = new BacktrackingTree(10, items);
@@ -152,7 +153,7 @@ public class BackTrackingTreeTest {
     tree.print(System.out);
     tree.addToRucksack(coin);
     tree.print(System.out);
-    tree.addToRucksack(feather);
+    tree.addToRucksack(letter);
     tree.addToRucksack(crown);
     tree.print(System.out);
 
@@ -186,21 +187,21 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test4() {
-    BacktrackingItem crown = new BacktrackingItem(6, 6, "Crown");
-    BacktrackingItem coin = new BacktrackingItem(4, 3, "Coin");
-    BacktrackingItem feather = new BacktrackingItem(4, 1, "Feather");
-    BacktrackingItem pearl = new BacktrackingItem(7, 4, "Pearl");
+    BacktrackingItem crown = new BacktrackingItem(6, 6, "Crown", new ImageIcon("src/main/resources/icons/Krone.png"));
+    BacktrackingItem coin = new BacktrackingItem(4, 3, "Coin", new ImageIcon("src/main/resources/icons/Münze.png"));
+    BacktrackingItem letter = new BacktrackingItem(4, 1, "letter", new ImageIcon("src/main/resources/icons/letter.png"));
+    BacktrackingItem pearl = new BacktrackingItem(7, 4, "Pearl", new ImageIcon("src/main/resources/icons/Perle.png"));
 
     items.add(crown);
     items.add(pearl);
     items.add(coin);
-    items.add(feather);
+    items.add(letter);
     items.sort(Comparator.comparingInt(Item::getWeight).reversed());
 
     BacktrackingTree tree = new BacktrackingTree(10, items);
 
     tree.addToRucksack(crown);
-    tree.addToRucksack(feather);
+    tree.addToRucksack(letter);
     tree.addToRucksack(pearl);
     tree.addToTrash(pearl);
     tree.addToTrash(pearl);
@@ -237,9 +238,9 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test5() {
-    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown");
-    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl");
-    BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin");
+    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown", new ImageIcon("src/main/resources/icons/Krone.png"));
+    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl", new ImageIcon("src/main/resources/icons/Perle.png"));
+    BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin", new ImageIcon("src/main/resources/icons/Münze.png"));
 
     items.add(crown);
     items.add(pearl);
@@ -301,9 +302,9 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test6() {
-    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown");
-    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl");
-    //BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin");
+    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown", new ImageIcon("src/main/resources/icons/Krone.png"));
+    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl", new ImageIcon("src/main/resources/icons/Perle.png"));
+   // BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin", new ImageIcon("src/main/resources/icons/Münze.png"));
 
     items.add(crown);
     items.add(pearl);
@@ -345,9 +346,9 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test7() {
-    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown");
-    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl");
-    BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin");
+    BacktrackingItem crown = new BacktrackingItem(7, 6, "Crown", new ImageIcon("src/main/resources/icons/Krone.png"));
+    BacktrackingItem pearl = new BacktrackingItem(8, 6, "Pearl", new ImageIcon("src/main/resources/icons/Perle.png"));
+    BacktrackingItem coin = new BacktrackingItem(20, 4, "Coin", new ImageIcon("src/main/resources/icons/Münze.png"));
 
     items.add(crown);
     items.add(pearl);
