@@ -24,10 +24,6 @@ import solving.ButtonEventHandlerTable;
  */
 public class GuiLevelPageBacktracking extends GuiLevelPage {
   /**
-   * the Button Event Handler.
-   */
-  private final ButtonEventHandler buttonHandler;
-  /**
    * the labels of the page.
    */
   private JLabel[] labels;
@@ -56,7 +52,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
-    buttonHandler = new ButtonEventHandlerTable(getLevel());
   }
 
   /**
@@ -114,9 +109,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons rucksack
       JButton putToRucksack = new JButton("lege in den Rucksack");
-      putToRucksack.addActionListener(e -> {
-        handleButtons(finalI, true);
-      });
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
           .get(i).toString());
@@ -126,13 +118,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
-      putToTrash.addActionListener(e -> {
-        handleButtons(finalI, false);
-      });
+
       JButton currentRucksack = new JButton(items.get(i).getName());
-      currentRucksack.addActionListener(e -> {
-        handleButtons(finalI, false);
-      });
+      
 
       panelAvaible.add(itemLabel);
       panelAvaible.add(labels[i]);
@@ -154,20 +142,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       panelRucksack.add(currentWeightLabel);
       panelRucksack.add(currentValueLabel);
 
-    }
-  }
-
-  private void handleButtons(final int index,
-                             final boolean toRucksack) {
-    if (toRucksack) {
-      buttonHandler.addToRucksack(index, getLevel());
-      updateLabel(index);
-    } else {
-      buttonHandler.addToTrash(index, getLevel());
-      for (int i = index; i < getLevel()
-          .getBacktrackingItemList().size(); i++) {
-        updateLabel(i);
-      }
     }
   }
 
@@ -229,7 +203,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //alles zusammenpuzzeln
 
     JButton treeButton = new JButton("Zeige Baum");
-    treeButton.addActionListener(e -> buttonHandler.show());
     centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
