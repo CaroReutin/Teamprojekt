@@ -1,7 +1,5 @@
 package gui.level;
 
-import backtrackingtree.BacktrackingTree;
-import betatree.Tree;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -32,18 +30,9 @@ import solving.ButtonEventHandlerTable;
  */
 public class GuiLevelPageBacktracking extends GuiLevelPage {
   /**
-   * the beta tree.
-   */
-  private Tree betaTree;
-  /**
    * the Button Event Handler.
    */
-  private ButtonEventHandler buttonHandler;
-  /**
-   * the backtrackingTree (JTree).
-   */
-  private BacktrackingTree tree;
-
+  private final ButtonEventHandler buttonHandler;
   /**
    * the labels of the page.
    */
@@ -73,7 +62,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
-    buttonHandler = new ButtonEventHandlerTable(level);
+    buttonHandler = new ButtonEventHandlerTable(getLevel());
   }
 
   /**
@@ -137,8 +126,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           getLevel().setInRucksackAmountList(finalI, getLevel().getInRucksackAmountList().get(finalI) + 1);
           getLevel().setAvailableItemAmountList(finalI, getLevel().getItemAmountAvailable(finalI) - 1);
         }*/
-        buttonHandler.addToRucksack(finalI);
-        updateLabel(finalI);
+        handleButtons(finalI, true);
       });
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList().get(i).toString());
@@ -164,8 +152,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           }
         }
          */
-        buttonHandler.addToTrash(finalI);
-        updateLabel(finalI);
+        handleButtons(finalI, false);
       });
       /*JButton current = new JButton(items.get(i).getName()
           + " (" + items.get(i).getWeight() + "g, "
@@ -182,23 +169,20 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       });*/
       JButton currentRucksack = new JButton(items.get(i).getName());
       currentRucksack.addActionListener(e -> {
-        // TODO Never does anything ? (not a todo but todo highlights)
         if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
           return;
         }
-        if (!getLevel().getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          getLevel().moveFromRucksack(finalI);
-          updateLabel(finalI);
-        }
-
+        handleButtons(finalI, false);
       });
 
       JButton currentTrash = new JButton(items.get(i).getName());
+      /*
       currentRucksack.addActionListener(e -> {
         getLevel().setCounter(getLevel().getCounter() + 1);
         buttonHandler.addToTrash(finalI);
         updateLabel(finalI);
       });
+       */
       //panelItems.add(current);
       //panelItems.add(labels[i]);
       panelAvaible.add(itemLabel);
@@ -220,6 +204,16 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       panelRucksack.add(currentValueLabel);
 
     }
+  }
+
+  private void handleButtons(final int index,
+                             final boolean toRucksack) {
+    if (toRucksack) {
+      buttonHandler.addToRucksack(index);
+    } else {
+      buttonHandler.addToTrash(index);
+    }
+    updateLabel(index);
   }
 
   /**

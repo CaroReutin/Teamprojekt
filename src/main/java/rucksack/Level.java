@@ -311,7 +311,7 @@ public class Level implements Serializable {
    */
   public void turnIntoBacktracking() {
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
-      ArrayList<BacktrackingItem> temp = new ArrayList<BacktrackingItem>();
+      ArrayList<BacktrackingItem> temp = new ArrayList<>();
       for (int i = 0; i < itemList.size(); i++) {
         Item tempItem = itemList.get(i);
         BacktrackingItem newItem = new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName());

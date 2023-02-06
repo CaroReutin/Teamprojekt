@@ -3,7 +3,6 @@ package solving;
 import java.util.ArrayList;
 import jtree.BacktrackingTree;
 import rucksack.BacktrackingItem;
-import rucksack.Item;
 import rucksack.Level;
 
 public class ButtonEventHandlerJTree extends ButtonEventHandler {
@@ -15,7 +14,8 @@ public class ButtonEventHandlerJTree extends ButtonEventHandler {
     lastDepth = 0;
     tree = new BacktrackingTree(level);
     myLevel = level;
-    ArrayList<Item> oldList = level.getItemList();
+    myLevel.turnIntoBacktracking();
+    ArrayList<BacktrackingItem> oldList = level.getBacktrackingItemList();
     ArrayList<BacktrackingItem> logicItemList = new ArrayList<>();
     for (int i = 0; i < oldList.size(); i++) {
       for (int j = 0; j < level.getItemAmountAvailable(i); j++) {
@@ -29,31 +29,28 @@ public class ButtonEventHandlerJTree extends ButtonEventHandler {
 
   @Override
   public void addToRucksack(final int itemButtonIndex) {
-    //if (this.backtrackingTree.addToRucksack((BacktrackingItem)
-    //    this.myLevel.getItemList().get(itemButtonIndex))){
+    if (this.backtrackingTree.addToRucksack(
+        this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
 
-
-    this.myLevel.moveToRucksack(itemButtonIndex);
-    this.tree.putInBag();
-    lastDepth++;
-
-
-    //}
+      this.myLevel.moveToRucksack(itemButtonIndex);
+      this.tree.putInBag();
+      lastDepth++;
+    }
   }
 
   @Override
   public void addToTrash(final int itemButtonIndex) {
-    //if (this.backtrackingTree.addToTrash((BacktrackingItem)
-    //    this.myLevel.getItemList().get(itemButtonIndex))){
-    //this.myLevel.moveToTrash(itemButtonIndex);
-    int difference = Math.abs(itemButtonIndex - lastDepth);
-    for (int i = 0; i < difference; i++) {
-      this.tree.back();
-      lastDepth--;
+    if (this.backtrackingTree.addToTrash(
+        this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
+      //this.myLevel.moveToTrash(itemButtonIndex);
+      int difference = Math.abs(itemButtonIndex - lastDepth);
+      for (int i = 0; i <= difference; i++) {
+        this.tree.back();
+        lastDepth--;
+      }
+      this.tree.putInTrash();
+      lastDepth++;
     }
-    this.tree.putInTrash();
-    lastDepth++;
-    //}
   }
 
   @Override

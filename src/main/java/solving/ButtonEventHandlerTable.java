@@ -1,8 +1,9 @@
 package solving;
 
+import backtrackingtree.BacktrackingTree;
 import betatree.Tree;
 import java.util.ArrayList;
-import rucksack.Item;
+import rucksack.BacktrackingItem;
 import rucksack.Level;
 
 public class ButtonEventHandlerTable extends ButtonEventHandler {
@@ -19,7 +20,7 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
   /**
    * list of items.
    */
-  private final ArrayList<Item> itemList = new ArrayList<>();
+  private final ArrayList<BacktrackingItem> itemList = new ArrayList<>();
   /**
    * what depth the currentNode is located at.
    */
@@ -35,12 +36,17 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
   public ButtonEventHandlerTable(final Level level) {
     final boolean isSmallTree = false;
     final boolean leftCentric = false;
-    itemList.add(new Item(0, 0, "root"));
-    for (int i = 0; i < level.getItemList().size(); i++) {
+    myLevel = level;
+    myLevel.turnIntoBacktracking();
+    itemList.add(new BacktrackingItem(0, 0, "root"));
+    ArrayList<BacktrackingItem> backtrackingTreeItemList = new ArrayList<>();
+    for (int i = 0; i < level.getBacktrackingItemList().size(); i++) {
       for (int j = 0; j < level.getItemAmountList().get(i); j++) {
-        itemList.add(level.getItemList().get(i));
+        itemList.add(level.getBacktrackingItemList().get(i));
+        backtrackingTreeItemList.add(level.getBacktrackingItemList().get(i));
       }
     }
+    backtrackingTree = new BacktrackingTree(myLevel.getCapacity(), backtrackingTreeItemList);
     generateNodes();
     int itemAmount = itemList.size();
     tree = new Tree(itemAmount, isSmallTree, leftCentric);
@@ -53,15 +59,15 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
    * and then putInTrash.
    */
   public void addToTrash(final int itemButtonIndex) {
-    if (itemList.size() - currentDepth <= 1) {
-      return;
+    if (this.backtrackingTree.addToTrash(
+        this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
+      int difference = Math.abs(itemButtonIndex - currentDepth);
+      for (int i = 0; i < difference; i++) {
+        this.back();
+      }
+      currentPath += "0";
+      addNode();
     }
-    int difference = Math.abs(itemButtonIndex - currentDepth);
-    for (int i = 0; i < difference; i++) {
-      this.back();
-    }
-    currentPath += "0";
-    addNode();
   }
 
   @Override
@@ -107,11 +113,11 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
    * adds the path where the next heaviest item is added to the bag.
    */
   public void addToRucksack(final int itemButtonIndex) {
-    if (itemList.size() - currentDepth <= 1) {
-      return;
+    if (this.backtrackingTree.addToRucksack(
+        this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
+      currentPath += "1";
+      addNode();
     }
-    currentPath += "1";
-    addNode();
   }
 
   private void addNode() {
