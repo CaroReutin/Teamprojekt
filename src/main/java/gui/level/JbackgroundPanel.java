@@ -18,7 +18,7 @@ public class JbackgroundPanel extends JPanel {
   /**
    * the x position of the picture.
    */
-  private final int x;
+  private final int xPos;
 
 
 
@@ -29,9 +29,9 @@ public class JbackgroundPanel extends JPanel {
    * @param x            the x
    * @param y            the y
    */
-  public JbackgroundPanel(final Image myBackground, int x) {
+  public JbackgroundPanel(final Image myBackground, final int x) {
     this.background = myBackground;
-    this.x = x;
+    this.xPos = x;
   }
 
   /**
@@ -41,6 +41,6 @@ public class JbackgroundPanel extends JPanel {
   protected void paintComponent(final Graphics g) {
 
     super.paintComponent(g);
-    g.drawImage(this.background, this.x, 0, this);
+    g.drawImage(this.background, this.xPos, 0, this);
   }
 }

@@ -24,7 +24,7 @@ public final class AppData {
    */
   public static final int DEFAULT_ITEMS_IN_CUSTOM_LEVEL = 1;
   /**
-   * the maximum amount of different items in backtracking levels
+   * the maximum amount of different items in backtracking levels.
    */
   public static final int MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL = 5;
 
@@ -144,9 +144,9 @@ public final class AppData {
         File newFile = new File(destDir, zipEntry.getName());
         // https://security.snyk.io/research/zip-slip-vulnerability
         if (!newFile.getCanonicalPath().startsWith(destDir.getCanonicalPath()
-          + File.separator)) {
+            + File.separator)) {
           throw new IOException("Entry is outside of the target dir: "
-            + zipEntry.getName());
+              + zipEntry.getName());
         }
         if (zipEntry.isDirectory()) {
           if (!newFile.isDirectory() && !newFile.mkdirs()) {
@@ -199,7 +199,8 @@ public final class AppData {
    * Initialize beginning level.
    */
   public static void initializeBeginningLevel() {
-    LEVEL_ZERO[0] = loadLevel(new File("src/main/resources/level/StartLevel.zip"));
+    LEVEL_ZERO[0] = loadLevel(new File("src/main/resources/"
+        + "level/StartLevel.zip"));
   }
 
   /**
@@ -270,7 +271,8 @@ public final class AppData {
    * Generate item.
    *
    * @param index the unique index of the item
-   * @return returns a new Instance of the wanted item if it      is in the ArrayList else it returns null
+   * @return returns a new Instance of the wanted item if it
+   *          is in the ArrayList else it returns null
    */
   public static Item generateItem(final int index) {
     return new Item(ITEMS.get(index).getValue(), ITEMS.get(index).getWeight(),

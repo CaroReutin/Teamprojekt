@@ -90,11 +90,16 @@ public class Item implements Serializable {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Item item = (Item) o;
-    return value == item.value && weight == item.weight && Objects.equals(name, item.name);
+    return value == item.value && weight
+        == item.weight && Objects.equals(name, item.name);
   }
 
   @Override

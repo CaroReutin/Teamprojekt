@@ -1,6 +1,11 @@
 package gui.level;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;

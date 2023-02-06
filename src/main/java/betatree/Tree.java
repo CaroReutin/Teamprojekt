@@ -112,7 +112,8 @@ public class Tree {
     treeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
   }
 
-  public void addNode(final int row, final int col, final ImageIcon labelIcon, final String buttonText) {
+  public void addNode(final int row, final int col,
+                      final ImageIcon labelIcon, final String buttonText) {
     buttons.get(row).get(col).setText(buttonText);
     buttons.get(row).get(col).setVisible(true);
     labels.get(row - 1).get(col).setIcon(labelIcon);

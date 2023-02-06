@@ -5,12 +5,12 @@ import jtree.BacktrackingTree;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
 
-public class ButtonEventHandlerJTree extends ButtonEventHandler {
+public class ButtonEventHandlerJtree extends ButtonEventHandler {
 
   private final BacktrackingTree tree;
   private int lastDepth;
 
-  public ButtonEventHandlerJTree(final Level level) {
+  public ButtonEventHandlerJtree(final Level level) {
     lastDepth = 0;
     tree = new BacktrackingTree(level);
     myLevel = level;
@@ -20,11 +20,13 @@ public class ButtonEventHandlerJTree extends ButtonEventHandler {
     for (int i = 0; i < oldList.size(); i++) {
       for (int j = 0; j < level.getItemAmountAvailable(i); j++) {
         logicItemList.add(
-            new BacktrackingItem(oldList.get(i).getValue(), oldList.get(i).getWeight(),
+            new BacktrackingItem(oldList.get(i).getValue(),
+                oldList.get(i).getWeight(),
                 oldList.get(i).getName()));
       }
     }
-    backtrackingTree = new backtrackingtree.BacktrackingTree(level.getCapacity(), logicItemList);
+    backtrackingTree = new backtrackingtree.BacktrackingTree(
+        level.getCapacity(), logicItemList);
   }
 
   @Override

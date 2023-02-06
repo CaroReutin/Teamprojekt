@@ -47,7 +47,8 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
         backtrackingTreeItemList.add(level.getBacktrackingItemList().get(i));
       }
     }
-    backtrackingTree = new BacktrackingTree(myLevel.getCapacity(), backtrackingTreeItemList);
+    backtrackingTree = new BacktrackingTree(myLevel.getCapacity()
+        , backtrackingTreeItemList);
     generateNodes();
     int itemAmount = itemList.size();
     tree = new Tree(itemAmount, isSmallTree, leftCentric);
@@ -68,8 +69,8 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       }
       currentPath += "0";
       addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
-          backtrackingTree.getCurrentNode().getCurrentWeight() + "/" +
-              backtrackingTree.getCurrentNode().getCurrentValue());
+          backtrackingTree.getCurrentNode().getCurrentWeight() + "/"
+              + backtrackingTree.getCurrentNode().getCurrentValue());
     }
   }
 
@@ -120,8 +121,8 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
         this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
       currentPath += "1";
       addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
-          backtrackingTree.getCurrentNode().getCurrentWeight() + "/" +
-              backtrackingTree.getCurrentNode().getCurrentValue());
+          backtrackingTree.getCurrentNode().getCurrentWeight() + "/"
+              + backtrackingTree.getCurrentNode().getCurrentValue());
     }
   }
 

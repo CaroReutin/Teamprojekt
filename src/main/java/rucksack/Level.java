@@ -35,7 +35,7 @@ public class Level implements Serializable {
    * the list with all items.
    */
   @XmlElement
-  private ArrayList<Item> itemList;
+  private final ArrayList<Item> itemList;
 
   private ArrayList<BacktrackingItem> backtrackingItemList;
   /**
@@ -54,7 +54,7 @@ public class Level implements Serializable {
   /**
    * the list of the amount in the trash.
    */
-  private ArrayList<Integer> inTrashAmountList = new ArrayList<>();
+  private final ArrayList<Integer> inTrashAmountList = new ArrayList<>();
   /**
    * the current value.
    */
@@ -314,14 +314,16 @@ public class Level implements Serializable {
       ArrayList<BacktrackingItem> temp = new ArrayList<>();
       for (int i = 0; i < itemList.size(); i++) {
         Item tempItem = itemList.get(i);
-        BacktrackingItem newItem = new BacktrackingItem(tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
+        BacktrackingItem newItem = new BacktrackingItem(
+            tempItem.getValue(), tempItem.getWeight(), tempItem.getName());
         temp.add(newItem);
         //set Item is in trash to 0
         inTrashAmountList.add(0);
       }
       backtrackingItemList = temp;
       //backtrackingItemList has to be sorted for BacktrackingNode
-      backtrackingItemList.sort(Comparator.comparingInt(Item::getWeight).reversed());
+      backtrackingItemList.sort(Comparator.comparingInt(
+          Item::getWeight).reversed());
     }
 
   }
@@ -330,15 +332,15 @@ public class Level implements Serializable {
     return inTrashAmountList;
   }
 
-  public void setInTrashAmountList(int index, int newAmount) {
+  public void setInTrashAmountList(final int index, final int newAmount) {
     inTrashAmountList.set(index, newAmount);
   }
 
-  public void setAvailableItemAmountList(int index, int newAmount) {
+  public void setAvailableItemAmountList(final int index, final int newAmount) {
     availableItemAmountList.set(index, newAmount);
   }
 
-  public void setInRucksackAmountList(int index, int newAmount) {
+  public void setInRucksackAmountList(final int index, final int newAmount) {
     inRucksackAmountList.set(index, newAmount);
   }
 
