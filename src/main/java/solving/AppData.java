@@ -186,13 +186,7 @@ public final class AppData {
         Level level = (Level) marsh.unmarshal(levelFile);
         level.turnIntoBacktracking();
         level.resetLevel();
-        if (level.getRobber().equals(Level.Robber.DR_META)) {
-          return level;
-        } else if (level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          return level;
-        } else {
-          return level;
-        }
+        return level;
       }
 
     } catch (IOException | JAXBException e) {
