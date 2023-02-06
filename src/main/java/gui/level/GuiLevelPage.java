@@ -1,8 +1,14 @@
 package gui.level;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -52,6 +58,11 @@ public class GuiLevelPage {
    * @param mylevel the level that can be played in this page
    */
   public GuiLevelPage(final Level mylevel) {
+    if (mylevel.getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
+      mylevel.getItemList().sort(
+          Comparator.comparingInt(Item::getWeight)
+              .thenComparingInt(Item::getValue).reversed());
+    }
     this.level = mylevel;
   }
 

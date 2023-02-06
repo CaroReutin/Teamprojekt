@@ -2,6 +2,7 @@ package rucksack;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -89,15 +90,41 @@ public class Item implements Serializable {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Item item = (Item) o;
-    return value == item.value && weight == item.weight && Objects.equals(name, item.name);
+    return value == item.value && weight
+        == item.weight && Objects.equals(name, item.name);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(value, weight, name);
+  }
+
+  /**
+   * .
+   *
+   * @param depthRemaining .
+   * @return "
+   */
+  public String getBacktrackingName(final int depthRemaining) {
+    // TODO fix depth
+    int spacesPerDepth = 4;
+    assert name != null;
+    StringBuilder res = new StringBuilder(name);
+    int spacesRemaing = 10 + depthRemaining * spacesPerDepth - name.length();
+    res.append(" ".repeat(Math.max(0, spacesRemaing)));
+    return res.toString();
+  }
+
+  public ImageIcon getIcon() {
+    return new ImageIcon(Objects.requireNonNull(getClass()
+        .getResource("/stern.png")));
   }
 }

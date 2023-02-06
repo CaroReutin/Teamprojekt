@@ -1,8 +1,8 @@
 import gui.level.GuiManager;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import solving.AppData;
 import solving.UserDataManager;
-
-import javax.swing.*;
 
 /**
  * The type Main.
@@ -24,7 +24,8 @@ public final class Main {
   public static void main(final String[] args) {
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
+    } catch (ClassNotFoundException | InstantiationException
+             | UnsupportedLookAndFeelException | IllegalAccessException e) {
       e.printStackTrace();
     }
     AppData.initialize();
@@ -32,7 +33,6 @@ public final class Main {
     AppData.initializeGreedy();
     AppData.initializeBacktrackingLevel();
     UserDataManager.load();
-
     GuiManager guiManager = new GuiManager();
     guiManager.launch();
   }

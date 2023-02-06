@@ -1,7 +1,6 @@
 
 package gui.level;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -38,7 +37,8 @@ public class GuiFrontpage {
   /**
    * The constant WIDTH_RUCKSACK.
    */
-  public static final int  WIDTH_RUCKSACK = 57;
+  public static final int WIDTH_RUCKSACK = 57;
+
   /**
    * To be used with frame.setContentPane().
    *
@@ -51,7 +51,7 @@ public class GuiFrontpage {
     //füge Text und Buttons hinzu
     Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, SIZE_FONT_BIG);
     Font fontButtons = new Font("Arial",
-      Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL);
+        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL);
     JLabel titel = new JLabel("Optimal Heist");
     titel.setFont(fontStyle);
     JButton levelButton = new JButton("Level");
@@ -74,8 +74,8 @@ public class GuiFrontpage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-      rucksackImage.getImage().getScaledInstance(
-        WIDTH_RUCKSACK, HIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+        rucksackImage.getImage().getScaledInstance(
+            WIDTH_RUCKSACK, HIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
 
     JLabel picture = new JLabel(new ImageIcon(scaledRucksackImage));
 
