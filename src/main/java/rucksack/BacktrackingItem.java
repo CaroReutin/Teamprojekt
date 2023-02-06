@@ -1,5 +1,7 @@
 package rucksack;
 
+import javax.swing.*;
+
 /**
  * this class is a specific item named BacktrackingItem
  * which is only used for Backtracking purposes.
@@ -36,8 +38,8 @@ public class BacktrackingItem extends Item {
    * @param name   the name
    */
   public BacktrackingItem(final int value,
-                          final int weight, final String name) {
-    super(value, weight, name);
+                          final int weight, final String name, final ImageIcon imageIcon) {
+    super(value, weight, name, imageIcon);
     this.state = StateBacktracking.AVAILABLE;
   }
 

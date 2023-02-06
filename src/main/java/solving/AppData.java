@@ -280,7 +280,7 @@ public final class AppData {
    */
   public static Item generateItem(final int index) {
     return new Item(ITEMS.get(index).getValue(), ITEMS.get(index).getWeight(),
-        ITEMS.get(index).getName());
+        ITEMS.get(index).getName(), ITEMS.get(index).getImageIcon());
   }
 
   /**

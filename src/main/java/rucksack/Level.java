@@ -212,6 +212,7 @@ public class Level implements Serializable {
     assert this.robber != null;
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
       myRucksack.turnIntoBacktracking();
+
     }
   }
 
