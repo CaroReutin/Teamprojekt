@@ -3,6 +3,7 @@ package betatree;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -103,6 +104,7 @@ public class Tree {
         rowCounter2++;
       }
     }
+    buttons.get(0).get(0).setText("Gewicht/Wert");
     buttons.get(0).get(0).setVisible(true);
     treeFrame.add(panel);
     treeFrame.setSize(1000, 750);
@@ -110,8 +112,11 @@ public class Tree {
     treeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
   }
 
-  public void addNode(final int row, final int col) {
+  public void addNode(final int row, final int col, final ImageIcon labelIcon, final String buttonText) {
+    buttons.get(row).get(col).setText(buttonText);
     buttons.get(row).get(col).setVisible(true);
+    labels.get(row - 1).get(col).setIcon(labelIcon);
+    // TODO Center Label Icon
     labels.get(row - 1).get(col).setVisible(true);
     treeFrame.getContentPane().revalidate();
     treeFrame.getContentPane().repaint();

@@ -3,6 +3,7 @@ package solving;
 import backtrackingtree.BacktrackingTree;
 import betatree.Tree;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
 
@@ -66,7 +67,9 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
         this.back();
       }
       currentPath += "0";
-      addNode();
+      addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
+          backtrackingTree.getCurrentNode().getCurrentWeight() + "/" +
+              backtrackingTree.getCurrentNode().getCurrentValue());
     }
   }
 
@@ -116,16 +119,18 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
     if (this.backtrackingTree.addToRucksack(
         this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
       currentPath += "1";
-      addNode();
+      addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
+          backtrackingTree.getCurrentNode().getCurrentWeight() + "/" +
+              backtrackingTree.getCurrentNode().getCurrentValue());
     }
   }
 
-  private void addNode() {
+  private void addNode(final ImageIcon labelIcon, final String buttonText) {
     int nextIndex = Integer.parseInt(currentPath, 2);
     currentDepth++;
     if (!exploredPaths.get(currentDepth).contains(nextIndex)) {
       exploredPaths.get(currentDepth).add(nextIndex);
-      this.tree.addNode(currentDepth, nextIndex);
+      this.tree.addNode(currentDepth, nextIndex, labelIcon, buttonText);
     }
   }
 }
