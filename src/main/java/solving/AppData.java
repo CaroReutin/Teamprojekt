@@ -8,18 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import gui.level.GuiLevelPage;
-import gui.level.GuiLevelPageBacktracking;
-import gui.level.GuiLevelPageGreedy;
-import gui.level.GuiManager;
-import org.apache.commons.io.FileUtils;
-import rucksack.Item;
-import rucksack.Level;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import org.apache.commons.io.FileUtils;
+import rucksack.Item;
+import rucksack.Level;
 
 /**
  * The type App data.

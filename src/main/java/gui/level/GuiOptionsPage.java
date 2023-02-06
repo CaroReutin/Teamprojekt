@@ -19,7 +19,6 @@ import solving.AppData;
  * The class GUIOptionsPage holds the pane of the optionspage.
  */
 public class GuiOptionsPage {
-
   /**
    * the number of rows on the pane.
    */

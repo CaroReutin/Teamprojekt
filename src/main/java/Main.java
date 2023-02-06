@@ -32,7 +32,6 @@ public final class Main {
     AppData.initializeGreedy();
     AppData.initializeBacktrackingLevel();
     UserDataManager.load();
-
     GuiManager guiManager = new GuiManager();
     guiManager.launch();
   }
