@@ -123,7 +123,7 @@ public class Rucksack {
     for (Item tempItem : itemList) {
       BacktrackingItem newItem =
           new BacktrackingItem(tempItem.getValue(),
-              tempItem.getWeight(), tempItem.getName());
+              tempItem.getWeight(), tempItem.getName(), tempItem.getImageIcon());
       temp.add(newItem);
     }
     itemList = temp;

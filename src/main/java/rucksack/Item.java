@@ -1,6 +1,8 @@
 package rucksack;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,6 +27,7 @@ public class Item implements Serializable {
   @XmlElement
   private final String name;
 
+  private final ImageIcon imageIcon;
 
   /**
    * Instantiates a new Item.
@@ -34,10 +37,11 @@ public class Item implements Serializable {
    * @param itemName   the Name
    */
   public Item(final int itemValue, final int itemWeight,
-              final String itemName) {
+              final String itemName, final ImageIcon imageIcon) {
     this.value = itemValue;
     this.weight = itemWeight;
     this.name = itemName;
+    this.imageIcon = imageIcon;
   }
 
   /**
@@ -47,6 +51,7 @@ public class Item implements Serializable {
     this.value = -1;
     this.weight = -1;
     this.name = null;
+    this.imageIcon = null;
   }
 
   /**
@@ -85,5 +90,48 @@ public class Item implements Serializable {
   @Override
   public String toString() {
     return name + "\nWeight: " + weight + "\nValue: " + value;
+  }
+
+  public ImageIcon getImageIcon() {
+    return imageIcon;
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Item item = (Item) o;
+    return value == item.value && weight
+        == item.weight && Objects.equals(name, item.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value, weight, name);
+  }
+
+  /**
+   * .
+   *
+   * @param depthRemaining .
+   * @return "
+   */
+  public String getBacktrackingName(final int depthRemaining) {
+    // TODO fix depth
+    int spacesPerDepth = 4;
+    assert name != null;
+    StringBuilder res = new StringBuilder(name);
+    int spacesRemaing = 10 + depthRemaining * spacesPerDepth - name.length();
+    res.append(" ".repeat(Math.max(0, spacesRemaing)));
+    return res.toString();
+  }
+
+  public ImageIcon getIcon() {
+    return new ImageIcon(Objects.requireNonNull(getClass()
+        .getResource("/stern.png")));
   }
 }

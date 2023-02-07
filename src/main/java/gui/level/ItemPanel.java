@@ -107,8 +107,7 @@ public class ItemPanel extends Container {
     myContainer.add(itemInfoPane, BorderLayout.EAST);
 
     JButton iconSelector = new JButton();
-    icon = new ImageIcon(Objects.requireNonNull(getClass()
-        .getResource("/stern.png")));
+    icon = new ImageIcon("src/main/resources/icons/DefaultBox.png");
     Image image = icon.getImage();
     icon = new ImageIcon(image.getScaledInstance(
         AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
@@ -177,14 +176,15 @@ public class ItemPanel extends Container {
     if (nameField.getText().equals("")
         || amountField.getText().equals("")
         || weightField.getText().equals("")
-        || valueField.getText().equals("")) {
+        || valueField.getText().equals("")
+        || icon.getImage() == null) {
       throw new NullPointerException("No field may be empty");
     }
     // Cannot be empty because of the if above
     // => Must be an Integer because of the formatter
     return new Item(Integer.parseInt(valueField.getText()),
         Integer.parseInt(weightField.getText()),
-        nameField.getText());
+        nameField.getText(), icon);
   }
 
   /**

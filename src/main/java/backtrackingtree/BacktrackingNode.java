@@ -1,8 +1,10 @@
 package backtrackingtree;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 import rucksack.BacktrackingItem;
+import rucksack.Item;
 
 
 /**
@@ -62,18 +64,18 @@ public class BacktrackingNode {
   /**
    * the constructor for this  class.
    *
-   * @param bagItem        the item of the composite
-   * @param oldWeight      the weight before the new one gets calculated
-   * @param oldValue       the value before the new one
-   * @param bagCapacity    the maximum capacity of the bag
-   * @param sortedItemList list of the items of the level
-   * @param myParent       parent of this node
-   * @param isInBag        true if item is in the bag, false if
-   *                      it's in the trash
+   * @param bagItem     the item of the composite
+   * @param oldWeight   the weight before the new one gets calculated
+   * @param oldValue    the value before the new one
+   * @param bagCapacity the maximum capacity of the bag
+   * @param myItemList  list of the items of the level
+   * @param myParent    parent of this node
+   * @param isInBag     true if item is in the bag, false if
+   *                    it's in the trash
    */
   public BacktrackingNode(final BacktrackingItem bagItem, final int oldWeight,
                           final int oldValue, final int bagCapacity,
-                          final ArrayList<BacktrackingItem> sortedItemList,
+                          final ArrayList<BacktrackingItem> myItemList,
                           final BacktrackingNode myParent,
                           final boolean isInBag) {
     item = bagItem;
@@ -94,64 +96,12 @@ public class BacktrackingNode {
     capacity = bagCapacity;
     parent = myParent;
 
-    itemList = sortedItemList;
-  }
+    //sort myItemList first by weight and second by value
+    myItemList.sort(
+        Comparator.comparingInt(Item::getWeight)
+            .thenComparingInt(Item::getValue).reversed());
+    this.itemList = myItemList;
 
-  /**
-   * adds an item to the trash bin from the rucksack or the available selection.
-   *
-   * @param childItem the item in the new node (trash)
-   * @return the new current node of the tree
-   */
-  public BacktrackingNode addToTrash(final BacktrackingItem childItem) {
-    BacktrackingItem.StateBacktracking childState = childItem.getState();
-    //adds depending on if an item is in available, rucksack or trash
-    if (childState == BacktrackingItem.StateBacktracking.TRASH) {
-      System.out.println(childItem.getName() + " ist schon im Müll.");
-      return null;
-
-    } else if (childState == BacktrackingItem.StateBacktracking.RUCKSACK) {
-
-      //getting up the tree, so we can set the new left child correctly
-      BacktrackingNode currentParent = parent;
-      if (this.getItem().getName().equals(childItem.getName())) {
-        currentParent = this;
-      } else {
-        if (this.getItem().getState() != BacktrackingItem.StateBacktracking.TRASH) {
-          System.out.println(this.getItem().getName() + " muss zuerst in den Müll bewegt werden.");
-          return null;
-        }
-        while (!Objects.equals(currentParent.getItem().getName(),
-                childItem.getName())) {
-          if (currentParent.getName().equals("root")) {
-            break;
-          } else if (currentParent.getItem().getState() != BacktrackingItem.StateBacktracking.TRASH) {
-            System.out.println(currentParent.getItem().getName() + " muss zuerst in den Müll bewegt werden.");
-            return null;
-          }
-          currentParent = currentParent.getParent();
-        }
-      }
-      childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
-
-      currentParent = currentParent.getParent();
-      int newCurrentWeight = currentParent.getCurrentWeight();
-      int newCurrentValue = currentParent.getCurrentValue();
-      currentParent.setLeftChild(new BacktrackingNode(childItem,
-          newCurrentWeight, newCurrentValue, capacity, itemList,
-          currentParent, false));
-      moveItemsIntoAvailable(currentParent.rightChild);
-      return currentParent.getLeftChild();
-
-    } else if (childState == BacktrackingItem.StateBacktracking.AVAILABLE) {
-      childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
-      leftChild = new BacktrackingNode(childItem, currentWeight,
-              currentValue, capacity, itemList, this, false);
-      return leftChild;
-    }
-    System.out.println(childItem.getName()
-        + " konnte nicht in den Müll geworfen werden.");
-    return null;
   }
 
   /**
@@ -160,7 +110,7 @@ public class BacktrackingNode {
    *
    * @param gotIntoTrashNode which is thrown from rucksack into trash.
    */
-  private void moveItemsIntoAvailable(final BacktrackingNode gotIntoTrashNode) {
+  public void moveItemsIntoAvailable(final BacktrackingNode gotIntoTrashNode) {
     BacktrackingNode currentNode = gotIntoTrashNode;
     int weight = currentNode.item.getWeight();
 
@@ -177,13 +127,6 @@ public class BacktrackingNode {
     }
     System.out.println("Liste der Items mit gleichem Gewicht"
         + ", dessen Status nicht verändert werden darf: " + sb);
-
-    /*ArrayList<BacktrackingItem> sameWeightParentList = new ArrayList<>();
-    BacktrackingNode sameWeightParentNode = gotIntoTrashNode.getParent();
-    while (sameWeightParentNode.getItem().getWeight() == gotIntoTrashNode.getItem().getWeight()) {
-      sameWeightParentList.add(sameWeightParentNode.getItem());
-      sameWeightParentNode = sameWeightParentNode.getParent();
-    }*/
 
     for (BacktrackingItem currentItem : itemList) {
       //lower weight gets into available
@@ -217,14 +160,14 @@ public class BacktrackingNode {
   public boolean addToRucksack(final BacktrackingItem childItem) {
     if (itemFitsInRucksack(childItem)) {
       rightChild = new BacktrackingNode(childItem, currentWeight,
-              currentValue, capacity, itemList, this, true);
+          currentValue, capacity, itemList, this, true);
       System.out.println(childItem.getName() + " wurde hinzugefügt");
       childItem.setState(BacktrackingItem.StateBacktracking.RUCKSACK);
       return true;
 
     } else {
       System.out.println("Item "
-              + childItem.getName() + " kann nicht hinzugefügt werden.");
+          + childItem.getName() + " kann nicht hinzugefügt werden.");
       return false;
     }
   }
@@ -247,16 +190,17 @@ public class BacktrackingNode {
       return true;
     } else {
       System.out.println("Item "
-              + bagItem.getName() + " macht Rucksack zu schwer "
-              + "und kann deswegen nicht hinzugefügt werden.");
+          + bagItem.getName() + " macht Rucksack zu schwer "
+          + "und kann deswegen nicht hinzugefügt werden.");
       return false;
     }
   }
 
   private boolean isNextSelectableItemForBag(final BacktrackingItem
-                                                     newBagItem) {
+                                                 newBagItem) {
     final int weightNewBagItem = newBagItem.getWeight();
     final int indexThis = itemList.indexOf(this.getItem());
+    final int indexNewBagItem = itemList.indexOf(newBagItem);
     final int weightThis = this.item.getWeight();
 
     //if item is in available
@@ -264,84 +208,15 @@ public class BacktrackingNode {
       System.out.println(newBagItem.getName() + " ist nicht available");
       return false;
     }
+    //_______________________________________
 
     //first item to add to the tree
-    if (itemList.get(0).getWeight() == weightNewBagItem) {
+    if (indexThis == 0 && indexNewBagItem == 0) {
       return true;
     }
 
-    // if new item has the same weight as this node
-    if (weightNewBagItem == weightThis) {
-      return true;
-    }
-
-    //case if left item has the same weight as the thisItem
-    if (indexThis != 0) {
-      if (itemList.get(indexThis - 1).getWeight() == weightThis) {
-        for (int i = indexThis - 1; i >= 0; i--) {
-          if (itemList.get(i).getWeight() == weightThis) {
-            if (itemList.get(i).getState()
-                    == BacktrackingItem.StateBacktracking.AVAILABLE) {
-              System.out.println("Item " + newBagItem.getName()
-                      + " ist nicht das nächstverfügbare,"
-                      + " weil es noch verfügbare "
-                      + "schwerere Items gibt. Dieses ist zB "
-                      + itemList.get(i).getName());
-              return false;
-            }
-          } else {
-            break;
-          }
-        }
-      }
-    }
-
-    //case if right item has the same weight as thisItem
-    if (indexThis != itemList.size() - 1) {
-      if (itemList.get(indexThis + 1).getWeight() == weightThis) {
-        for (int i = indexThis + 1; i <= itemList.size() - 1; i++) {
-          if (itemList.get(i).getWeight() == weightThis) {
-            if (itemList.get(i).getState()
-                    == BacktrackingItem.StateBacktracking.AVAILABLE) {
-              System.out.println("Item " + newBagItem.getName()
-                      + " ist nicht verfügbar.");
-              return false;
-            }
-          } else {
-            break;
-          }
-        }
-      }
-    }
-
-    //case when we want to add a lighter item.
-    //index of this node's item is not the first one
-    // or the last one of the itemList
-    //if (indexThis != 0 && indexThis != itemList.size() - 1) {
-    // thisItem is at a middle position in the list.
-    //case if left and right does not have the same weight as this
-    //if (itemList.get(indexThis - 1).getWeight() != weightThis
-    //        && itemList.get(indexThis + 1).getWeight() != weightThis) {
-
-    int indexMostRightItem = indexThis;
-    for (int i = indexThis; i < itemList.size() - 1; i++) {
-      if (itemList.get(i).getWeight() == weightThis) {
-        indexMostRightItem = i;
-      } else {
-        break;
-      }
-    }
-    if (itemList.get(indexMostRightItem + 1).getWeight()
-            == weightNewBagItem) {
-      return true;
-    } else {
-      System.out.println("Item " + newBagItem.getName()
-              + " ist nicht das Nächstleichtere!");
-      return false;
-    }
-    //return true;
-    //  }
-    // }
+    //is NewBagItem the next selecible item? -> is the next of the list
+    return (indexThis + 1) == indexNewBagItem;
   }
 
   /**

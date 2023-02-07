@@ -2,6 +2,7 @@ import rucksack.*;
 import solving.*;
 import org.junit.jupiter.api.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class TestGreedy {
@@ -24,9 +25,9 @@ public class TestGreedy {
         amount.add(1);
         amount.add(1);
         // Sum of Weights = Capacity
-        items.add(new Item(10,1,"1"));
-        items.add(new Item(15,2,"2"));
-        items.add(new Item(40,3,"3"));
+        items.add(new Item(10,1,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(15,2,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(40,3,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,6);
         expected.add(items.get(2));
         expected.add(items.get(0));
@@ -36,18 +37,18 @@ public class TestGreedy {
         // None Fit
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(10,7,"1"));
-        items.add(new Item(15,8,"2"));
-        items.add(new Item(40,9,"3"));
+        items.add(new Item(10,7,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(15,8,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(40,9,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,6);
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected), SolverGreedy.solveGreedy(items,amount,6));
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Best does not Fit
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(10,3,"1"));
-        items.add(new Item(15,4,"2"));
-        items.add(new Item(999999,9,"3"));
+        items.add(new Item(10,3,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(15,4,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(999999,9,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,6);
         expected.add(items.get(1));
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected), SolverGreedy.solveGreedy(items,amount,6));
@@ -55,9 +56,9 @@ public class TestGreedy {
         // Random Numbers
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(130,20,"2"));
-        items.add(new Item(200,30,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(130,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(200,30,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(2));
         expected.add(items.get(1));
@@ -71,9 +72,9 @@ public class TestGreedy {
         amount.add(1);
         amount.add(1);
         // Random Numbers
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(100,20,"2"));
-        items.add(new Item(120,30,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(120,30,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(0));
         expected.add(items.get(1));
@@ -87,9 +88,9 @@ public class TestGreedy {
         amount.add(1);
         amount.add(1);
         amount.add(2);
-        items.add(new Item(5,5,"Goldbarren"));
-        items.add(new Item(4,4,"Besen"));
-        items.add(new Item(3,3,"Apfel"));
+        items.add(new Item(5,5,"ring", new ImageIcon("src/main/resources/icons/ring.png")));
+        items.add(new Item(4,4,"Brief", new ImageIcon("src/main/resources/icons/letter.png")));
+        items.add(new Item(3,3,"Buch", new ImageIcon("src/main/resources/icons/Buch.png")));
         level = new Level(items,amount,0,10);
         expected.add(items.get(0));
         expected.add(items.get(1));
@@ -102,9 +103,9 @@ public class TestGreedy {
         amount.add(1);
         amount.add(2);
         amount.add(1);
-        items.add(new Item(4,4,"Besen"));
-        items.add(new Item(3,3,"Apfel"));
-        items.add(new Item(5,5,"Goldbarren"));
+        items.add(new Item(4,4,"Brief", new ImageIcon("src/main/resources/icons/letter.png")));
+        items.add(new Item(3,3,"Buch", new ImageIcon("src/main/resources/icons/Buch.png")));
+        items.add(new Item(5,5,"ring", new ImageIcon("src/main/resources/icons/ring.png")));
         level = new Level(items,amount,0,10);
         /*
         This was expected with the old implementation of greedy
@@ -124,9 +125,9 @@ public class TestGreedy {
         amount.add(1);
         amount.add(1);
         amount.add(1);
-        items.add(new Item(4,4,"Besen"));
-        items.add(new Item(3,3,"Apfel"));
-        items.add(new Item(2,2,"Kaugummi"));
+        items.add(new Item(4,4,"Brief", new ImageIcon("src/main/resources/icons/letter.png")));
+        items.add(new Item(3,3,"Buch", new ImageIcon("src/main/resources/icons/Buch.png")));
+        items.add(new Item(2,2,"Axt", new ImageIcon("src/main/resources/icons/axe.png")));
         level = new Level(items,amount,0,5);
         expected.add(items.get(0));
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected), SolverGreedy.solveGreedy(items,amount,5));
@@ -139,9 +140,9 @@ public class TestGreedy {
         amount.add(1);
         amount.add(1);
         // Weight 0
-        items.add(new Item(60,0,"1"));
-        items.add(new Item(100,40,"2"));
-        items.add(new Item(120,30,"3"));
+        items.add(new Item(60,0,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,40,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(120,30,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(0));
         expected.add(items.get(2));
@@ -150,9 +151,9 @@ public class TestGreedy {
         // Value 0
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(100,20,"2"));
-        items.add(new Item(0,30,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(0,30,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(0));
         expected.add(items.get(1));
@@ -161,9 +162,9 @@ public class TestGreedy {
         // Weight and Value 0
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(100,20,"2"));
-        items.add(new Item(0,0,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(0,0,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(0));
         expected.add(items.get(1));
@@ -172,9 +173,9 @@ public class TestGreedy {
         // Weight and Value Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(100,20,"2"));
-        items.add(new Item(-10,-20,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(-10,-20,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(0));
         expected.add(items.get(1));
@@ -183,9 +184,9 @@ public class TestGreedy {
         // Weight Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(100,20,"2"));
-        items.add(new Item(5000,-3,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(5000,-3,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(0));
         expected.add(items.get(1));
@@ -194,9 +195,9 @@ public class TestGreedy {
         // Value Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(100,20,"2"));
-        items.add(new Item(-4,1,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(-4,1,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,50);
         expected.add(items.get(0));
         expected.add(items.get(1));
@@ -205,18 +206,18 @@ public class TestGreedy {
         // Capacity Negative
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(130,20,"2"));
-        items.add(new Item(200,30,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(130,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(200,30,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,-10);
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected), SolverGreedy.solveGreedy(items,amount,-10));
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected),s.solveAlgorithm(level));
         // Capacity Zero
         items = new ArrayList<>();
         expected = new ArrayList<>();
-        items.add(new Item(60,10,"1"));
-        items.add(new Item(130,20,"2"));
-        items.add(new Item(200,30,"3"));
+        items.add(new Item(60,10,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(130,20,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(200,30,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,0);
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected), SolverGreedy.solveGreedy(items,amount,0));
         Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expected),s.solveAlgorithm(level));
@@ -231,13 +232,13 @@ public class TestGreedy {
         amount.add(1);
         amount.add(1);
         amount.add(1);
-        items.add(new Item(60,0,"1"));
-        items.add(new Item(100,40,"2"));
-        items.add(new Item(120,30,"3"));
-        items.add(new Item(50,0,"4"));
-        items.add(new Item(70,0,"5"));
-        items.add(new Item(80,10,"6"));
-        items.add(new Item(80,80,"7"));
+        items.add(new Item(60,0,"1", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(100,40,"2", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(120,30,"3", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(50,0,"4", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(70,0,"5", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(80,10,"6", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
+        items.add(new Item(80,80,"7", new ImageIcon("src/main/resources/icons/DefaultBox.png")));
         level = new Level(items,amount,0,80);
         expected.add(items.get(0));
         expected.add(items.get(1));

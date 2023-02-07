@@ -1,6 +1,7 @@
 package gui.level;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,15 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import rucksack.Item;
+import rucksack.BacktrackingItem;
 import rucksack.Level;
-
 
 /**
  * backtracking level pages.
  */
 public class GuiLevelPageBacktracking extends GuiLevelPage {
-
   /**
    * the labels of the page.
    */
@@ -34,6 +33,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    */
   private JLabel currentValueLabel;
   /**
+   * number of items in Label.
+   */
+  private JLabel[] trashLabels;
+  /**
    * the current weight of the label.
    */
   private JLabel currentWeightLabel;
@@ -45,18 +48,23 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    */
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
+    getLevel().turnIntoBacktracking();
   }
 
   /**
    * makes the Item Buttons.
    *
-   * @param panelItems    The right panel where the buttons for
+   * @param panelAvaible  The right panel where the buttons for
    *                      the items NOT IN the bag should go to.
    * @param panelRucksack The left panel where the buttons for
    *                      the items IN the bag should go to.
+   * @param pannelTrash The trash panel.
+   * @param controlPannel The control panel.
    */
-  @Override
-  public void itemButtons(final JPanel panelItems, final JPanel panelRucksack) {
+
+  public void itemButtons(final JPanel panelAvaible, final JPanel panelRucksack,
+                          final JPanel pannelTrash,
+                          final JPanel controlPannel) {
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
     Font fontCurrentWeightLabel = currentWeightLabel.getFont();
     currentWeightLabel.setFont(
@@ -69,9 +77,11 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
         fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle()
             | Font.BOLD));
 
-    ArrayList<Item> items = getLevel().getItemList();
+    //getLevel().turnIntoBacktracking();
+    ArrayList<BacktrackingItem> items = getLevel().getBacktrackingItemList();
     labels = new JLabel[items.size()];
     rucksackLabels = new JLabel[items.size()];
+    trashLabels = new JLabel[items.size()];
     for (int i = 0; i < items.size(); i++) {
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
 
@@ -82,33 +92,51 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       Font fontRucksack = rucksackLabels[i].getFont();
       rucksackLabels[i].setFont(fontRucksack.deriveFont(fontRucksack.getStyle()
           | Font.BOLD));
+      // Laufvariable
       int finalI = i;
-      JButton current = new JButton(items.get(i).getName()
-          + " (" + items.get(i).getWeight() + "g, "
-          + items.get(i).getValue() + "€)");
-      current.addActionListener(e -> {
-        if (getLevel().getItemAmountAvailable(finalI) <= 0) {
-          return;
-        }
-        if ((getLevel().getCurrentWeight() + getLevel().getItemList()
-            .get(finalI).getWeight()) <= getLevel().getCapacity()) {
-          getLevel().moveToRucksack(finalI);
-          updateLabel(finalI);
-        }
-      });
-      JButton currentRucksack = new JButton(items.get(i).getName());
-      currentRucksack.addActionListener(e -> {
-        if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
-          return;
-        }
-        if (!getLevel().getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          getLevel().moveFromRucksack(finalI);
-          updateLabel(finalI);
-        }
+      // State of current item
+      BacktrackingItem.StateBacktracking stateItem =
+          items.get(finalI).getState();
+      //Avaible Labels
+      JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
+      JLabel itemLabel = new JLabel(items.get(i)
+          .getName() + " (" + items.get(i).getWeight() + "g, "
+          + items.get(i).getValue() + "€), Anzahl: ");
+      //JLabel itemLabelAmount = new JLabel(labels[i].getText());
+      itemLabel.setBackground(Color.white);
 
-      });
-      panelItems.add(current);
-      panelItems.add(labels[i]);
+      //buttons rucksack
+      JButton putToRucksack = new JButton("lege in den Rucksack");
+      //Trash Buttons and Labels
+      trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
+          .get(i).toString());
+
+      Font ft = trashLabels[i].getFont();
+      trashLabels[i].setFont(ft.deriveFont((f.getStyle() | Font.BOLD)));
+
+      //buttons trash
+      JButton putToTrash = new JButton("lege in den Müll");
+
+      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+
+
+      panelAvaible.add(itemIcon);
+      panelAvaible.add(itemLabel);
+      panelAvaible.add(labels[i]);
+      JLabel itemControlLabelIcon = new JLabel(items.get(i).getImageIcon());
+      JLabel itemControlLabel =
+          new JLabel(items.get(i).getName() + " ("
+              + items.get(i).getWeight() + "g, "
+              + items.get(i).getValue() + "€)");
+      controlPannel.add(itemControlLabelIcon);
+      controlPannel.add(itemControlLabel);
+      controlPannel.add(putToRucksack);
+      controlPannel.add(putToTrash);
+
+      JButton currentTrash = new JButton(items.get(i).getImageIcon());
+      pannelTrash.add(currentTrash);
+      pannelTrash.add(trashLabels[i]);
+
       panelRucksack.add(currentRucksack);
       panelRucksack.add(rucksackLabels[i]);
       panelRucksack.add(currentWeightLabel);
@@ -130,32 +158,52 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
     assert url != null;
-
+    // Panel were availble items are
     JPanel rightPanel = new JPanel(new GridLayout(2, 1));
-    JPanel avaiblePanel = new JPanel();
+    JPanel avaiblePanel = new JPanel(new GridLayout(
+        getLevel().getItemList().size() + 1, 2));
     avaiblePanel.add(new JLabel("Verfügbar:"));
-    JPanel trashPanel = new JPanel();
-    trashPanel.add(new JLabel("Müll:"));
+    // Panel with buttons were you can add items to rucksack or trash
+    JPanel controlPannel = new JPanel();
+    controlPannel.add(new JLabel("Kontrollfläche: "));
     rightPanel.add(avaiblePanel, BorderLayout.NORTH);
-    rightPanel.add(trashPanel, BorderLayout.SOUTH);
+    rightPanel.add(controlPannel, BorderLayout.SOUTH);
 
 
-    //JPanel rightPanel = new JPanel(new GridLayout(
-    // level.getItemList().size(), 1));
-
-    // erzeuge Buttons
+    // Rucksack Panel
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(170, 300,
             java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0);
+    rucksackPanel.add(new JLabel("Rucksack:"));
+    JPanel trashPanel = new JPanel();
+
+    //Trash Panel
+    trashPanel.add(new JLabel("Müll:"));
+    leftPanel.add(rucksackPanel, BorderLayout.NORTH);
+    leftPanel.add(trashPanel, BorderLayout.SOUTH);
+
+    //Panel where escape-Button is
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     this.escapeButton(centerPanel);
-    this.itemButtons(avaiblePanel, leftPanel);
+
+    //add Counter
+    /*
+     JPanel counterPanel = new JPanel();
+     counterPanel.add(new JLabel("Schrittzähler: "));
+     counterPanel.add(new JLabel(Integer.toString(getLevel().getCounter())));
+     centerPanel.add(counterPanel);
+    */
+
+    this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 
 
     //alles zusammenpuzzeln
 
+    JButton treeButton = new JButton("Zeige Baum");
+    centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
     pane.add(rightPanel, BorderLayout.EAST);
@@ -171,6 +219,8 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   @Override
   public void updateLabel(final int i) {
     labels[i].setText(String.valueOf(getLevel().getItemAmountAvailable(i)));
+    trashLabels[i].setText(String.valueOf(getLevel()
+        .getInTrashAmountList().get(i)));
     rucksackLabels[i].setText(String.valueOf(getLevel()
         .getItemAmountInRucksack(i)));
     currentWeightLabel.setText(

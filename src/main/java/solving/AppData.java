@@ -8,18 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import gui.level.GuiLevelPage;
-import gui.level.GuiLevelPageBacktracking;
-import gui.level.GuiLevelPageGreedy;
-import gui.level.GuiManager;
-import org.apache.commons.io.FileUtils;
-import rucksack.Item;
-import rucksack.Level;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import org.apache.commons.io.FileUtils;
+import rucksack.Item;
+import rucksack.Level;
 
 /**
  * The type App data.
@@ -30,7 +24,7 @@ public final class AppData {
    */
   public static final int DEFAULT_ITEMS_IN_CUSTOM_LEVEL = 1;
   /**
-   * the maximum amount of different items in backtracking levels
+   * the maximum amount of different items in backtracking levels.
    */
   public static final int MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL = 5;
 
@@ -150,9 +144,9 @@ public final class AppData {
         File newFile = new File(destDir, zipEntry.getName());
         // https://security.snyk.io/research/zip-slip-vulnerability
         if (!newFile.getCanonicalPath().startsWith(destDir.getCanonicalPath()
-          + File.separator)) {
+            + File.separator)) {
           throw new IOException("Entry is outside of the target dir: "
-            + zipEntry.getName());
+              + zipEntry.getName());
         }
         if (zipEntry.isDirectory()) {
           if (!newFile.isDirectory() && !newFile.mkdirs()) {
@@ -186,13 +180,7 @@ public final class AppData {
         Level level = (Level) marsh.unmarshal(levelFile);
         level.turnIntoBacktracking();
         level.resetLevel();
-        if (level.getRobber().equals(Level.Robber.DR_META)) {
-          return level;
-        } else if (level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          return level;
-        } else {
-          return level;
-        }
+        return level;
       }
 
     } catch (IOException | JAXBException e) {
@@ -205,7 +193,8 @@ public final class AppData {
    * Initialize beginning level.
    */
   public static void initializeBeginningLevel() {
-    LEVEL_ZERO[0] = loadLevel(new File("src/main/resources/level/StartLevel.zip"));
+    LEVEL_ZERO[0] = loadLevel(new File("src/main/resources/"
+        + "level/StartLevel.zip"));
   }
 
   /**
@@ -276,11 +265,12 @@ public final class AppData {
    * Generate item.
    *
    * @param index the unique index of the item
-   * @return returns a new Instance of the wanted item if it      is in the ArrayList else it returns null
+   * @return returns a new Instance of the wanted item if it
+   *          is in the ArrayList else it returns null
    */
   public static Item generateItem(final int index) {
     return new Item(ITEMS.get(index).getValue(), ITEMS.get(index).getWeight(),
-        ITEMS.get(index).getName());
+        ITEMS.get(index).getName(), ITEMS.get(index).getImageIcon());
   }
 
   /**
