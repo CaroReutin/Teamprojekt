@@ -23,7 +23,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
         logicItemList.add(
             new BacktrackingItem(oldList.get(i).getValue(),
                 oldList.get(i).getWeight(),
-                oldList.get(i).getName()));
+                oldList.get(i).getName(), oldList.get(i).getImageIcon()));
       }
     }
     backtrackingTree = new backtrackingtree.BacktrackingTree(

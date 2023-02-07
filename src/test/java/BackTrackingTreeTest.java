@@ -389,9 +389,9 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test8() {
-    BacktrackingItem i1 = new BacktrackingItem(7, 6, "i1");
-    BacktrackingItem i2 = new BacktrackingItem(8, 6, "i2");
-    BacktrackingItem i3 = new BacktrackingItem(9, 6, "i3");
+    BacktrackingItem i1 = new BacktrackingItem(7, 6, "i1", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
+    BacktrackingItem i2 = new BacktrackingItem(8, 6, "i2", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
+    BacktrackingItem i3 = new BacktrackingItem(9, 6, "i3", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
 
     items.add(i2);
     items.add(i1);
@@ -456,9 +456,9 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test9() {
-    BacktrackingItem drawing = new BacktrackingItem(8, 6, "Zeichnung");
-    BacktrackingItem letter = new BacktrackingItem(7, 6, "Brief");
-    BacktrackingItem diamond = new BacktrackingItem(20, 4, "Diamant");
+    BacktrackingItem drawing = new BacktrackingItem(8, 6, "Zeichnung", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
+    BacktrackingItem letter = new BacktrackingItem(7, 6, "Brief", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
+    BacktrackingItem diamond = new BacktrackingItem(20, 4, "Diamant", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
 
     items.add(diamond);
     items.add(drawing);

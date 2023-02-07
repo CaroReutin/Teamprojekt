@@ -40,7 +40,7 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
     final boolean leftCentric = false;
     myLevel = level;
     myLevel.turnIntoBacktracking();
-    itemList.add(new BacktrackingItem(0, 0, "root"));
+    itemList.add(new BacktrackingItem(0, 0, "root", new ImageIcon()));
     ArrayList<BacktrackingItem> backtrackingTreeItemList = new ArrayList<>();
     for (int i = 0; i < level.getBacktrackingItemList().size(); i++) {
       for (int j = 0; j < level.getItemAmountList().get(i); j++) {
