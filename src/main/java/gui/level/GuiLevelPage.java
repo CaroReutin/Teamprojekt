@@ -198,7 +198,8 @@ public class GuiLevelPage {
     labels = new JLabel[items.size()];
     rucksackLabels = new JLabel[items.size()];
     for (int i = 0; i < items.size(); i++) {
-      labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
+      labels[i] = new JLabel(level.getItemList().get(i).getIcon());
+      //labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
 
       Font f = labels[i].getFont();
       labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
