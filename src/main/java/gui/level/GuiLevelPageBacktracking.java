@@ -199,7 +199,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     // Rucksack Panel
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(170, 300,
+        rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
     JPanel leftPanel = new JPanel(new GridLayout(2, 1));
     JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0);

@@ -274,7 +274,7 @@ public class GuiLevelPage {
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
-            170, 300, java.awt.Image.SCALE_SMOOTH);
+            200, 350, java.awt.Image.SCALE_SMOOTH);
 
 
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);

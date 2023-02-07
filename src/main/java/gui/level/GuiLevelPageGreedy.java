@@ -131,7 +131,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(170, 300,
+        rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
 
 
