@@ -101,6 +101,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       BacktrackingItem.StateBacktracking stateItem =
           items.get(finalI).getState();
       //Avaible Labels
+      JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
       JLabel itemLabel = new JLabel(items.get(i)
           .getName() + " (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€), Anzahl: ");
@@ -119,21 +120,23 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
 
-      JButton currentRucksack = new JButton(items.get(i).getName());
-      
+      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
 
+
+      panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
       panelAvaible.add(labels[i]);
+      JLabel itemControlLabelIcon = new JLabel(items.get(i).getImageIcon());
       JLabel itemControlLabel =
           new JLabel(items.get(i).getName() + " ("
               + items.get(i).getWeight() + "g, "
               + items.get(i).getValue() + "€)");
+      controlPannel.add(itemControlLabelIcon);
       controlPannel.add(itemControlLabel);
-      controlPannel.add(putToRucksack);
       controlPannel.add(putToRucksack);
       controlPannel.add(putToTrash);
 
-      JButton currentTrash = new JButton(items.get(i).getName());
+      JButton currentTrash = new JButton(items.get(i).getImageIcon());
       pannelTrash.add(currentTrash);
       pannelTrash.add(trashLabels[i]);
 
