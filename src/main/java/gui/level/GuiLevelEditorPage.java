@@ -201,7 +201,10 @@ public final class GuiLevelEditorPage {
 
     JPanel resetPanel = new JPanel();
     JButton reset = new JButton("Reset");
-    reset.addActionListener(e -> GuiManager.openLevelEditor());
+    reset.addActionListener(e -> {
+      panelCounter = 0;
+      GuiManager.openLevelEditor();
+    });
     reset.setFont(fontButtons);
     resetPanel.add(reset);
 
@@ -441,7 +444,8 @@ public final class GuiLevelEditorPage {
             + " Knopf im Level-editor\noder ziehe die Zip Datei"
             + " irgendwo (außer auf ein Textfeld) in das Programm.\n\n"
             + "Falls eine höhere Anzahl an Gegenständen erwartet wurde,"
-            + " überprüfe ob\njedes der 4 Felder aller Items, welche in das Level"
+            + " überprüfe ob\njedes der 4 Felder aller"
+            + " Items, welche in das Level"
             + " sollen ausgefüllt wurden.",
         "Erfolgreich gespeichert", JOptionPane.PLAIN_MESSAGE);
   }
@@ -457,7 +461,7 @@ public final class GuiLevelEditorPage {
     // => Must be an Integer because of the formatter
     return new Item(Integer.parseInt(VALUE_FIELDS.get(i).getText()),
         Integer.parseInt(WEIGHT_FIELDS.get(i).getText()),
-        NAME_FIELDS.get(i).getText(),null);
+        NAME_FIELDS.get(i).getText(), null);
   }
 
   private static class FieldListener extends DocumentFilter {
