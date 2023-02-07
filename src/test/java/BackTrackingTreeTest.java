@@ -456,9 +456,9 @@ public class BackTrackingTreeTest {
    */
   @Test
   public void test9() {
-    BacktrackingItem drawing = new BacktrackingItem(8, 6, "Zeichnung", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
-    BacktrackingItem letter = new BacktrackingItem(7, 6, "Brief", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
-    BacktrackingItem diamond = new BacktrackingItem(20, 4, "Diamant", new ImageIcon("src/main/resources/icons/DefaultBox.png"));
+    BacktrackingItem drawing = new BacktrackingItem(8, 6, "Zeichnung", new ImageIcon("src/main/resources/icons/Zeichnung.png"));
+    BacktrackingItem letter = new BacktrackingItem(7, 6, "Brief", new ImageIcon("src/main/resources/icons/letter.png"));
+    BacktrackingItem diamond = new BacktrackingItem(20, 4, "Diamant", new ImageIcon("src/main/resources/icons/Diamant.png"));
 
     items.add(diamond);
     items.add(drawing);
