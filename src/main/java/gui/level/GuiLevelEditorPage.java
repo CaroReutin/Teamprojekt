@@ -1,10 +1,12 @@
 
 package gui.level;
 
+import static gui.level.GuiFrontpage.SIZE_FONT_SMALL;
 import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.File;
@@ -18,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -150,11 +153,13 @@ public final class GuiLevelEditorPage {
     JComboBox<String> modeDropdown = new JComboBox<>(robberOptions);
     leftSide.add(modeDropdown);
 
+    Font fontButtons = new Font("Arial",
+        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL / 2);
+
     JButton save = new JButton("Speichern");
     save.addActionListener(e -> saveLevel(pane,
         titleField, capacityField, modeDropdown));
-    leftSide.add(save);
-
+    save.setFont(fontButtons);
     JButton back = new JButton("Abbrechen");
     back.addActionListener(e -> {
       if (JOptionPane.YES_OPTION
@@ -165,8 +170,17 @@ public final class GuiLevelEditorPage {
         GuiManager.openMainMenu();
       }
     });
-    leftSide.add(back);
 
+    back.setFont(fontButtons);
+
+    JPanel savePanel = new JPanel();
+    savePanel.add(save);
+    leftSide.add(savePanel);
+    JPanel backPanel = new JPanel();
+    backPanel.add(back);
+    leftSide.add(backPanel);
+
+    JPanel loadPanel = new JPanel();
     JButton load = new JButton("Level öffnen");
     load.addActionListener(e -> {
       JFileChooser chooseIcon = new JFileChooser();
@@ -181,12 +195,17 @@ public final class GuiLevelEditorPage {
         CustomLevelManager.load(customLevel);
       }
     });
-    leftSide.add(load);
+    load.setFont(fontButtons);
+    loadPanel.add(load);
+    leftSide.add(loadPanel);
 
+    JPanel resetPanel = new JPanel();
     JButton reset = new JButton("Reset");
     reset.addActionListener(e -> GuiManager.openLevelEditor());
-    leftSide.add(reset);
+    reset.setFont(fontButtons);
+    resetPanel.add(reset);
 
+    leftSide.add(resetPanel);
     pane.add(leftSide);
 
     addMiddleAndRightPart(pane);
@@ -417,13 +436,13 @@ public final class GuiLevelEditorPage {
     }
 
     showMessageDialog(pane, "Level mit " + itemList.size()
-        + " verschiedenen Gegenständen gespeichert.\n\n"
-        + "Lade das Level entweder durch den Level öffnen"
-        + " Knopf im Level-editor\noder ziehe die Zip Datei"
-        + " irgendwo (außer auf ein Textfeld) in das Programm.\n\n"
-        + "Falls eine höhere Anzahl an Gegenständen erwartet wurde,"
-        + " überprüfe ob\njedes der 4 Felder aller Items, welche in das Level"
-        + " sollen ausgefüllt wurden.",
+            + " verschiedenen Gegenständen gespeichert.\n\n"
+            + "Lade das Level entweder durch den Level öffnen"
+            + " Knopf im Level-editor\noder ziehe die Zip Datei"
+            + " irgendwo (außer auf ein Textfeld) in das Programm.\n\n"
+            + "Falls eine höhere Anzahl an Gegenständen erwartet wurde,"
+            + " überprüfe ob\njedes der 4 Felder aller Items, welche in das Level"
+            + " sollen ausgefüllt wurden.",
         "Erfolgreich gespeichert", JOptionPane.PLAIN_MESSAGE);
   }
 
