@@ -15,9 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
-import solving.ButtonEventHandler;
-import solving.ButtonEventHandlerTable;
-
 
 /**
  * backtracking level pages.
@@ -61,8 +58,8 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    *                      the items NOT IN the bag should go to.
    * @param panelRucksack The left panel where the buttons for
    *                      the items IN the bag should go to.
-   * @param panelRucksack The right pannel where rhe buttons fpr
-   *                      the items in trash are
+   * @param pannelTrash The trash panel.
+   * @param controlPannel The control panel.
    */
 
   public void itemButtons(final JPanel panelAvaible, final JPanel panelRucksack,
