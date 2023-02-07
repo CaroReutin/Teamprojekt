@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -57,6 +58,11 @@ public class GuiLevelPage {
    * @param mylevel the level that can be played in this page
    */
   public GuiLevelPage(final Level mylevel) {
+    if (mylevel.getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
+      mylevel.getItemList().sort(
+          Comparator.comparingInt(Item::getWeight)
+              .thenComparingInt(Item::getValue).reversed());
+    }
     this.level = mylevel;
   }
 
@@ -93,7 +99,7 @@ public class GuiLevelPage {
         }
       });
     } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
-        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER) {
+        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
       flucht.addActionListener(e -> {
         if (levelNumber >= 0) {
           if (level.getCurrentValue() > UserDataManager.getScore(
@@ -202,10 +208,13 @@ public class GuiLevelPage {
       rucksackLabels[i].setFont(fontRucksack.deriveFont(
           fontRucksack.getStyle() | Font.BOLD));
       int finalI = i;
-      JButton current = new JButton(items.get(i).getName()
+      JPanel itemPanel = new JPanel();
+      JButton itemIcon = new JButton(items.get(i).getImageIcon());
+      itemPanel.add(itemIcon);
+      JLabel current = new JLabel(items.get(i).getName()
           + " (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
-      current.addActionListener(e -> {
+      itemIcon.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
         }
@@ -215,7 +224,7 @@ public class GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksack = new JButton(items.get(i).getName());
+      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
       currentRucksack.addActionListener(e -> {
         if (level.getItemAmountInRucksack(finalI) <= 0) {
           return;
@@ -227,6 +236,7 @@ public class GuiLevelPage {
 
       });
       panelItems.add(current);
+      panelItems.add(itemPanel);
       panelItems.add(labels[i]);
       panelRucksack.add(currentRucksack);
       panelRucksack.add(rucksackLabels[i]);
@@ -264,7 +274,7 @@ public class GuiLevelPage {
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
-            170, 300, java.awt.Image.SCALE_SMOOTH);
+            200, 350, java.awt.Image.SCALE_SMOOTH);
 
 
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);

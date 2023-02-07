@@ -1,8 +1,6 @@
 package solving;
 
 import java.io.File;
-import java.util.ArrayList;
-import rucksack.Item;
 import rucksack.Level;
 
 /**
@@ -16,6 +14,21 @@ public final class BacktrackingLevel {
 
   }
 
+  private static final int levelOne = 0;
+
+  private static final int levelTwo = 1;
+
+  private static final int levelThree = 2;
+
+  private static final int levelFour = 3;
+
+  private static final int levelFive = 4;
+
+  private static final int levelSix = 5;
+
+  private static final int levelSeven = 6;
+
+
   /**
    * The Backtracking level.
    */
@@ -26,39 +39,32 @@ public final class BacktrackingLevel {
    */
   public static void initializeBacktracking() {
     //Backtracking Level 1
-
-    LEVEL_BACKTRACKING[0] = AppData.loadLevel(new File("src/main/resources/level/Backtracking1.zip"));
-
+    LEVEL_BACKTRACKING[levelOne] =
+      AppData.loadLevel(new File("src/main/resources/level/Backtracking1.zip"));
 
     //Backtracking Level 2
-
-    LEVEL_BACKTRACKING[1] =
-        AppData.loadLevel(new File("src/main/resources/level/Backtracking2.zip"));
-
+    LEVEL_BACKTRACKING[levelTwo] =
+      AppData.loadLevel(new File("src/main/resources/level/Backtracking2.zip"));
 
     //Backtracking Level 3
-
-    LEVEL_BACKTRACKING[2] =
-        AppData.loadLevel(new File("src/main/resources/level/Backtracking3.zip"));
+    LEVEL_BACKTRACKING[levelThree] =
+      AppData.loadLevel(new File("src/main/resources/level/Backtracking3.zip"));
 
     //Backtracking Level 4
-
-    LEVEL_BACKTRACKING[3] =
-        AppData.loadLevel(new File("src/main/resources/level/Backtracking4.zip"));
+    LEVEL_BACKTRACKING[levelFour] =
+      AppData.loadLevel(new File("src/main/resources/level/Backtracking4.zip"));
 
     //Backtracking Level 5
-
-    LEVEL_BACKTRACKING[4] =
-        AppData.loadLevel(new File("src/main/resources/level/Backtracking5.zip"));
+    LEVEL_BACKTRACKING[levelFive] =
+      AppData.loadLevel(new File("src/main/resources/level/Backtracking5.zip"));
 
     //Backtracking Level 6
-
-    LEVEL_BACKTRACKING[5] =
-        AppData.loadLevel(new File("src/main/resources/level/Backtracking6.zip"));
+    LEVEL_BACKTRACKING[levelSix] =
+      AppData.loadLevel(new File("src/main/resources/level/Backtracking6.zip"));
 
     //Backtracking Level 7
-
-    //LEVEL_BACKTRACKING[6] = AppData.loadLevel(new File("src/main/resources/level/Backtracking7.zip"));
+    LEVEL_BACKTRACKING[levelSeven] =
+     AppData.loadLevel(new File("src/main/resources/level/Backtracking7.zip"));
   }
 
   /**

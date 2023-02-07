@@ -457,7 +457,7 @@ public final class GuiLevelEditorPage {
     // => Must be an Integer because of the formatter
     return new Item(Integer.parseInt(VALUE_FIELDS.get(i).getText()),
         Integer.parseInt(WEIGHT_FIELDS.get(i).getText()),
-        NAME_FIELDS.get(i).getText());
+        NAME_FIELDS.get(i).getText(),null);
   }
 
   private static class FieldListener extends DocumentFilter {

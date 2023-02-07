@@ -82,10 +82,11 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
       rucksackLabels[i].setFont(fontRucksack
           .deriveFont(fontRucksack.getStyle() | Font.BOLD));
       int finalI = i;
-      JButton current = new JButton(items.get(i)
+      JButton currentIcon = new JButton(items.get(i).getImageIcon());
+      JLabel current = new JLabel(items.get(i)
           .getName() + " (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
-      current.addActionListener(e -> {
+      currentIcon.addActionListener(e -> {
         if (getLevel().getItemAmountAvailable(finalI) <= 0) {
           return;
         }
@@ -95,8 +96,8 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksack = new JButton(items.get(i).getName());
-      currentRucksack.addActionListener(e -> {
+      JButton currentRucksackIcon = new JButton(items.get(i).getImageIcon());
+      currentRucksackIcon.addActionListener(e -> {
         if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
           return;
         }
@@ -107,8 +108,9 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
 
       });
       panelItems.add(current);
+      panelItems.add(currentIcon);
       panelItems.add(labels[i]);
-      panelRucksack.add(currentRucksack);
+      panelRucksack.add(currentRucksackIcon);
       panelRucksack.add(rucksackLabels[i]);
       panelRucksack.add(currentWeightLabel);
       panelRucksack.add(currentValueLabel);
@@ -131,7 +133,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(170, 300,
+        rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
 
 

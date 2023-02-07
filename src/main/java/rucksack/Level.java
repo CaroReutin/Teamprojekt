@@ -10,6 +10,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Level implements Serializable {
+  public void setCurrentValue(final int i) {
+    this.myRucksack.setCurrentValue(i);
+  }
+
+  public void setCurrentWeight(final int i) {
+    this.myRucksack.setCurrentWeight(i);
+  }
+
   /**
    * Greedy -> Gieriger Ganove
    * Backtracking -> Backtracking Bandit
@@ -163,7 +171,7 @@ public class Level implements Serializable {
   /**
    * Move from rucksack.
    *
-   * @param i the
+   * @param i the index of the item to be moved
    */
   public void moveFromRucksack(final int i) {
     myRucksack.moveFromRucksack(i);
@@ -212,6 +220,26 @@ public class Level implements Serializable {
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
       myRucksack.turnIntoBacktracking();
     }
+  }
+
+  public ArrayList<Integer> getInTrashAmountList() {
+    return myRucksack.getInTrashAmountList();
+  }
+
+  public void setInTrashAmountList(final int index, final int newAmount) {
+    myRucksack.setInTrashAmountList(index, newAmount);
+  }
+
+  public void setAvailableItemAmountList(final int index, final int newAmount) {
+    myRucksack.setAvailableItemAmountList(index, newAmount);
+  }
+
+  public void setInRucksackAmountList(final int index, final int newAmount) {
+    myRucksack.setInRucksackAmountList(index, newAmount);
+  }
+
+  public ArrayList<BacktrackingItem> getBacktrackingItemList() {
+    return myRucksack.getBacktrackingItemList();
   }
 
 }
