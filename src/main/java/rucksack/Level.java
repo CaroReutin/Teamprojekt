@@ -23,12 +23,12 @@ public class Level implements Serializable {
     this.myRucksack.setCurrentWeight(i);
   }
 
-  public void setItemIcon(int i, ImageIcon imageIcon) {
+  /* void setItemIcon(int i, ImageIcon imageIcon) {
     Item oldItem = this.itemList.get(i);
     this.itemList.set(i,
       new Item(oldItem.getValue(), oldItem.getWeight(),
         oldItem.getName(), imageIcon));
-  }
+  }*/
 
   /**
    * Greedy -> Gieriger Ganove
@@ -54,8 +54,8 @@ public class Level implements Serializable {
   /**
    * the list with all items.
    */
-  @XmlElement
-  private final ArrayList<Item> itemList;
+  /*@XmlElement
+  private final ArrayList<Item> itemList;*/
 
   /**
    * the current robber.
