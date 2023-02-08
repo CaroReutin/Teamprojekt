@@ -2,6 +2,7 @@ package rucksack;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,6 +17,13 @@ public class Level implements Serializable {
 
   public void setCurrentWeight(final int i) {
     this.myRucksack.setCurrentWeight(i);
+  }
+
+  public void setItemIcon(int i, ImageIcon imageIcon) {
+    Item oldItem = this.itemList.get(i);
+    this.itemList.set(i,
+      new Item(oldItem.getValue(), oldItem.getWeight(),
+        oldItem.getName(), imageIcon));
   }
 
   /**
@@ -37,6 +45,12 @@ public class Level implements Serializable {
      */
     DR_META
   }
+
+  /**
+   * the list with all items.
+   */
+  @XmlElement
+  private final ArrayList<Item> itemList;
 
   /**
    * the current robber.
