@@ -128,6 +128,7 @@ public class GuiManager {
    * @param levelPage the GUILevel page of the level that should be opened.
    */
   public static void openLevel(final GuiLevelPage levelPage, final int levelNumber) {
+    NumberLevel = levelNumber;
     frame.setContentPane(levelPage.getPane());
     final int lastGreedyNumber = 7;
     String title = "Level ";
@@ -140,7 +141,6 @@ public class GuiManager {
     } else {
       title = "Benutzerdefiniertes " + title;
     }
-    NumberLevel = levelNumber;
     frame.setTitle(title);
     paint();
 
