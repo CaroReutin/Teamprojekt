@@ -1,5 +1,6 @@
 package solving;
 
+import java.awt.*;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import javax.swing.*;
 import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.xml.bind.JAXBContext;
@@ -184,13 +186,11 @@ public final class AppData {
         level.turnIntoBacktracking();
         level.resetLevel();
         for (int i = 0; i < level.getItemList().size(); i++) {
-          File picture = new File(destDir + "/picture" + i);
-          if (picture.exists()) {
-            level.setItemIcon(i, new ImageIcon(
-                new ImageIcon(picture.getAbsolutePath()).getImage()
-                    .getScaledInstance(
-                AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
-          }
+          File picture = new File(destDir + "/picture" + i + ".png");
+          /*if (picture.exists()) {
+            level.setItemIcon(i, new ImageIcon(new ImageIcon(picture.getAbsolutePath())
+              .getImage().getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
+          }*/
         }
         return level;
       }
