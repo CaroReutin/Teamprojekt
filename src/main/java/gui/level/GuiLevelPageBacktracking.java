@@ -16,6 +16,11 @@ import javax.swing.JPanel;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
 
+import backtrackingtree.BacktrackingNode;
+import backtrackingtree.BacktrackingTree;
+import rucksack.Item;
+
+
 /**
  * backtracking level pages.
  */
@@ -40,6 +45,8 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    * the current weight of the label.
    */
   private JLabel currentWeightLabel;
+
+  private BacktrackingTree backtrackingTree = new BacktrackingTree(getLevel().getCapacity(), getLevel().getBacktrackingItemList());
 
   /**
    * make a new backtracking level page.
@@ -94,9 +101,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           | Font.BOLD));
       // Laufvariable
       int finalI = i;
-      // State of current item
-      BacktrackingItem.StateBacktracking stateItem =
-          items.get(finalI).getState();
+      BacktrackingItem item = items.get(i);
       //Avaible Labels
       JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
       JLabel itemLabel = new JLabel(items.get(i)
@@ -107,6 +112,11 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons rucksack
       JButton putToRucksack = new JButton("lege in den Rucksack");
+      putToRucksack.addActionListener(e -> {
+        getLevel().setCounter(getLevel().getCounter() + 1);
+        backtrackingTree.addToRucksack(item);
+        updateLabel(finalI);
+      });
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
           .get(i).toString());
@@ -116,8 +126,21 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
+      putToTrash.addActionListener(e -> {
+        getLevel().setCounter(getLevel().getCounter() + 1);
+        backtrackingTree.addToTrash(item);
+        updateLabel(finalI);
+      });
 
       JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+      currentRucksack.addActionListener(e -> {
+        if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
+          return;
+        }
+        if (getLevel().getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
+          getLevel().moveFromRucksack(finalI);
+          updateLabel(finalI);
+        }
 
 
       panelAvaible.add(itemIcon);
