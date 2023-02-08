@@ -98,8 +98,8 @@ public class GuiLevelPage {
           //this case is not possible, all buttons are switched
         }
       });
-    } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
-        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
+    } else if (levelNumber == 8
+        || levelNumber == 15 || levelNumber == 0) {
       flucht.addActionListener(e -> {
         if (levelNumber >= 0) {
           if (level.getCurrentValue() > UserDataManager.getScore(
