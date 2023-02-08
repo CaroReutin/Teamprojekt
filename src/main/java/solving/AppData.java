@@ -191,6 +191,8 @@ public final class AppData {
         return level;
       }
 
+
+
     } catch (IOException | JAXBException e) {
       e.printStackTrace();
     }
