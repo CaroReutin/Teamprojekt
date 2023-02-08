@@ -2,13 +2,17 @@ package rucksack;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
+import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * The class that holds the level information.
  */
 @XmlRootElement
+@XmlSeeAlso(Item.class)
 public class Level implements Serializable {
   public void setCurrentValue(final int i) {
     this.myRucksack.setCurrentValue(i);
@@ -91,6 +95,9 @@ public class Level implements Serializable {
     this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
     //this.levelindex = levelIndex;
     this.robber = myRobber;
+    //todo aus placeIcon Branch
+    //currentWeight = 0;
+    //currentValue = 0;
   }
 
   /**
@@ -100,8 +107,10 @@ public class Level implements Serializable {
     this.myRucksack = new Rucksack(new ArrayList<>(), new ArrayList<>(), -1);
     //this.levelindex = -1;
     this.robber = null;
+    //todo aus placeIcon Branch
+    //currentWeight = 0;
+    //currentValue = 0;
   }
-
 
   /**
    * NOTE: this does not return the items still available in the level
