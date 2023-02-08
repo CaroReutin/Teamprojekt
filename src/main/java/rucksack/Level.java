@@ -2,7 +2,7 @@ package rucksack;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
