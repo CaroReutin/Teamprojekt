@@ -194,7 +194,7 @@ public final class AppData {
    */
   public static void initializeBeginningLevel() {
     LEVEL_ZERO[0] = loadLevel(new File("src/main/resources/"
-        + "level/StartLevel.zip"));
+        + "Level/Startlevel.zip"));
   }
 
   /**
