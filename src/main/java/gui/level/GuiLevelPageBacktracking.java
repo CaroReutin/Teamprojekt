@@ -18,12 +18,18 @@ import betatree.Tree;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
 import backtrackingtree.BacktrackingTree;
+import solving.ButtonEventHandler;
+import solving.ButtonEventHandlerTable;
 
 
 /**
  * backtracking level pages.
  */
 public class GuiLevelPageBacktracking extends GuiLevelPage {
+  /**
+   * the Button Event Handler.
+   */
+  private final ButtonEventHandler buttonHandler;
   /**
    * the labels of the page.
    */
@@ -57,6 +63,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
+    buttonHandler = new ButtonEventHandlerTable(getLevel());
   }
 
   /**
@@ -114,8 +121,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       //buttons rucksack
       JButton putToRucksack = new JButton("lege in den Rucksack");
       putToRucksack.addActionListener(e -> {
-        backtrackingTree.addToRucksack(item);
-        updateLabel(finalI);
+        handleButtons(finalI, true);
       });
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
@@ -127,19 +133,11 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
       putToTrash.addActionListener(e -> {
-        backtrackingTree.addToTrash(item);
-        updateLabel(finalI);
+        handleButtons(finalI, false);
       });
-
-      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+      JButton currentRucksack = new JButton(items.get(i).getName());
       currentRucksack.addActionListener(e -> {
-        if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
-          return;
-        }
-        if (getLevel().getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
-          getLevel().moveFromRucksack(finalI);
-          updateLabel(finalI);
-        }
+        handleButtons(finalI, false);
       });
 
       panelAvaible.add(itemIcon);
@@ -242,5 +240,19 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     currentWeightLabel.setText(
         getLevel().getCurrentWeight() + "/" + getLevel().getCapacity() + "g");
     currentValueLabel.setText((getLevel().getCurrentValue() + "€"));
+  }
+
+  private void handleButtons(final int index,
+                             final boolean toRucksack) {
+    if (toRucksack) {
+      buttonHandler.addToRucksack(index, getLevel());
+      updateLabel(index);
+    } else {
+      buttonHandler.addToTrash(index, getLevel());
+      for (int i = index; i < getLevel()
+          .getBacktrackingItemList().size(); i++) {
+        updateLabel(i);
+      }
+    }
   }
 }
