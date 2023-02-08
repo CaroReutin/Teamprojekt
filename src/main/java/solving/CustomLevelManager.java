@@ -217,11 +217,11 @@ public final class CustomLevelManager {
         level.turnIntoBacktracking();
         level.resetLevel();
         if (level.getRobber().equals(Level.Robber.DR_META)) {
-          GuiManager.openLevel(new GuiLevelPage(level));
+          GuiManager.openLevel(new GuiLevelPage(level), -1);
         } else if (level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          GuiManager.openLevel(new GuiLevelPageGreedy(level));
+          GuiManager.openLevel(new GuiLevelPageGreedy(level), -1);
         } else {
-          GuiManager.openLevel(new GuiLevelPageBacktracking(level));
+          GuiManager.openLevel(new GuiLevelPageBacktracking(level), -1);
         }
       }
 

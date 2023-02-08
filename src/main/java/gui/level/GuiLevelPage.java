@@ -73,7 +73,7 @@ public class GuiLevelPage {
    */
   public void escapeButton(final Container centerPanel) {
     JButton flucht = new JButton("Flucht");
-    int levelNumber = this.level.getLevelNumber();
+    int levelNumber = GuiManager.NumberLevel;
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
@@ -98,13 +98,13 @@ public class GuiLevelPage {
           //this case is not possible, all buttons are switched
         }
       });
-    } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
-        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
+    } else if (levelNumber == 7
+        || levelNumber == 14 || levelNumber == 0) {
       flucht.addActionListener(e -> {
         if (levelNumber >= 0) {
           if (level.getCurrentValue() > UserDataManager.getScore(
-              level.getLevelNumber())) {
-            UserDataManager.newHighScore(level.getLevelNumber(),
+            GuiManager.NumberLevel)) {
+            UserDataManager.newHighScore(GuiManager.NumberLevel,
                 level.getCurrentValue());
             UserDataManager.save();
           }
@@ -134,8 +134,8 @@ public class GuiLevelPage {
     } else {
       flucht.addActionListener(e -> {
         if (level.getCurrentValue() > UserDataManager
-            .getScore(level.getLevelNumber())) {
-          UserDataManager.newHighScore(level.getLevelNumber(),
+            .getScore(GuiManager.NumberLevel)) {
+          UserDataManager.newHighScore(GuiManager.NumberLevel,
               level.getCurrentValue());
           UserDataManager.save();
         }
@@ -155,7 +155,7 @@ public class GuiLevelPage {
           case 1 -> {
             GuiManager.openLevel(
                 GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
-                    [level.getLevelNumber() + 1]);
+                    [GuiManager.NumberLevel + 1], GuiManager.NumberLevel + 1);
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
           case 2 -> {
@@ -312,7 +312,7 @@ public class GuiLevelPage {
    *
    * @return the level number.
    */
-  public int getLevelNumber() {
+  /*public int getLevelNumber() {
     return this.level.getLevelNumber();
-  }
+  }*/
 }
