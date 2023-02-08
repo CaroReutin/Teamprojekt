@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import betatree.Tree;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
 import backtrackingtree.BacktrackingTree;
@@ -44,6 +46,8 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   private JLabel currentWeightLabel;
 
   private BacktrackingTree backtrackingTree = new BacktrackingTree(getLevel().getCapacity(), getLevel().getBacktrackingItemList());
+
+  private Tree tree = new Tree(getLevel().getItemList().size(), false, false);
 
   /**
    * make a new backtracking level page.
@@ -214,6 +218,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
     JButton treeButton = new JButton("Zeige Baum");
     //Todo add actionlistener treebutton
+    treeButton.addActionListener(e -> tree.show());
     centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
