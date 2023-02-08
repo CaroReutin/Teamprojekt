@@ -72,7 +72,7 @@ public final class AppData {
   /**
    * Max amount of items in custom level, used to make the GUI.
    */
-  public static final int MAXIMUM_ITEMS_IN_CUSTOM_LEVEL = 16;
+  public static final int MAXIMUM_ITEMS_IN_CUSTOM_LEVEL = 15;
   /**
    * The constant LEVELAMOUNT.
    */
@@ -206,7 +206,7 @@ public final class AppData {
    */
   public static void initializeBeginningLevel() {
     LEVEL_ZERO[0] = loadLevel(new File("src/main/resources/"
-        + "level/StartLevel.zip"));
+        + "Level/Startlevel.zip"));
   }
 
   /**

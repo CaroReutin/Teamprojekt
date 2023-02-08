@@ -26,35 +26,35 @@ public final class GreedyLevel {
   public static void initializeGreedy() {
     // Greedy Level 1
     LEVEL_GREEDY[0] =
-      AppData.loadLevel(new File("src/main/resources/level/Greedy1.zip"));
+      AppData.loadLevel(new File("src/main/resources/Level/Greedy1.zip"));
 
     // Greedy Level 2
     LEVEL_GREEDY[1] =
-      AppData.loadLevel(new File("src/main/resources/level/Greedy2.zip"));
+      AppData.loadLevel(new File("src/main/resources/Level/Greedy2.zip"));
 
     //Greedy Level 3
     LEVEL_GREEDY[2] =
-      AppData.loadLevel(new File("src/main/resources/level/Greedy3.zip"));
+      AppData.loadLevel(new File("src/main/resources/Level/Greedy3.zip"));
 
 
     //Greedy Level 4
     LEVEL_GREEDY[3] =
-      AppData.loadLevel(new File("src/main/resources/level/Greedy4.zip"));
+      AppData.loadLevel(new File("src/main/resources/Level/Greedy4.zip"));
 
 
     //Greedy Level 5
     LEVEL_GREEDY[4] =
-      AppData.loadLevel(new File("src/main/resources/level/Greedy5.zip"));
+      AppData.loadLevel(new File("src/main/resources/Level/Greedy5.zip"));
 
 
     //Greedy Level 6
     LEVEL_GREEDY[5] =
-      AppData.loadLevel(new File("src/main/resources/level/Greedy6.zip"));
+      AppData.loadLevel(new File("src/main/resources/Level/Greedy6.zip"));
 
 
     //Greedy Level 7
     LEVEL_GREEDY[6] =
-      AppData.loadLevel(new File("src/main/resources/level/Greedy7.zip"));
+      AppData.loadLevel(new File("src/main/resources/Level/Greedy7.zip"));
 
   }
 

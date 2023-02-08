@@ -215,7 +215,7 @@ public class BacktrackingNode {
       return true;
     }
 
-    //is NewBagItem the next selecible item? -> is the next of the list
+    //is NewBagItem the next selectible item? -> is the next of the list
     return (indexThis + 1) == indexNewBagItem;
   }
 

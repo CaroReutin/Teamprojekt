@@ -1,6 +1,7 @@
 package rucksack;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -116,20 +117,6 @@ public class Rucksack {
   }
 
   /**
-   * Turns the items into backtracking items.
-   */
-  public void turnIntoBacktracking() {
-    ArrayList<Item> temp = new ArrayList<>();
-    for (Item tempItem : itemList) {
-      BacktrackingItem newItem =
-          new BacktrackingItem(tempItem.getValue(),
-              tempItem.getWeight(), tempItem.getName(), tempItem.getImageIcon());
-      temp.add(newItem);
-    }
-    itemList = temp;
-  }
-
-  /**
    * returns the amount list.
    *
    * @return the amount list
@@ -192,5 +179,59 @@ public class Rucksack {
    */
   public ArrayList<Item> getItemList() {
     return itemList;
+  }
+
+  private ArrayList<BacktrackingItem> backtrackingItemList = new ArrayList<>();
+  private ArrayList<Integer> inTrashAmountList = new ArrayList<>();
+
+  /**
+   * Turns level into backtracking level if needed.
+   */
+  public void turnIntoBacktracking() {
+    ArrayList<BacktrackingItem> temp = new ArrayList<>();
+    for (int i = 0; i < itemList.size(); i++) {
+      Item tempItem = itemList.get(i);
+      BacktrackingItem newItem = new BacktrackingItem(
+          tempItem.getValue(), tempItem.getWeight(), tempItem.getName(), tempItem.getImageIcon());
+      temp.add(newItem);
+      //set Item is in trash to 0
+      inTrashAmountList.add(0);
+    }
+    backtrackingItemList = temp;
+    //backtrackingItemList has to be sorted for BacktrackingNode
+    backtrackingItemList.sort(Comparator.comparingInt(
+        Item::getWeight).reversed());
+  }
+
+  public ArrayList<Integer> getInTrashAmountList() {
+    return inTrashAmountList;
+  }
+
+  public void setInTrashAmountList(final int index, final int newAmount) {
+    inTrashAmountList.set(index, newAmount);
+  }
+
+  public void setAvailableItemAmountList(final int index, final int newAmount) {
+    availableItemAmountList.set(index, newAmount);
+  }
+
+  public void setInRucksackAmountList(final int index, final int newAmount) {
+    inRucksackAmountList.set(index, newAmount);
+  }
+
+  public ArrayList<Integer> getInRucksackAmountList() {
+    return inRucksackAmountList;
+  }
+
+  public ArrayList<BacktrackingItem> getBacktrackingItemList() {
+    return backtrackingItemList;
+  }
+
+  public void setCurrentValue(int i) {
+    currentValue = i;
+  }
+
+  public void setCurrentWeight(int i) {
+    currentWeight = i;
   }
 }

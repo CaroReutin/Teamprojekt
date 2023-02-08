@@ -61,6 +61,7 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
    * bag to trash interaction has to be modeled with back
    * and then putInTrash.
    */
+  @Override
   public void addToTrash(final int itemButtonIndex, final Level level) {
     boolean fromRucksackToTrash = level.getBacktrackingItemList().get(itemButtonIndex)
         .getState().equals(BacktrackingItem.StateBacktracking.RUCKSACK);
@@ -82,7 +83,7 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       for (int i = 0; i < difference; i++) {
         this.back();
       }
-      currentPath += "0";
+      currentPath += "1";
       addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
           backtrackingTree.getCurrentNode().getCurrentWeight() + "/"
               + backtrackingTree.getCurrentNode().getCurrentValue());
@@ -165,13 +166,14 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
   /**
    * adds the path where the next heaviest item is added to the bag.
    */
+  @Override
   public void addToRucksack(final int itemButtonIndex, final Level level) {
     boolean fromTrashToRucksack =
         level.getBacktrackingItemList().get(itemButtonIndex).getState().equals(
             BacktrackingItem.StateBacktracking.TRASH);
     if (this.backtrackingTree.addToRucksack(
         this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
-      currentPath += "1";
+      currentPath += "0";
       addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
           backtrackingTree.getCurrentNode().getCurrentWeight() + "/"
               + backtrackingTree.getCurrentNode().getCurrentValue());

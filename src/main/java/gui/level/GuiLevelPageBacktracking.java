@@ -15,11 +15,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
+import solving.ButtonEventHandler;
+import solving.ButtonEventHandlerTable;
+
 
 /**
  * backtracking level pages.
  */
 public class GuiLevelPageBacktracking extends GuiLevelPage {
+  /**
+   * the Button Event Handler.
+   */
+  private final ButtonEventHandler buttonHandler;
   /**
    * the labels of the page.
    */
@@ -49,6 +56,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
+    buttonHandler = new ButtonEventHandlerTable(getLevel());
   }
 
   /**
@@ -94,10 +102,8 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           | Font.BOLD));
       // Laufvariable
       int finalI = i;
-      // State of current item
-      BacktrackingItem.StateBacktracking stateItem =
-          items.get(finalI).getState();
-      //Avaible Labels
+      BacktrackingItem item = items.get(i);
+      //Available Labels
       JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
       JLabel itemLabel = new JLabel(items.get(i)
           .getName() + " (" + items.get(i).getWeight() + "g, "
@@ -107,6 +113,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons rucksack
       JButton putToRucksack = new JButton("lege in den Rucksack");
+      putToRucksack.addActionListener(e -> handleButtons(finalI, true));
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
           .get(i).toString());
@@ -116,9 +123,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
-
+      putToTrash.addActionListener(e -> handleButtons(finalI, false));
       JButton currentRucksack = new JButton(items.get(i).getImageIcon());
-
+      currentRucksack.addActionListener(e -> handleButtons(finalI, false));
 
       panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
@@ -158,7 +165,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
     assert url != null;
-    // Panel were availble items are
+    // Panel were available items are
     JPanel rightPanel = new JPanel(new GridLayout(2, 1));
     JPanel avaiblePanel = new JPanel(new GridLayout(
         getLevel().getItemList().size() + 1, 2));
@@ -173,7 +180,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     // Rucksack Panel
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(170, 300,
+        rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
     JPanel leftPanel = new JPanel(new GridLayout(2, 1));
     JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0);
@@ -189,20 +196,12 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     this.escapeButton(centerPanel);
 
-    //add Counter
-    /*
-     JPanel counterPanel = new JPanel();
-     counterPanel.add(new JLabel("Schrittzähler: "));
-     counterPanel.add(new JLabel(Integer.toString(getLevel().getCounter())));
-     centerPanel.add(counterPanel);
-    */
-
     this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 
 
     //alles zusammenpuzzeln
-
     JButton treeButton = new JButton("Zeige Baum");
+    treeButton.addActionListener(e -> buttonHandler.show());
     centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
@@ -226,5 +225,19 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     currentWeightLabel.setText(
         getLevel().getCurrentWeight() + "/" + getLevel().getCapacity() + "g");
     currentValueLabel.setText((getLevel().getCurrentValue() + "€"));
+  }
+
+  private void handleButtons(final int index,
+                             final boolean toRucksack) {
+    if (toRucksack) {
+      buttonHandler.addToRucksack(index, getLevel());
+      updateLabel(index);
+    } else {
+      buttonHandler.addToTrash(index, getLevel());
+      for (int i = index; i < getLevel()
+          .getBacktrackingItemList().size(); i++) {
+        updateLabel(i);
+      }
+    }
   }
 }
