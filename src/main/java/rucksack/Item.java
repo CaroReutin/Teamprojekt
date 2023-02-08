@@ -135,9 +135,4 @@ public class Item implements Serializable {
         .getResource("/stern.png")));
   }
 
-  public void setImageIcon(ImageIcon imageIcon) {
-    this.imageIcon = imageIcon;
-  }
-
-
 }
