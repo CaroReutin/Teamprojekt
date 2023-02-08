@@ -102,6 +102,7 @@ public class Level implements Serializable {
     this.robber = null;
   }
 
+
   /**
    * NOTE: this does not return the items still available in the level
    * (i.e. the ones not in the Backpack)

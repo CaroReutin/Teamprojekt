@@ -113,7 +113,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       //buttons rucksack
       JButton putToRucksack = new JButton("lege in den Rucksack");
       putToRucksack.addActionListener(e -> {
-        getLevel().setCounter(getLevel().getCounter() + 1);
         backtrackingTree.addToRucksack(item);
         updateLabel(finalI);
       });
@@ -127,12 +126,12 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
       putToTrash.addActionListener(e -> {
-        getLevel().setCounter(getLevel().getCounter() + 1);
         backtrackingTree.addToTrash(item);
         updateLabel(finalI);
       });
 
       JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+      int finalI1 = i;
       currentRucksack.addActionListener(e -> {
         if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
           return;
@@ -141,27 +140,27 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           getLevel().moveFromRucksack(finalI);
           updateLabel(finalI);
         }
-
+      });
 
       panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
-      panelAvaible.add(labels[i]);
-      JLabel itemControlLabelIcon = new JLabel(items.get(i).getImageIcon());
+      panelAvaible.add(labels[finalI1]);
+      JLabel itemControlLabelIcon = new JLabel(items.get(finalI1).getImageIcon());
       JLabel itemControlLabel =
-          new JLabel(items.get(i).getName() + " ("
-              + items.get(i).getWeight() + "g, "
-              + items.get(i).getValue() + "€)");
+          new JLabel(items.get(finalI1).getName() + " ("
+              + items.get(finalI1).getWeight() + "g, "
+              + items.get(finalI1).getValue() + "€)");
       controlPannel.add(itemControlLabelIcon);
       controlPannel.add(itemControlLabel);
       controlPannel.add(putToRucksack);
       controlPannel.add(putToTrash);
 
-      JButton currentTrash = new JButton(items.get(i).getImageIcon());
+      JButton currentTrash = new JButton(items.get(finalI1).getImageIcon());
       pannelTrash.add(currentTrash);
-      pannelTrash.add(trashLabels[i]);
+      pannelTrash.add(trashLabels[finalI1]);
 
       panelRucksack.add(currentRucksack);
-      panelRucksack.add(rucksackLabels[i]);
+      panelRucksack.add(rucksackLabels[finalI1]);
       panelRucksack.add(currentWeightLabel);
       panelRucksack.add(currentValueLabel);
 
