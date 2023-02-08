@@ -2,13 +2,17 @@ package rucksack;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
+import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * The class that holds the level information.
  */
 @XmlRootElement
+@XmlSeeAlso(Item.class)
 public class Level implements Serializable {
   public void setCurrentValue(final int i) {
     this.myRucksack.setCurrentValue(i);
@@ -16,6 +20,13 @@ public class Level implements Serializable {
 
   public void setCurrentWeight(final int i) {
     this.myRucksack.setCurrentWeight(i);
+  }
+
+  public void setItemIcon(int i, ImageIcon imageIcon) {
+    Item oldItem = this.itemList.get(i);
+    this.itemList.set(i,
+        new Item(oldItem.getValue(), oldItem.getWeight(),
+            oldItem.getName(), imageIcon));
   }
 
   /**
