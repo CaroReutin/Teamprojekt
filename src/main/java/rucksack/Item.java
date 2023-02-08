@@ -27,7 +27,7 @@ public class Item implements Serializable {
   @XmlElement
   private final String name;
 
-  private final ImageIcon imageIcon;
+  private ImageIcon imageIcon;
 
   /**
    * Instantiates a new Item.
@@ -134,4 +134,5 @@ public class Item implements Serializable {
     return new ImageIcon(Objects.requireNonNull(getClass()
         .getResource("/stern.png")));
   }
+
 }
