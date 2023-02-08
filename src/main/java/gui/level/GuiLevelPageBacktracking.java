@@ -103,7 +103,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       // Laufvariable
       int finalI = i;
       BacktrackingItem item = items.get(i);
-      //Avaible Labels
+      //Available Labels
       JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
       JLabel itemLabel = new JLabel(items.get(i)
           .getName() + " (" + items.get(i).getWeight() + "g, "
@@ -113,9 +113,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons rucksack
       JButton putToRucksack = new JButton("lege in den Rucksack");
-      putToRucksack.addActionListener(e -> {
-        handleButtons(finalI, true);
-      });
+      putToRucksack.addActionListener(e -> handleButtons(finalI, true));
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
           .get(i).toString());
@@ -125,13 +123,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
-      putToTrash.addActionListener(e -> {
-        handleButtons(finalI, false);
-      });
-      JButton currentRucksack = new JButton(items.get(i).getName());
-      currentRucksack.addActionListener(e -> {
-        handleButtons(finalI, false);
-      });
+      putToTrash.addActionListener(e -> handleButtons(finalI, false));
+      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+      currentRucksack.addActionListener(e -> handleButtons(finalI, false));
 
       panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
@@ -171,7 +165,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
     assert url != null;
-    // Panel were availble items are
+    // Panel were available items are
     JPanel rightPanel = new JPanel(new GridLayout(2, 1));
     JPanel avaiblePanel = new JPanel(new GridLayout(
         getLevel().getItemList().size() + 1, 2));
@@ -206,9 +200,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
 
     //alles zusammenpuzzeln
-
     JButton treeButton = new JButton("Zeige Baum");
-    //Todo add actionlistener treebutton
     treeButton.addActionListener(e -> buttonHandler.show());
     centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);
