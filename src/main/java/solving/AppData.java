@@ -181,13 +181,13 @@ public final class AppData {
         Level level = (Level) marsh.unmarshal(levelFile);
         level.turnIntoBacktracking();
         level.resetLevel();
-        for (int i = 0; i < level.getItemList().size(); i++) {
+        /*for (int i = 0; i < level.getItemList().size(); i++) {
           File picture = new File(destDir + "/picture" + i + ".png");
           if (picture.exists()) {
             level.setItemIcon(i, new ImageIcon(new ImageIcon(picture.getAbsolutePath())
               .getImage().getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
           }
-        }
+        }*/
         return level;
       }
 
