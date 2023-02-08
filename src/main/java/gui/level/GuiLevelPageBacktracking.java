@@ -15,10 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
-
-import backtrackingtree.BacktrackingNode;
 import backtrackingtree.BacktrackingTree;
-import rucksack.Item;
 
 
 /**
@@ -131,7 +128,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       });
 
       JButton currentRucksack = new JButton(items.get(i).getImageIcon());
-      int finalI1 = i;
       currentRucksack.addActionListener(e -> {
         if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
           return;
@@ -144,23 +140,23 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
-      panelAvaible.add(labels[finalI1]);
-      JLabel itemControlLabelIcon = new JLabel(items.get(finalI1).getImageIcon());
+      panelAvaible.add(labels[i]);
+      JLabel itemControlLabelIcon = new JLabel(items.get(i).getImageIcon());
       JLabel itemControlLabel =
-          new JLabel(items.get(finalI1).getName() + " ("
-              + items.get(finalI1).getWeight() + "g, "
-              + items.get(finalI1).getValue() + "€)");
+          new JLabel(items.get(i).getName() + " ("
+              + items.get(i).getWeight() + "g, "
+              + items.get(i).getValue() + "€)");
       controlPannel.add(itemControlLabelIcon);
       controlPannel.add(itemControlLabel);
       controlPannel.add(putToRucksack);
       controlPannel.add(putToTrash);
 
-      JButton currentTrash = new JButton(items.get(finalI1).getImageIcon());
+      JButton currentTrash = new JButton(items.get(i).getImageIcon());
       pannelTrash.add(currentTrash);
-      pannelTrash.add(trashLabels[finalI1]);
+      pannelTrash.add(trashLabels[i]);
 
       panelRucksack.add(currentRucksack);
-      panelRucksack.add(rucksackLabels[finalI1]);
+      panelRucksack.add(rucksackLabels[i]);
       panelRucksack.add(currentWeightLabel);
       panelRucksack.add(currentValueLabel);
 
@@ -210,14 +206,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //Panel where escape-Button is
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     this.escapeButton(centerPanel);
-
-    //add Counter
-    /*
-     JPanel counterPanel = new JPanel();
-     counterPanel.add(new JLabel("Schrittzähler: "));
-     counterPanel.add(new JLabel(Integer.toString(getLevel().getCounter())));
-     centerPanel.add(counterPanel);
-    */
 
     this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 
