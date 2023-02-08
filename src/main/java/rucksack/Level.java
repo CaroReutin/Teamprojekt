@@ -46,7 +46,7 @@ public class Level implements Serializable {
   /**
    * the level index.
    */
-  private final int levelindex;
+  //private final int levelindex;
   /**
    * the rucksack of this level
    */
@@ -68,7 +68,7 @@ public class Level implements Serializable {
                final ArrayList<Integer> myItemAmountList,
                final int levelIndex, final int myCapacity) {
     this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
-    this.levelindex = levelIndex;
+    //this.levelindex = levelIndex;
     this.robber = Robber.DR_META;
   }
 
@@ -89,7 +89,7 @@ public class Level implements Serializable {
                final Robber myRobber, final int levelIndex,
                final int myCapacity) {
     this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
-    this.levelindex = levelIndex;
+    //this.levelindex = levelIndex;
     this.robber = myRobber;
   }
 
@@ -98,7 +98,7 @@ public class Level implements Serializable {
    */
   private Level() {
     this.myRucksack = new Rucksack(new ArrayList<>(), new ArrayList<>(), -1);
-    this.levelindex = -1;
+    //this.levelindex = -1;
     this.robber = null;
   }
 
@@ -156,9 +156,9 @@ public class Level implements Serializable {
    *
    * @return the level number
    */
-  public int getLevelNumber() {
+  /*public int getLevelNumber() {
     return this.levelindex;
-  }
+  }*/
 
   /**
    * Move to rucksack.

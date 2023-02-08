@@ -40,6 +40,10 @@ public class GuiManager {
    */
   private static JFrame frame;
 
+
+
+  public static int NumberLevel;
+
   /**
    * Opens the Leveleditor.
    */
@@ -48,6 +52,7 @@ public class GuiManager {
     frame.setTitle("Level-editor");
     paint();
   }
+
 
   /**
    * Opens the main Menu.
@@ -122,11 +127,10 @@ public class GuiManager {
    *
    * @param levelPage the GUILevel page of the level that should be opened.
    */
-  public static void openLevel(final GuiLevelPage levelPage) {
+  public static void openLevel(final GuiLevelPage levelPage, final int levelNumber) {
     frame.setContentPane(levelPage.getPane());
     final int lastGreedyNumber = 7;
     String title = "Level ";
-    int levelNumber = levelPage.getLevelNumber();
     if (levelNumber > lastGreedyNumber) {
       title = "Backtracking-" + title + (levelNumber - lastGreedyNumber);
     } else if (levelNumber >= 1) {
@@ -136,8 +140,14 @@ public class GuiManager {
     } else {
       title = "Benutzerdefiniertes " + title;
     }
+    NumberLevel = levelNumber;
     frame.setTitle(title);
     paint();
+
+  }
+
+  public static int getNumberLevel() {
+    return NumberLevel;
   }
 
   /**
