@@ -19,6 +19,8 @@ import solving.AppData;
  * The class GUIOptionsPage holds the pane of the optionspage.
  */
 public class GuiOptionsPage {
+  public static boolean backtrackingTipsAllowed = false;
+  public static boolean greedyTipsAllowed = false;
   /**
    * the number of rows on the pane.
    */
@@ -44,10 +46,18 @@ public class GuiOptionsPage {
   private static void confirmPassword(final String pw, final Container parent) {
     if (pw.matches(AppData.getPassword(0))) {
       JOptionPane.showMessageDialog(parent,
-          "Hinweise sind nun freigeschalten.",
+          "Hinweise für Greedy-Level sind nun freigeschalten.",
           "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-
-      //Level.tipsAllowed(true);
+      GuiOptionsPage.greedyTipsAllowed = true;
+    } else if (pw.matches(AppData.getPassword(1))) {
+      JOptionPane.showMessageDialog(parent,
+          "Hinweise für Backtracking-Level sind nun freigeschalten.",
+          "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+      GuiOptionsPage.backtrackingTipsAllowed = true;
+    } else {
+      JOptionPane.showMessageDialog(parent,
+          "Das eingegebene Passwort war nicht korrekt.",
+          "Falsches Passwort", JOptionPane.INFORMATION_MESSAGE);
     }
   }
 
@@ -65,10 +75,10 @@ public class GuiOptionsPage {
 
     JFormattedTextField passwordInput = new JFormattedTextField("");
     passwordInput.setPreferredSize(
-      new Dimension(LENGTH_OF_FIELD, HIGHT_OF_FIELD));
+        new Dimension(LENGTH_OF_FIELD, HIGHT_OF_FIELD));
     GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
         .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-         "callConfirmPassword");
+            "callConfirmPassword");
     GuiManager.getRootPane().getActionMap()
         .put("callConfirmPassword", new AbstractAction() {
           @Override
@@ -94,7 +104,7 @@ public class GuiOptionsPage {
     backPanel.add(back);
     back.addActionListener(e -> {
       GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+          .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
       GuiManager.openMainMenu();
     });
 
