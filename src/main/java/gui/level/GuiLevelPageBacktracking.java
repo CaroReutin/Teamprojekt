@@ -258,14 +258,26 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
         solution.add(getLevel().getItemList().get(i));
       }
     }
+    String res = "";
     SolverGreedy.sortLikeGreedy(solution);
     if (this.getLevel().getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
       ArrayList<Item> rightSolution = s.solveAlgorithm(this.getLevel());
       if (solution.equals(SolverGreedy.sortLikeGreedy(rightSolution))) {
-        return "Es wurde die bestmögliche Lösung gefunden.";
+        res += "Es wurde die bestmögliche Lösung gefunden.";
       } else {
-        return "Das geht noch besser.";
+        res += "Das geht noch besser.";
       }
+      boolean hasExploredEverything = true;
+      for (int i = 0; i < getLevel().getBacktrackingItemList().size(); i++) {
+        if (getLevel().getItemAmountInRucksack(i) != 0
+            || getLevel().getItemAmountAvailable(i) != 0) {
+          hasExploredEverything = false;
+        }
+      }
+      if (!hasExploredEverything) {
+        res += "\nAber es gibt noch mehr mögliche Kombinationen.";
+      }
+      return res;
     } else {
       return "Das solltest du nicht sehen können, es lief etwas schief.";
     }
