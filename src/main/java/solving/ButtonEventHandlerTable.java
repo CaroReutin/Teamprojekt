@@ -2,6 +2,9 @@ package solving;
 
 import backtrackingtree.BacktrackingTree;
 import betatree.Tree;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import rucksack.BacktrackingItem;
@@ -85,8 +88,35 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       }
       currentPath += "1";
       ImageIcon crossedOut = backtrackingTree.getCurrentNode().getItem().getImageIcon();
-      // Not yet crossed out
-      addNode(crossedOut,
+      BufferedImage crossedOutBuffered = new BufferedImage(
+          crossedOut.getIconWidth(),
+          crossedOut.getIconHeight(),
+          BufferedImage.TYPE_INT_RGB);
+      Graphics g = crossedOutBuffered.createGraphics();
+      crossedOut.paintIcon(null, g, 0, 0);
+      g.dispose();
+      ImageIcon not = new ImageIcon("src/main/resources/icons/Not.png");
+      not = new ImageIcon(not.getImage()
+          .getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
+      BufferedImage notBuffered = new BufferedImage(
+          not.getIconWidth(),
+          not.getIconHeight(),
+          BufferedImage.TYPE_INT_RGB);
+      Graphics g2 = notBuffered.createGraphics();
+      not.paintIcon(null, g2, 0, 0);
+      g2.dispose();
+      for (int y = 0; y < crossedOutBuffered.getHeight(); y++) {
+        for (int x = 0; x < crossedOutBuffered.getWidth(); x++) {
+          int clr;
+          if (notBuffered.getRGB(x, y) == -16777216) {
+            clr = crossedOutBuffered.getRGB(x, y);
+          } else {
+            clr = notBuffered.getRGB(x, y);
+          }
+          crossedOutBuffered.setRGB(x, y, clr);
+        }
+      }
+      addNode(new ImageIcon(crossedOutBuffered),
           backtrackingTree.getCurrentNode().getCurrentWeight() + "/"
               + backtrackingTree.getCurrentNode().getCurrentValue());
       if (fromRucksackToTrash) {
