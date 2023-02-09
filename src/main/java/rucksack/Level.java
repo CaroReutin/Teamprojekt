@@ -2,13 +2,18 @@ package rucksack;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import java.util.Comparator;
+import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * The class that holds the level information.
  */
 @XmlRootElement
+@XmlSeeAlso(Item.class)
 public class Level implements Serializable {
   public void setCurrentValue(final int i) {
     this.myRucksack.setCurrentValue(i);
@@ -16,6 +21,13 @@ public class Level implements Serializable {
 
   public void setCurrentWeight(final int i) {
     this.myRucksack.setCurrentWeight(i);
+  }
+
+  public void setItemIcon(int i, ImageIcon imageIcon) {
+    Item oldItem = this.myRucksack.getItemList().get(i);
+    this.myRucksack.getItemList().set(i,
+      new Item(oldItem.getValue(), oldItem.getWeight(),
+        oldItem.getName(), imageIcon));
   }
 
   /**
@@ -43,10 +55,7 @@ public class Level implements Serializable {
    */
   @XmlElement
   private final Robber robber;
-  /**
-   * the level index.
-   */
-  private final int levelindex;
+
   /**
    * the rucksack of this level
    */
@@ -68,7 +77,6 @@ public class Level implements Serializable {
                final ArrayList<Integer> myItemAmountList,
                final int levelIndex, final int myCapacity) {
     this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
-    this.levelindex = levelIndex;
     this.robber = Robber.DR_META;
   }
 
@@ -89,7 +97,6 @@ public class Level implements Serializable {
                final Robber myRobber, final int levelIndex,
                final int myCapacity) {
     this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
-    this.levelindex = levelIndex;
     this.robber = myRobber;
   }
 
@@ -98,7 +105,6 @@ public class Level implements Serializable {
    */
   private Level() {
     this.myRucksack = new Rucksack(new ArrayList<>(), new ArrayList<>(), -1);
-    this.levelindex = -1;
     this.robber = null;
   }
 
@@ -148,15 +154,6 @@ public class Level implements Serializable {
    */
   public void resetLevel() {
     myRucksack.reset();
-  }
-
-  /**
-   * Gets level number.
-   *
-   * @return the level number
-   */
-  public int getLevelNumber() {
-    return this.levelindex;
   }
 
   /**

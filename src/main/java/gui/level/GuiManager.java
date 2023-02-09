@@ -1,6 +1,7 @@
 
 package gui.level;
 
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -40,6 +41,10 @@ public class GuiManager {
    */
   private static JFrame frame;
 
+
+
+  public static int NumberLevel;
+
   /**
    * Opens the Leveleditor.
    */
@@ -49,6 +54,7 @@ public class GuiManager {
     paint();
   }
 
+
   /**
    * Opens the main Menu.
    */
@@ -57,6 +63,7 @@ public class GuiManager {
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setTitle("Optimal Heist");
     frame.setSize(1000, 750);
+    frame.setMinimumSize(new Dimension(700, 500));
     frame.setLocationRelativeTo(null);
     frame.setDropTarget(new DropTarget() {
       public synchronized void drop(final DropTargetDropEvent evt) {
@@ -122,11 +129,11 @@ public class GuiManager {
    *
    * @param levelPage the GUILevel page of the level that should be opened.
    */
-  public static void openLevel(final GuiLevelPage levelPage) {
+  public static void openLevel(final GuiLevelPage levelPage, final int levelNumber) {
+    NumberLevel = levelNumber;
     frame.setContentPane(levelPage.getPane());
     final int lastGreedyNumber = 7;
     String title = "Level ";
-    int levelNumber = levelPage.getLevelNumber();
     if (levelNumber > lastGreedyNumber) {
       title = "Backtracking-" + title + (levelNumber - lastGreedyNumber);
     } else if (levelNumber >= 1) {
@@ -138,6 +145,11 @@ public class GuiManager {
     }
     frame.setTitle(title);
     paint();
+
+  }
+
+  public static int getNumberLevel() {
+    return NumberLevel;
   }
 
   /**
