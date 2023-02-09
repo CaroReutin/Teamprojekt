@@ -110,7 +110,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       itemLabel.setBackground(Color.white);
 
       //buttons rucksack
-      JButton putToRucksack = new JButton("lege in den Rucksack");
+      JButton putToRucksack = new JButton("mitnehmen");
       putToRucksack.setFont(smallFont);
       putToRucksack.addActionListener(e -> handleButtons(finalI, true));
 
@@ -121,7 +121,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       trashLabels[i].setFont(mediumFont);
 
       //buttons trash
-      JButton putToTrash = new JButton("lege in den Müll");
+      JButton putToTrash = new JButton("wegwerfen");
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
       JButton currentRucksack = new JButton(new ImageIcon(scaledIcon));
@@ -160,6 +160,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    */
   @Override
   public Container getPane() {
+    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
     Container pane = new Container();
     pane.setLayout(new GridLayout(1, 3));
 
@@ -170,10 +171,14 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     JPanel rightPanel = new JPanel(new GridLayout(2, 1));
     JPanel avaiblePanel = new JPanel(new GridLayout(
         getLevel().getItemList().size() + 1, 2));
-    avaiblePanel.add(new JLabel("Verfügbar:"));
+    JLabel available = new JLabel("Verfügbar:");
+    available.setFont(mediumFont);
+    avaiblePanel.add(available);
     // Panel with buttons were you can add items to rucksack or trash
     JPanel controlPannel = new JPanel();
-    controlPannel.add(new JLabel("Kontrollfläche: "));
+    JLabel control = new JLabel("Kontrollfläche: ");
+    control.setFont(mediumFont);
+    controlPannel.add(control);
     rightPanel.add(avaiblePanel, BorderLayout.NORTH);
     rightPanel.add(controlPannel, BorderLayout.SOUTH);
 
@@ -185,7 +190,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
             java.awt.Image.SCALE_SMOOTH);
     JPanel leftPanel = new JPanel(new GridLayout(2, 1));
     JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0);
-    rucksackPanel.add(new JLabel("Rucksack:"));
+    JLabel rucksack = new JLabel("Rucksack:");
+    rucksack.setFont(mediumFont);
+    rucksackPanel.add(rucksack);
 
     //Trash Panel
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
@@ -194,7 +201,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       Image.SCALE_SMOOTH);
     JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20);
 
-    trashPanel.add(new JLabel("Müll:"));
+    JLabel trash = new JLabel("Müll:");
+    trash.setFont(mediumFont);
+    trashPanel.add(trash);
     leftPanel.add(rucksackPanel, BorderLayout.NORTH);
     leftPanel.add(trashPanel, BorderLayout.SOUTH);
 
@@ -206,6 +215,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
     //alles zusammenpuzzeln
     JButton treeButton = new JButton("Zeige Baum");
+    treeButton.setFont(mediumFont);
     treeButton.addActionListener(e -> buttonHandler.show());
     centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);

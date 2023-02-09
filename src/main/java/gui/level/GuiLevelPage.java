@@ -67,7 +67,9 @@ public class GuiLevelPage {
    * @param centerPanel the Panel that the escapeButton should be on.
    */
   public void escapeButton(final Container centerPanel) {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     JButton flucht = new JButton("Flucht");
+    flucht.setFont(font);
     int levelNumber = GuiManager.NumberLevel;
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
