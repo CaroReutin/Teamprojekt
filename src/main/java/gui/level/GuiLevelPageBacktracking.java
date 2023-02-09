@@ -200,7 +200,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //Panel where escape-Button is
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     this.escapeButton(centerPanel);
-
     this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 
 
