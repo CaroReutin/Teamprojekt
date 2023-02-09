@@ -23,12 +23,12 @@ public class Level implements Serializable {
     this.myRucksack.setCurrentWeight(i);
   }
 
-  /* void setItemIcon(int i, ImageIcon imageIcon) {
+  public void setItemIcon(int i, ImageIcon imageIcon) {
     Item oldItem = this.itemList.get(i);
     this.itemList.set(i,
       new Item(oldItem.getValue(), oldItem.getWeight(),
         oldItem.getName(), imageIcon));
-  }*/
+  }
 
   /**
    * Greedy -> Gieriger Ganove
@@ -54,18 +54,15 @@ public class Level implements Serializable {
   /**
    * the list with all items.
    */
-  /*@XmlElement
-  private final ArrayList<Item> itemList;*/
+  @XmlElement
+  private final ArrayList<Item> itemList;
 
   /**
    * the current robber.
    */
   @XmlElement
   private final Robber robber;
-  /**
-   * the level index.
-   */
-  //private final int levelindex;
+
   /**
    * the rucksack of this level
    */
@@ -87,7 +84,6 @@ public class Level implements Serializable {
                final ArrayList<Integer> myItemAmountList,
                final int levelIndex, final int myCapacity) {
     this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
-    //this.levelindex = levelIndex;
     this.robber = Robber.DR_META;
   }
 
@@ -108,11 +104,7 @@ public class Level implements Serializable {
                final Robber myRobber, final int levelIndex,
                final int myCapacity) {
     this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
-    //this.levelindex = levelIndex;
     this.robber = myRobber;
-    //todo aus placeIcon Branch
-    //currentWeight = 0;
-    //currentValue = 0;
   }
 
   /**
@@ -120,11 +112,7 @@ public class Level implements Serializable {
    */
   private Level() {
     this.myRucksack = new Rucksack(new ArrayList<>(), new ArrayList<>(), -1);
-    //this.levelindex = -1;
     this.robber = null;
-    //todo aus placeIcon Branch
-    //currentWeight = 0;
-    //currentValue = 0;
   }
 
   /**
@@ -174,15 +162,6 @@ public class Level implements Serializable {
   public void resetLevel() {
     myRucksack.reset();
   }
-
-  /**
-   * Gets level number.
-   *
-   * @return the level number
-   */
-  /*public int getLevelNumber() {
-    return this.levelindex;
-  }*/
 
   /**
    * Move to rucksack.

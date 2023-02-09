@@ -132,7 +132,7 @@ public class Item implements Serializable {
 
   public ImageIcon getIcon() {
     return new ImageIcon(Objects.requireNonNull(getClass()
-        .getResource("/stern.png")));
+        .getResource("icons/DefaultBox.png")));
   }
 
 }
