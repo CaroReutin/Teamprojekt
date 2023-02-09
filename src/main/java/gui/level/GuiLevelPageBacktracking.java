@@ -98,10 +98,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //Available Labels
       ImageIcon imageIcon = items.get(i).getImageIcon();
-      Image scaledIcon =
-        imageIcon.getImage().getScaledInstance(
-          30, 30, java.awt.Image.SCALE_SMOOTH);
-      JLabel itemIcon = new JLabel(new ImageIcon(scaledIcon));
+      JLabel itemIcon = new JLabel(imageIcon);
 
       JLabel itemLabel = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€), ");
@@ -124,13 +121,13 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       JButton putToTrash = new JButton("wegwerfen");
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
-      JButton currentRucksack = new JButton(new ImageIcon(scaledIcon));
+      JButton currentRucksack = new JButton(imageIcon);
       currentRucksack.addActionListener(e -> handleButtons(finalI, false));
 
       panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
       panelAvaible.add(labels[i]);
-      JLabel itemControlLabelIcon = new JLabel(new ImageIcon(scaledIcon));
+      JLabel itemControlLabelIcon = new JLabel(imageIcon);
       JLabel itemControlLabel =
           new JLabel(" ("
               + items.get(i).getWeight() + "g, "
@@ -141,7 +138,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       controlPannel.add(putToRucksack);
       controlPannel.add(putToTrash);
 
-      JButton currentTrash = new JButton(new ImageIcon(scaledIcon));
+      JButton currentTrash = new JButton(imageIcon);
       pannelTrash.add(currentTrash);
       pannelTrash.add(trashLabels[i]);
 

@@ -200,10 +200,7 @@ public class GuiLevelPage {
       int finalI = i;
       JPanel itemPanel = new JPanel();
       ImageIcon imageIcon = items.get(i).getImageIcon();
-      Image scaledIcon =
-        imageIcon.getImage().getScaledInstance(
-          30, 30, java.awt.Image.SCALE_SMOOTH);
-      JButton itemIcon = new JButton(new ImageIcon(scaledIcon));
+      JButton itemIcon = new JButton(imageIcon);
       itemPanel.add(itemIcon);
       JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
@@ -218,7 +215,7 @@ public class GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksack = new JButton(new ImageIcon(scaledIcon));
+      JButton currentRucksack = new JButton(imageIcon);
       currentRucksack.addActionListener(e -> {
         if (level.getItemAmountInRucksack(finalI) <= 0) {
           return;
