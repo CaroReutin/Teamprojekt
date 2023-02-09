@@ -1,11 +1,6 @@
 package gui.level;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -274,7 +269,7 @@ public class GuiLevelPage {
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
-            200, 350, java.awt.Image.SCALE_SMOOTH);
+            300, 500, java.awt.Image.SCALE_SMOOTH);
 
 
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);

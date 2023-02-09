@@ -185,9 +185,14 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     JPanel leftPanel = new JPanel(new GridLayout(2, 1));
     JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0);
     rucksackPanel.add(new JLabel("Rucksack:"));
-    JPanel trashPanel = new JPanel();
 
     //Trash Panel
+    URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
+    ImageIcon trashImage = new ImageIcon(urlTrash);
+    Image scaledTrashImage = trashImage.getImage().getScaledInstance(200, 350,
+      Image.SCALE_SMOOTH);
+    JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20);
+
     trashPanel.add(new JLabel("Müll:"));
     leftPanel.add(rucksackPanel, BorderLayout.NORTH);
     leftPanel.add(trashPanel, BorderLayout.SOUTH);
