@@ -3,8 +3,6 @@ package rucksack;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import java.util.Comparator;
-import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -28,6 +26,10 @@ public class Level implements Serializable {
     this.myRucksack.getItemList().set(i,
       new Item(oldItem.getValue(), oldItem.getWeight(),
         oldItem.getName(), imageIcon));
+  }
+
+  public ArrayList<Integer> getItemAmountInRucksackList() {
+    return this.myRucksack.getInRucksackAmountList();
   }
 
   /**

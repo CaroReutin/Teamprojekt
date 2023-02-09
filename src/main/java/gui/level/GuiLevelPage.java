@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import rucksack.Item;
 import rucksack.Level;
+import solving.SolverBacktracking;
+import solving.SolverGreedy;
 import solving.UserDataManager;
 
 
@@ -77,8 +79,9 @@ public class GuiLevelPage {
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
-            "Hier steht Tips / Feedback",
+            message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
                 .INFORMATION_MESSAGE, null, buttons,
             buttons[0]);
@@ -103,15 +106,16 @@ public class GuiLevelPage {
       flucht.addActionListener(e -> {
         if (levelNumber >= 0) {
           if (level.getCurrentValue() > UserDataManager.getScore(
-            GuiManager.NumberLevel)) {
+              GuiManager.NumberLevel)) {
             UserDataManager.newHighScore(GuiManager.NumberLevel,
                 level.getCurrentValue());
             UserDataManager.save();
           }
         }
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
-            "Hier steht Tips / Feedback",
+            message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
                 .INFORMATION_MESSAGE, null, buttons,
             buttons[0]);
@@ -140,8 +144,9 @@ public class GuiLevelPage {
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
-            "Hier steht Tips / Feedback",
+            message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
                 .INFORMATION_MESSAGE, null, buttons,
             buttons[0]);
@@ -170,6 +175,43 @@ public class GuiLevelPage {
       });
     }
     centerPanel.add(flucht);
+  }
+
+  private String generateEscapeMessage() {
+    SolverBacktracking s = new SolverBacktracking();
+    SolverGreedy sg = new SolverGreedy();
+    ArrayList<Item> solution = new ArrayList<>();
+    for (int i = 0; i < level.getItemList().size(); i++) {
+      for (int j = 0; j < level.getItemAmountInRucksack(i); j++) {
+        solution.add(level.getItemList().get(i));
+      }
+    }
+    SolverGreedy.sortLikeGreedy(solution);
+    if (this.level.getRobber().equals(Level.Robber.DR_META)) {
+      if (solution.equals(SolverGreedy.sortLikeGreedy(s.solveAlgorithm(this.level)))) {
+        return "Es wurde die bestmögliche Lösung gefunden.";
+      } else {
+        return "Es gibt noch bessere lösungen.";
+      }
+    } else if (this.level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
+      if (solution.equals(SolverGreedy.sortLikeGreedy(sg.solveAlgorithm(this.level)))) {
+        return "Der Gierige Ganove hat die gleiche Lösung wie du.";
+      } else if (solution.equals(SolverGreedy.sortLikeGreedy(s.solveAlgorithm(this.level)))) {
+        return "Es wurde die bestmögliche Lösung gefunden, jedoch nicht die Lösung, die der Gierige Ganove hat.";
+      } else {
+        return "Das geht noch besser.";
+      }
+    } else if (this.level.getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
+      // TODO
+      // solution = this.level.getTreeSolution();
+      if (solution.equals(SolverGreedy.sortLikeGreedy(s.solveAlgorithm(this.level)))) {
+        return "Es wurde die bestmögliche Lösung gefunden.";
+      } else {
+        return "Es gibt noch bessere lösungen.";
+      }
+    } else {
+      return "Das solltest du nicht sehen können, es lief etwas schief.";
+    }
   }
 
   /**
