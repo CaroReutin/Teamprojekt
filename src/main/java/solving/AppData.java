@@ -185,7 +185,7 @@ public final class AppData {
           File picture = new File(destDir + "/picture" + i + ".png");
           if (picture.exists()) {
             level.setItemIcon(i, new ImageIcon(new ImageIcon(picture.getAbsolutePath())
-              .getImage().getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
+              .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
           }
         }
         return level;

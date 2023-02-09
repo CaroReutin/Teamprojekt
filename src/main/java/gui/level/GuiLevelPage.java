@@ -1,11 +1,6 @@
 package gui.level;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -72,7 +67,9 @@ public class GuiLevelPage {
    * @param centerPanel the Panel that the escapeButton should be on.
    */
   public void escapeButton(final Container centerPanel) {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     JButton flucht = new JButton("Flucht");
+    flucht.setFont(font);
     int levelNumber = GuiManager.NumberLevel;
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
@@ -182,17 +179,13 @@ public class GuiLevelPage {
    *                      the items IN the bag should go to.
    */
   public void itemButtons(final JPanel panelItems, final JPanel panelRucksack) {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
     currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
-    Font fontCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(
-        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel
-            .getStyle() | Font.BOLD));
+    currentWeightLabel.setFont(bigFont);
 
     currentValueLabel = new JLabel("0€");
-    Font fontCurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(
-        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel
-            .getStyle() | Font.BOLD));
+    currentValueLabel.setFont(bigFont);
 
     ArrayList<Item> items = level.getItemList();
     labels = new JLabel[items.size()];
@@ -200,20 +193,18 @@ public class GuiLevelPage {
     for (int i = 0; i < items.size(); i++) {
       labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
 
-      Font f = labels[i].getFont();
-      labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+      labels[i].setFont(font);
 
       rucksackLabels[i] = new JLabel("0");
-      Font fontRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fontRucksack.deriveFont(
-          fontRucksack.getStyle() | Font.BOLD));
+      rucksackLabels[i].setFont(font);
       int finalI = i;
       JPanel itemPanel = new JPanel();
-      JButton itemIcon = new JButton(items.get(i).getImageIcon());
+      ImageIcon imageIcon = items.get(i).getImageIcon();
+      JButton itemIcon = new JButton(imageIcon);
       itemPanel.add(itemIcon);
-      JLabel current = new JLabel(items.get(i).getName()
-          + " (" + items.get(i).getWeight() + "g, "
+      JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
+      current.setFont(font);
       itemIcon.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
@@ -224,7 +215,7 @@ public class GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+      JButton currentRucksack = new JButton(imageIcon);
       currentRucksack.addActionListener(e -> {
         if (level.getItemAmountInRucksack(finalI) <= 0) {
           return;
@@ -233,7 +224,6 @@ public class GuiLevelPage {
           level.moveFromRucksack(finalI);
           updateLabel(finalI);
         }
-
       });
       panelItems.add(current);
       panelItems.add(itemPanel);
@@ -274,14 +264,19 @@ public class GuiLevelPage {
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
-            200, 350, java.awt.Image.SCALE_SMOOTH);
-
-
+            300, 500, java.awt.Image.SCALE_SMOOTH);
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
+
+
+    //füge Räuber ein
+    URL urlRobber = getClass().getClassLoader().getResource("DiebRot.png");
+    ImageIcon robberImage = new ImageIcon(urlRobber);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(200, 350,
+      Image.SCALE_SMOOTH);
+    JPanel robberPanel = new JbackgroundPanel(scaledRobberImage, 0);
+
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JPanel rightPanel = new JPanel();
-    //JPanel rightPanel = new JPanel
-    // (new GridLayout(level.getItemList().size(), 1));
+    JPanel rightPanel = new JbackgroundPanel(scaledRobberImage, 0);
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
@@ -289,7 +284,6 @@ public class GuiLevelPage {
 
 
     //alles zusammenpuzzeln
-
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
     pane.add(rightPanel, BorderLayout.EAST);
