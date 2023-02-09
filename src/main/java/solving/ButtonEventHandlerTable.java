@@ -88,6 +88,10 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       }
       currentPath += "1";
       ImageIcon crossedOut = backtrackingTree.getCurrentNode().getItem().getImageIcon();
+      // TODO Benutzt ein ganz andere Bild
+      //crossedOut =
+      //    new ImageIcon(crossedOut.getImage().getScaledInstance(AppData.ICON_SIZE / 2, AppData
+      //        .ICON_SIZE / 2, Image.SCALE_SMOOTH));
       BufferedImage crossedOutBuffered = new BufferedImage(
           crossedOut.getIconWidth(),
           crossedOut.getIconHeight(),
@@ -98,6 +102,9 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       ImageIcon not = new ImageIcon("src/main/resources/icons/Not.png");
       not = new ImageIcon(not.getImage()
           .getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
+      // gehört zu dem obigen TODO
+      //not = new ImageIcon(not.getImage()
+      //    .getScaledInstance(AppData.ICON_SIZE / 2, AppData.ICON_SIZE / 2, Image.SCALE_SMOOTH));
       BufferedImage notBuffered = new BufferedImage(
           not.getIconWidth(),
           not.getIconHeight(),
