@@ -82,7 +82,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     currentValueLabel = new JLabel("0€");
     currentValueLabel.setFont(bigFont);
 
-    //getLevel().turnIntoBacktracking();
     ArrayList<BacktrackingItem> items = getLevel().getBacktrackingItemList();
     labels = new JLabel[items.size()];
     rucksackLabels = new JLabel[items.size()];
@@ -98,12 +97,16 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       int finalI = i;
 
       //Available Labels
-      JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
+      ImageIcon imageIcon = items.get(i).getImageIcon();
+      Image scaledIcon =
+        imageIcon.getImage().getScaledInstance(
+          30, 30, java.awt.Image.SCALE_SMOOTH);
+      JLabel itemIcon = new JLabel(new ImageIcon(scaledIcon));
+
       JLabel itemLabel = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€), ");
       itemLabel.setFont(smallFont);
 
-      //JLabel itemLabelAmount = new JLabel(labels[i].getText());
       itemLabel.setBackground(Color.white);
 
       //buttons rucksack
@@ -121,13 +124,13 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       JButton putToTrash = new JButton("lege in den Müll");
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
-      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+      JButton currentRucksack = new JButton(new ImageIcon(scaledIcon));
       currentRucksack.addActionListener(e -> handleButtons(finalI, false));
 
       panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
       panelAvaible.add(labels[i]);
-      JLabel itemControlLabelIcon = new JLabel(items.get(i).getImageIcon());
+      JLabel itemControlLabelIcon = new JLabel(new ImageIcon(scaledIcon));
       JLabel itemControlLabel =
           new JLabel(" ("
               + items.get(i).getWeight() + "g, "
@@ -138,7 +141,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       controlPannel.add(putToRucksack);
       controlPannel.add(putToTrash);
 
-      JButton currentTrash = new JButton(items.get(i).getImageIcon());
+      JButton currentTrash = new JButton(new ImageIcon(scaledIcon));
       pannelTrash.add(currentTrash);
       pannelTrash.add(trashLabels[i]);
 
