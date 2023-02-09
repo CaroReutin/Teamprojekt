@@ -178,12 +178,12 @@ public class GuiLevelPage {
    */
   public void itemButtons(final JPanel panelItems, final JPanel panelRucksack) {
     Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
-    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 40);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
     currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
     currentWeightLabel.setFont(bigFont);
 
     currentValueLabel = new JLabel("0€");
-    currentValueLabel.setFont(font);
+    currentValueLabel.setFont(bigFont);
 
     ArrayList<Item> items = level.getItemList();
     labels = new JLabel[items.size()];

@@ -73,17 +73,14 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public void itemButtons(final JPanel panelAvaible, final JPanel panelRucksack,
                           final JPanel pannelTrash,
                           final JPanel controlPannel) {
+    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
-    Font fontCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(
-        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle()
-            | Font.BOLD));
+    currentWeightLabel.setFont(bigFont);
 
     currentValueLabel = new JLabel("0€");
-    Font fontCurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(
-        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle()
-            | Font.BOLD));
+    currentValueLabel.setFont(bigFont);
 
     //getLevel().turnIntoBacktracking();
     ArrayList<BacktrackingItem> items = getLevel().getBacktrackingItemList();
@@ -92,37 +89,37 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     trashLabels = new JLabel[items.size()];
     for (int i = 0; i < items.size(); i++) {
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
-
-      Font f = labels[i].getFont();
-      labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+      labels[i].setFont(smallFont);
 
       rucksackLabels[i] = new JLabel("0");
-      Font fontRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fontRucksack.deriveFont(fontRucksack.getStyle()
-          | Font.BOLD));
+      rucksackLabels[i].setFont(smallFont);
+
       // Laufvariable
       int finalI = i;
-      BacktrackingItem item = items.get(i);
+
       //Available Labels
       JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
-      JLabel itemLabel = new JLabel(items.get(i)
-          .getName() + " (" + items.get(i).getWeight() + "g, "
-          + items.get(i).getValue() + "€), Anzahl: ");
+      JLabel itemLabel = new JLabel(" (" + items.get(i).getWeight() + "g, "
+          + items.get(i).getValue() + "€), ");
+      itemLabel.setFont(smallFont);
+
       //JLabel itemLabelAmount = new JLabel(labels[i].getText());
       itemLabel.setBackground(Color.white);
 
       //buttons rucksack
       JButton putToRucksack = new JButton("lege in den Rucksack");
+      putToRucksack.setFont(smallFont);
       putToRucksack.addActionListener(e -> handleButtons(finalI, true));
+
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
           .get(i).toString());
 
-      Font ft = trashLabels[i].getFont();
-      trashLabels[i].setFont(ft.deriveFont((f.getStyle() | Font.BOLD)));
+      trashLabels[i].setFont(mediumFont);
 
       //buttons trash
       JButton putToTrash = new JButton("lege in den Müll");
+      putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
       JButton currentRucksack = new JButton(items.get(i).getImageIcon());
       currentRucksack.addActionListener(e -> handleButtons(finalI, false));
@@ -132,9 +129,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       panelAvaible.add(labels[i]);
       JLabel itemControlLabelIcon = new JLabel(items.get(i).getImageIcon());
       JLabel itemControlLabel =
-          new JLabel(items.get(i).getName() + " ("
+          new JLabel(" ("
               + items.get(i).getWeight() + "g, "
               + items.get(i).getValue() + "€)");
+      itemControlLabel.setFont(smallFont);
       controlPannel.add(itemControlLabelIcon);
       controlPannel.add(itemControlLabel);
       controlPannel.add(putToRucksack);

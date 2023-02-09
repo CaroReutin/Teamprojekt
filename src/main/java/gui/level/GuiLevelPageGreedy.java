@@ -56,36 +56,28 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
   @Override
   public void itemButtons(final JPanel panelItems,
                           final JPanel panelRucksack) {
+    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
-    Font fontCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(
-        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle()
-            | Font.BOLD));
+    currentWeightLabel.setFont(bigFont);
 
     currentValueLabel = new JLabel("0€");
-    Font fontCurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(
-        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle()
-            | Font.BOLD));
+    currentValueLabel.setFont(bigFont);
 
     ArrayList<Item> items = getLevel().getItemList();
     labels = new JLabel[items.size()];
     rucksackLabels = new JLabel[items.size()];
     for (int i = 0; i < items.size(); i++) {
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
-
-      Font f = labels[i].getFont();
-      labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+      labels[i].setFont(smallFont);
 
       rucksackLabels[i] = new JLabel("0");
-      Font fontRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fontRucksack
-          .deriveFont(fontRucksack.getStyle() | Font.BOLD));
+      rucksackLabels[i].setFont(smallFont);
       int finalI = i;
       JButton currentIcon = new JButton(items.get(i).getImageIcon());
-      JLabel current = new JLabel(items.get(i)
-          .getName() + " (" + items.get(i).getWeight() + "g, "
+      JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
+      current.setFont(smallFont);
       currentIcon.addActionListener(e -> {
         if (getLevel().getItemAmountAvailable(finalI) <= 0) {
           return;
