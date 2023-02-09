@@ -177,7 +177,7 @@ public class GuiLevelPage {
     centerPanel.add(flucht);
   }
 
-  private String generateEscapeMessage() {
+  public String generateEscapeMessage() {
     SolverBacktracking s = new SolverBacktracking();
     SolverGreedy sg = new SolverGreedy();
     ArrayList<Item> solution = new ArrayList<>();
@@ -200,14 +200,6 @@ public class GuiLevelPage {
         return "Es wurde die bestmögliche Lösung gefunden, jedoch nicht die Lösung, die der Gierige Ganove hat.";
       } else {
         return "Das geht noch besser.";
-      }
-    } else if (this.level.getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
-      // TODO
-      // solution = this.level.getTreeSolution();
-      if (solution.equals(SolverGreedy.sortLikeGreedy(s.solveAlgorithm(this.level)))) {
-        return "Es wurde die bestmögliche Lösung gefunden.";
-      } else {
-        return "Es gibt noch bessere lösungen.";
       }
     } else {
       return "Das solltest du nicht sehen können, es lief etwas schief.";

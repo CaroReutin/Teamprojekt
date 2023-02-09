@@ -60,4 +60,9 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
   public void show() {
     tree.show();
   }
+
+  @Override
+  public String getSolution() {
+    return null;
+  }
 }

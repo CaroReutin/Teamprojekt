@@ -242,4 +242,9 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       this.tree.addNode(currentDepth, nextIndex, labelIcon, buttonText);
     }
   }
+
+  @Override
+  public String getSolution() {
+    return tree.getSolution();
+  }
 }

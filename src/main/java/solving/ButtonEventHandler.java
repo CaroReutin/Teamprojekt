@@ -18,4 +18,6 @@ public abstract class ButtonEventHandler {
   public abstract void addToTrash(int itemButtonIndex, Level level);
 
   public abstract void show();
+
+  public abstract String getSolution();
 }

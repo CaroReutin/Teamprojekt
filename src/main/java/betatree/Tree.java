@@ -12,7 +12,7 @@ import javax.swing.JLabel;
  * the Tree.
  */
 public class Tree {
-  private String solution = "";
+  private String solution = null;
   /**
    * the frame that shows the tree.
    */
@@ -154,6 +154,11 @@ public class Tree {
   }
 
   public String getSolution() {
+    if (solution == null){
+      return null;
+    }else if (solution.length() < buttons.size()){
+      return "0".repeat(buttons.size() - solution.length() - 1) + solution;
+    }
     return solution;
   }
 }
