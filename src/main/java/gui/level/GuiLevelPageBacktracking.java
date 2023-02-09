@@ -179,24 +179,31 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     rightPanel.add(avaiblePanel, BorderLayout.NORTH);
     rightPanel.add(controlPannel, BorderLayout.SOUTH);
 
-
     // Rucksack Panel
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
     JPanel leftPanel = new JPanel(new GridLayout(2, 1));
-    JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0);
+    JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     JLabel rucksack = new JLabel("Rucksack:");
     rucksack.setFont(mediumFont);
     rucksackPanel.add(rucksack);
+
+    //füge Räuber ein
+    URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
+    ImageIcon robberImage = new ImageIcon(urlRobber);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
+      Image.SCALE_SMOOTH);
+
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
 
     //Trash Panel
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
     ImageIcon trashImage = new ImageIcon(urlTrash);
     Image scaledTrashImage = trashImage.getImage().getScaledInstance(200, 350,
       Image.SCALE_SMOOTH);
-    JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20);
+    JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20, 0);
 
     JLabel trash = new JLabel("Müll:");
     trash.setFont(mediumFont);
@@ -205,7 +212,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     leftPanel.add(trashPanel, BorderLayout.SOUTH);
 
     //Panel where escape-Button is
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     this.escapeButton(centerPanel);
     this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 

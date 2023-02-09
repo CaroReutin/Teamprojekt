@@ -265,28 +265,30 @@ public class GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
             300, 500, java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
 
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebRot.png");
     ImageIcon robberImage = new ImageIcon(urlRobber);
-    Image scaledRobberImage = robberImage.getImage().getScaledInstance(200, 350,
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
       Image.SCALE_SMOOTH);
-    JPanel robberPanel = new JbackgroundPanel(scaledRobberImage, 0);
 
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JPanel rightPanel = new JbackgroundPanel(scaledRobberImage, 0);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
+    JPanel rightPanel = new JPanel();
+
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
     this.itemButtons(rightPanel, leftPanel);
 
+    JPanel emptyPanel = new JPanel();
 
     //alles zusammenpuzzeln
-    pane.add(leftPanel, BorderLayout.WEST);
-    pane.add(centerPanel, BorderLayout.CENTER);
-    pane.add(rightPanel, BorderLayout.EAST);
+    pane.add(leftPanel);
+    pane.add(centerPanel);
+    pane.add(rightPanel);
+
 
     return pane;
   }
