@@ -84,7 +84,9 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
         this.back();
       }
       currentPath += "1";
-      addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
+      ImageIcon crossedOut = backtrackingTree.getCurrentNode().getItem().getImageIcon();
+      // Not yet crossed out
+      addNode(crossedOut,
           backtrackingTree.getCurrentNode().getCurrentWeight() + "/"
               + backtrackingTree.getCurrentNode().getCurrentValue());
       if (fromRucksackToTrash) {
@@ -174,7 +176,7 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
     if (this.backtrackingTree.addToRucksack(
         this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
       currentPath += "0";
-      addNode(backtrackingTree.getCurrentNode().getItem().getIcon(),
+      addNode(backtrackingTree.getCurrentNode().getItem().getImageIcon(),
           backtrackingTree.getCurrentNode().getCurrentWeight() + "/"
               + backtrackingTree.getCurrentNode().getCurrentValue());
       if (fromTrashToRucksack) {
