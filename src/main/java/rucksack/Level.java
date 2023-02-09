@@ -24,8 +24,8 @@ public class Level implements Serializable {
   }
 
   public void setItemIcon(int i, ImageIcon imageIcon) {
-    Item oldItem = this.itemList.get(i);
-    this.itemList.set(i,
+    Item oldItem = this.myRucksack.getItemList().get(i);
+    this.myRucksack.getItemList().set(i,
       new Item(oldItem.getValue(), oldItem.getWeight(),
         oldItem.getName(), imageIcon));
   }
@@ -49,13 +49,6 @@ public class Level implements Serializable {
      */
     DR_META
   }
-
-
-  /**
-   * the list with all items.
-   */
-  @XmlElement
-  private final ArrayList<Item> itemList;
 
   /**
    * the current robber.
