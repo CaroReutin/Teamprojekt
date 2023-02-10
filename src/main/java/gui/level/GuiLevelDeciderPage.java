@@ -144,7 +144,7 @@ public class GuiLevelDeciderPage {
             .getLevelBacktracking(i - NUM_LEVEL_EIGHT));
         guiLevelButtons[i] = new JButton(Integer.toString(i - NUM_LEVEL_SIX));
       }
-      guiLevelButtons[i].setBackground(Color.cyan);
+      guiLevelButtons[i].setBackground(Color.LIGHT_GRAY);
       guiLevelButtons[i].setFont(fontButtons);
     }
 
@@ -232,7 +232,7 @@ public class GuiLevelDeciderPage {
 
     JButton backToFrontPage = new JButton("zurück");
     backToFrontPage.setFont(fontButtons);
-    backToFrontPage.setBackground(Color.cyan);
+    backToFrontPage.setBackground(Color.LIGHT_GRAY);
     backToFrontPage.addActionListener(e -> GuiManager.openMainMenu());
     JPanel backToFrontPagePanel = new JPanel();
     backToFrontPagePanel.add(backToFrontPage);
