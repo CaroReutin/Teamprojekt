@@ -208,7 +208,6 @@ public final class CustomLevelManager {
       if (levelName == null) {
         throw new IOException("Level not found");
       } else {
-        // TODO Sprint 4: Bilder in Level einfügen
         File levelFile = new File(destDir + "/" + levelName);
         JAXBContext jaxbContext = JAXBContext.newInstance(Level.class);
         Unmarshaller marsh = jaxbContext.createUnmarshaller();
