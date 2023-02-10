@@ -142,8 +142,6 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     JPanel rightPanel = new JPanel();
-    //JPanel rightPanel = new JPanel(new GridLayout
-    // (level.getItemList().size(), 1));
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
