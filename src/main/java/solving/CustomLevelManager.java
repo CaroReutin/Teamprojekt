@@ -39,7 +39,7 @@ public final class CustomLevelManager {
    * @param level      the level to save
    * @param validItems the list of valid Items
    */
-  public static void save(final String path,
+  public static boolean save(final String path,
                           final String identifier, final Level level,
                           final ArrayList<Integer> validItems) {
     String customLevelFolder;
@@ -50,7 +50,7 @@ public final class CustomLevelManager {
       String homePath = System.getProperty("user.home", "Desktop");
       customLevelFolder = homePath + "/Optimal Heist/customLevel/temp";
     }
-    save(customLevelFolder, path, identifier, level, validItems);
+    return save(customLevelFolder, path, identifier, level, validItems);
   }
 
   /**
@@ -63,7 +63,7 @@ public final class CustomLevelManager {
    * @param level         the level to save
    * @param validItems    the list of valid Items
    */
-  public static void save(final String pictureFolder,
+  public static boolean save(final String pictureFolder,
                           final String path, final String identifier,
                           final Level level,
                           final ArrayList<Integer> validItems) {
@@ -85,6 +85,7 @@ public final class CustomLevelManager {
       zipLevel(pictureFolder, levelPath, validItems);
       boolean ignoreResult2 = new File(levelPath).delete();
       boolean ignoreResult3 = new File(path + "/temp").delete();
+      return true;
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

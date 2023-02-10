@@ -3,7 +3,6 @@ package gui.level;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import rucksack.BacktrackingItem;
 import rucksack.Item;
@@ -20,6 +20,7 @@ import solving.ButtonEventHandler;
 import solving.ButtonEventHandlerTable;
 import solving.SolverBacktracking;
 import solving.SolverGreedy;
+import solving.UserDataManager;
 
 
 /**
@@ -264,6 +265,120 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
         updateLabel(i);
       }
     }
+  }
+
+  /**
+   * Adds the escapeButton to the Panel.
+   *
+   * @param centerPanel the Panel that the escapeButton should be on.
+   */
+  @Override
+  public void escapeButton(final Container centerPanel) {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
+    JButton flucht = new JButton("Flucht");
+    flucht.setFont(font);
+    int levelNumber = GuiManager.numberLevel;
+    if (levelNumber == -1) {
+      flucht.addActionListener(e -> {
+        String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        String message = generateEscapeMessage();
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+            message,
+            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+                .INFORMATION_MESSAGE, null, buttons,
+            buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            buttonHandler.resetLevel(getLevel(), levelNumber);
+            for (int i = 0; i < getLevel().getItemList().size(); i++) {
+              updateLabel(i);
+            }
+          }
+          case 1 -> {
+            GuiManager.openMainMenu();
+            System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
+        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
+      flucht.addActionListener(e -> {
+        if (levelNumber >= 0) {
+          if (getLevel().getCurrentValue() > UserDataManager.getScore(
+              GuiManager.numberLevel)) {
+            UserDataManager.newHighScore(GuiManager.numberLevel,
+                getLevel().getCurrentValue());
+            UserDataManager.save();
+          }
+        }
+        String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        String message = null;
+        message = generateEscapeMessage();
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+            message,
+            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+                .INFORMATION_MESSAGE, null, buttons,
+            buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            buttonHandler.resetLevel(getLevel(), levelNumber);
+            for (int i = 0; i < getLevel().getItemList().size(); i++) {
+              updateLabel(i);
+            }
+          }
+          case 1 -> {
+            GuiManager.openLevelSelectScreen();
+            System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else {
+      flucht.addActionListener(e -> {
+        if (getLevel().getCurrentValue() > UserDataManager
+            .getScore(GuiManager.numberLevel)) {
+          UserDataManager.newHighScore(GuiManager.numberLevel,
+              getLevel().getCurrentValue());
+          UserDataManager.save();
+        }
+        String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
+        String message = null;
+        message = generateEscapeMessage();
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+            message,
+            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+                .INFORMATION_MESSAGE, null, buttons,
+            buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            buttonHandler.resetLevel(getLevel(), levelNumber);
+            for (int i = 0; i < getLevel().getItemList().size(); i++) {
+              updateLabel(i);
+            }
+          }
+          case 1 -> {
+            GuiManager.openLevel(
+                GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
+                    [GuiManager.numberLevel + 1], GuiManager.numberLevel + 1);
+            System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+          }
+          case 2 -> {
+            GuiManager.openLevelSelectScreen();
+            System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+
+        }
+      });
+    }
+    centerPanel.add(flucht);
   }
 
   /**

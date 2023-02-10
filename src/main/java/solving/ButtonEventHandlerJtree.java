@@ -64,4 +64,9 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
   public String getSolution() {
     return null;
   }
+
+  @Override
+  public void resetLevel(Level level, int levelNumber) {
+
+  }
 }
