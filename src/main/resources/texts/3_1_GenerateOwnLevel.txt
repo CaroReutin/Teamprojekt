@@ -1,0 +1,24 @@
+Willkommen in Dr. Metas Museumswerkstatt!
+Hier kannst du deine eigenen Level mit meinem Leveleditor erstellen.
+
+Links kannst du den Namen deines Levels (Titel) sowie das Maximal-
+gewicht deines Rucksacks (Kapazität) angeben. Außerdem kannst du den
+Modus auswählen, ob das Level dem Verhalten eines bestimmten Hand-
+langers angepasst sein soll. Um ein freies Level zu erstellen, bei dem
+nur das bestmögliche Ergebnis zählt und man kein Baumdiagramm als
+Hilfsmittel hat, wähle den Dr.Meta-Modus.
+
+Rechts kannst du die Gegenstände generieren, die im Museum ausgestellt
+werden. Die Werte Gewicht, Wert und Anzahl müssen natürliche Zahlen
+sein. Außerdem kannst du nicht nur den Namen, sondern auch das Icon
+ändern. Klicke auf das Platzhalter-Bild und wähle ein entsprechendes
+Symbol für deinen Gegenstand aus.
+
+Nicht korrekt ausgefüllte Gegenstände werden unter Umständen nicht ge-
+speichert oder fehlerhaft dargestellt. Weitere Gegenstände fügst du
+mithilfe des + hinzu. Beachte, dass ein Level höchstens 15 verschiedene
+Gegenstände, ein Backtrackinglevel höchstens 5 Gegenstände haben kann.
+
+Mit "Speichern" kannst du deinen selbsterstellten Level als ZIP-Datei speichern.
+Mit "Abbrechen" kehrst du zum Hauptmenü zurück, ohne die eingegebenen Daten zu speichern.
+Mit "Reset" löschst du alle eingegebenen Daten im Leveleditor.

@@ -1,0 +1,15 @@
+Bei mir - dem gierigen Ganoven - geht es um Schnelligkeit. Meistens
+hat man bei einem Museumsraub nicht wirklich viel Zeit. Deswegen lege
+ich auch nichts wieder zurück, was ich in den Rucksack gepackt habe.
+
+Ich betrachte bei jedem Gegenstand das Verhältnis Wert:Gewicht.
+Das (im Verhältnis zu seinem Gewicht) Wertvollste wird als erstes ein-
+gepackt. Falls zwei Gegenstände das gleiche Wert-Gewicht-Verhältnis
+haben, dann wird eher das Wertvollere und damit Schwerere genommen.
+Falls ein Gegenstand nicht mehr in den Rucksack passt, wird er über-
+sprungen. Ich flüchte, wenn der Rucksack voll ist oder der "wertloseste"
+Gegenstand betrachtet wurde.
+
+Mit diesem Verfahren bin ich schnell, aber habe nicht zwangsläufig die
+bestmöglicheLösung. Trotzdem packe ich meistens gut ein, oft sogar optimal.
+GUSTAV, DER GIERIGE GANOVE

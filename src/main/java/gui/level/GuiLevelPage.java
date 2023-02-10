@@ -1,3 +1,4 @@
+
 package gui.level;
 
 import java.awt.BorderLayout;
@@ -6,6 +7,9 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -69,17 +73,18 @@ public class GuiLevelPage {
   }
 
   /**
-   * Adds the Button to the Panel.
+   * Adds the escapeButton to the Panel.
    *
    * @param centerPanel the Panel that the escapeButton should be on.
    */
   public void escapeButton(final Container centerPanel) {
     JButton flucht = new JButton("Flucht");
-    int levelNumber = GuiManager.NumberLevel;
+    int levelNumber = GuiManager.numberLevel;
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = generateEscapeMessage();
+        String message = null;
+        message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -101,19 +106,20 @@ public class GuiLevelPage {
           //this case is not possible, all buttons are switched
         }
       });
-    } else if (levelNumber == 7
-        || levelNumber == 14 || levelNumber == 0) {
+    } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
+        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
       flucht.addActionListener(e -> {
         if (levelNumber >= 0) {
           if (level.getCurrentValue() > UserDataManager.getScore(
-              GuiManager.NumberLevel)) {
-            UserDataManager.newHighScore(GuiManager.NumberLevel,
+              GuiManager.numberLevel)) {
+            UserDataManager.newHighScore(GuiManager.numberLevel,
                 level.getCurrentValue());
             UserDataManager.save();
           }
         }
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = generateEscapeMessage();
+        String message = null;
+        message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -138,13 +144,14 @@ public class GuiLevelPage {
     } else {
       flucht.addActionListener(e -> {
         if (level.getCurrentValue() > UserDataManager
-            .getScore(GuiManager.NumberLevel)) {
-          UserDataManager.newHighScore(GuiManager.NumberLevel,
+            .getScore(GuiManager.numberLevel)) {
+          UserDataManager.newHighScore(GuiManager.numberLevel,
               level.getCurrentValue());
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
-        String message = generateEscapeMessage();
+        String message = null;
+        message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -160,7 +167,7 @@ public class GuiLevelPage {
           case 1 -> {
             GuiManager.openLevel(
                 GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
-                    [GuiManager.NumberLevel + 1], GuiManager.NumberLevel + 1);
+                    [GuiManager.numberLevel + 1], GuiManager.numberLevel + 1);
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
           case 2 -> {
@@ -177,6 +184,10 @@ public class GuiLevelPage {
     centerPanel.add(flucht);
   }
 
+  /**
+   * Method for generating the correct escape message depending on the level and solution.
+   * @return String of the generated escape message
+   */
   public String generateEscapeMessage() {
     SolverBacktracking s = new SolverBacktracking();
     SolverGreedy sg = new SolverGreedy();
@@ -188,22 +199,80 @@ public class GuiLevelPage {
     }
     SolverGreedy.sortLikeGreedy(solution);
     if (this.level.getRobber().equals(Level.Robber.DR_META)) {
-      if (solution.equals(SolverGreedy.sortLikeGreedy(s.solveAlgorithm(this.level)))) {
-        return "Es wurde die bestmögliche Lösung gefunden.";
+      if (solution.equals(SolverGreedy
+              .sortLikeGreedy(s.solveAlgorithm(this.level)))) {
+        //case: correct solution
+        String message = null;
+        try {
+          message = fileToString(
+                  "src/main/resources/texts/2_1_1_OptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
       } else {
-        return "Es gibt noch bessere lösungen.";
+        String message = null;
+        try {
+          message = fileToString(
+                  "src/main/resources/texts/2_1_2_SuboptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
       }
     } else if (this.level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-      if (solution.equals(SolverGreedy.sortLikeGreedy(sg.solveAlgorithm(this.level)))) {
-        return "Der Gierige Ganove hat die gleiche Lösung wie du.";
-      } else if (solution.equals(SolverGreedy.sortLikeGreedy(s.solveAlgorithm(this.level)))) {
-        return "Es wurde die bestmögliche Lösung gefunden, jedoch nicht die Lösung, die der Gierige Ganove hat.";
+      if (solution.equals(SolverGreedy
+              .sortLikeGreedy(sg.solveAlgorithm(this.level)))) {
+        String message = null;
+        try {
+          message = fileToString(
+                  "src/main/resources/texts/2_1_1_OptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
+      } else if (solution.equals(SolverGreedy
+              .sortLikeGreedy(s.solveAlgorithm(this.level)))) {
+        String message = null;
+        try {
+          message = fileToString(
+                  "src/main/resources/texts/2_1_3_OptimalButWrongSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
       } else {
-        return "Das geht noch besser.";
+        String message = null;
+        try {
+          message = fileToString(
+                  "src/main/resources/texts/2_1_2_SuboptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
       }
     } else {
       return "Das solltest du nicht sehen können, es lief etwas schief.";
     }
+  }
+
+  /**
+   * Method for formatting a TXT-file into a single String instance
+   * @param fileName name of the TXT-file supposed to be shown
+   * @return the String of the given TXT-file
+   */
+  public static String fileToString(final String fileName) throws IOException {
+    FileReader reader = new FileReader(fileName);
+    BufferedReader inBuffer = new BufferedReader(reader);
+    StringBuilder message = new StringBuilder();
+    String line = inBuffer.readLine();
+
+    while (line != null) {
+      message.append(line);
+      message.append("\n");
+      line = inBuffer.readLine();
+    }
+    return message.toString();
   }
 
   /**
@@ -341,9 +410,8 @@ public class GuiLevelPage {
   }
 
 
-  /**
-   * returns the level number.
-   *
+  /* *
+   * Returns the level number.
    * @return the level number.
    */
   /*public int getLevelNumber() {

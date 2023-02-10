@@ -136,6 +136,12 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
         rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
 
+    ImageIcon clueSymbol = new ImageIcon(
+            "src/main/resources/icons/clueSymbol.png");
+    Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
+            57, 57, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
+    JButton clueButton = new JButton(newClueSymbol);
 
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
