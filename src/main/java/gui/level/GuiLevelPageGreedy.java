@@ -126,12 +126,17 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(200, 350,
+        rucksackImage.getImage().getScaledInstance(300, 800,
             java.awt.Image.SCALE_SMOOTH);
 
+    //füge Räuber ein
+    URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
+    ImageIcon robberImage = new ImageIcon(urlRobber);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
+      Image.SCALE_SMOOTH);
 
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     JPanel rightPanel = new JPanel();
     //JPanel rightPanel = new JPanel(new GridLayout
     // (level.getItemList().size(), 1));

@@ -8,7 +8,7 @@ import rucksack.BacktrackingItem;
 import rucksack.Level;
 
 public class ButtonEventHandlerTable extends ButtonEventHandler {
-  //TODO remove myLevel
+
   private Tree tree;
   /**
    * all possible (and impossible) nodes.

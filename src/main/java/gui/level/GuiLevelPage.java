@@ -205,6 +205,7 @@ public class GuiLevelPage {
       JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
       current.setFont(font);
+      itemPanel.add(current);
       itemIcon.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
@@ -225,13 +226,12 @@ public class GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      panelItems.add(current);
       panelItems.add(itemPanel);
       panelItems.add(labels[i]);
-      panelRucksack.add(currentRucksack);
-      panelRucksack.add(rucksackLabels[i]);
-      panelRucksack.add(currentWeightLabel);
-      panelRucksack.add(currentValueLabel);
+      panelRucksack.add(currentRucksack, BorderLayout.CENTER);
+      panelRucksack.add(rucksackLabels[i], BorderLayout.CENTER);
+      panelRucksack.add(currentWeightLabel, BorderLayout.SOUTH);
+      panelRucksack.add(currentValueLabel, BorderLayout.SOUTH);
 
     }
   }
@@ -265,28 +265,30 @@ public class GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
             300, 500, java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
 
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebRot.png");
     ImageIcon robberImage = new ImageIcon(urlRobber);
-    Image scaledRobberImage = robberImage.getImage().getScaledInstance(200, 350,
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
       Image.SCALE_SMOOTH);
-    JPanel robberPanel = new JbackgroundPanel(scaledRobberImage, 0);
 
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JPanel rightPanel = new JbackgroundPanel(scaledRobberImage, 0);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
+    JPanel rightPanel = new JPanel();
+
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
     this.itemButtons(rightPanel, leftPanel);
 
+    JPanel emptyPanel = new JPanel();
 
     //alles zusammenpuzzeln
-    pane.add(leftPanel, BorderLayout.WEST);
-    pane.add(centerPanel, BorderLayout.CENTER);
-    pane.add(rightPanel, BorderLayout.EAST);
+    pane.add(leftPanel);
+    pane.add(centerPanel);
+    pane.add(rightPanel);
+
 
     return pane;
   }

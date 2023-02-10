@@ -121,7 +121,6 @@ public class Item implements Serializable {
    * @return "
    */
   public String getBacktrackingName(final int depthRemaining) {
-    // TODO fix depth
     int spacesPerDepth = 4;
     assert name != null;
     StringBuilder res = new StringBuilder(name);
