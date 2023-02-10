@@ -265,7 +265,7 @@ public class GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
             300, 500, java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundWithItems(scaledRucksackImage, 0, 0);
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
 
 
     //füge Räuber ein
