@@ -83,8 +83,7 @@ public class GuiLevelPage {
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = null;
-        message = generateEscapeMessage();
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -184,8 +183,127 @@ public class GuiLevelPage {
     centerPanel.add(flucht);
   }
 
+  /*
+  *
+  *
+  */
+
   /**
-   * Method for generating the correct escape message depending on the level and solution.
+   * Adds the clueButton to the Panel.
+   *
+   * @param centerPanel the Panel that the escapeButton should be on.
+   */
+  public void clueButton(final Container centerPanel) {
+    JButton hinweis = new JButton("Hinweis");
+    int levelNumber = GuiManager.numberLevel;
+    if (levelNumber == -1) {
+      hinweis.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          message = fileToString(
+                  "src/main/resources/texts/levelTexts/X1.txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            //nothing is supposed to happen
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else if (levelNumber == 0) {
+      hinweis.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          message = fileToString(
+                  "src/main/resources/texts/levelTexts/E1.txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            //nothing is supposed to happen
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else if (0 < levelNumber && levelNumber <= LAST_GREEDY_LEVELNUMBER) {
+      hinweis.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          int fileNumber = levelNumber + 1;
+          message = fileToString(
+                  "src/main/resources/texts/levelTexts/G"
+                          + fileNumber + ".txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            //nothing is supposed to happen
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else if (0 < LAST_GREEDY_LEVELNUMBER
+            & levelNumber <= LAST_BACKTRACKING_LEVELNUMBER) {
+      hinweis.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          int fileNumber = levelNumber - LAST_GREEDY_LEVELNUMBER + 1;
+          message = fileToString(
+                  "src/main/resources/texts/levelTexts/B"
+                          + fileNumber + ".txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            //nothing is supposed to happen
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    }
+    centerPanel.add(hinweis);
+  }
+
+  /**
+   * Method for generating the correct escape message
+   * depending on the level and solution.
    * @return String of the generated escape message
    */
   public String generateEscapeMessage() {
@@ -257,7 +375,7 @@ public class GuiLevelPage {
   }
 
   /**
-   * Method for formatting a TXT-file into a single String instance
+   * Method for formatting a TXT-file into a single String instance.
    * @param fileName name of the TXT-file supposed to be shown
    * @return the String of the given TXT-file
    */
@@ -388,6 +506,7 @@ public class GuiLevelPage {
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
+    this.clueButton(centerPanel);
     this.itemButtons(rightPanel, leftPanel);
 
 

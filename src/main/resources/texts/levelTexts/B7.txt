@@ -1,0 +1,4 @@
+Dieses Level hat viele mögliche Kombinationen. Versuche, den Baum so gut wie möglich
+im Blick zu behalten, um nicht aus Versehen noch mögliche Teilbäume zu überspringen.
+
+Zielwert: 30

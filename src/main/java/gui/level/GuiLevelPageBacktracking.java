@@ -195,10 +195,12 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     leftPanel.add(rucksackPanel, BorderLayout.NORTH);
     leftPanel.add(trashPanel, BorderLayout.SOUTH);
 
-    //Panel where escape-Button is
+    //Panel where escape-Button and clue-Button are
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     this.escapeButton(centerPanel);
-
+    if (GuiOptionsPage.backtrackingTipsAllowed) {
+      this.clueButton(centerPanel);
+    }
     this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 
 
@@ -244,12 +246,17 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     }
   }
 
+  /**
+   * Method for generating the message when clicking the escape button.
+   * @return String of the escape message
+   */
   @Override
   public String generateEscapeMessage() {
     SolverBacktracking s = new SolverBacktracking();
     String solutionString = this.buttonHandler.getSolution();
     if (solutionString == null) {
-      return "Drücke vor beenden des Levels den Knopf im Baum der, der richtigen Lösung entspricht.";
+      return "Drücke vor beenden des Levels den Knopf im Baum der,"
+              + "der richtigen Lösung entspricht.";
     }
     ArrayList<Item> solution = new ArrayList<>();
     for (int i = 0; i < getLevel().getBacktrackingItemList().size(); i++) {
