@@ -205,6 +205,7 @@ public class GuiLevelPage {
       JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
       current.setFont(font);
+      itemPanel.add(current);
       itemIcon.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
@@ -225,7 +226,6 @@ public class GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      panelItems.add(current);
       panelItems.add(itemPanel);
       panelItems.add(labels[i]);
       panelRucksack.add(currentRucksack);
