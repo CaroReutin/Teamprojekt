@@ -1,7 +1,7 @@
 
 package gui.level;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -32,7 +32,7 @@ public class GuiManager {
   private static final GuiLevelEditorPage GUI_LEVEL_EDITOR_PAGE
       = new GuiLevelEditorPage();
   /**
-   * the current gui leveldeciderpage.
+   * the current gui level decider page.
    */
   private static final GuiLevelDeciderPage GUI_LEVEL_DECIDER_PAGE
       = new GuiLevelDeciderPage();
@@ -43,7 +43,7 @@ public class GuiManager {
 
 
 
-  public static int NumberLevel;
+  public static int numberLevel;
 
   /**
    * Opens the Leveleditor.
@@ -128,9 +128,11 @@ public class GuiManager {
    * Opens the Level.
    *
    * @param levelPage the GUILevel page of the level that should be opened.
+   * @param levelNumber the level's number.
    */
-  public static void openLevel(final GuiLevelPage levelPage, final int levelNumber) {
-    NumberLevel = levelNumber;
+  public static void openLevel(final GuiLevelPage levelPage,
+                               final int levelNumber) {
+    numberLevel = levelNumber;
     frame.setContentPane(levelPage.getPane());
     final int lastGreedyNumber = 7;
     String title = "Level ";
@@ -149,7 +151,7 @@ public class GuiManager {
   }
 
   public static int getNumberLevel() {
-    return NumberLevel;
+    return numberLevel;
   }
 
   /**

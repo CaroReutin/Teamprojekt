@@ -83,6 +83,8 @@ public final class CustomLevelManager {
       fos.close();
 
       zipLevel(pictureFolder, levelPath, validItems);
+      boolean ignoreResult2 = new File(levelPath).delete();
+      boolean ignoreResult3 = new File(path + "/temp").delete();
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

@@ -14,9 +14,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import rucksack.BacktrackingItem;
+import rucksack.Item;
 import rucksack.Level;
 import solving.ButtonEventHandler;
 import solving.ButtonEventHandlerTable;
+import solving.SolverBacktracking;
+import solving.SolverGreedy;
 
 
 /**
@@ -66,7 +69,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    *                      the items NOT IN the bag should go to.
    * @param panelRucksack The left panel where the buttons for
    *                      the items IN the bag should go to.
-   * @param pannelTrash The trash panel.
+   * @param pannelTrash   The trash panel.
    * @param controlPannel The control panel.
    */
 
@@ -211,8 +214,13 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     leftPanel.add(rucksackPanel, BorderLayout.NORTH);
     leftPanel.add(trashPanel, BorderLayout.SOUTH);
 
+    //Panel where escape-Button and clue-Button are
+    //JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     //Panel where escape-Button is
     this.escapeButton(centerPanel);
+    if (GuiOptionsPage.backtrackingTipsAllowed) {
+      this.clueButton(centerPanel);
+    }
     this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 
 
@@ -224,7 +232,6 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
     pane.add(rightPanel, BorderLayout.EAST);
-
 
     return pane;
 
@@ -256,6 +263,50 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           .getBacktrackingItemList().size(); i++) {
         updateLabel(i);
       }
+    }
+  }
+
+  /**
+   * Method for generating the message when clicking the escape button.
+   * @return String of the escape message
+   */
+  @Override
+  public String generateEscapeMessage() {
+    SolverBacktracking s = new SolverBacktracking();
+    String solutionString = this.buttonHandler.getSolution();
+    if (solutionString == null) {
+      return "Drücke vor beenden des Levels den Knopf im Baum der,"
+              + "der richtigen Lösung entspricht.";
+    }
+    ArrayList<Item> solution = new ArrayList<>();
+    for (int i = 0; i < getLevel().getBacktrackingItemList().size(); i++) {
+      System.out.println(solutionString);
+      if (solutionString.charAt(i) == '0') {
+        solution.add(getLevel().getItemList().get(i));
+      }
+    }
+    String res = "";
+    SolverGreedy.sortLikeGreedy(solution);
+    if (this.getLevel().getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
+      ArrayList<Item> rightSolution = s.solveAlgorithm(this.getLevel());
+      if (solution.equals(SolverGreedy.sortLikeGreedy(rightSolution))) {
+        res += "Es wurde die bestmögliche Lösung gefunden.";
+      } else {
+        res += "Das geht noch besser.";
+      }
+      boolean hasExploredEverything = true;
+      for (int i = 0; i < getLevel().getBacktrackingItemList().size(); i++) {
+        if (getLevel().getItemAmountInRucksack(i) != 0
+            || getLevel().getItemAmountAvailable(i) != 0) {
+          hasExploredEverything = false;
+        }
+      }
+      if (!hasExploredEverything) {
+        res += "\nAber es gibt noch mehr mögliche Kombinationen.";
+      }
+      return res;
+    } else {
+      return "Das solltest du nicht sehen können, es lief etwas schief.";
     }
   }
 }

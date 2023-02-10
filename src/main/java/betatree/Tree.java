@@ -12,6 +12,7 @@ import javax.swing.JLabel;
  * the Tree.
  */
 public class Tree {
+  private String solution = null;
   /**
    * the frame that shows the tree.
    */
@@ -19,7 +20,12 @@ public class Tree {
   /**
    * the buttons matching to the nodes in nodes Arraylist.
    */
-  private final ArrayList<ArrayList<JButton>> buttons = new ArrayList<>();
+  private final ArrayList<ArrayList<JLabel>> buttons = new ArrayList<>();
+  /**
+   * the actual buttons matching to the nodes in nodes Arraylist.
+   * only the last row.
+   */
+  private final ArrayList<JButton> actualButtons = new ArrayList<>();
   /**
    * the labels matching to the buttons in buttons Arraylist.
    */
@@ -64,8 +70,17 @@ public class Tree {
         }
         int colCounter = 0;
         for (int j = 0; j < colAmount; j++) {
-          if (columnsWithButtons.contains(j)) {
-            buttons.get(rowCounter).add(new JButton(""));
+          if (columnsWithButtons.contains(j) && (i + 1 == rowAmount)) {
+            actualButtons.add(new JButton(""));
+            actualButtons.get(colCounter).setVisible(false);
+            int finalColCounter = colCounter;
+            actualButtons.get(colCounter).addActionListener(e -> {
+              this.solution = Integer.toBinaryString(finalColCounter);
+            });
+            panel.add(actualButtons.get(colCounter));
+            colCounter++;
+          } else if (columnsWithButtons.contains(j)) {
+            buttons.get(rowCounter).add(new JLabel(""));
             buttons.get(rowCounter).get(colCounter).setVisible(false);
             panel.add(buttons.get(rowCounter).get(colCounter));
             colCounter++;
@@ -114,8 +129,13 @@ public class Tree {
 
   public void addNode(final int row, final int col,
                       final ImageIcon labelIcon, final String buttonText) {
-    buttons.get(row).get(col).setText(buttonText);
-    buttons.get(row).get(col).setVisible(true);
+    if (row == buttons.size() - 1) {
+      actualButtons.get(col).setText(buttonText);
+      actualButtons.get(col).setVisible(true);
+    } else {
+      buttons.get(row).get(col).setText(buttonText);
+      buttons.get(row).get(col).setVisible(true);
+    }
     labels.get(row - 1).get(col).setIcon(labelIcon);
     labels.get(row - 1).get(col).setVisible(true);
     treeFrame.getContentPane().revalidate();
@@ -130,5 +150,14 @@ public class Tree {
    */
   public void show() {
     treeFrame.setVisible(true);
+  }
+
+  public String getSolution() {
+    if (solution == null){
+      return null;
+    }else if (solution.length() < buttons.size()){
+      return "0".repeat(buttons.size() - solution.length() - 1) + solution;
+    }
+    return solution;
   }
 }

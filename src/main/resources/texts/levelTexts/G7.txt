@@ -1,0 +1,2 @@
+Berechne hier am besten als Erstes das Verhältnis (Wert:Gewicht) für alle Gegenstände,
+bevor du beginnst einzusortieren. Beginne dann wie gewohnt beim besten Verhältnis.

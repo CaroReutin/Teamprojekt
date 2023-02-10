@@ -1,0 +1,13 @@
+In jedem Level musst du deinen Rucksack mit Wertgegenständen füllen.
+Dabei hat jeder Gegenstand ein Gewicht und einen Wert. Dein Rucksack
+darf ein vorgegebenes Maximalgewicht nicht überschreiten. Mit dieser
+Einschränkung ist nun deine Aufgabe, deinen Rucksack so wertvoll wie
+möglich zu packen.
+
+Meine beiden besten Handlanger - der gierige Ganove und der
+Backtracking-Bandit - haben hierfür unterschiedliche Herangehensweisen.
+
+In meinen Leveln, also denen vom Typ Dr. Meta, hast du keinerlei Ein-
+schränkungen. Durch Klicken kannst du Gegenstände in den Rucksack legen
+und wieder herausnehmen. Wenn du denkst, dass du den bestmöglichen
+Rucksack gepackt hast, dann flüchte.

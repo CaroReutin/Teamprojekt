@@ -143,6 +143,9 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
+    if (GuiOptionsPage.greedyTipsAllowed) {
+      this.clueButton(centerPanel);
+    }
     this.itemButtons(rightPanel, leftPanel);
 
     //alles zusammenpuzzeln

@@ -1,0 +1,2 @@
+Denk daran, dass du als Erstes die schwereren Gegenstände betrachten sollst und
+du dir dann nacheinander alle Kombinationen anschauen sollst.
