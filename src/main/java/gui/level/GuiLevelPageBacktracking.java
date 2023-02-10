@@ -124,8 +124,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       JButton putToTrash = new JButton("wegwerfen");
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
-      JButton currentRucksack = new JButton(imageIcon);
-      currentRucksack.addActionListener(e -> handleButtons(finalI, false));
+      JLabel currentRucksack = new JLabel(imageIcon);
 
       JPanel availableTempPanel = new JPanel(new GridLayout(1, 4));
       availableTempPanel.add(itemIcon);
@@ -147,7 +146,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       tempControlPanel.add(putToTrash);
       controlPanel.add(tempControlPanel);
 
-      JButton currentTrash = new JButton(imageIcon);
+      JLabel currentTrash = new JLabel(imageIcon);
       panelTrash.add(currentTrash);
       panelTrash.add(trashLabels[i]);
 
