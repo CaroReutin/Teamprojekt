@@ -2,8 +2,8 @@
  * this package contains all necessary classes to implement the
  * gui.
  *
- * @version 0.1
- * @author Erber, Fohrer
+ * @version 4.0
+ * @author Erber, Fohrer, Nöckel, Pross, Reutin
  */
 
 package gui.level;
