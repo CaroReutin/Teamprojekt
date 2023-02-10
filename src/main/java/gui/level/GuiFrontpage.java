@@ -59,12 +59,12 @@ public class GuiFrontpage {
     title.setFont(fontStyle);
     JButton levelButton = new JButton("Level");
     levelButton.setFont(fontButtons);
-    levelButton.setBackground(Color.cyan);
+    levelButton.setBackground(Color.LIGHT_GRAY);
     JButton ownLevelButton = new JButton("Eigene Level");
-    ownLevelButton.setBackground(Color.cyan);
+    ownLevelButton.setBackground(Color.LIGHT_GRAY);
     ownLevelButton.setFont(fontButtons);
     JButton settingsButton = new JButton("Einstellungen");
-    settingsButton.setBackground(Color.cyan);
+    settingsButton.setBackground(Color.LIGHT_GRAY);
     settingsButton.setFont(fontButtons);
     ImageIcon clueSymbol = new ImageIcon(
             "src/main/resources/icons/clueSymbol.png");

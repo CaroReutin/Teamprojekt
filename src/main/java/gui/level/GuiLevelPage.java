@@ -191,10 +191,12 @@ public class GuiLevelPage {
    * @param centerPanel the Panel that the escapeButton should be on.
    */
   public void clueButton(final Container centerPanel) {
-    JButton hinweis = new JButton("Hinweis");
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
+    JButton clue = new JButton("Hinweis");
+    clue.setFont(font);
     int levelNumber = GuiManager.numberLevel;
     if (levelNumber == -1) {
-      hinweis.addActionListener(e -> {
+      clue.addActionListener(e -> {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
@@ -218,7 +220,7 @@ public class GuiLevelPage {
         }
       });
     } else if (levelNumber == 0) {
-      hinweis.addActionListener(e -> {
+      clue.addActionListener(e -> {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
@@ -242,7 +244,7 @@ public class GuiLevelPage {
         }
       });
     } else if (0 < levelNumber && levelNumber <= LAST_GREEDY_LEVELNUMBER) {
-      hinweis.addActionListener(e -> {
+      clue.addActionListener(e -> {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
@@ -269,7 +271,7 @@ public class GuiLevelPage {
       });
     } else if (0 < LAST_GREEDY_LEVELNUMBER
             & levelNumber <= LAST_BACKTRACKING_LEVELNUMBER) {
-      hinweis.addActionListener(e -> {
+      clue.addActionListener(e -> {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
@@ -295,7 +297,7 @@ public class GuiLevelPage {
         }
       });
     }
-    centerPanel.add(hinweis);
+    centerPanel.add(clue);
   }
 
   /**
@@ -419,7 +421,7 @@ public class GuiLevelPage {
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(font);
       int finalI = i;
-      JPanel itemPanel = new JPanel();
+      JPanel itemPanel = new JPanel(new GridLayout(1, 4));
       ImageIcon imageIcon = items.get(i).getImageIcon();
       JButton itemIcon = new JButton(imageIcon);
       itemPanel.add(itemIcon);
@@ -447,8 +449,8 @@ public class GuiLevelPage {
           updateLabel(finalI);
         }
       });
+      itemPanel.add(labels[i]);
       panelItems.add(itemPanel);
-      panelItems.add(labels[i]);
       panelRucksack.add(currentRucksack, BorderLayout.CENTER);
       panelRucksack.add(rucksackLabels[i], BorderLayout.CENTER);
       panelRucksack.add(currentWeightLabel, BorderLayout.SOUTH);

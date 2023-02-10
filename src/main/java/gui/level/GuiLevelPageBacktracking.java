@@ -66,17 +66,17 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   /**
    * makes the Item Buttons.
    *
-   * @param panelAvaible  The right panel where the buttons for
+   * @param panelAvailable  The right panel where the buttons for
    *                      the items NOT IN the bag should go to.
    * @param panelRucksack The left panel where the buttons for
    *                      the items IN the bag should go to.
-   * @param pannelTrash   The trash panel.
-   * @param controlPannel The control panel.
+   * @param panelTrash   The trash panel.
+   * @param controlPanel The control panel.
    */
 
-  public void itemButtons(final JPanel panelAvaible, final JPanel panelRucksack,
-                          final JPanel pannelTrash,
-                          final JPanel controlPannel) {
+  public void itemButtons(final JPanel panelAvailable, final JPanel panelRucksack,
+                          final JPanel panelTrash,
+                          final JPanel controlPanel) {
     Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
     Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
     Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
@@ -125,26 +125,31 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       JButton putToTrash = new JButton("wegwerfen");
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
-      JButton currentRucksack = new JButton(imageIcon);
-      currentRucksack.addActionListener(e -> handleButtons(finalI, false));
+      JLabel currentRucksack = new JLabel(imageIcon);
 
-      panelAvaible.add(itemIcon);
-      panelAvaible.add(itemLabel);
-      panelAvaible.add(labels[i]);
+      JPanel availableTempPanel = new JPanel(new GridLayout(1, 4));
+      availableTempPanel.add(itemIcon);
+      availableTempPanel.add(itemLabel);
+      availableTempPanel.add(labels[i]);
+      panelAvailable.add(availableTempPanel);
       JLabel itemControlLabelIcon = new JLabel(imageIcon);
       JLabel itemControlLabel =
           new JLabel(" ("
               + items.get(i).getWeight() + "g, "
               + items.get(i).getValue() + "€)");
       itemControlLabel.setFont(smallFont);
-      controlPannel.add(itemControlLabelIcon);
-      controlPannel.add(itemControlLabel);
-      controlPannel.add(putToRucksack);
-      controlPannel.add(putToTrash);
 
-      JButton currentTrash = new JButton(imageIcon);
-      pannelTrash.add(currentTrash);
-      pannelTrash.add(trashLabels[i]);
+      JPanel tempControlPanel = new JPanel(new GridLayout(2, 5));
+
+      tempControlPanel.add(itemControlLabelIcon);
+      tempControlPanel.add(itemControlLabel);
+      tempControlPanel.add(putToRucksack);
+      tempControlPanel.add(putToTrash);
+      controlPanel.add(tempControlPanel);
+
+      JLabel currentTrash = new JLabel(imageIcon);
+      panelTrash.add(currentTrash);
+      panelTrash.add(trashLabels[i]);
 
       panelRucksack.add(currentRucksack);
       panelRucksack.add(rucksackLabels[i]);
@@ -161,7 +166,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    */
   @Override
   public Container getPane() {
-    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
+    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     Container pane = new Container();
     pane.setLayout(new GridLayout(1, 3));
 

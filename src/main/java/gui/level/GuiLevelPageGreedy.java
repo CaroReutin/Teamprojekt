@@ -74,6 +74,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(smallFont);
       int finalI = i;
+      JPanel availableItems = new JPanel(new GridLayout(1, 2));
       ImageIcon currentIcon = items.get(i).getImageIcon();
       JButton currentItemIcon = new JButton(currentIcon);
       JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
@@ -100,9 +101,11 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
         }
 
       });
-      panelItems.add(current);
-      panelItems.add(currentItemIcon);
-      panelItems.add(labels[i]);
+
+      availableItems.add(currentItemIcon);
+      availableItems.add(current);
+      availableItems.add(labels[i]);
+      panelItems.add(availableItems);
       panelRucksack.add(currentRucksackIcon);
       panelRucksack.add(rucksackLabels[i]);
       panelRucksack.add(currentWeightLabel);
@@ -131,6 +134,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
+    assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
       Image.SCALE_SMOOTH);
@@ -138,8 +142,6 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     JPanel rightPanel = new JPanel();
-    //JPanel rightPanel = new JPanel(new GridLayout
-    // (level.getItemList().size(), 1));
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
