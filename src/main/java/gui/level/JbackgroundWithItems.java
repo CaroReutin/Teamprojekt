@@ -32,6 +32,7 @@ public class JbackgroundWithItems extends JPanel {
     this.background = myBackground;
     this.xPos = x;
     this.yPos = y;
+    setLayout(new BorderLayout());
   }
 
   /**

@@ -228,10 +228,10 @@ public class GuiLevelPage {
       });
       panelItems.add(itemPanel);
       panelItems.add(labels[i]);
-      panelRucksack.add(currentRucksack);
-      panelRucksack.add(rucksackLabels[i]);
-      panelRucksack.add(currentWeightLabel);
-      panelRucksack.add(currentValueLabel);
+      panelRucksack.add(currentRucksack, BorderLayout.CENTER);
+      panelRucksack.add(rucksackLabels[i], BorderLayout.CENTER);
+      panelRucksack.add(currentWeightLabel, BorderLayout.SOUTH);
+      panelRucksack.add(currentValueLabel, BorderLayout.SOUTH);
 
     }
   }
@@ -265,7 +265,7 @@ public class GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
             300, 500, java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
+    JPanel leftPanel = new JbackgroundWithItems(scaledRucksackImage, 0, 0);
 
 
     //füge Räuber ein

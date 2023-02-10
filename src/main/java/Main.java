@@ -22,12 +22,6 @@ public final class Main {
    * @param args the input arguments
    */
   public static void main(final String[] args) {
-    try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } catch (ClassNotFoundException | InstantiationException
-             | UnsupportedLookAndFeelException | IllegalAccessException e) {
-      e.printStackTrace();
-    }
     AppData.initialize();
     AppData.initializeBeginningLevel();
     AppData.initializeGreedy();
