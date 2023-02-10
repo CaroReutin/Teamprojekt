@@ -1,18 +1,8 @@
 package solving;
 
-import java.awt.*;
+import java.awt.Font;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-import javax.swing.*;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
 
@@ -117,85 +107,13 @@ public final class AppData {
    * @return the level
    */
   public static Level loadLevel(final File zippedLevel) {
-    // Source: https://www.baeldung.com/java-compress-and-uncompress
     File destDir = new File(AppData.getCustomLevelUnzipFolder());
-    File zip;
-    try {
-      if (destDir.exists()) {
-        FileUtils.cleanDirectory(destDir);
-      } else {
-        Boolean ignoreResult = destDir.mkdirs();
-      }
-      zip = new File(destDir + "/" + zippedLevel.getName());
-      FileUtils.copyFile(zippedLevel, zip);
-    } catch (IOException e) {
-      e.printStackTrace();
+    String levelName = CustomLevelManager.unzip(zippedLevel, destDir);
+    if (levelName == null) {
       return null;
     }
-    String levelName = null;
-
-    try {
-      byte[] buffer = new byte[AppData.ZIP_BYTE_SIZE];
-      ZipInputStream zis = new ZipInputStream(new FileInputStream(zip));
-      ZipEntry zipEntry = zis.getNextEntry();
-      while (zipEntry != null) {
-        if (zipEntry.getName().endsWith(".xml")) {
-          levelName = zipEntry.getName();
-        }
-        File newFile = new File(destDir, zipEntry.getName());
-        // https://security.snyk.io/research/zip-slip-vulnerability
-        if (!newFile.getCanonicalPath().startsWith(destDir.getCanonicalPath()
-            + File.separator)) {
-          throw new IOException("Entry is outside of the target dir: "
-              + zipEntry.getName());
-        }
-        if (zipEntry.isDirectory()) {
-          if (!newFile.isDirectory() && !newFile.mkdirs()) {
-            throw new IOException("Failed to create directory " + newFile);
-          }
-        } else {
-          File parent = newFile.getParentFile();
-          if (!parent.isDirectory() && !parent.mkdirs()) {
-            throw new IOException("Failed to create directory " + parent);
-          }
-
-          FileOutputStream fos = new FileOutputStream(newFile);
-          int len;
-          while ((len = zis.read(buffer)) > 0) {
-            fos.write(buffer, 0, len);
-          }
-          fos.close();
-        }
-        zipEntry = zis.getNextEntry();
-      }
-      zis.closeEntry();
-      zis.close();
-      if (levelName == null) {
-        throw new IOException("Level not found");
-      } else {
-        File levelFile = new File(destDir + "/" + levelName);
-        JAXBContext jaxbContext = JAXBContext.newInstance(Level.class);
-        Unmarshaller marsh = jaxbContext.createUnmarshaller();
-
-        Level level = (Level) marsh.unmarshal(levelFile);
-        level.turnIntoBacktracking();
-        level.resetLevel();
-        for (int i = 0; i < level.getItemList().size(); i++) {
-          File picture = new File(destDir + "/picture" + i + ".png");
-          if (picture.exists()) {
-            level.setItemIcon(i, new ImageIcon(new ImageIcon(picture.getAbsolutePath())
-              .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-          }
-        }
-        return level;
-      }
-
-
-
-    } catch (IOException | JAXBException e) {
-      e.printStackTrace();
-    }
-    return null;
+    File levelFile = new File(destDir + "/" + levelName);
+    return CustomLevelManager.convertLevelfileToLevel(levelFile);
   }
 
   /**
@@ -275,7 +193,7 @@ public final class AppData {
    *
    * @param index the unique index of the item
    * @return returns a new Instance of the wanted item if it
-   *          is in the ArrayList else it returns null
+   * is in the ArrayList else it returns null
    */
   public static Item generateItem(final int index) {
     return new Item(ITEMS.get(index).getValue(), ITEMS.get(index).getWeight(),

@@ -1,17 +1,14 @@
 package rucksack;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * The class that holds the level information.
  */
-@XmlRootElement
-@XmlSeeAlso(Item.class)
+@XStreamAlias("Level")
 public class Level implements Serializable {
   public void setCurrentValue(final int i) {
     this.myRucksack.setCurrentValue(i);
@@ -55,13 +52,13 @@ public class Level implements Serializable {
   /**
    * the current robber.
    */
-  @XmlElement
+  @XStreamAlias("Robber")
   private final Robber robber;
 
   /**
    * the rucksack of this level
    */
-  @XmlElement
+  @XStreamAlias("Rucksack")
   private final Rucksack myRucksack;
 
   /**

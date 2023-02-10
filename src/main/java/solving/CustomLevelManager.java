@@ -1,9 +1,13 @@
 package solving;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import gui.level.GuiLevelPage;
 import gui.level.GuiLevelPageBacktracking;
 import gui.level.GuiLevelPageGreedy;
 import gui.level.GuiManager;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,12 +17,11 @@ import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.swing.ImageIcon;
 import org.apache.commons.io.FileUtils;
+import rucksack.Item;
 import rucksack.Level;
+import rucksack.Rucksack;
 
 /**
  * Manages Custom Levels do not make an instance all methods are static.
@@ -28,6 +31,64 @@ public final class CustomLevelManager {
    * do not make.
    */
   private CustomLevelManager() {
+  }
+
+  static String unzip(final File zippedLevel, final File destDir) {
+    String levelName = null;
+    // Source: https://www.baeldung.com/java-compress-and-uncompress
+    File zip;
+    try {
+      if (destDir.exists()) {
+        FileUtils.cleanDirectory(destDir);
+      } else {
+        Boolean ignoreResult = destDir.mkdirs();
+      }
+      zip = new File(destDir + "/" + zippedLevel.getName());
+      FileUtils.copyFile(zippedLevel, zip);
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
+    try {
+      byte[] buffer = new byte[AppData.ZIP_BYTE_SIZE];
+      ZipInputStream zis = new ZipInputStream(new FileInputStream(zip));
+      ZipEntry zipEntry = zis.getNextEntry();
+      while (zipEntry != null) {
+        if (zipEntry.getName().endsWith(".xml")) {
+          levelName = zipEntry.getName();
+        }
+        File newFile = new File(destDir, zipEntry.getName());
+        // https://security.snyk.io/research/zip-slip-vulnerability
+        if (!newFile.getCanonicalPath().startsWith(destDir.getCanonicalPath()
+            + File.separator)) {
+          throw new IOException("Entry is outside of the target dir: "
+              + zipEntry.getName());
+        }
+        if (zipEntry.isDirectory()) {
+          if (!newFile.isDirectory() && !newFile.mkdirs()) {
+            throw new IOException("Failed to create directory " + newFile);
+          }
+        } else {
+          File parent = newFile.getParentFile();
+          if (!parent.isDirectory() && !parent.mkdirs()) {
+            throw new IOException("Failed to create directory " + parent);
+          }
+
+          FileOutputStream fos = new FileOutputStream(newFile);
+          int len;
+          while ((len = zis.read(buffer)) > 0) {
+            fos.write(buffer, 0, len);
+          }
+          fos.close();
+        }
+        zipEntry = zis.getNextEntry();
+      }
+      zis.closeEntry();
+      zis.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return levelName;
   }
 
   /**
@@ -40,8 +101,9 @@ public final class CustomLevelManager {
    * @param validItems the list of valid Items
    */
   public static boolean save(final String path,
-                          final String identifier, final Level level,
-                          final ArrayList<Integer> validItems) {
+                             final String identifier,
+                             final Level level,
+                             final ArrayList<Integer> validItems) {
     String customLevelFolder;
     if (System.getProperty("os.name").contains("Windows")) {
       String appdataPath = System.getenv("APPDATA");
@@ -62,32 +124,31 @@ public final class CustomLevelManager {
    *                      name of the zippedLevel
    * @param level         the level to save
    * @param validItems    the list of valid Items
+   * @return returns true if the file was saved successfully
    */
   public static boolean save(final String pictureFolder,
-                          final String path, final String identifier,
-                          final Level level,
-                          final ArrayList<Integer> validItems) {
+                             final String path, final String identifier,
+                             final Level level,
+                             final ArrayList<Integer> validItems) {
     // Make path if it does not exist already
     boolean ignoreResult = new File(path + "/temp").mkdirs();
     // Use jaxb to turn Level into xml file
     String levelPath = path + "/" + identifier + ".xml";
+    XStream xstream = new XStream(new DomDriver());
+    String res = xstream.toXML(level);
     try {
       FileOutputStream fos = new FileOutputStream(levelPath);
-      JAXBContext jaxbContext = JAXBContext.newInstance(Level.class);
-      Marshaller marsh = jaxbContext.createMarshaller();
-
-      marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-      marsh.marshal(level, fos);
-
+      byte[] strToBytes = res.getBytes();
+      fos.write(strToBytes);
       fos.close();
 
       zipLevel(pictureFolder, levelPath, validItems);
       boolean ignoreResult2 = new File(levelPath).delete();
       boolean ignoreResult3 = new File(path + "/temp").delete();
       return true;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
     }
   }
 
@@ -157,67 +218,25 @@ public final class CustomLevelManager {
   public static void load(final File zippedLevel) {
     // Source: https://www.baeldung.com/java-compress-and-uncompress
     File destDir = new File(AppData.getCustomLevelUnzipFolder());
-    File zip;
+    String levelName;
     try {
-      if (destDir.exists()) {
-        FileUtils.cleanDirectory(destDir);
-      } else {
-        Boolean ignoreResult = destDir.mkdirs();
-      }
-      zip = new File(destDir + "/" + zippedLevel.getName());
-      FileUtils.copyFile(zippedLevel, zip);
-    } catch (IOException e) {
-      e.printStackTrace();
-      return;
-    }
-    String levelName = null;
-
-    try {
-      byte[] buffer = new byte[AppData.ZIP_BYTE_SIZE];
-      ZipInputStream zis = new ZipInputStream(new FileInputStream(zip));
-      ZipEntry zipEntry = zis.getNextEntry();
-      while (zipEntry != null) {
-        if (zipEntry.getName().endsWith(".xml")) {
-          levelName = zipEntry.getName();
-        }
-        File newFile = new File(destDir, zipEntry.getName());
-        // https://security.snyk.io/research/zip-slip-vulnerability
-        if (!newFile.getCanonicalPath().startsWith(destDir.getCanonicalPath()
-            + File.separator)) {
-          throw new IOException("Entry is outside of the target dir: "
-              + zipEntry.getName());
-        }
-        if (zipEntry.isDirectory()) {
-          if (!newFile.isDirectory() && !newFile.mkdirs()) {
-            throw new IOException("Failed to create directory " + newFile);
-          }
-        } else {
-          File parent = newFile.getParentFile();
-          if (!parent.isDirectory() && !parent.mkdirs()) {
-            throw new IOException("Failed to create directory " + parent);
-          }
-
-          FileOutputStream fos = new FileOutputStream(newFile);
-          int len;
-          while ((len = zis.read(buffer)) > 0) {
-            fos.write(buffer, 0, len);
-          }
-          fos.close();
-        }
-        zipEntry = zis.getNextEntry();
-      }
-      zis.closeEntry();
-      zis.close();
+      levelName = unzip(zippedLevel, destDir);
       if (levelName == null) {
         throw new IOException("Level not found");
       } else {
         File levelFile = new File(destDir + "/" + levelName);
-        JAXBContext jaxbContext = JAXBContext.newInstance(Level.class);
-        Unmarshaller marsh = jaxbContext.createUnmarshaller();
-
-        Level level = (Level) marsh.unmarshal(levelFile);
-        level.turnIntoBacktracking();
-        level.resetLevel();
+        Level level = convertLevelfileToLevel(levelFile);
+        assert level != null;
+        for (int i = 0; i < level.getItemList().size(); i++) {
+          File currentPicture = new File(destDir
+              .getAbsolutePath() + "/picture" + i + ".png");
+          if (currentPicture.exists()) {
+            level.setItemIcon(i, new ImageIcon(new ImageIcon(currentPicture
+                .getAbsolutePath()).getImage()
+                .getScaledInstance(AppData.ICON_SIZE,
+                    AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
+          }
+        }
         if (level.getRobber().equals(Level.Robber.DR_META)) {
           GuiManager.openLevel(new GuiLevelPage(level), -1);
         } else if (level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
@@ -226,10 +245,16 @@ public final class CustomLevelManager {
           GuiManager.openLevel(new GuiLevelPageBacktracking(level), -1);
         }
       }
-
-    } catch (IOException | JAXBException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
+  }
 
+  public static Level convertLevelfileToLevel(final File levelFile) {
+    XStream xstream = new XStream(new DomDriver());
+    xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+    xstream.allowTypes(new Class[] {Level.class, Rucksack.class,
+        Item.class, ImageIcon.class});
+    return (Level) xstream.fromXML(levelFile);
   }
 }
