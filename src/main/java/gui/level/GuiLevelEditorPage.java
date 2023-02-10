@@ -42,7 +42,7 @@ public final class GuiLevelEditorPage {
   /**
    * The path for the default Icon.
    */
-  private static final String DEFAULTICONPATH = "stern.png";
+  private static final String DEFAULTICONPATH = "icons/DefaultBox.png";
 
   /**
    * The list of icons.

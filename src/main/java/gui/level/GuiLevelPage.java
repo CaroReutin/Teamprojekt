@@ -110,14 +110,13 @@ public class GuiLevelPage {
     } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
         || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
       flucht.addActionListener(e -> {
-        if (levelNumber >= 0) {
-          if (level.getCurrentValue() > UserDataManager.getScore(
-              GuiManager.numberLevel)) {
-            UserDataManager.newHighScore(GuiManager.numberLevel,
-                level.getCurrentValue());
-            UserDataManager.save();
-          }
+        if (level.getCurrentValue() > UserDataManager.getScore(
+            GuiManager.numberLevel)) {
+          UserDataManager.newHighScore(GuiManager.numberLevel,
+              level.getCurrentValue());
+          UserDataManager.save();
         }
+
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
         String message = null;
         message = generateEscapeMessage();
@@ -493,6 +492,7 @@ public class GuiLevelPage {
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebRot.png");
+    assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
       Image.SCALE_SMOOTH);
