@@ -76,74 +76,72 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public void itemButtons(final JPanel panelAvaible, final JPanel panelRucksack,
                           final JPanel pannelTrash,
                           final JPanel controlPannel) {
+    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
-    Font fontCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(
-        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle()
-            | Font.BOLD));
+    currentWeightLabel.setFont(bigFont);
 
     currentValueLabel = new JLabel("0€");
-    Font fontCurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(
-        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle()
-            | Font.BOLD));
+    currentValueLabel.setFont(bigFont);
 
-    //getLevel().turnIntoBacktracking();
     ArrayList<BacktrackingItem> items = getLevel().getBacktrackingItemList();
     labels = new JLabel[items.size()];
     rucksackLabels = new JLabel[items.size()];
     trashLabels = new JLabel[items.size()];
     for (int i = 0; i < items.size(); i++) {
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
-
-      Font f = labels[i].getFont();
-      labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+      labels[i].setFont(smallFont);
 
       rucksackLabels[i] = new JLabel("0");
-      Font fontRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fontRucksack.deriveFont(fontRucksack.getStyle()
-          | Font.BOLD));
+      rucksackLabels[i].setFont(smallFont);
+
       // Laufvariable
       int finalI = i;
-      BacktrackingItem item = items.get(i);
+
       //Available Labels
-      JLabel itemIcon = new JLabel(items.get(i).getImageIcon());
-      JLabel itemLabel = new JLabel(items.get(i)
-          .getName() + " (" + items.get(i).getWeight() + "g, "
-          + items.get(i).getValue() + "€), Anzahl: ");
-      //JLabel itemLabelAmount = new JLabel(labels[i].getText());
+      ImageIcon imageIcon = items.get(i).getImageIcon();
+      JLabel itemIcon = new JLabel(imageIcon);
+
+      JLabel itemLabel = new JLabel(" (" + items.get(i).getWeight() + "g, "
+          + items.get(i).getValue() + "€), ");
+      itemLabel.setFont(smallFont);
+
       itemLabel.setBackground(Color.white);
 
       //buttons rucksack
-      JButton putToRucksack = new JButton("lege in den Rucksack");
+      JButton putToRucksack = new JButton("mitnehmen");
+      putToRucksack.setFont(smallFont);
       putToRucksack.addActionListener(e -> handleButtons(finalI, true));
+
       //Trash Buttons and Labels
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
           .get(i).toString());
 
-      Font ft = trashLabels[i].getFont();
-      trashLabels[i].setFont(ft.deriveFont((f.getStyle() | Font.BOLD)));
+      trashLabels[i].setFont(mediumFont);
 
       //buttons trash
-      JButton putToTrash = new JButton("lege in den Müll");
+      JButton putToTrash = new JButton("wegwerfen");
+      putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
-      JButton currentRucksack = new JButton(items.get(i).getImageIcon());
+      JButton currentRucksack = new JButton(imageIcon);
       currentRucksack.addActionListener(e -> handleButtons(finalI, false));
 
       panelAvaible.add(itemIcon);
       panelAvaible.add(itemLabel);
       panelAvaible.add(labels[i]);
-      JLabel itemControlLabelIcon = new JLabel(items.get(i).getImageIcon());
+      JLabel itemControlLabelIcon = new JLabel(imageIcon);
       JLabel itemControlLabel =
-          new JLabel(items.get(i).getName() + " ("
+          new JLabel(" ("
               + items.get(i).getWeight() + "g, "
               + items.get(i).getValue() + "€)");
+      itemControlLabel.setFont(smallFont);
       controlPannel.add(itemControlLabelIcon);
       controlPannel.add(itemControlLabel);
       controlPannel.add(putToRucksack);
       controlPannel.add(putToTrash);
 
-      JButton currentTrash = new JButton(items.get(i).getImageIcon());
+      JButton currentTrash = new JButton(imageIcon);
       pannelTrash.add(currentTrash);
       pannelTrash.add(trashLabels[i]);
 
@@ -162,6 +160,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    */
   @Override
   public Container getPane() {
+    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
     Container pane = new Container();
     pane.setLayout(new GridLayout(1, 3));
 
@@ -172,13 +171,16 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     JPanel rightPanel = new JPanel(new GridLayout(2, 1));
     JPanel avaiblePanel = new JPanel(new GridLayout(
         getLevel().getItemList().size() + 1, 2));
-    avaiblePanel.add(new JLabel("Verfügbar:"));
+    JLabel available = new JLabel("Verfügbar:");
+    available.setFont(mediumFont);
+    avaiblePanel.add(available);
     // Panel with buttons were you can add items to rucksack or trash
     JPanel controlPannel = new JPanel();
-    controlPannel.add(new JLabel("Kontrollfläche: "));
+    JLabel control = new JLabel("Kontrollfläche: ");
+    control.setFont(mediumFont);
+    controlPannel.add(control);
     rightPanel.add(avaiblePanel, BorderLayout.NORTH);
     rightPanel.add(controlPannel, BorderLayout.SOUTH);
-
 
     // Rucksack Panel
     ImageIcon rucksackImage = new ImageIcon(url);
@@ -186,17 +188,35 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
         rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
     JPanel leftPanel = new JPanel(new GridLayout(2, 1));
-    JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0);
-    rucksackPanel.add(new JLabel("Rucksack:"));
-    JPanel trashPanel = new JPanel();
+    JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
+    JLabel rucksack = new JLabel("Rucksack:");
+    rucksack.setFont(mediumFont);
+    rucksackPanel.add(rucksack);
+
+    //füge Räuber ein
+    URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
+    ImageIcon robberImage = new ImageIcon(urlRobber);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
+      Image.SCALE_SMOOTH);
+
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
 
     //Trash Panel
-    trashPanel.add(new JLabel("Müll:"));
+    URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
+    ImageIcon trashImage = new ImageIcon(urlTrash);
+    Image scaledTrashImage = trashImage.getImage().getScaledInstance(200, 350,
+      Image.SCALE_SMOOTH);
+    JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20, 0);
+
+    JLabel trash = new JLabel("Müll:");
+    trash.setFont(mediumFont);
+    trashPanel.add(trash);
     leftPanel.add(rucksackPanel, BorderLayout.NORTH);
     leftPanel.add(trashPanel, BorderLayout.SOUTH);
 
     //Panel where escape-Button and clue-Button are
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    //JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    //Panel where escape-Button is
     this.escapeButton(centerPanel);
     if (GuiOptionsPage.backtrackingTipsAllowed) {
       this.clueButton(centerPanel);
@@ -206,12 +226,12 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
     //alles zusammenpuzzeln
     JButton treeButton = new JButton("Zeige Baum");
+    treeButton.setFont(mediumFont);
     treeButton.addActionListener(e -> buttonHandler.show());
     centerPanel.add(treeButton);
     pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
     pane.add(rightPanel, BorderLayout.EAST);
-
 
     return pane;
 

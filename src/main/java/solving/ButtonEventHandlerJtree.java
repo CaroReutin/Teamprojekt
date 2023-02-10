@@ -11,7 +11,6 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
   private int lastDepth;
 
   public ButtonEventHandlerJtree(final Level level) {
-    // TODO not tested might be broken
     lastDepth = 0;
     tree = new BacktrackingTree(level);
     myLevel = level;

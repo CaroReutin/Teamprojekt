@@ -137,7 +137,6 @@ public class Tree {
       buttons.get(row).get(col).setVisible(true);
     }
     labels.get(row - 1).get(col).setIcon(labelIcon);
-    // TODO Center Label Icon
     labels.get(row - 1).get(col).setVisible(true);
     treeFrame.getContentPane().revalidate();
     treeFrame.getContentPane().repaint();
