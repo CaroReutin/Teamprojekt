@@ -1,8 +1,10 @@
 package solving;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import rucksack.Item;
 import rucksack.Level;
 
@@ -113,7 +115,19 @@ public final class AppData {
       return null;
     }
     File levelFile = new File(destDir + "/" + levelName);
-    return CustomLevelManager.convertLevelfileToLevel(levelFile);
+    Level level = CustomLevelManager.convertLevelfileToLevel(levelFile);
+    assert level != null;
+    for (int i = 0; i < level.getItemList().size(); i++) {
+      File currentPicture = new File(destDir
+          .getAbsolutePath() + "/picture" + i + ".png");
+      if (currentPicture.exists()) {
+        level.setItemIcon(i, new ImageIcon(new ImageIcon(currentPicture
+            .getAbsolutePath()).getImage()
+            .getScaledInstance(AppData.ICON_SIZE,
+                AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
+      }
+    }
+    return level;
   }
 
   /**
