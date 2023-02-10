@@ -160,4 +160,8 @@ public class Tree {
     }
     return solution;
   }
+
+  public void close() {
+    treeFrame.dispose();
+  }
 }

@@ -2,6 +2,8 @@ package solving;
 
 import backtrackingtree.BacktrackingTree;
 import betatree.Tree;
+import gui.level.GuiLevelPageBacktracking;
+import gui.level.GuiManager;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -246,5 +248,12 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
   @Override
   public String getSolution() {
     return tree.getSolution();
+  }
+
+  @Override
+  public void resetLevel(final Level level, final int levelNumber) {
+    level.resetLevel();
+    tree.close();
+    GuiManager.openLevel(new GuiLevelPageBacktracking(level), levelNumber);
   }
 }

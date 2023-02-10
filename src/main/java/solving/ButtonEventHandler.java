@@ -20,4 +20,6 @@ public abstract class ButtonEventHandler {
   public abstract void show();
 
   public abstract String getSolution();
+
+  public abstract void resetLevel(Level level, int levelNumber);
 }

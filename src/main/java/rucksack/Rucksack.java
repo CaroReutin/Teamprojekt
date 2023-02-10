@@ -84,8 +84,10 @@ public class Rucksack {
   public void reset() {
     inRucksackAmountList = new ArrayList<>();
     availableItemAmountList = new ArrayList<>();
+    inTrashAmountList = new ArrayList<>();
     for (Integer amount : itemAmountList) {
       inRucksackAmountList.add(0);
+      inTrashAmountList.add(0);
       availableItemAmountList.add(amount);
     }
     currentWeight = 0;
