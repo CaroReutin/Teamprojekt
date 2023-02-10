@@ -1,10 +1,6 @@
 package gui.level;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -74,6 +70,7 @@ public class GuiOptionsPage {
    * @return returns the Container that contains the content of the options page
    */
   public Container getPane() {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     Container pane = new Container();
     pane.setLayout(new BorderLayout());
 
@@ -103,12 +100,14 @@ public class GuiOptionsPage {
 
     //erzeuge Buttons
     JButton enterPassword = new JButton("Eingabe");
+    enterPassword.setFont(font);
     enterPasswordPanel.add(enterPassword);
     enterPassword.addActionListener(e ->
         confirmPassword(passwordInput.getText(), pane));
 
     JPanel backPanel = new JPanel();
     JButton back = new JButton("Zurück");
+    back.setFont(font);
     backPanel.add(back);
     back.addActionListener(e -> {
       GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)

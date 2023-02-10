@@ -205,7 +205,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
       Image.SCALE_SMOOTH);
 
-    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 100);
 
     //Trash Panel
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
