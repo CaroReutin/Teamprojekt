@@ -4,27 +4,34 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+
 import solving.AppData;
 
 /**
  * The class GUIOptionsPage holds the pane of the optionspage.
  */
 public class GuiOptionsPage {
+  /**
+   * the boolean value whether the tips for backtracking levels are unlocked
+   */
   public static boolean backtrackingTipsAllowed = false;
   public static boolean greedyTipsAllowed = false;
   /**
    * the number of rows on the pane.
    */
-  public static final int ROWS_ON_PANE = 3;
+  public static final int ROWS_ON_PANE = 4;
 
   /**
    * the preferred length of the field.
@@ -90,6 +97,7 @@ public class GuiOptionsPage {
     //erzeuge JPanels
     JPanel enterPasswordPanel = new JPanel();
     JPanel passwordInputPanel = new JPanel();
+    JPanel descriptionPanel = new JPanel();
     passwordInputPanel.add(passwordInput);
     passwordInput.setValue("");
 
@@ -108,12 +116,45 @@ public class GuiOptionsPage {
       GuiManager.openMainMenu();
     });
 
+    ImageIcon clueSymbol = new ImageIcon(
+            "src/main/resources/icons/clueSymbol.png");
+    Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
+            60, 60, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
+    JButton clueButton = new JButton(newClueSymbol);
+    descriptionPanel.add(clueButton);
+    clueButton.addActionListener(e -> {
+      String editorMessage = null;
+      try {
+        editorMessage = GuiLevelPage.fileToString(
+                "src/main/resources/texts/4_Options.txt");
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+      String[] editorButtons = {"Verstanden"};
+      int chosenEditorButton = JOptionPane.showOptionDialog(null,
+              editorMessage,
+              "Passworteingabe",
+              JOptionPane.DEFAULT_OPTION,
+              JOptionPane.INFORMATION_MESSAGE,
+              null,
+              editorButtons, editorButtons[0]);
+      switch (chosenEditorButton) {
+        case 0 -> {
+          GuiManager.openOptionsMenu();
+        }
+        default -> { //should not happen...
+        }
+      }
+    });
+
     JPanel emptyPanel = new JPanel();
 
     //add panels on subpane
     subPane.add(passwordInputPanel);
     subPane.add(enterPasswordPanel);
     subPane.add(backPanel);
+    subPane.add(descriptionPanel);
     //add panels and subpane on pane
     pane.add(subPane, BorderLayout.CENTER);
     return pane;

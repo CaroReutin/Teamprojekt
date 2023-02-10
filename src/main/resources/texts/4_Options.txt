@@ -1,7 +1,5 @@
 Mithilfe der korrekten Passwörter kannst du hier
-- alle Greedy-Level von Beginn an freischalten.
-- alle Backtracking-Level von Beginn an freischalten.
-- die Tipps nach dem Abschluss eines Levels verbessern.
-Ansonsten muss man alle Level nacheinander spielen. 
-Die Tipps nach dem Ende eines Levels zeigen dir nur an,
-ob das gesuchte Ergebnis ausgewählt wurde oder nicht.
+die Hinweise während eines Levels freischalten.
+Für die Greedy-Level sowie die Backtracking-Level
+gibt es jeweils ein eigenes Passwort.
+Ansonsten muss man alle Level ohne Tipps spielen.
