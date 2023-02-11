@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 import rucksack.Item;
 import rucksack.Level;
@@ -99,6 +100,10 @@ public final class AppData {
     boolean ignoreResult = new File(customLevelPictureFolder).mkdirs();
     PASSWORDS.add("Gr33dy");
     PASSWORDS.add("B4cktr4cking");
+
+    initializeBeginningLevel();
+    initializeGreedy();
+    initializeBacktrackingLevel();
   }
 
 
@@ -134,8 +139,9 @@ public final class AppData {
    * Initialize beginning level.
    */
   public static void initializeBeginningLevel() {
-    LEVEL_ZERO[0] = loadLevel(new File("src/main/resources/"
-        + "Level/Startlevel.zip"));
+    LEVEL_ZERO[0] = loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+      .getResource("Level/Startlevel.zip")).getPath()));
+
   }
 
   /**

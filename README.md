@@ -17,18 +17,35 @@ modifiziert werden.
 # Ausführung
 Das Programm wird auf Linux, MacOS und Windows unterstützt.
 
-##Linux
+## Linux (Ubuntu)
 
+### Benötigte Programme installieren.
+$ sudo apt update && sudo apt upgrade -y
+$ sudo apt install git -y
+$ sudo apt install maven -y
+$ sudo apt install openjdk-17-jre-headless
+$ sudo apt-get install openjdk-17-jre
 
+falls:
+$ mvn --version
+eine andere java version als jdk 17 anzeigt, wähle über
+$ sudo update-alternatives --config java
+jdk 17 aus
 
-##Windows
-git pull 
+### Das Projekt klonen und ausführen (Linux und Windows?)
 
-mvn clean
+$ git clone https://github.com/CaroReutin/Teamprojekt <directory>
+(wobei <directory> der Ordnerpfad ist an dem das Projekt gespeichert werden soll)
+(wenn beim Einloggen in GitHub nach dem passwort gefragt wird, muss statdessen ein PersonalAccesToken eingegeben werden,
+https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic)
 
-mvn package
-
-
+Das Projekt kann nun bearbeitet werden.
+Um das programm auszuführen öffne das Terminal in <directory> und gebe ein:
+$ mvn clean 
+$ mvn package
+$ java -jar target/<jarname>
+(wobei <jarname> der name der jar mit den dependencies ist, bsp. 
+optimalheist-1.0-SNAPSHOT-jar-with-dependencies.jar)
 
 
 ##MacOS

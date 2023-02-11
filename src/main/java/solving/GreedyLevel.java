@@ -1,6 +1,8 @@
 package solving;
 
 import java.io.File;
+import java.util.Objects;
+
 import rucksack.Level;
 
 
@@ -26,35 +28,42 @@ public final class GreedyLevel {
   public static void initializeGreedy() {
     // Greedy Level 1
     LEVEL_GREEDY[0] =
-      AppData.loadLevel(new File("src/main/resources/Level/Greedy1.zip"));
+      AppData.loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+        .getResource("Level/Greedy1.zip")).getPath()));
 
     // Greedy Level 2
     LEVEL_GREEDY[1] =
-      AppData.loadLevel(new File("src/main/resources/Level/Greedy2.zip"));
+      AppData.loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+        .getResource("Level/Greedy2.zip")).getPath()));
 
     //Greedy Level 3
     LEVEL_GREEDY[2] =
-      AppData.loadLevel(new File("src/main/resources/Level/Greedy3.zip"));
+      AppData.loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+        .getResource("Level/Greedy3.zip")).getPath()));
 
 
     //Greedy Level 4
     LEVEL_GREEDY[3] =
-      AppData.loadLevel(new File("src/main/resources/Level/Greedy4.zip"));
+      AppData.loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+        .getResource("Level/Greedy4.zip")).getPath()));
 
 
     //Greedy Level 5
     LEVEL_GREEDY[4] =
-      AppData.loadLevel(new File("src/main/resources/Level/Greedy5.zip"));
+      AppData.loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+        .getResource("Level/Greedy5.zip")).getPath()));
 
 
     //Greedy Level 6
     LEVEL_GREEDY[5] =
-      AppData.loadLevel(new File("src/main/resources/Level/Greedy6.zip"));
+      AppData.loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+        .getResource("Level/Greedy6.zip")).getPath()));
 
 
     //Greedy Level 7
     LEVEL_GREEDY[6] =
-      AppData.loadLevel(new File("src/main/resources/Level/Greedy7.zip"));
+      AppData.loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+        .getResource("Level/Greedy7.zip")).getPath()));
 
   }
 
