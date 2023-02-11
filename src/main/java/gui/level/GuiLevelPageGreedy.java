@@ -129,7 +129,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(300, 800,
+        rucksackImage.getImage().getScaledInstance(300, 700,
             java.awt.Image.SCALE_SMOOTH);
 
     //füge Räuber ein
