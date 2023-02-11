@@ -121,8 +121,10 @@ public final class GuiLevelEditorPage {
     Container leftSide = new Container();
     leftSide.setLayout(new GridLayout(5, 2));
 
+    Font leveleditorFont = new Font("Arial",
+        Font.BOLD + Font.ITALIC, 20);
     JLabel titel = new JLabel("Titel: ");
-    titel.setFont(AppData.FONT_STYLE);
+    titel.setFont(leveleditorFont);
     leftSide.add(titel);
 
     JTextField titleField = new JTextField("");
@@ -132,7 +134,7 @@ public final class GuiLevelEditorPage {
     leftSide.add(titleField);
 
     JLabel capacity = new JLabel("Kapazität: ");
-    capacity.setFont(AppData.FONT_STYLE);
+    capacity.setFont(leveleditorFont);
     leftSide.add(capacity);
 
 
@@ -143,7 +145,7 @@ public final class GuiLevelEditorPage {
     leftSide.add(capacityField);
 
     JLabel modus = new JLabel("Modus: ");
-    modus.setFont(AppData.FONT_STYLE);
+    modus.setFont(leveleditorFont);
     leftSide.add(modus);
 
     String[] robberOptions = new String[Level.Robber.values().length];
@@ -154,7 +156,7 @@ public final class GuiLevelEditorPage {
     leftSide.add(modeDropdown);
 
     Font fontButtons = new Font("Arial",
-        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL / 2);
+        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL / 2 - 2);
 
     JButton save = new JButton("Speichern");
     save.addActionListener(e -> saveLevel(pane,
@@ -249,6 +251,9 @@ public final class GuiLevelEditorPage {
     NAME_FIELDS = new ArrayList<>();
     NAME_LABELS = new ArrayList<>();
 
+    Font panelFont = new Font("Arial",
+        Font.BOLD + Font.ITALIC, 15);
+
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
       itemPanels.add(new Container());
       itemPanels.get(i).setLayout(new GridLayout(1, 3));
@@ -307,13 +312,15 @@ public final class GuiLevelEditorPage {
       });
       itemPanels.get(i).add(ICON_SELECTORS.get(i));
 
-      NAME_LABELS.add(new JLabel("Bezeichnung: "));
+      NAME_LABELS.add(new JLabel("Name: "));
+      NAME_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(NAME_LABELS.get(i));
 
       NAME_FIELDS.add(new JTextField());
       fieldPanels.get(i).add(NAME_FIELDS.get(i));
 
       VALUE_LABELS.add(new JLabel("Wert: "));
+      VALUE_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(VALUE_LABELS.get(i));
 
       VALUE_FIELDS.add(new JTextField());
@@ -323,6 +330,7 @@ public final class GuiLevelEditorPage {
       fieldPanels.get(i).add(VALUE_FIELDS.get(i));
 
       WEIGHT_LABELS.add(new JLabel("Gewicht: "));
+      WEIGHT_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(WEIGHT_LABELS.get(i));
 
       WEIGHT_FIELDS.add(new JTextField());
@@ -332,6 +340,7 @@ public final class GuiLevelEditorPage {
       fieldPanels.get(i).add(WEIGHT_FIELDS.get(i));
 
       AMOUNT_LABELS.add(new JLabel("Anzahl: "));
+      AMOUNT_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(AMOUNT_LABELS.get(i));
 
       AMOUNT_FIELDS.add(new JTextField());
