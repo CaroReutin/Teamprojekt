@@ -3,9 +3,11 @@ package solving;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Objects;
 import javax.swing.ImageIcon;
+import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
 
@@ -139,8 +141,18 @@ public final class AppData {
    * Initialize beginning level.
    */
   public static void initializeBeginningLevel() {
-    LEVEL_ZERO[0] = loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
-      .getResource("Level/Startlevel.zip")).getPath()));
+    try {
+      InputStream is = AppData.class.getClassLoader().getResourceAsStream("Level/Startlevel.zip");
+      File file = File.createTempFile("startlevel", "zip");
+      FileUtils.copyInputStreamToFile(is, file);
+      LEVEL_ZERO[0] = loadLevel(file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+
+    //LEVEL_ZERO[0] = loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
+    //  .getResource("Level/Startlevel.zip")).getPath()));
 
   }
 
