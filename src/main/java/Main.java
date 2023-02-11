@@ -1,6 +1,4 @@
 import gui.level.GuiManager;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import solving.AppData;
 import solving.UserDataManager;
 

@@ -3,28 +3,27 @@ package rucksack;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.swing.ImageIcon;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.thoughtworks.xstream.annotations.*;
 
 /**
  * Item that can be stolen.
  */
-@XmlRootElement
+@XStreamAlias("Item")
 public class Item implements Serializable {
   /**
    * the value of the item.
    */
-  @XmlElement
+  @XStreamAlias("Value")
   private final int value;
   /**
    * the weight of the item.
    */
-  @XmlElement
+  @XStreamAlias("Weight")
   private final int weight;
   /**
    * the name of the item.
    */
-  @XmlElement
+  @XStreamAlias("Name")
   private final String name;
 
   private ImageIcon imageIcon;

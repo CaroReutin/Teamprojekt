@@ -47,62 +47,62 @@ public final class GuiLevelEditorPage {
   /**
    * The list of icons.
    */
-  private static final ArrayList<ImageIcon> ICONS = new ArrayList<>();
+  private static ArrayList<ImageIcon> ICONS = new ArrayList<>();
   /**
    * The list of name TextFields.
    */
-  private static final ArrayList<JTextField> NAME_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> NAME_FIELDS = new ArrayList<>();
   /**
    * The list of weight TextFields.
    */
-  private static final ArrayList<JTextField> WEIGHT_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> WEIGHT_FIELDS = new ArrayList<>();
   /**
    * The list of value TextFields.
    */
-  private static final ArrayList<JTextField> VALUE_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> VALUE_FIELDS = new ArrayList<>();
   /**
    * The list of amount TextFields.
    */
-  private static final ArrayList<JTextField> AMOUNT_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> AMOUNT_FIELDS = new ArrayList<>();
   /**
    * The list of name labels.
    */
-  private static final ArrayList<JLabel> NAME_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> NAME_LABELS = new ArrayList<>();
   /**
    * The list of weight labels.
    */
-  private static final ArrayList<JLabel> WEIGHT_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> WEIGHT_LABELS = new ArrayList<>();
   /**
    * The list of value labels.
    */
-  private static final ArrayList<JLabel> VALUE_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> VALUE_LABELS = new ArrayList<>();
   /**
    * The list of amount labels.
    */
-  private static final ArrayList<JLabel> AMOUNT_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> AMOUNT_LABELS = new ArrayList<>();
   /**
    * The list of weight documents.
    */
-  private static final ArrayList<AbstractDocument>
+  private static ArrayList<AbstractDocument>
       WEIGHT_FIELD_DOCUMENTS = new ArrayList<>();
   /**
    * The list of amount documents.
    */
-  private static final ArrayList<AbstractDocument>
+  private static ArrayList<AbstractDocument>
       AMOUNT_FIELD_DOCUMENTS = new ArrayList<>();
   /**
    * The list of value documents.
    */
-  private static final ArrayList<AbstractDocument>
+  private static ArrayList<AbstractDocument>
       VALUE_FIELD_DOCUMENTS = new ArrayList<>();
   /**
    * The list of icon selector buttons.
    */
-  private static final ArrayList<JButton> ICON_SELECTORS = new ArrayList<>();
+  private static ArrayList<JButton> ICON_SELECTORS = new ArrayList<>();
   /**
    * The amount of currently visible itemPanels.
    */
-  private static int panelCounter = 0;
+  private static int panelCounter;
 
   /**
    * The Level Editor.
@@ -121,8 +121,10 @@ public final class GuiLevelEditorPage {
     Container leftSide = new Container();
     leftSide.setLayout(new GridLayout(5, 2));
 
+    Font leveleditorFont = new Font("Arial",
+        Font.BOLD + Font.ITALIC, 20);
     JLabel titel = new JLabel("Titel: ");
-    titel.setFont(AppData.FONT_STYLE);
+    titel.setFont(leveleditorFont);
     leftSide.add(titel);
 
     JTextField titleField = new JTextField("");
@@ -132,7 +134,7 @@ public final class GuiLevelEditorPage {
     leftSide.add(titleField);
 
     JLabel capacity = new JLabel("Kapazität: ");
-    capacity.setFont(AppData.FONT_STYLE);
+    capacity.setFont(leveleditorFont);
     leftSide.add(capacity);
 
 
@@ -143,7 +145,7 @@ public final class GuiLevelEditorPage {
     leftSide.add(capacityField);
 
     JLabel modus = new JLabel("Modus: ");
-    modus.setFont(AppData.FONT_STYLE);
+    modus.setFont(leveleditorFont);
     leftSide.add(modus);
 
     String[] robberOptions = new String[Level.Robber.values().length];
@@ -154,7 +156,7 @@ public final class GuiLevelEditorPage {
     leftSide.add(modeDropdown);
 
     Font fontButtons = new Font("Arial",
-        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL / 2);
+        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL / 2 - 2);
 
     JButton save = new JButton("Speichern");
     save.addActionListener(e -> saveLevel(pane,
@@ -203,6 +205,14 @@ public final class GuiLevelEditorPage {
     JButton reset = new JButton("Reset");
     reset.addActionListener(e -> {
       panelCounter = 0;
+      for (int i = 0; i < ICONS.size(); i++) {
+        ICONS.set(i, new ImageIcon(DEFAULTICONPATH));
+        NAME_FIELDS.get(i).setText("");
+        WEIGHT_FIELDS.get(i);
+        VALUE_FIELDS.get(i).setText("");
+        AMOUNT_FIELDS.get(i).setText("");
+        ICON_SELECTORS.get(i).setIcon(ICONS.get(i));
+      }
       GuiManager.openLevelEditor();
     });
     reset.setFont(fontButtons);
@@ -217,6 +227,7 @@ public final class GuiLevelEditorPage {
   }
 
   private void addMiddleAndRightPart(final Container pane) {
+    panelCounter = 0;
     Container middle = new Container();
     middle.setLayout(new GridLayout(8, 1));
 
@@ -226,6 +237,22 @@ public final class GuiLevelEditorPage {
     ArrayList<Container> itemPanels = new ArrayList<>();
     ArrayList<Container> fieldPanels = new ArrayList<>();
     ArrayList<Container> labelPanels = new ArrayList<>();
+    ICONS = new ArrayList<>();
+    ICON_SELECTORS = new ArrayList<>();
+    AMOUNT_FIELDS = new ArrayList<>();
+    AMOUNT_LABELS = new ArrayList<>();
+    AMOUNT_FIELD_DOCUMENTS = new ArrayList<>();
+    VALUE_FIELDS = new ArrayList<>();
+    VALUE_LABELS = new ArrayList<>();
+    VALUE_FIELD_DOCUMENTS = new ArrayList<>();
+    WEIGHT_FIELDS = new ArrayList<>();
+    WEIGHT_LABELS = new ArrayList<>();
+    WEIGHT_FIELD_DOCUMENTS = new ArrayList<>();
+    NAME_FIELDS = new ArrayList<>();
+    NAME_LABELS = new ArrayList<>();
+
+    Font panelFont = new Font("Arial",
+        Font.BOLD + Font.ITALIC, 15);
 
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
       itemPanels.add(new Container());
@@ -285,13 +312,15 @@ public final class GuiLevelEditorPage {
       });
       itemPanels.get(i).add(ICON_SELECTORS.get(i));
 
-      NAME_LABELS.add(new JLabel("Bezeichnung: "));
+      NAME_LABELS.add(new JLabel("Name: "));
+      NAME_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(NAME_LABELS.get(i));
 
       NAME_FIELDS.add(new JTextField());
       fieldPanels.get(i).add(NAME_FIELDS.get(i));
 
       VALUE_LABELS.add(new JLabel("Wert: "));
+      VALUE_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(VALUE_LABELS.get(i));
 
       VALUE_FIELDS.add(new JTextField());
@@ -301,6 +330,7 @@ public final class GuiLevelEditorPage {
       fieldPanels.get(i).add(VALUE_FIELDS.get(i));
 
       WEIGHT_LABELS.add(new JLabel("Gewicht: "));
+      WEIGHT_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(WEIGHT_LABELS.get(i));
 
       WEIGHT_FIELDS.add(new JTextField());
@@ -310,6 +340,7 @@ public final class GuiLevelEditorPage {
       fieldPanels.get(i).add(WEIGHT_FIELDS.get(i));
 
       AMOUNT_LABELS.add(new JLabel("Anzahl: "));
+      AMOUNT_LABELS.get(i).setFont(panelFont);
       labelPanels.get(i).add(AMOUNT_LABELS.get(i));
 
       AMOUNT_FIELDS.add(new JTextField());

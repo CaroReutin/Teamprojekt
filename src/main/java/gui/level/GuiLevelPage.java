@@ -1,9 +1,7 @@
 package gui.level;
 
-import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -99,6 +97,10 @@ public class GuiLevelPage {
             }
           }
           case 1 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openMainMenu();
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
@@ -133,6 +135,10 @@ public class GuiLevelPage {
             }
           }
           case 1 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevelSelectScreen();
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
@@ -165,12 +171,20 @@ public class GuiLevelPage {
             }
           }
           case 1 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevel(
                 GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
                     [GuiManager.numberLevel + 1], GuiManager.numberLevel + 1);
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
           case 2 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevelSelectScreen();
             System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
           }

@@ -1,10 +1,11 @@
 package solving;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import java.io.File;
 import java.io.FileOutputStream;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import java.io.IOException;
 
 
 /**
@@ -57,17 +58,16 @@ public final class UserDataManager {
   public static void save(final String saveFolder) {
     Boolean ignoreResult = new File(saveFolder).mkdirs();
     String saveFilePath = saveFolder + "/userData.xml";
+    XStream xstream = new XStream(new DomDriver());
+    xstream.alias("UserData", UserData.class);
+    String xml = xstream.toXML(data);
+    File output = new File(saveFilePath);
     try {
-      FileOutputStream fos = new FileOutputStream(saveFilePath);
-      JAXBContext jaxbContext = JAXBContext.newInstance(UserData.class);
-      Marshaller marsh = jaxbContext.createMarshaller();
-
-      marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-      marsh.marshal(data, fos);
-
+      FileOutputStream fos = new FileOutputStream(output);
+      byte[] strToBytes = xml.getBytes();
+      fos.write(strToBytes);
       fos.close();
-    } catch (Exception e) {
+    } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
@@ -105,14 +105,15 @@ public final class UserDataManager {
       save(saveFolder);
       return;
     }
-    try {
-      JAXBContext jaxbContext = JAXBContext.newInstance(UserData.class);
-      Unmarshaller marsh = jaxbContext.createUnmarshaller();
+    data = getData(saveFile);
+  }
 
-      data = (UserData) marsh.unmarshal(saveFile);
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
+  private static UserData getData(final File saveFile) {
+    XStream xstream = new XStream(new DomDriver());
+    xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+    xstream.allowTypes(new Class[]{UserData.class});
+    xstream.alias("UserData", UserData.class);
+    return (UserData) xstream.fromXML(saveFile);
   }
 
   /**
@@ -150,7 +151,7 @@ public final class UserDataManager {
    * Data to string string.
    *
    * @return returns the Scores in format x1|x2|...|x14|x15
-   *      where xn is the score of the nth Level
+   * where xn is the score of the nth Level
    */
   public static String dataToString() {
     return data.toString();

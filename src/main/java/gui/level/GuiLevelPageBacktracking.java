@@ -300,6 +300,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
             }
           }
           case 1 -> {
+            buttonHandler.resetLevel(getLevel(), levelNumber);
+            for (int i = 0; i < getLevel().getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openMainMenu();
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
@@ -335,6 +339,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
             }
           }
           case 1 -> {
+            buttonHandler.resetLevel(getLevel(), levelNumber);
+            for (int i = 0; i < getLevel().getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevelSelectScreen();
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
@@ -367,6 +375,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
             }
           }
           case 1 -> {
+            buttonHandler.resetLevel(getLevel(), levelNumber);
+            for (int i = 0; i < getLevel().getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevel(
                 GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
                     [GuiManager.numberLevel + 1], GuiManager.numberLevel + 1);

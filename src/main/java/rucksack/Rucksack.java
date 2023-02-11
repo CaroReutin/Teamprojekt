@@ -1,24 +1,23 @@
 package rucksack;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.util.ArrayList;
 import java.util.Comparator;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * the rucksack.
  */
-@XmlRootElement
+@XStreamAlias("Rucksack")
 public class Rucksack {
   /**
    * the list with all items.
    */
-  @XmlElement
+  @XStreamAlias("ItemList")
   private ArrayList<Item> itemList;
   /**
    * the list with the amount of the items.
    */
-  @XmlElement
+  @XStreamAlias("ItemAmountList")
   private final ArrayList<Integer> itemAmountList;
   /**
    * the list with the amount of available items.
@@ -39,7 +38,7 @@ public class Rucksack {
   /**
    * the capacity of the rucksack.
    */
-  @XmlElement
+  @XStreamAlias("capacity")
   private final int capacity;
 
   /**
