@@ -411,12 +411,11 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     SolverBacktracking s = new SolverBacktracking();
     String solutionString = this.buttonHandler.getSolution();
     if (solutionString == null) {
-      return "Drücke vor beenden des Levels den Knopf im Baum der,"
+      return "Drücke vor beenden des Levels das Blatt im Baum, welches"
               + "der richtigen Lösung entspricht.";
     }
     ArrayList<Item> solution = new ArrayList<>();
     for (int i = 0; i < getLevel().getBacktrackingItemList().size(); i++) {
-      System.out.println(solutionString);
       if (solutionString.charAt(i) == '0') {
         solution.add(getLevel().getItemList().get(i));
       }

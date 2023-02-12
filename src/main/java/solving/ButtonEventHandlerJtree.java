@@ -18,7 +18,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
 
   public ButtonEventHandlerJtree(final Level level) {
     lastDepth = 0;
-    tree = new BacktrackingJTree();
+    tree = new BacktrackingJTree(level);
     myLevel = level;
     myLevel.turnIntoBacktracking();
     ArrayList<BacktrackingItem> oldList = level.getBacktrackingItemList();
@@ -154,7 +154,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
 
   @Override
   public String getSolution() {
-    return null;
+    return tree.getSolution();
   }
 
   @Override
