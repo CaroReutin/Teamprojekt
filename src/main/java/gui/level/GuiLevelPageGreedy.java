@@ -93,17 +93,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksackIcon = new JButton(currentIcon);
-      currentRucksackIcon.addActionListener(e -> {
-        if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
-          return;
-        }
-        if (!getLevel().getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          getLevel().moveFromRucksack(finalI);
-          updateLabel(finalI);
-        }
-
-      });
+      JLabel currentRucksackIcon = new JLabel(currentIcon);
 
       JPanel infosPanel = new JPanel();
       infosPanel.add(currentWeightLabel);
