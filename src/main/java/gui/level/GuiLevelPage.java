@@ -9,7 +9,6 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.InputMismatchException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -227,10 +226,7 @@ public class GuiLevelPage {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/levelTexts/X1.txt");
-          File file = File.createTempFile("Own1", "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/levelTexts/Editor1.txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -253,10 +249,7 @@ public class GuiLevelPage {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/levelTexts/E1.txt");
-          File file = File.createTempFile("Eing1", "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/levelTexts/Eingangslevel1.txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -280,10 +273,7 @@ public class GuiLevelPage {
         String message = null;
         try {
           int fileNumber = levelNumber + 1;
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/levelTexts/G" + fileNumber + ".txt");
-          File file = File.createTempFile("Greedy" + fileNumber, "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/levelTexts/Greedy" + fileNumber + ".txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -308,10 +298,7 @@ public class GuiLevelPage {
         String message = null;
         try {
           int fileNumber = levelNumber - LAST_GREEDY_LEVELNUMBER + 1;
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/levelTexts/B" + fileNumber + ".txt");
-          File file = File.createTempFile("Backtracking" + fileNumber, "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/levelTexts/Backtracking" + fileNumber + ".txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -354,10 +341,7 @@ public class GuiLevelPage {
         //case: correct solution
         String message = null;
         try {
-         InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/2_1_1_OptimalSolution.txt");
-         File file = File.createTempFile("2_1_1_OptimalSolution", "txt");
-         FileUtils.copyInputStreamToFile(is, file);
-         message = fileToStringFromFile(file);
+         message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -365,10 +349,7 @@ public class GuiLevelPage {
       } else {
         String message = null;
         try {
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/2_1_2_SuboptimalSolution.txt");
-          File file = File.createTempFile("2_1_2_SuboptimalSolution", "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -379,10 +360,7 @@ public class GuiLevelPage {
               .sortLikeGreedy(sg.solveAlgorithm(this.level)))) {
         String message = null;
         try {
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/2_1_1_OptimalSolution.txt");
-          File file = File.createTempFile("2_1_1_OptimalSolution", "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -391,10 +369,7 @@ public class GuiLevelPage {
               .sortLikeGreedy(s.solveAlgorithm(this.level)))) {
         String message = null;
         try {
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/2_1_3_OptimalButWrongSolution.txt");
-          File file = File.createTempFile("2_1_3_OptimalButWrongSolution", "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/2_1_3_OptimalButWrongSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -402,10 +377,7 @@ public class GuiLevelPage {
       } else {
         String message = null;
         try {
-          InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream("texts/2_1_2_SuboptimalSolution.txt");
-          File file = File.createTempFile("2_1_2_SuboptimalSolution", "txt");
-          FileUtils.copyInputStreamToFile(is, file);
-          message = fileToStringFromFile(file);
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -418,11 +390,19 @@ public class GuiLevelPage {
 
   /**
    * Method for formatting a TXT-file into a single String instance.
-   * @param fileName name of the TXT-file supposed to be shown
+   * @param path name of the TXT-file supposed to be shown
    * @return the String of the given TXT-file
    */
-  public static String fileToStringFromFile(final File fileName) throws IOException {
-    FileReader reader = new FileReader(fileName.getPath());
+  public static String fileToStringFromFile(final String path) throws IOException {
+    InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream(path);
+    String[] pathArguments = path.split("[/.]");
+    int size = pathArguments.length;
+    String prefix = pathArguments[size - 2];
+    String suffix = pathArguments[size - 1];
+    File file = File.createTempFile(prefix, suffix);
+    FileUtils.copyInputStreamToFile(is, file);
+
+    FileReader reader = new FileReader(file.getPath());
     BufferedReader inBuffer = new BufferedReader(reader);
     StringBuilder message = new StringBuilder();
     String line = inBuffer.readLine();
