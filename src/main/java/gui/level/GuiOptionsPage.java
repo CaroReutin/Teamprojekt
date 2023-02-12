@@ -24,11 +24,73 @@ import solving.AppData;
  */
 public class GuiOptionsPage {
   /**
-   * the boolean value whether the tips for backtracking levels are unlocked
+   * The boolean value whether the tips for backtracking levels are unlocked.
    */
-  public static boolean backtrackingTipsAllowed = false;
-  public static boolean greedyTipsAllowed = false;
-  public static boolean altTreeSelected = false;
+  private static boolean backtrackingTipsAllowed = false;
+
+  /**
+   * Setter method for the value of backtracking clues being allowed.
+   *
+   * @param backtrackingTipsAllowed boolean value whether clues are allowed
+   */
+  public static void setBacktrackingTipsAllowed(
+          final boolean backtrackingTipsAllowed) {
+    GuiOptionsPage.backtrackingTipsAllowed = backtrackingTipsAllowed;
+  }
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getBacktrackingTipsAllowed() {
+    return backtrackingTipsAllowed;
+  }
+
+  /**
+   * The boolean value whether the clues for the greedy levels are unlocked.
+   */
+  private static boolean greedyTipsAllowed = false;
+  /**
+   * Setter method for the value of greedy clues being allowed.
+   *
+   * @param greedyTipsAllowed boolean value whether clues are allowed
+   */
+  public static void setGreedyTipsAllowed(
+          final boolean greedyTipsAllowed) {
+    GuiOptionsPage.greedyTipsAllowed = greedyTipsAllowed;
+  }
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getGreedyTipsAllowed() {
+    return greedyTipsAllowed;
+  }
+  /**
+   * The boolean value whether the alternate version of
+   * the tree depiction is necessary.
+   */
+  private static boolean altTreeSelected = false;
+  /**
+   * Setter method for selection of the alternate tree version.
+   *
+   * @param altTreeSelected boolean value whether the alternate version
+   *                        of the backtracking tree is selected
+   */
+  public static void setAltTreeSelected(
+          final boolean altTreeSelected) {
+    GuiOptionsPage.altTreeSelected = altTreeSelected;
+  }
+  /**
+   * Getter method for the boolean value whether
+   * the alternate tree version is selected.
+   *
+   * @return the value of altTreeSelected
+   */
+  public static boolean getAltTreeSelected() {
+    return altTreeSelected;
+  }
   /**
    * the number of rows on the pane.
    */
@@ -42,7 +104,7 @@ public class GuiOptionsPage {
   /**
    * the preferred width of the field.
    */
-  public static final int HIGHT_OF_FIELD = 50;
+  public static final int HEIGHT_OF_FIELD = 50;
 
   /**
    * Compares the given String with the set of implemented passwords.
@@ -54,12 +116,12 @@ public class GuiOptionsPage {
   private static void confirmPassword(final String pw, final Container parent) {
     if (pw.matches(AppData.getPassword(0))) {
       JOptionPane.showMessageDialog(parent,
-          "Hinweise für Greedy-Level sind nun freigeschalten.",
+          "Hinweise für Greedy-Level sind nun freigeschaltet.",
           "Erfolg", JOptionPane.INFORMATION_MESSAGE);
       GuiOptionsPage.greedyTipsAllowed = true;
     } else if (pw.matches(AppData.getPassword(1))) {
       JOptionPane.showMessageDialog(parent,
-          "Hinweise für Backtracking-Level sind nun freigeschalten.",
+          "Hinweise für Backtracking-Level sind nun freigeschaltet.",
           "Erfolg", JOptionPane.INFORMATION_MESSAGE);
       GuiOptionsPage.backtrackingTipsAllowed = true;
     } else {
@@ -84,7 +146,7 @@ public class GuiOptionsPage {
 
     JFormattedTextField passwordInput = new JFormattedTextField("");
     passwordInput.setPreferredSize(
-        new Dimension(LENGTH_OF_FIELD, HIGHT_OF_FIELD));
+        new Dimension(LENGTH_OF_FIELD, HEIGHT_OF_FIELD));
     GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
         .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
             "callConfirmPassword");
@@ -106,15 +168,15 @@ public class GuiOptionsPage {
     JButton treeModeButton = new JButton();
     treeModeButton.setFont(font);
     if (altTreeSelected) {
-      treeModeButton.setText("Zeige Standart Backtrackingbaum");
+      treeModeButton.setText("Zeige Standard-Backtrackingbaum");
     } else {
-      treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+      treeModeButton.setText("Zeige alternativen Backtrackingbaum");
     }
     treeModeButton.addActionListener(e -> {
       if (!altTreeSelected) {
-        treeModeButton.setText("Zeige Standart Backtrackingbaum");
+        treeModeButton.setText("Zeige Standard-Backtrackingbaum");
       } else {
-        treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+        treeModeButton.setText("Zeige alternativen Backtrackingbaum");
       }
       altTreeSelected = !altTreeSelected;
     });
@@ -171,13 +233,13 @@ public class GuiOptionsPage {
 
     JPanel emptyPanel = new JPanel();
 
-    //add panels on subpane
+    //add panels on sub-pane
     subPane.add(passwordInputPanel);
     subPane.add(enterPasswordPanel);
     subPane.add(backPanel);
     subPane.add(treeModePanel);
     subPane.add(descriptionPanel);
-    //add panels and subpane on pane
+    //add panels and sub-pane on pane
     pane.add(subPane, BorderLayout.CENTER);
     return pane;
   }

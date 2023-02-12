@@ -42,8 +42,10 @@ public class GuiManager {
   private static JFrame frame;
 
 
-
-  public static int numberLevel;
+  /**
+   * Number of the level.
+   */
+  private static int numberLevel;
 
   /**
    * Opens the Leveleditor.
@@ -52,6 +54,22 @@ public class GuiManager {
     frame.setContentPane(GUI_LEVEL_EDITOR_PAGE.getPane());
     frame.setTitle("Level-editor");
     paint();
+  }
+
+  /**
+     * Setter method for the private int numberLevel.
+     */
+  public static void setNumberLevel() {
+    setNumberLevel(0);
+  }
+
+  /**
+   * Setter method for the private int numberLevel.
+   *
+   * @param numberLevel the int value the numberLevel should be set to.
+   */
+  public static void setNumberLevel(final int numberLevel) {
+    GuiManager.numberLevel = numberLevel;
   }
 
 
@@ -132,7 +150,7 @@ public class GuiManager {
    */
   public static void openLevel(final GuiLevelPage levelPage,
                                final int levelNumber) {
-    numberLevel = levelNumber;
+    setNumberLevel(levelNumber);
     frame.setContentPane(levelPage.getPane());
     final int lastGreedyNumber = 7;
     String title = "Level ";
@@ -150,6 +168,11 @@ public class GuiManager {
 
   }
 
+  /**
+   * Getter method for receiving the level's number.
+   *
+   * @return integer number of the current level.
+   */
   public static int getNumberLevel() {
     return numberLevel;
   }

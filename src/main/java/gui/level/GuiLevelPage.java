@@ -79,7 +79,7 @@ public class GuiLevelPage {
     Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     JButton flucht = new JButton("Flucht");
     flucht.setFont(font);
-    int levelNumber = GuiManager.numberLevel;
+    int levelNumber = GuiManager.getNumberLevel();
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
@@ -113,8 +113,8 @@ public class GuiLevelPage {
         || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
       flucht.addActionListener(e -> {
         if (level.getCurrentValue() > UserDataManager.getScore(
-            GuiManager.numberLevel)) {
-          UserDataManager.newHighScore(GuiManager.numberLevel,
+                GuiManager.getNumberLevel())) {
+          UserDataManager.newHighScore(GuiManager.getNumberLevel(),
               level.getCurrentValue());
           UserDataManager.save();
         }
@@ -150,8 +150,8 @@ public class GuiLevelPage {
     } else {
       flucht.addActionListener(e -> {
         if (level.getCurrentValue() > UserDataManager
-            .getScore(GuiManager.numberLevel)) {
-          UserDataManager.newHighScore(GuiManager.numberLevel,
+            .getScore(GuiManager.getNumberLevel())) {
+          UserDataManager.newHighScore(GuiManager.getNumberLevel(),
               level.getCurrentValue());
           UserDataManager.save();
         }
@@ -177,7 +177,8 @@ public class GuiLevelPage {
             }
             GuiManager.openLevel(
                 GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
-                    [GuiManager.numberLevel + 1], GuiManager.numberLevel + 1);
+                    [GuiManager.getNumberLevel() + 1],
+                    GuiManager.getNumberLevel() + 1);
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
           case 2 -> {
@@ -207,7 +208,7 @@ public class GuiLevelPage {
     Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     JButton clue = new JButton("Hinweis");
     clue.setFont(font);
-    int levelNumber = GuiManager.numberLevel;
+    int levelNumber = GuiManager.getNumberLevel();
     if (levelNumber == -1) {
       clue.addActionListener(e -> {
         String[] buttons = {"Schließen"};
@@ -223,13 +224,8 @@ public class GuiLevelPage {
                 "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
-        switch (chosenButton) {
-          case 0 -> {
-            //nothing is supposed to happen
-          }
-          default -> {
-          }
-          //this case is not possible, all buttons are switched
+        //this case is not possible, all buttons are switched
+        if (chosenButton == 0) { //nothing is supposed to happen
         }
       });
     } else if (levelNumber == 0) {
@@ -247,13 +243,8 @@ public class GuiLevelPage {
                 "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
-        switch (chosenButton) {
-          case 0 -> {
-            //nothing is supposed to happen
-          }
-          default -> {
-          }
-          //this case is not possible, all buttons are switched
+        //this case is not possible, all buttons are switched
+        if (chosenButton == 0) { //nothing is supposed to happen
         }
       });
     } else if (0 < levelNumber && levelNumber <= LAST_GREEDY_LEVELNUMBER) {
@@ -273,13 +264,8 @@ public class GuiLevelPage {
                 "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
-        switch (chosenButton) {
-          case 0 -> {
-            //nothing is supposed to happen
-          }
-          default -> {
-          }
-          //this case is not possible, all buttons are switched
+        //this case is not possible, all buttons are switched
+        if (chosenButton == 0) { //nothing is supposed to happen
         }
       });
     } else if (0 < LAST_GREEDY_LEVELNUMBER
@@ -300,13 +286,8 @@ public class GuiLevelPage {
                 "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
-        switch (chosenButton) {
-          case 0 -> {
-            //nothing is supposed to happen
-          }
-          default -> {
-          }
-          //this case is not possible, all buttons are switched
+        //this case is not possible, all buttons are switched
+        if (chosenButton == 0) { //nothing is supposed to happen
         }
       });
     }

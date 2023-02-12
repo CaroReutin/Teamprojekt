@@ -13,7 +13,7 @@ public class Rucksack {
    * the list with all items.
    */
   @XStreamAlias("ItemList")
-  private ArrayList<Item> itemList;
+  private final ArrayList<Item> itemList;
   /**
    * the list with the amount of the items.
    */
@@ -182,7 +182,14 @@ public class Rucksack {
     return itemList;
   }
 
+  /**
+   * Array list containing all items of a backtracking level.
+   */
   private ArrayList<BacktrackingItem> backtrackingItemList = new ArrayList<>();
+  /**
+   * Array list containing all items that were put into the trash
+   * in a backtracking level.
+   */
   private ArrayList<Integer> inTrashAmountList = new ArrayList<>();
 
   /**
@@ -190,10 +197,10 @@ public class Rucksack {
    */
   public void turnIntoBacktracking() {
     ArrayList<BacktrackingItem> temp = new ArrayList<>();
-    for (int i = 0; i < itemList.size(); i++) {
-      Item tempItem = itemList.get(i);
+    for (Item tempItem : itemList) {
       BacktrackingItem newItem = new BacktrackingItem(
-          tempItem.getValue(), tempItem.getWeight(), tempItem.getName(), tempItem.getImageIcon());
+              tempItem.getValue(), tempItem.getWeight(),
+              tempItem.getName(), tempItem.getImageIcon());
       temp.add(newItem);
       //set Item is in trash to 0
       inTrashAmountList.add(0);
@@ -204,35 +211,78 @@ public class Rucksack {
         Item::getWeight).reversed());
   }
 
+  /**
+   * Getter method for the trash amount list.
+   *
+   * @return the trash amount list
+   */
   public ArrayList<Integer> getInTrashAmountList() {
     return inTrashAmountList;
   }
 
+  /**
+   * Setter method for an element in the trash amount list.
+   *
+   * @param index where to set a new value
+   * @param newAmount new value to be set
+   */
   public void setInTrashAmountList(final int index, final int newAmount) {
     inTrashAmountList.set(index, newAmount);
   }
 
+  /**
+   * Setter method for an element in the list of available items.
+   *
+   * @param index where to set a new value
+   * @param newAmount new value to be set
+   */
   public void setAvailableItemAmountList(final int index, final int newAmount) {
     availableItemAmountList.set(index, newAmount);
   }
 
+  /**
+   * Setter method for an element in the rucksack amount list.
+   *
+   * @param index where to set a new value
+   * @param newAmount new value to be set
+   */
   public void setInRucksackAmountList(final int index, final int newAmount) {
     inRucksackAmountList.set(index, newAmount);
   }
 
+  /**
+   * Getter method for the rucksack amount list.
+   *
+   * @return the rucksack amount list
+   */
   public ArrayList<Integer> getInRucksackAmountList() {
     return inRucksackAmountList;
   }
 
+  /**
+   * Getter method for the list of items in a backtracking level.
+   *
+   * @return the backtracking item list
+   */
   public ArrayList<BacktrackingItem> getBacktrackingItemList() {
     return backtrackingItemList;
   }
 
-  public void setCurrentValue(int i) {
+  /**
+   * Setter method for the current value held in the rucksack.
+   *
+   * @param i new value of the rucksack
+   */
+  public void setCurrentValue(final int i) {
     currentValue = i;
   }
 
-  public void setCurrentWeight(int i) {
+  /**
+   * Setter method for the current weight held in the rucksack.
+   *
+   * @param i new weight of the rucksack
+   */
+  public void setCurrentWeight(final int i) {
     currentWeight = i;
   }
 }

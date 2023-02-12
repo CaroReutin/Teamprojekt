@@ -91,10 +91,10 @@ public final class UserDataManager {
   }
 
   /**
-   * If the userData.save file is not in the specified directory,
+   * If the userData.save-file is not in the specified directory,
    * a new User will be created and saved in that directory.
    *
-   * @param saveFolder the Folder that contains userData.save
+   * @param saveFolder the Folder that contains userData.save-file
    */
   public static void load(final String saveFolder) {
     Boolean ignoreResult = new File(saveFolder).mkdirs();
@@ -151,7 +151,7 @@ public final class UserDataManager {
    * Data to string string.
    *
    * @return returns the Scores in format x1|x2|...|x14|x15
-   * where xn is the score of the nth Level
+   *     where xn is the score of the nth Level
    */
   public static String dataToString() {
     return data.toString();

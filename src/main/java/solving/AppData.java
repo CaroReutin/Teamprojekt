@@ -23,8 +23,19 @@ public final class AppData {
    * the maximum amount of different items in backtracking levels.
    */
   public static final int MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL = 5;
+  /**
+   * The minimum width a game frame must have.
+   */
   public static final int MINIMUM_WIDTH = 800;
+  /**
+   * The minimum height a game frame must have.
+   */
   public static final int MINIMUM_HEIGHT = 600;
+
+  /**
+   * The height and width of an image icon.
+   */
+  public static final int IMAGE_ICON_SIZE = 30;
 
   /**
    * do not make.
@@ -34,7 +45,7 @@ public final class AppData {
   }
 
   /**
-   * The size of Icons in the Leveleditor.
+   * The size of Icons in the level editor.
    */
   public static final int ICON_SIZE = 75;
   /**
@@ -69,9 +80,9 @@ public final class AppData {
    */
   public static final int MAXIMUM_ITEMS_IN_CUSTOM_LEVEL = 15;
   /**
-   * The constant LEVELAMOUNT.
+   * The constant LEVEL_AMOUNT.
    */
-  public static final int LEVELAMOUNT = 15;
+  public static final int LEVEL_AMOUNT = 15;
   /**
    * the passwords that are used.
    */
@@ -112,7 +123,7 @@ public final class AppData {
 
 
   /**
-   * Load level level.
+   * Load level.
    *
    * @param zippedLevel the zipped level
    * @return the level
@@ -132,7 +143,9 @@ public final class AppData {
       if (currentPicture.exists()) {
         level.setItemIcon(i, new ImageIcon(new ImageIcon(currentPicture
             .getAbsolutePath()).getImage()
-            .getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            .getScaledInstance(IMAGE_ICON_SIZE,
+                    IMAGE_ICON_SIZE,
+                    Image.SCALE_SMOOTH)));
       }
     }
     return level;
@@ -143,18 +156,14 @@ public final class AppData {
    */
   public static void initializeBeginningLevel() {
     try {
-      InputStream is = AppData.class.getClassLoader().getResourceAsStream("Level/Startlevel.zip");
+      InputStream is = AppData.class.getClassLoader().getResourceAsStream(
+              "Level/Startlevel.zip");
       File file = File.createTempFile("startlevel", "zip");
       FileUtils.copyInputStreamToFile(is, file);
       LEVEL_ZERO[0] = loadLevel(file);
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-
-    //LEVEL_ZERO[0] = loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
-    //  .getResource("Level/Startlevel.zip")).getPath()));
-
   }
 
   /**
@@ -226,7 +235,7 @@ public final class AppData {
    *
    * @param index the unique index of the item
    * @return returns a new Instance of the wanted item if it
-   * is in the ArrayList else it returns null
+   *     is in the ArrayList else it returns null
    */
   public static Item generateItem(final int index) {
     return new Item(ITEMS.get(index).getValue(), ITEMS.get(index).getWeight(),

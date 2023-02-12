@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * This class confugures the gui frontpage.
+ * This class configures the gui frontpage.
  */
 public class GuiFrontpage {
   /**
-   * the constant NUM_ROWS_SUBPANE.
+   * The constant NUM_ROWS_SUBPANE, the number of rows in the pane.
    */
-  public static final int NUM_ROWS_SUBPANE = 7;
+  public static final int NUM_ROWS_SUBPANE = 5;
 
   /**
    * The constant SIZE_FONT_SMALL.
@@ -33,7 +33,7 @@ public class GuiFrontpage {
   public static final int SIZE_FONT_BIG = 50;
 
   /**
-   * The constant HIGHT_RUCKSACK.
+   * The constant HEIGHT_RUCKSACK.
    */
   public static final int HEIGHT_RUCKSACK = 80;
   /**
@@ -46,10 +46,9 @@ public class GuiFrontpage {
    *
    * @return returns the Container that contains the content of the frontpage
    */
-  @SuppressWarnings("checkstyle:TodoComment")
   public Container getPane() {
     Container pane = new Container();
-    pane.setLayout(new GridLayout(5, 1));
+    pane.setLayout(new GridLayout(NUM_ROWS_SUBPANE, 1));
 
     //füge Text und Buttons hinzu
     Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, SIZE_FONT_BIG);
@@ -79,10 +78,10 @@ public class GuiFrontpage {
     settingsButton.addActionListener(e -> GuiManager.openOptionsMenu());
     clueButton.addActionListener(e -> {
       try {
-        // TODO Alternative Buttons und Icons im Bild!
         String message = GuiLevelPage.fileToString(
                 "src/main/resources/texts/1_Introtext.txt");
-        String[] buttons = {"Schließen",
+        String[] buttons = {
+                "Schließen",
                 "Wie spiele ich?",
                 "Eigene Level spielen?"};
         int chosenButton = JOptionPane.showOptionDialog(null,
@@ -229,8 +228,7 @@ public class GuiFrontpage {
     settingsPanel.add(settingsButton);
     JPanel cluePanel = new JPanel();
     cluePanel.add(clueButton);
-    //TODO Un-fuck up the frontpage
-    //add panels on subpane
+    //add panels on sub-pane
     pane.add(titlePanel);
     pane.add(levelPanel);
     pane.add(ownLevelPanel);

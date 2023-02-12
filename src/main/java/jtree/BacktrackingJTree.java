@@ -7,28 +7,61 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import rucksack.Level;
 
+/**
+ * Class for the item selection tree given as a visual aid
+ * in a backtracking level. It is a JTree.
+ * The tree is called backtracking tree.
+ */
 public class BacktrackingJTree {
-  private final JFrame treeframe;
+  /**
+   * The new frame for the tree.
+   */
+  private final JFrame treeFrame;
+  /**
+   * The tree's root node.
+   */
   private DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+  /**
+   * The new tree, starting with the root node.
+   */
   private JTree tree = new JTree(root);
+  /**
+   * The current node of the tree.
+   */
   private DefaultMutableTreeNode currentNode;
+  /**
+   * The selected node of the tree.
+   */
   private DefaultMutableTreeNode selectedNode = null;
-  private int ITEM_AMOUNT;
+  /**
+   * The number of items that are part of the tree.
+   */
+  private int itemAmount;
 
+  /**
+   * The constructor for the tree of a backtracking level.
+   *
+   * @param level the backtracking level whose tree shall be drawn
+   */
   public BacktrackingJTree(final Level level) {
-    ITEM_AMOUNT = level.getBacktrackingItemList().size();
+    itemAmount = level.getBacktrackingItemList().size();
     tree.addTreeSelectionListener(treeSelectionEvent -> {
       selectedNode = (DefaultMutableTreeNode)
           tree.getLastSelectedPathComponent();
     });
     currentNode = root;
-    treeframe = new JFrame();
-    treeframe.setSize(800, 600);
+    treeFrame = new JFrame();
+    treeFrame.setSize(800, 600);
     JScrollPane treeView = new JScrollPane(tree);
-    treeframe.add(treeView);
-    treeframe.setVisible(false);
+    treeFrame.add(treeView);
+    treeFrame.setVisible(false);
   }
 
+  /**
+   * Method for creating the node when an item gets put into the rucksack.
+   *
+   * @param currentBacktrackingNode the current node of the tree
+   */
   public void putInBag(final BacktrackingNode currentBacktrackingNode) {
     addNode(currentBacktrackingNode, "      ");
   }
@@ -38,18 +71,29 @@ public class BacktrackingJTree {
     for (int i = 0; i < tree.getRowCount(); i++) {
       tree.expandRow(i);
     }
-    treeframe.revalidate();
-    treeframe.repaint();
+    treeFrame.revalidate();
+    treeFrame.repaint();
   }
 
+  /**
+   * Method that shows the tree.
+   */
   public void show() {
-    treeframe.setVisible(true);
+    treeFrame.setVisible(true);
   }
 
+  /**
+   * Method for closing the backtracking tree.
+   */
   public void close() {
-    treeframe.dispose();
+    treeFrame.dispose();
   }
 
+  /**
+   * Method for creating the node when an item gets put into the trash can.
+   *
+   * @param currentBacktrackingNode the current node of the tree
+   */
   public void putInTrash(final BacktrackingNode currentBacktrackingNode) {
     int depth = currentNode.getLevel() - currentBacktrackingNode.getLevel();
     for (int i = 0; i <= depth; i++) {
@@ -72,8 +116,13 @@ public class BacktrackingJTree {
     update();
   }
 
+  /**
+   * Method for creating the String of the solution.
+   *
+   * @return the String of the solution
+   */
   public String getSolution() {
-    if (selectedNode == null || selectedNode.getLevel() != ITEM_AMOUNT) {
+    if (selectedNode == null || selectedNode.getLevel() != itemAmount) {
       return null;
     }
     StringBuilder res = new StringBuilder();

@@ -99,6 +99,7 @@ public final class CustomLevelManager {
    *                   name of the zippedLevel
    * @param level      the level to save
    * @param validItems the list of valid Items
+   * @return boolean value whether saving was successful
    */
   public static boolean save(final String path,
                              final String identifier,
@@ -250,6 +251,12 @@ public final class CustomLevelManager {
     }
   }
 
+  /**
+   * Method for converting a level file into a level.
+   *
+   * @param levelFile the file which is supposed to be converted
+   * @return the level produced by the conversion
+   */
   public static Level convertLevelfileToLevel(final File levelFile) {
     XStream xstream = new XStream(new DomDriver());
     xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);

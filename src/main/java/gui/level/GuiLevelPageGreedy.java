@@ -2,7 +2,6 @@ package gui.level;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -133,11 +132,12 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
             java.awt.Image.SCALE_SMOOTH);
 
     //füge Räuber ein
-    URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
+    URL urlRobber = getClass().getClassLoader().getResource(
+            "DiebGrauMitSack.png");
     assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
-    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
-      Image.SCALE_SMOOTH);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(
+            100, 200, Image.SCALE_SMOOTH);
 
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
@@ -145,7 +145,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
-    if (GuiOptionsPage.greedyTipsAllowed) {
+    if (GuiOptionsPage.getGreedyTipsAllowed()) {
       this.clueButton(centerPanel);
     }
     this.itemButtons(rightPanel, leftPanel);

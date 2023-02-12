@@ -140,16 +140,6 @@ public class BacktrackingNode {
           currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
         }
       }
-      /*//
-      if (currentItem.getWeight() == weight && !currentItem
-              .getName().equals(gotIntoTrashNode.item.getName())) {
-        //items only get set to available if item is not a parent
-        if (!sameWeightParentList.contains(currentItem)) {
-          currentItem.setState(BacktrackingItem.StateBacktracking.AVAILABLE);
-        }
-      }*/
-
-
     }
   }
 
@@ -218,7 +208,7 @@ public class BacktrackingNode {
       return true;
     }
 
-    //is NewBagItem the next selectible item? -> is the next of the list
+    //is NewBagItem the next selectable item? -> is the next of the list
     return (indexThis + 1) == indexNewBagItem;
   }
 
@@ -294,8 +284,16 @@ public class BacktrackingNode {
     return parent;
   }
 
+  /**
+   * Integer number of the level.
+   */
   private final int level;
 
+  /**
+   * Method for receiving the level number.
+   *
+   * @return the level number as int
+   */
   public int getLevel() {
     return level;
   }

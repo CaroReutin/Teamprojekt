@@ -1,8 +1,13 @@
 package gui.level;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.JPanel;
 
+/**
+ * Class for a GUI background with items.
+ */
 public class JbackgroundWithItems extends JPanel {
 
   /**
@@ -28,7 +33,8 @@ public class JbackgroundWithItems extends JPanel {
    * @param x            the x
    * @param y            the y
    */
-  public JbackgroundWithItems(final Image myBackground, final int x, final int y) {
+  public JbackgroundWithItems(final Image myBackground,
+                              final int x, final int y) {
     this.background = myBackground;
     this.xPos = x;
     this.yPos = y;

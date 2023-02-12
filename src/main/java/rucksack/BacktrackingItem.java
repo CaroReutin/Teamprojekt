@@ -1,6 +1,6 @@
 package rucksack;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
 
 /**
  * this class is a specific item named BacktrackingItem
@@ -36,9 +36,12 @@ public class BacktrackingItem extends Item {
    * @param value  the value
    * @param weight the weight
    * @param name   the name
+   * @param imageIcon the icon
    */
   public BacktrackingItem(final int value,
-                          final int weight, final String name, final ImageIcon imageIcon) {
+                          final int weight,
+                          final String name,
+                          final ImageIcon imageIcon) {
     super(value, weight, name, imageIcon);
     this.state = StateBacktracking.AVAILABLE;
   }
@@ -60,6 +63,4 @@ public class BacktrackingItem extends Item {
   public void setState(final StateBacktracking stateBacktracking) {
     this.state = stateBacktracking;
   }
-
-
 }

@@ -29,7 +29,8 @@ public final class GreedyLevel {
   public static void initializeGreedy() {
     try {
       InputStream is =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Greedy1.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Greedy1.zip");
       File file = File.createTempFile("Greedy1", "zip");
       FileUtils.copyInputStreamToFile(is, file);
       //Backtracking Level 1
@@ -37,7 +38,8 @@ public final class GreedyLevel {
           AppData.loadLevel(file);
 
       InputStream is2 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Greedy2.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Greedy2.zip");
       File file2 = File.createTempFile("Greedy2", "zip");
       FileUtils.copyInputStreamToFile(is2, file2);
       //Backtracking Level 2
@@ -45,7 +47,8 @@ public final class GreedyLevel {
           AppData.loadLevel(file2);
 
       InputStream is3 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Greedy3.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Greedy3.zip");
       File file3 = File.createTempFile("Greedy3", "zip");
       FileUtils.copyInputStreamToFile(is3, file3);
       //Backtracking Level 3
@@ -53,7 +56,8 @@ public final class GreedyLevel {
           AppData.loadLevel(file3);
 
       InputStream is4 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Greedy4.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Greedy4.zip");
       File file4 = File.createTempFile("Greedy4", "zip");
       FileUtils.copyInputStreamToFile(is4, file4);
       //Backtracking Level 4
@@ -61,7 +65,8 @@ public final class GreedyLevel {
           AppData.loadLevel(file4);
 
       InputStream is5 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Greedy5.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Greedy5.zip");
       File file5 = File.createTempFile("Greedy5", "zip");
       FileUtils.copyInputStreamToFile(is5, file5);
       //Backtracking Level 5
@@ -69,7 +74,8 @@ public final class GreedyLevel {
           AppData.loadLevel(file5);
 
       InputStream is6 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Greedy6.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Greedy6.zip");
       File file6 = File.createTempFile("Greedy6", "zip");
       FileUtils.copyInputStreamToFile(is6, file6);
       //Backtracking Level 6
@@ -77,7 +83,8 @@ public final class GreedyLevel {
           AppData.loadLevel(file6);
 
       InputStream is7 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Greedy7.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Greedy7.zip");
       File file7 = File.createTempFile("Greedy7", "zip");
       FileUtils.copyInputStreamToFile(is7, file7);
       //Backtracking Level 7

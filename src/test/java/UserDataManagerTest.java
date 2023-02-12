@@ -28,7 +28,7 @@ public class UserDataManagerTest {
   @Test
   public void scoreEqualsLevel() {
     UserDataManager.load(testSaveFolder);
-    for (int i = 0; i < AppData.LEVELAMOUNT; i++) {
+    for (int i = 0; i < AppData.LEVEL_AMOUNT; i++) {
       UserDataManager.newHighScore(i, i);
     }
     Assertions.assertEquals("0|1|2|3|4|5|6|7|8|9|10|11|12|13|14", UserDataManager.dataToString());
@@ -36,7 +36,7 @@ public class UserDataManagerTest {
     UserDataManager.reset();
     UserDataManager.load(testSaveFolder);
     Assertions.assertEquals("0|1|2|3|4|5|6|7|8|9|10|11|12|13|14", UserDataManager.dataToString());
-    for (int i = 0; i < AppData.LEVELAMOUNT; i++) {
+    for (int i = 0; i < AppData.LEVEL_AMOUNT; i++) {
       Assertions.assertEquals(UserDataManager.getScore(i), i);
     }
   }

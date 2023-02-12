@@ -13,7 +13,7 @@ import rucksack.Item;
 import rucksack.Level;
 
 /**
- * .
+ * Class of the item tree for a backtracking level.
  */
 public class BacktrackingTree {
   /**
@@ -29,11 +29,11 @@ public class BacktrackingTree {
    */
   private final ArrayList<ArrayList<Integer>> exploredPaths = new ArrayList<>();
   /**
-   * the current node.
+   * The current node.
    */
   private DefaultMutableTreeNode currentNode;
   /**
-   * the tree node that is selected as solution
+   * The tree node that is selected as solution.
    */
   private BacktrackingNode solution = null;
   /**
@@ -51,8 +51,17 @@ public class BacktrackingTree {
    * at the end of that path.
    */
   private String currentPath = "";
+
   /**
-   * .
+   * Maximum amount of items in a backtracking level.
+   */
+  public static final int MAX_ITEM_AMOUNT = 5;
+  /**
+   * Size of the frame where the backtracking tree is shown.
+   */
+  public static final int FRAME_SIZE = 500;
+  /**
+   * The current backtracking level.
    *
    * @param level the level
    */
@@ -73,8 +82,12 @@ public class BacktrackingTree {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)
             tree.getLastSelectedPathComponent();
 
-        if (node == null) return;
-        if (node.getLevel() != level.getBacktrackingItemList().size()) return;
+        if (node == null) {
+          return;
+        }
+        if (node.getLevel() != level.getBacktrackingItemList().size()) {
+          return;
+        }
 
         Object nodeInfo = node.getPath();
         System.out.println(nodeInfo);
@@ -82,7 +95,7 @@ public class BacktrackingTree {
     });
     tree.setRootVisible(true);
     tree.setVisible(true);
-    frame.setSize(500, 500);
+    frame.setSize(FRAME_SIZE, FRAME_SIZE);
     frame.add(tree);
     frame.setVisible(false);
     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -105,16 +118,17 @@ public class BacktrackingTree {
     leftRes += rightRes;
     rightRes += "    ";
     leftRes += "Weight: " + weight
-        + " ".repeat(Math.max(0, 5 - String
-        .valueOf(weight).length())) + " | " + "Value: " + value;
+        + " ".repeat(Math.max(0, MAX_ITEM_AMOUNT
+            - String.valueOf(weight).length())) + " | " + "Value: " + value;
     int newWeight = weight + itemList.get(depth).getWeight();
     int newValue = value + itemList.get(depth).getValue();
     rightRes += "Weight: " + newWeight
-        + " ".repeat(Math.max(0, 5 - String
-        .valueOf(newWeight).length())) + " | " + "Value: " + newValue;
+            + " ".repeat(Math.max(0, MAX_ITEM_AMOUNT
+            - String.valueOf(newWeight).length()))
+            + " | "
+            + "Value: "
+            + newValue;
     DefaultMutableTreeNode node = new DefaultMutableTreeNode(leftRes);
-    //nodes.get(depth).add(node);
-    //nodes.get(depth).add(new DefaultMutableTreeNode(rightRes));
     addNodes(depth + 1, value, weight);
     addNodes(depth + 1, newValue, newWeight);
   }
@@ -133,8 +147,10 @@ public class BacktrackingTree {
 
   /**
    * adds the path where the next heaviest item is added to the bag.
+   *
+   * @param currentBacktrackingNode the current node of the backtracking tree
    */
-  public void putInBag(BacktrackingNode currentBacktrackingNode) {
+  public void putInBag(final BacktrackingNode currentBacktrackingNode) {
     if (itemList.size() - currentDepth <= 0) {
       return;
     }
@@ -168,8 +184,10 @@ public class BacktrackingTree {
    * adds the path where the next heaviest item is added to the trash.
    * bag to trash interaction has to be modeled with back
    * and then putInTrash.
+   *
+   * @param currentBacktrackingNode the current node of the backtracking tree
    */
-  public void putInTrash(BacktrackingNode currentBacktrackingNode) {
+  public void putInTrash(final BacktrackingNode currentBacktrackingNode) {
     if (itemList.size() - currentDepth <= 0) {
       return;
     }
@@ -184,6 +202,9 @@ public class BacktrackingTree {
     frame.setVisible(true);
   }
 
+  /**
+   * Method for closing the tree and disposing the frame.
+   */
   public void close() {
     frame.dispose();
   }

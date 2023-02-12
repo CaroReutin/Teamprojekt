@@ -47,58 +47,58 @@ public final class GuiLevelEditorPage {
   /**
    * The list of icons.
    */
-  private static ArrayList<ImageIcon> ICONS = new ArrayList<>();
+  private static ArrayList<ImageIcon> icons = new ArrayList<>();
   /**
    * The list of name TextFields.
    */
-  private static ArrayList<JTextField> NAME_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> nameFields = new ArrayList<>();
   /**
    * The list of weight TextFields.
    */
-  private static ArrayList<JTextField> WEIGHT_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> weightFields = new ArrayList<>();
   /**
    * The list of value TextFields.
    */
-  private static ArrayList<JTextField> VALUE_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> valueFields = new ArrayList<>();
   /**
    * The list of amount TextFields.
    */
-  private static ArrayList<JTextField> AMOUNT_FIELDS = new ArrayList<>();
+  private static ArrayList<JTextField> amountFields = new ArrayList<>();
   /**
    * The list of name labels.
    */
-  private static ArrayList<JLabel> NAME_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> nameLabels = new ArrayList<>();
   /**
    * The list of weight labels.
    */
-  private static ArrayList<JLabel> WEIGHT_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> weightLabels = new ArrayList<>();
   /**
    * The list of value labels.
    */
-  private static ArrayList<JLabel> VALUE_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> valueLabels = new ArrayList<>();
   /**
    * The list of amount labels.
    */
-  private static ArrayList<JLabel> AMOUNT_LABELS = new ArrayList<>();
+  private static ArrayList<JLabel> amountLabels = new ArrayList<>();
   /**
    * The list of weight documents.
    */
   private static ArrayList<AbstractDocument>
-      WEIGHT_FIELD_DOCUMENTS = new ArrayList<>();
+          weightFieldDocuments = new ArrayList<>();
   /**
    * The list of amount documents.
    */
   private static ArrayList<AbstractDocument>
-      AMOUNT_FIELD_DOCUMENTS = new ArrayList<>();
+          amountFieldDocuments = new ArrayList<>();
   /**
    * The list of value documents.
    */
   private static ArrayList<AbstractDocument>
-      VALUE_FIELD_DOCUMENTS = new ArrayList<>();
+          valueFieldDocuments = new ArrayList<>();
   /**
    * The list of icon selector buttons.
    */
-  private static ArrayList<JButton> ICON_SELECTORS = new ArrayList<>();
+  private static ArrayList<JButton> iconSelectors = new ArrayList<>();
   /**
    * The amount of currently visible itemPanels.
    */
@@ -205,13 +205,13 @@ public final class GuiLevelEditorPage {
     JButton reset = new JButton("Reset");
     reset.addActionListener(e -> {
       panelCounter = 0;
-      for (int i = 0; i < ICONS.size(); i++) {
-        ICONS.set(i, new ImageIcon(DEFAULTICONPATH));
-        NAME_FIELDS.get(i).setText("");
-        WEIGHT_FIELDS.get(i);
-        VALUE_FIELDS.get(i).setText("");
-        AMOUNT_FIELDS.get(i).setText("");
-        ICON_SELECTORS.get(i).setIcon(ICONS.get(i));
+      for (int i = 0; i < icons.size(); i++) {
+        icons.set(i, new ImageIcon(DEFAULTICONPATH));
+        nameFields.get(i).setText("");
+        weightFields.get(i);
+        valueFields.get(i).setText("");
+        amountFields.get(i).setText("");
+        iconSelectors.get(i).setIcon(icons.get(i));
       }
       GuiManager.openLevelEditor();
     });
@@ -237,19 +237,19 @@ public final class GuiLevelEditorPage {
     ArrayList<Container> itemPanels = new ArrayList<>();
     ArrayList<Container> fieldPanels = new ArrayList<>();
     ArrayList<Container> labelPanels = new ArrayList<>();
-    ICONS = new ArrayList<>();
-    ICON_SELECTORS = new ArrayList<>();
-    AMOUNT_FIELDS = new ArrayList<>();
-    AMOUNT_LABELS = new ArrayList<>();
-    AMOUNT_FIELD_DOCUMENTS = new ArrayList<>();
-    VALUE_FIELDS = new ArrayList<>();
-    VALUE_LABELS = new ArrayList<>();
-    VALUE_FIELD_DOCUMENTS = new ArrayList<>();
-    WEIGHT_FIELDS = new ArrayList<>();
-    WEIGHT_LABELS = new ArrayList<>();
-    WEIGHT_FIELD_DOCUMENTS = new ArrayList<>();
-    NAME_FIELDS = new ArrayList<>();
-    NAME_LABELS = new ArrayList<>();
+    icons = new ArrayList<>();
+    iconSelectors = new ArrayList<>();
+    amountFields = new ArrayList<>();
+    amountLabels = new ArrayList<>();
+    amountFieldDocuments = new ArrayList<>();
+    valueFields = new ArrayList<>();
+    valueLabels = new ArrayList<>();
+    valueFieldDocuments = new ArrayList<>();
+    weightFields = new ArrayList<>();
+    weightLabels = new ArrayList<>();
+    weightFieldDocuments = new ArrayList<>();
+    nameFields = new ArrayList<>();
+    nameLabels = new ArrayList<>();
 
     Font panelFont = new Font("Arial",
         Font.BOLD + Font.ITALIC, 15);
@@ -261,12 +261,12 @@ public final class GuiLevelEditorPage {
       fieldPanels.get(i).setLayout(new GridLayout(4, 1));
       labelPanels.add(new Container());
       labelPanels.get(i).setLayout(new GridLayout(4, 1));
-      ICONS.add(new ImageIcon(DEFAULTICONPATH));
-      Image image = ICONS.get(i).getImage();
-      ICONS.set(i, new ImageIcon(image.getScaledInstance(
+      icons.add(new ImageIcon(DEFAULTICONPATH));
+      Image image = icons.get(i).getImage();
+      icons.set(i, new ImageIcon(image.getScaledInstance(
           AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
-      ICON_SELECTORS.add(new JButton());
-      ICON_SELECTORS.get(i).setIcon(ICONS.get(i));
+      iconSelectors.add(new JButton());
+      iconSelectors.get(i).setIcon(icons.get(i));
       JFileChooser chooseIcon = new JFileChooser();
       chooseIcon.setCurrentDirectory(new File("."));
       chooseIcon.setDialogTitle("Speicherordner");
@@ -275,7 +275,7 @@ public final class GuiLevelEditorPage {
           "Image files", ImageIO.getReaderFileSuffixes());
       chooseIcon.setFileFilter(imageFilter);
       int finalI = i;
-      ICON_SELECTORS.get(i).addActionListener(e -> {
+      iconSelectors.get(i).addActionListener(e -> {
         if (chooseIcon.showOpenDialog(pane) == JFileChooser
             .APPROVE_OPTION) {
           try {
@@ -292,7 +292,7 @@ public final class GuiLevelEditorPage {
                       + "Stellen Sie sicher, dass es sich um ein "
                       + "PNG/JPG/JPEG handelt.");
             } else {
-              ICONS.set(finalI, new ImageIcon(readImage));
+              icons.set(finalI, new ImageIcon(readImage));
               //geht kaputt, wenn nicht png-Datei
               File destination = new File(AppData
                   .getCustomLevelPictureFolder()
@@ -301,7 +301,7 @@ public final class GuiLevelEditorPage {
                 FileUtils.delete(destination);
               }
               FileUtils.copyFile(chooseIcon.getSelectedFile(), destination);
-              ICON_SELECTORS.get(finalI).setIcon(new ImageIcon(ICONS
+              iconSelectors.get(finalI).setIcon(new ImageIcon(icons
                   .get(finalI).getImage().getScaledInstance(AppData
                       .ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
             }
@@ -310,44 +310,44 @@ public final class GuiLevelEditorPage {
           }
         }
       });
-      itemPanels.get(i).add(ICON_SELECTORS.get(i));
+      itemPanels.get(i).add(iconSelectors.get(i));
 
-      NAME_LABELS.add(new JLabel("Name: "));
-      NAME_LABELS.get(i).setFont(panelFont);
-      labelPanels.get(i).add(NAME_LABELS.get(i));
+      nameLabels.add(new JLabel("Name: "));
+      nameLabels.get(i).setFont(panelFont);
+      labelPanels.get(i).add(nameLabels.get(i));
 
-      NAME_FIELDS.add(new JTextField());
-      fieldPanels.get(i).add(NAME_FIELDS.get(i));
+      nameFields.add(new JTextField());
+      fieldPanels.get(i).add(nameFields.get(i));
 
-      VALUE_LABELS.add(new JLabel("Wert: "));
-      VALUE_LABELS.get(i).setFont(panelFont);
-      labelPanels.get(i).add(VALUE_LABELS.get(i));
+      valueLabels.add(new JLabel("Wert: "));
+      valueLabels.get(i).setFont(panelFont);
+      labelPanels.get(i).add(valueLabels.get(i));
 
-      VALUE_FIELDS.add(new JTextField());
-      VALUE_FIELD_DOCUMENTS.add((AbstractDocument)
-          VALUE_FIELDS.get(i).getDocument());
-      VALUE_FIELD_DOCUMENTS.get(i).setDocumentFilter(new NumberListener());
-      fieldPanels.get(i).add(VALUE_FIELDS.get(i));
+      valueFields.add(new JTextField());
+      valueFieldDocuments.add((AbstractDocument)
+          valueFields.get(i).getDocument());
+      valueFieldDocuments.get(i).setDocumentFilter(new NumberListener());
+      fieldPanels.get(i).add(valueFields.get(i));
 
-      WEIGHT_LABELS.add(new JLabel("Gewicht: "));
-      WEIGHT_LABELS.get(i).setFont(panelFont);
-      labelPanels.get(i).add(WEIGHT_LABELS.get(i));
+      weightLabels.add(new JLabel("Gewicht: "));
+      weightLabels.get(i).setFont(panelFont);
+      labelPanels.get(i).add(weightLabels.get(i));
 
-      WEIGHT_FIELDS.add(new JTextField());
-      WEIGHT_FIELD_DOCUMENTS.add((AbstractDocument)
-          WEIGHT_FIELDS.get(i).getDocument());
-      WEIGHT_FIELD_DOCUMENTS.get(i).setDocumentFilter(new NumberListener());
-      fieldPanels.get(i).add(WEIGHT_FIELDS.get(i));
+      weightFields.add(new JTextField());
+      weightFieldDocuments.add((AbstractDocument)
+          weightFields.get(i).getDocument());
+      weightFieldDocuments.get(i).setDocumentFilter(new NumberListener());
+      fieldPanels.get(i).add(weightFields.get(i));
 
-      AMOUNT_LABELS.add(new JLabel("Anzahl: "));
-      AMOUNT_LABELS.get(i).setFont(panelFont);
-      labelPanels.get(i).add(AMOUNT_LABELS.get(i));
+      amountLabels.add(new JLabel("Anzahl: "));
+      amountLabels.get(i).setFont(panelFont);
+      labelPanels.get(i).add(amountLabels.get(i));
 
-      AMOUNT_FIELDS.add(new JTextField());
-      AMOUNT_FIELD_DOCUMENTS.add((AbstractDocument)
-          AMOUNT_FIELDS.get(i).getDocument());
-      AMOUNT_FIELD_DOCUMENTS.get(i).setDocumentFilter(new NumberListener());
-      fieldPanels.get(i).add(AMOUNT_FIELDS.get(i));
+      amountFields.add(new JTextField());
+      amountFieldDocuments.add((AbstractDocument)
+          amountFields.get(i).getDocument());
+      amountFieldDocuments.get(i).setDocumentFilter(new NumberListener());
+      fieldPanels.get(i).add(amountFields.get(i));
 
       itemPanels.get(i).add(labelPanels.get(i));
       itemPanels.get(i).add(fieldPanels.get(i));
@@ -387,15 +387,15 @@ public final class GuiLevelEditorPage {
   }
 
   private void setItemPanelVisibility(final boolean b, final int i) {
-    NAME_FIELDS.get(i).setVisible(b);
-    WEIGHT_FIELDS.get(i).setVisible(b);
-    VALUE_FIELDS.get(i).setVisible(b);
-    AMOUNT_FIELDS.get(i).setVisible(b);
-    NAME_LABELS.get(i).setVisible(b);
-    WEIGHT_LABELS.get(i).setVisible(b);
-    VALUE_LABELS.get(i).setVisible(b);
-    AMOUNT_LABELS.get(i).setVisible(b);
-    ICON_SELECTORS.get(i).setVisible(b);
+    nameFields.get(i).setVisible(b);
+    weightFields.get(i).setVisible(b);
+    valueFields.get(i).setVisible(b);
+    amountFields.get(i).setVisible(b);
+    nameLabels.get(i).setVisible(b);
+    weightLabels.get(i).setVisible(b);
+    valueLabels.get(i).setVisible(b);
+    amountLabels.get(i).setVisible(b);
+    iconSelectors.get(i).setVisible(b);
   }
 
   private static void saveLevel(final Container pane,
@@ -413,7 +413,7 @@ public final class GuiLevelEditorPage {
       try {
         Item nextItem = generateItem(i);
         if (nextItem.getWeight() == 0 || nextItem.getValue() == 0
-            || Integer.parseInt(AMOUNT_FIELDS.get(i).getText()) == 0) {
+            || Integer.parseInt(amountFields.get(i).getText()) == 0) {
           showMessageDialog(pane, "Wert, Gewicht und "
               + "Anzahl müssen mindestens 1 sein.");
           return;
@@ -433,7 +433,7 @@ public final class GuiLevelEditorPage {
         }
         itemList.add(nextItem);
         validItems.add(i);
-        itemAmountList.add(Integer.parseInt(AMOUNT_FIELDS.get(i).getText()));
+        itemAmountList.add(Integer.parseInt(amountFields.get(i).getText()));
       } catch (NullPointerException n) {
         n.printStackTrace();
       }
@@ -482,17 +482,17 @@ public final class GuiLevelEditorPage {
   }
 
   private static Item generateItem(final int i) {
-    if (NAME_FIELDS.get(i).getText().equals("")
-        || AMOUNT_FIELDS.get(i).getText().equals("")
-        || WEIGHT_FIELDS.get(i).getText().equals("")
-        || VALUE_FIELDS.get(i).getText().equals("")) {
+    if (nameFields.get(i).getText().equals("")
+        || amountFields.get(i).getText().equals("")
+        || weightFields.get(i).getText().equals("")
+        || valueFields.get(i).getText().equals("")) {
       throw new NullPointerException("No field may be empty");
     }
     // Cannot be empty because of the if above
     // => Must be an Integer because of the formatter
-    return new Item(Integer.parseInt(VALUE_FIELDS.get(i).getText()),
-        Integer.parseInt(WEIGHT_FIELDS.get(i).getText()),
-        NAME_FIELDS.get(i).getText(), null);
+    return new Item(Integer.parseInt(valueFields.get(i).getText()),
+        Integer.parseInt(weightFields.get(i).getText()),
+        nameFields.get(i).getText(), null);
   }
 
   private static class FieldListener extends DocumentFilter {
@@ -516,7 +516,6 @@ public final class GuiLevelEditorPage {
       fb.insertString(offset, string, attr);
 
     }
-
 
     @Override
     public void replace(final DocumentFilter.FilterBypass fb, final int offset,
