@@ -99,7 +99,7 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       g.dispose();
       ImageIcon not = new ImageIcon("src/main/resources/icons/Not.png");
       not = new ImageIcon(not.getImage()
-          .getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
+          .getScaledInstance(crossedOut.getIconWidth(), crossedOut.getIconHeight(), Image.SCALE_SMOOTH));
       BufferedImage notBuffered = new BufferedImage(
           not.getIconWidth(),
           not.getIconHeight(),
