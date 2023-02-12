@@ -18,6 +18,7 @@ import rucksack.Item;
 import rucksack.Level;
 import solving.ButtonEventHandler;
 import solving.ButtonEventHandlerJtree;
+import solving.ButtonEventHandlerTable;
 import solving.SolverBacktracking;
 import solving.SolverGreedy;
 import solving.UserDataManager;
@@ -30,7 +31,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   /**
    * the Button Event Handler.
    */
-  private final ButtonEventHandler buttonHandler;
+  private ButtonEventHandler buttonHandler;
   /**
    * the labels of the page.
    */
@@ -60,18 +61,22 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
-    buttonHandler = new ButtonEventHandlerJtree(getLevel());
+    if (GuiOptionsPage.altTreeSelected) {
+      buttonHandler = new ButtonEventHandlerJtree(getLevel());
+    } else {
+      buttonHandler = new ButtonEventHandlerTable(getLevel());
+    }
   }
 
   /**
    * makes the Item Buttons.
    *
-   * @param panelAvailable  The right panel where the buttons for
-   *                      the items NOT IN the bag should go to.
-   * @param panelRucksack The left panel where the buttons for
-   *                      the items IN the bag should go to.
-   * @param panelTrash   The trash panel.
-   * @param controlPanel The control panel.
+   * @param panelAvailable The right panel where the buttons for
+   *                       the items NOT IN the bag should go to.
+   * @param panelRucksack  The left panel where the buttons for
+   *                       the items IN the bag should go to.
+   * @param panelTrash     The trash panel.
+   * @param controlPanel   The control panel.
    */
 
   public void itemButtons(final JPanel panelAvailable, final JPanel panelRucksack,
@@ -203,7 +208,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
-      Image.SCALE_SMOOTH);
+        Image.SCALE_SMOOTH);
 
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 100);
 
@@ -211,7 +216,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
     ImageIcon trashImage = new ImageIcon(urlTrash);
     Image scaledTrashImage = trashImage.getImage().getScaledInstance(200, 350,
-      Image.SCALE_SMOOTH);
+        Image.SCALE_SMOOTH);
     JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20, 0);
 
     JLabel trash = new JLabel("Müll:");
@@ -404,6 +409,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
   /**
    * Method for generating the message when clicking the escape button.
+   *
    * @return String of the escape message
    */
   @Override
@@ -412,7 +418,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     String solutionString = this.buttonHandler.getSolution();
     if (solutionString == null) {
       return "Drücke vor beenden des Levels das Blatt im Baum, welches"
-              + "der richtigen Lösung entspricht.";
+          + "der richtigen Lösung entspricht.";
     }
     ArrayList<Item> solution = new ArrayList<>();
     for (int i = 0; i < getLevel().getBacktrackingItemList().size(); i++) {
