@@ -4,10 +4,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 import rucksack.BacktrackingItem;
 import rucksack.Item;
-
-import javax.swing.*;
 
 
 /**
@@ -24,10 +23,19 @@ public class BacktrackingTree {
    */
   private BacktrackingNode currentNode;
 
+  /**
+   * capacity of the bag.
+   */
   private final int bagCapacity;
 
+  /**
+   * the items.
+   */
   private final ArrayList<BacktrackingItem> itemArrayList;
 
+  /**
+   * variable that stores if subtree is full.
+   */
   private boolean isSubtreeFull = true;
 
 
@@ -43,8 +51,10 @@ public class BacktrackingTree {
         Comparator.comparingInt(Item::getWeight)
             .thenComparingInt(Item::getValue).reversed());
     this.itemArrayList = myItemArrayList;
-    root = new BacktrackingNode(new BacktrackingItem(0, 0, "root", new ImageIcon()),
-        0, 0, myBagCapacity, myItemArrayList, null, true, 0);
+    root = new BacktrackingNode(new BacktrackingItem(0,
+        0, "root", new ImageIcon()),
+        0, 0, myBagCapacity, myItemArrayList,
+        null, true, 0);
     currentNode = root;
     this.bagCapacity = myBagCapacity;
   }
@@ -256,6 +266,7 @@ public class BacktrackingTree {
 
   private void moveDownTheSubtree(final BacktrackingNode nodeItemToTrash) {
     if (currentNode.getCurrentWeight() >= bagCapacity) {
+      isSubtreeFull = allLeftChildrenAreThere();
       return;
     }
     // be on leafs
@@ -265,7 +276,6 @@ public class BacktrackingTree {
       // (in other words the highest high of the tree is reached)
       if (itemArrayList.indexOf(currentNode.getItem())
           == itemArrayList.size() - 1) {
-        return;
         //  no other item fits in rucksack
       } else if (currentNode.getCurrentWeight()
           + itemArrayList.get(itemArrayList.size() - 1)
@@ -297,6 +307,22 @@ public class BacktrackingTree {
       this.moveDownTheSubtree(nodeItemToTrash.getLeftChild());
       this.moveDownTheSubtree(nodeItemToTrash.getRightChild());
     }
+  }
+
+  private boolean allLeftChildrenAreThere() {
+    boolean res = true;
+    String currentNodeName = currentNode.getName();
+    while (currentNode.getLevel() < itemArrayList.size()) {
+      if (currentNode.getLeftChild() == null) {
+        res = false;
+        break;
+      }
+      currentNode = currentNode.getLeftChild();
+    }
+    while (!Objects.equals(currentNode.getName(), currentNodeName)) {
+      currentNode = currentNode.getParent();
+    }
+    return res;
   }
 
   /**
