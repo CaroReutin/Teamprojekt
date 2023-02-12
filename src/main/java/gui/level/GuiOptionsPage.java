@@ -107,7 +107,7 @@ public class GuiOptionsPage {
     treeModeButton.setFont(font);
     treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
     treeModeButton.addActionListener(e -> {
-      if (altTreeSelected) {
+      if (!altTreeSelected) {
         treeModeButton.setText("Zeige Standart Backtrackingbaum");
       } else {
         treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
