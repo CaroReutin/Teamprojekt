@@ -132,8 +132,7 @@ public final class AppData {
       if (currentPicture.exists()) {
         level.setItemIcon(i, new ImageIcon(new ImageIcon(currentPicture
             .getAbsolutePath()).getImage()
-            .getScaledInstance(AppData.ICON_SIZE,
-                AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
+            .getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
       }
     }
     return level;
