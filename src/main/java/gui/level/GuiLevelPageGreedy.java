@@ -71,6 +71,9 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
       labels[i].setFont(smallFont);
 
+      JPanel rucksackPanel = new JPanel(new GridLayout(1, 2));
+
+
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(smallFont);
       int finalI = i;
@@ -102,14 +105,20 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
 
       });
 
+      JPanel infosPanel = new JPanel();
+      infosPanel.add(currentWeightLabel);
+      infosPanel.add(currentValueLabel);
+
       availableItems.add(currentItemIcon);
       availableItems.add(current);
       availableItems.add(labels[i]);
       panelItems.add(availableItems);
-      panelRucksack.add(currentRucksackIcon);
-      panelRucksack.add(rucksackLabels[i]);
-      panelRucksack.add(currentWeightLabel);
-      panelRucksack.add(currentValueLabel);
+
+      rucksackPanel.add(currentRucksackIcon);
+      rucksackPanel.add(rucksackLabels[i]);
+
+      panelRucksack.add(rucksackPanel);
+      panelRucksack.add(infosPanel);
 
     }
   }
@@ -129,8 +138,10 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(300, 700,
+        rucksackImage.getImage().getScaledInstance(200, 400,
             java.awt.Image.SCALE_SMOOTH);
+    ImageIcon rucksackIcon = new ImageIcon(scaledRucksackImage);
+    JLabel rucksackLabel = new JLabel(rucksackIcon);
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
@@ -140,7 +151,8 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
       Image.SCALE_SMOOTH);
 
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    leftPanel.add(rucksackLabel);
     JPanel rightPanel = new JPanel();
 
     // erzeuge Buttons
@@ -148,7 +160,12 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     if (GuiOptionsPage.greedyTipsAllowed) {
       this.clueButton(centerPanel);
     }
-    this.itemButtons(rightPanel, leftPanel);
+
+    JPanel rucksackPanel = new JPanel();
+
+    this.itemButtons(rightPanel, rucksackPanel);
+
+    leftPanel.add(rucksackPanel);
 
     //alles zusammenpuzzeln
 
