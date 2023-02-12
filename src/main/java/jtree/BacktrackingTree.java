@@ -1,10 +1,14 @@
 package jtree;
 
+import backtrackingtree.BacktrackingNode;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 import rucksack.Item;
 import rucksack.Level;
 
@@ -21,11 +25,6 @@ public class BacktrackingTree {
    */
   private final JFrame frame = new JFrame();
   /**
-   * all possible (and impossible) nodes.
-   */
-  private final ArrayList<ArrayList<DefaultMutableTreeNode>>
-      nodes = new ArrayList<>();
-  /**
    * the indexes of explored paths matching to the nodes in nodes Arraylist.
    */
   private final ArrayList<ArrayList<Integer>> exploredPaths = new ArrayList<>();
@@ -33,6 +32,10 @@ public class BacktrackingTree {
    * the current node.
    */
   private DefaultMutableTreeNode currentNode;
+  /**
+   * the tree node that is selected as solution
+   */
+  private BacktrackingNode solution = null;
   /**
    * list of items.
    */
@@ -48,7 +51,6 @@ public class BacktrackingTree {
    * at the end of that path.
    */
   private String currentPath = "";
-
   /**
    * .
    *
@@ -64,6 +66,20 @@ public class BacktrackingTree {
     DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
     currentNode = root;
     tree = new JTree(root);
+    tree.getSelectionModel().setSelectionMode(
+            TreeSelectionModel.SINGLE_TREE_SELECTION);
+    tree.addTreeSelectionListener(new TreeSelectionListener() {
+      public void valueChanged(final TreeSelectionEvent e) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+            tree.getLastSelectedPathComponent();
+
+        if (node == null) return;
+        if (node.getLevel() != level.getBacktrackingItemList().size()) return;
+
+        Object nodeInfo = node.getPath();
+        System.out.println(nodeInfo);
+      }
+    });
     tree.setRootVisible(true);
     tree.setVisible(true);
     frame.setSize(500, 500);
@@ -74,10 +90,9 @@ public class BacktrackingTree {
 
   private void generateNodes() {
     for (int i = 0; i < itemList.size(); i++) {
-      nodes.add(new ArrayList<>());
       exploredPaths.add(new ArrayList<>());
     }
-    addNodes(0, 0, 0);
+    //addNodes(0, 0, 0);
   }
 
   private void addNodes(final int depth, final int value, final int weight) {
@@ -98,8 +113,8 @@ public class BacktrackingTree {
         + " ".repeat(Math.max(0, 5 - String
         .valueOf(newWeight).length())) + " | " + "Value: " + newValue;
     DefaultMutableTreeNode node = new DefaultMutableTreeNode(leftRes);
-    nodes.get(depth).add(node);
-    nodes.get(depth).add(new DefaultMutableTreeNode(rightRes));
+    //nodes.get(depth).add(node);
+    //nodes.get(depth).add(new DefaultMutableTreeNode(rightRes));
     addNodes(depth + 1, value, weight);
     addNodes(depth + 1, newValue, newWeight);
   }
@@ -119,7 +134,7 @@ public class BacktrackingTree {
   /**
    * adds the path where the next heaviest item is added to the bag.
    */
-  public void putInBag() {
+  public void putInBag(BacktrackingNode currentBacktrackingNode) {
     if (itemList.size() - currentDepth <= 0) {
       return;
     }
@@ -132,10 +147,10 @@ public class BacktrackingTree {
     boolean update = false;
     if (!exploredPaths.get(currentDepth).contains(nextIndex)) {
       update = true;
-      currentNode.add(nodes.get(currentDepth).get(nextIndex));
+      //currentNode.add(nodes.get(currentDepth).get(nextIndex));
       exploredPaths.get(currentDepth).add(nextIndex);
     }
-    currentNode = nodes.get(currentDepth).get(nextIndex);
+    //currentNode = nodes.get(currentDepth).get(nextIndex);
     currentDepth++;
     if (update) {
       DefaultMutableTreeNode pastNode =
@@ -154,7 +169,7 @@ public class BacktrackingTree {
    * bag to trash interaction has to be modeled with back
    * and then putInTrash.
    */
-  public void putInTrash() {
+  public void putInTrash(BacktrackingNode currentBacktrackingNode) {
     if (itemList.size() - currentDepth <= 0) {
       return;
     }
@@ -167,5 +182,9 @@ public class BacktrackingTree {
    */
   public void show() {
     frame.setVisible(true);
+  }
+
+  public void close() {
+    frame.dispose();
   }
 }
