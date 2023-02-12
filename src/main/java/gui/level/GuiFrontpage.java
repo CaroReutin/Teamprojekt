@@ -1,12 +1,16 @@
 
 package gui.level;
 
+import org.apache.commons.io.FileUtils;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -80,8 +84,10 @@ public class GuiFrontpage {
     clueButton.addActionListener(e -> {
       try {
         // TODO Alternative Buttons und Icons im Bild!
-        String message = GuiLevelPage.fileToString(
-                "src/main/resources/texts/1_Introtext.txt");
+        InputStream is = GuiFrontpage.class.getClassLoader().getResourceAsStream("texts/1_Introtext.txt");
+        File file = File.createTempFile("1_Introtext", "txt");
+        FileUtils.copyInputStreamToFile(is, file);
+        String message = GuiLevelPage.fileToStringFromFile(file);
         String[] buttons = {"Schließen",
                 "Wie spiele ich?",
                 "Eigene Level spielen?"};
@@ -97,8 +103,10 @@ public class GuiFrontpage {
             GuiManager.openMainMenu();
           }
           case 1 -> {
-            String levelMessage = GuiLevelPage.fileToString(
-                    "src/main/resources/texts/2_1_HowToPlay.txt");
+            InputStream levelIs = GuiFrontpage.class.getClassLoader().getResourceAsStream("texts/2_1_HowToPlay.txt");
+            File levelFile = File.createTempFile("2_1_HowToPlay", "txt");
+            FileUtils.copyInputStreamToFile(levelIs, levelFile);
+            String levelMessage = GuiLevelPage.fileToStringFromFile(levelFile);
             String[] levelTypeButtons = {
                     "Zur Levelauswahl",
                     "Greedy-Ganove?",
@@ -116,8 +124,10 @@ public class GuiFrontpage {
               }
               case 1 -> {
                 GuiManager.openLevelSelectScreen();
-                String greedyMessage = GuiLevelPage.fileToString(
-                        "src/main/resources/texts/2_2_HowToGreedy.txt");
+                InputStream greedyIs = GuiFrontpage.class.getClassLoader().getResourceAsStream("texts/2_2_HowToGreedy.txt");
+                File greedyFile = File.createTempFile("2_2_HowToGreedy", "txt");
+                FileUtils.copyInputStreamToFile(greedyIs, greedyFile);
+                String greedyMessage = GuiLevelPage.fileToStringFromFile(greedyFile);
                 String[] greedyButtons = {"Los geht's!"};
                 int chosenGreedyButton = JOptionPane.showOptionDialog(null,
                         greedyMessage,
@@ -136,8 +146,11 @@ public class GuiFrontpage {
               }
               case 2 -> {
                 GuiManager.openLevelSelectScreen();
-                String backtrackingMessage = GuiLevelPage.fileToString(
-                        "src/main/resources/texts/2_3_HowToBacktracking.txt");
+                InputStream backtrackingIs = GuiFrontpage.class.getClassLoader().getResourceAsStream("texts/2_3_HowToBacktracking.txt");
+                File backtrackingFile = File.createTempFile("2_3_HowToBacktracking", "txt");
+                FileUtils.copyInputStreamToFile(backtrackingIs, backtrackingFile);
+                String backtrackingMessage = GuiLevelPage.fileToStringFromFile(backtrackingFile);
+
                 String[] greedyButtons = {"Los geht's!"};
                 int chosenGreedyButton = JOptionPane.showOptionDialog(null,
                         backtrackingMessage,
@@ -159,8 +172,11 @@ public class GuiFrontpage {
             }
           }
           case 2 -> {
-            String playOwnMessage = GuiLevelPage.fileToString(
-                    "src/main/resources/texts/3_2_PlayOwnLevel.txt");
+            InputStream ownIs = GuiFrontpage.class.getClassLoader().getResourceAsStream("texts/3_2_PlayOwnLevel.txt");
+            File ownFile = File.createTempFile("3_2_PlayOwnLevel", "txt");
+            FileUtils.copyInputStreamToFile(ownIs, ownFile);
+            String playOwnMessage = GuiLevelPage.fileToStringFromFile(ownFile);
+
             String[] playOwnButtons = {
                     "Museumswerkstatt betreten",
                     "Was ist die Museumswerkstatt?"};
@@ -177,8 +193,11 @@ public class GuiFrontpage {
               }
               case 1 -> {
                 GuiManager.openLevelEditor();
-                String editorMessage = GuiLevelPage.fileToString(
-                        "src/main/resources/texts/3_1_GenerateOwnLevel.txt");
+                InputStream editorIs = GuiFrontpage.class.getClassLoader().getResourceAsStream("texts/3_1_GenerateOwnLevel.txt");
+                File editorFile = File.createTempFile("3_1_GenerateOwnLevel", "txt");
+                FileUtils.copyInputStreamToFile(editorIs, editorFile);
+                String editorMessage = GuiLevelPage.fileToStringFromFile(editorFile);
+
                 String[] editorButtons = {"Los geht's!"};
                 int chosenEditorButton = JOptionPane.showOptionDialog(null,
                         editorMessage,

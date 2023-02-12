@@ -130,8 +130,8 @@ public final class AppData {
       if (currentPicture.exists()) {
         level.setItemIcon(i, new ImageIcon(new ImageIcon(currentPicture
             .getAbsolutePath()).getImage()
-            .getScaledInstance(AppData.ICON_SIZE,
-                AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
+            .getScaledInstance(30,
+                30, Image.SCALE_SMOOTH)));
       }
     }
     return level;
@@ -143,17 +143,12 @@ public final class AppData {
   public static void initializeBeginningLevel() {
     try {
       InputStream is = AppData.class.getClassLoader().getResourceAsStream("Level/Startlevel.zip");
-      File file = File.createTempFile("startlevel", "zip");
+      File file = File.createTempFile("Startlevel", "zip");
       FileUtils.copyInputStreamToFile(is, file);
       LEVEL_ZERO[0] = loadLevel(file);
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-
-    //LEVEL_ZERO[0] = loadLevel(new File(Objects.requireNonNull(AppData.class.getClassLoader()
-    //  .getResource("Level/Startlevel.zip")).getPath()));
-
   }
 
   /**

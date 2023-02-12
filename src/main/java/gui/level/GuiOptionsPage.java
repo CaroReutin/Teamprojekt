@@ -124,12 +124,12 @@ public class GuiOptionsPage {
     descriptionPanel.add(clueButton);
     clueButton.addActionListener(e -> {
       String editorMessage = null;
-      try {
+      /*try {
         editorMessage = GuiLevelPage.fileToString(
                 "src/main/resources/texts/4_Options.txt");
       } catch (IOException ex) {
         throw new RuntimeException(ex);
-      }
+      }*/
       String[] editorButtons = {"Verstanden"};
       int chosenEditorButton = JOptionPane.showOptionDialog(null,
               editorMessage,
