@@ -105,7 +105,11 @@ public class GuiOptionsPage {
     JPanel treeModePanel = new JPanel();
     JButton treeModeButton = new JButton();
     treeModeButton.setFont(font);
-    treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+    if (altTreeSelected) {
+      treeModeButton.setText("Zeige Standart Backtrackingbaum");
+    } else {
+      treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+    }
     treeModeButton.addActionListener(e -> {
       if (!altTreeSelected) {
         treeModeButton.setText("Zeige Standart Backtrackingbaum");

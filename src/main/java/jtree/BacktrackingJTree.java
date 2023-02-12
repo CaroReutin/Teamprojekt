@@ -85,7 +85,7 @@ public class BacktrackingJTree {
       }
       selectedNode = (DefaultMutableTreeNode) selectedNode.getParent();
     }
-    System.out.println(res);
+    res.reverse();
     return res.toString();
   }
 }
