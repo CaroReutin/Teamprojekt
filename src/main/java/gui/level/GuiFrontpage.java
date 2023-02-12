@@ -3,15 +3,13 @@ package gui.level;
 
 import org.apache.commons.io.FileUtils;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -71,14 +69,31 @@ public class GuiFrontpage {
     settingsButton.setBackground(Color.LIGHT_GRAY);
     settingsButton.setFont(fontButtons);
 
-    InputStream is = GuiFrontpage.class.getClassLoader().getResourceAsStream("icons/clueSymbol.png");
+
+    /*JButton clueButton = new JButton();
+    try {
+      BufferedImage bi = ImageIO.read(new File("icons/clueSymbol.png"));
+      bi.getScaledInstance(WIDTH_RUCKSACK, WIDTH_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+      ImageIcon clueIcon = new ImageIcon(bi);
+      clueButton.add(clueIcon);
+
+    } catch () {
+
+    }*/
 
 
+   /* String imgName = "icons/clueSymbol.png";
+    URL imgURL = GuiFrontpage.class.getResource(imgName);
+    Toolkit tk = Toolkit.getDefaultToolkit();
+    Image img = tk.getImage(imgURL);
+    img.getScaledInstance(WIDTH_RUCKSACK, WIDTH_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon newClueSymbol = new ImageIcon(img);
+    JButton clueButton = new JButton(newClueSymbol);*/
 
     ImageIcon clueSymbol = new ImageIcon(
-            "src/main/resources/icons/clueSymbol.png");
+      "src/main/resources/icons/clueSymbol.png");
     Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
-            WIDTH_RUCKSACK, WIDTH_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+      WIDTH_RUCKSACK, WIDTH_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
     ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
     JButton clueButton = new JButton(newClueSymbol);
 
