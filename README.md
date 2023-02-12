@@ -26,9 +26,9 @@ $ sudo apt install git -y
 
 $ sudo apt install maven -y
 
-$ sudo apt install openjdk-17-jre-headless
+$ sudo apt install openjdk-17-jre-headless -y
 
-$ sudo apt-get install openjdk-17-jre
+$ sudo apt-get install openjdk-17-jre -y
 
 falls:
 $ mvn --version
@@ -39,20 +39,20 @@ jdk 17 aus
 
 ### Das Projekt klonen und ausführen
 
-$ git clone https://github.com/CaroReutin/Teamprojekt <directory>
-(wobei <directory> der Ordnerpfad ist an dem das Projekt gespeichert werden soll)
+$ git clone https://github.com/CaroReutin/Teamprojekt directory
+(wobei directory der Ordnerpfad ist an dem das Projekt gespeichert werden soll)
 (wenn beim Einloggen in GitHub nach dem passwort gefragt wird, muss statdessen ein PersonalAccesToken eingegeben werden,
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic)
 
 Das Projekt kann nun bearbeitet werden.
-Um das programm auszuführen öffne das Terminal in <directory> und gebe ein:
+Um das programm auszuführen öffne das Terminal in directory und gebe ein:
 
 $ mvn clean 
 
 $ mvn package
 
-$ java -jar target/<jarname>
-(wobei <jarname> der name der jar mit den dependencies ist, bsp. 
+$ java -jar target/jarname
+(wobei jarname der name der jar mit den dependencies ist, bsp. 
 optimalheist-1.0-SNAPSHOT-jar-with-dependencies.jar)
 
 ## Windows
@@ -63,20 +63,20 @@ optimalheist-1.0-SNAPSHOT-jar-with-dependencies.jar)
 
 ### Das Projekt klonen und ausführen
 
-$ git clone https://github.com/CaroReutin/Teamprojekt <directory>
-(wobei <directory> der Ordnerpfad ist an dem das Projekt gespeichert werden soll)
+$ git clone https://github.com/CaroReutin/Teamprojekt directory
+(wobei directory der Ordnerpfad ist an dem das Projekt gespeichert werden soll)
 (wenn beim Einloggen in GitHub nach dem passwort gefragt wird, muss statdessen ein PersonalAccesToken eingegeben werden,
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic)
 
 Das Projekt kann nun bearbeitet werden.
-Um das programm auszuführen öffne das Terminal in <directory> und gebe ein:
+Um das programm auszuführen öffne das Terminal in directory und gebe ein:
 
 $ mvn clean 
 
 $ mvn package
 
-$ java -jar target/<jarname>
-(wobei <jarname> der name der jar mit den dependencies ist, bsp. 
+$ java -jar target/jarname
+(wobei jarname der name der jar mit den dependencies ist, bsp. 
 optimalheist-1.0-SNAPSHOT-jar-with-dependencies.jar)
 
 
