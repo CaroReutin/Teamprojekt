@@ -81,7 +81,6 @@ public class GuiFrontpage {
 
     }*/
 
-
    /* String imgName = "icons/clueSymbol.png";
     URL imgURL = GuiFrontpage.class.getResource(imgName);
     Toolkit tk = Toolkit.getDefaultToolkit();
@@ -90,6 +89,7 @@ public class GuiFrontpage {
     ImageIcon newClueSymbol = new ImageIcon(img);
     JButton clueButton = new JButton(newClueSymbol);*/
 
+    //todo get picture from resourses
     ImageIcon clueSymbol = new ImageIcon(
       "src/main/resources/icons/clueSymbol.png");
     Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
