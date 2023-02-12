@@ -44,7 +44,7 @@ public class BacktrackingTree {
             .thenComparingInt(Item::getValue).reversed());
     this.itemArrayList = myItemArrayList;
     root = new BacktrackingNode(new BacktrackingItem(0, 0, "root", new ImageIcon()),
-        0, 0, myBagCapacity, myItemArrayList, null, true);
+        0, 0, myBagCapacity, myItemArrayList, null, true, 0);
     currentNode = root;
     this.bagCapacity = myBagCapacity;
   }
@@ -205,7 +205,7 @@ public class BacktrackingTree {
       int newCurrentValue = currentParent.getCurrentValue();
       currentParent.setLeftChild(new BacktrackingNode(childItem,
           newCurrentWeight, newCurrentValue, bagCapacity, itemArrayList,
-          currentParent, false));
+          currentParent, false, currentParent.getLevel() + 1));
       currentNode.moveItemsIntoAvailable(currentParent.getRightChild());
       return currentParent.getLeftChild();
 
@@ -228,7 +228,7 @@ public class BacktrackingTree {
       currentNode.setLeftChild(new BacktrackingNode(
           childItem, currentNode.getCurrentWeight(),
           currentNode.getCurrentValue(), bagCapacity,
-          itemArrayList, currentNode, false));
+          itemArrayList, currentNode, false, currentNode.getLevel() + 1));
       return currentNode.getLeftChild();
     }
     System.out.println(childItem.getName()

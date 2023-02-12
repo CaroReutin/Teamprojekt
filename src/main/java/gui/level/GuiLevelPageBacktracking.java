@@ -17,7 +17,7 @@ import rucksack.BacktrackingItem;
 import rucksack.Item;
 import rucksack.Level;
 import solving.ButtonEventHandler;
-import solving.ButtonEventHandlerTable;
+import solving.ButtonEventHandlerJtree;
 import solving.SolverBacktracking;
 import solving.SolverGreedy;
 import solving.UserDataManager;
@@ -60,7 +60,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
-    buttonHandler = new ButtonEventHandlerTable(getLevel());
+    buttonHandler = new ButtonEventHandlerJtree(getLevel());
   }
 
   /**

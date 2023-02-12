@@ -23,6 +23,8 @@ public final class AppData {
    * the maximum amount of different items in backtracking levels.
    */
   public static final int MAXIMUM_ITEMS_IN_CUSTOM_BACKTRACKING_LEVEL = 5;
+  public static final int MINIMUM_WIDTH = 800;
+  public static final int MINIMUM_HEIGHT = 600;
 
   /**
    * do not make.
