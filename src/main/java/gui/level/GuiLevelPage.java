@@ -440,9 +440,12 @@ public class GuiLevelPage {
       labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
 
       labels[i].setFont(font);
+      JPanel rucksackPanel = new JPanel(new GridLayout(1, 4));
 
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(font);
+
+
       int finalI = i;
       JPanel itemPanel = new JPanel(new GridLayout(1, 4));
       ImageIcon imageIcon = items.get(i).getImageIcon();
@@ -473,12 +476,16 @@ public class GuiLevelPage {
         }
       });
       itemPanel.add(labels[i]);
-      panelItems.add(itemPanel);
-      panelRucksack.add(currentRucksack, BorderLayout.CENTER);
-      panelRucksack.add(rucksackLabels[i], BorderLayout.CENTER);
-      panelRucksack.add(currentWeightLabel, BorderLayout.SOUTH);
-      panelRucksack.add(currentValueLabel, BorderLayout.SOUTH);
+      rucksackPanel.add(currentRucksack);
+      rucksackPanel.add(rucksackLabels[i]);
 
+      JPanel infosPanel = new JPanel();
+      infosPanel.add(currentWeightLabel);
+      infosPanel.add(currentValueLabel);
+
+      panelItems.add(itemPanel);
+      panelRucksack.add(rucksackPanel);
+      panelRucksack.add(infosPanel);
     }
   }
 
@@ -510,8 +517,11 @@ public class GuiLevelPage {
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
-            300, 500, java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
+            200, 400, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon rucksackIcon = new ImageIcon(scaledRucksackImage);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    JLabel rucksackImageLabel = new JLabel(rucksackIcon);
+    leftPanel.add(rucksackImageLabel);
 
 
     //füge Räuber ein
@@ -524,22 +534,24 @@ public class GuiLevelPage {
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
     JPanel rightPanel = new JPanel();
 
+    JPanel rucksackItems = new JPanel();
+
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
     this.clueButton(centerPanel);
-    this.itemButtons(rightPanel, leftPanel);
+    this.itemButtons(rightPanel, rucksackItems);
 
-    JPanel emptyPanel = new JPanel();
+    leftPanel.add(rucksackItems);
 
     //alles zusammenpuzzeln
     pane.add(leftPanel);
     pane.add(centerPanel);
     pane.add(rightPanel);
 
-    pane.add(leftPanel, BorderLayout.WEST);
+    /*pane.add(leftPanel, BorderLayout.WEST);
     pane.add(centerPanel, BorderLayout.CENTER);
-    pane.add(rightPanel, BorderLayout.EAST);
+    pane.add(rightPanel, BorderLayout.EAST);*/
 
     return pane;
   }

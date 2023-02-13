@@ -17,6 +17,7 @@ import rucksack.BacktrackingItem;
 import rucksack.Item;
 import rucksack.Level;
 import solving.ButtonEventHandler;
+import solving.ButtonEventHandlerJtree;
 import solving.ButtonEventHandlerTable;
 import solving.SolverBacktracking;
 import solving.SolverGreedy;
@@ -30,7 +31,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   /**
    * the Button Event Handler.
    */
-  private final ButtonEventHandler buttonHandler;
+  private ButtonEventHandler buttonHandler;
   /**
    * the labels of the page.
    */
@@ -60,18 +61,22 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
-    buttonHandler = new ButtonEventHandlerTable(getLevel());
+    if (GuiOptionsPage.altTreeSelected) {
+      buttonHandler = new ButtonEventHandlerJtree(getLevel());
+    } else {
+      buttonHandler = new ButtonEventHandlerTable(getLevel());
+    }
   }
 
   /**
    * makes the Item Buttons.
    *
-   * @param panelAvailable  The right panel where the buttons for
-   *                      the items NOT IN the bag should go to.
-   * @param panelRucksack The left panel where the buttons for
-   *                      the items IN the bag should go to.
-   * @param panelTrash   The trash panel.
-   * @param controlPanel The control panel.
+   * @param panelAvailable The right panel where the buttons for
+   *                       the items NOT IN the bag should go to.
+   * @param panelRucksack  The left panel where the buttons for
+   *                       the items IN the bag should go to.
+   * @param panelTrash     The trash panel.
+   * @param controlPanel   The control panel.
    */
 
   public void itemButtons(final JPanel panelAvailable, final JPanel panelRucksack,
@@ -79,12 +84,12 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
                           final JPanel controlPanel) {
     Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
     Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
-    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+    Font infoFont = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
-    currentWeightLabel.setFont(bigFont);
+    currentWeightLabel.setFont(infoFont);
 
     currentValueLabel = new JLabel("0€");
-    currentValueLabel.setFont(bigFont);
+    currentValueLabel.setFont(infoFont);
 
     ArrayList<BacktrackingItem> items = getLevel().getBacktrackingItemList();
     labels = new JLabel[items.size()];
@@ -116,16 +121,20 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       putToRucksack.addActionListener(e -> handleButtons(finalI, true));
 
       //Trash Buttons and Labels
+      JPanel trashPanel = new JPanel(new GridLayout(2, 1));
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
           .get(i).toString());
 
       trashLabels[i].setFont(mediumFont);
+
 
       //buttons trash
       JButton putToTrash = new JButton("wegwerfen");
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
       JLabel currentRucksack = new JLabel(imageIcon);
+
+      JPanel rucksackPanel = new JPanel(new GridLayout(2, 1));
 
       JPanel availableTempPanel = new JPanel(new GridLayout(1, 4));
       availableTempPanel.add(itemIcon);
@@ -148,13 +157,19 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       controlPanel.add(tempControlPanel);
 
       JLabel currentTrash = new JLabel(imageIcon);
-      panelTrash.add(currentTrash);
-      panelTrash.add(trashLabels[i]);
+      trashPanel.add(currentTrash);
+      trashPanel.add(trashLabels[i]);
+      panelTrash.add(trashPanel);
 
-      panelRucksack.add(currentRucksack);
-      panelRucksack.add(rucksackLabels[i]);
-      panelRucksack.add(currentWeightLabel);
-      panelRucksack.add(currentValueLabel);
+      rucksackPanel.add(currentRucksack);
+      rucksackPanel.add(rucksackLabels[i]);
+
+      JPanel infosPanel = new JPanel();
+      infosPanel.add(currentWeightLabel);
+      infosPanel.add(currentValueLabel);
+
+      panelRucksack.add(rucksackPanel);
+      panelRucksack.add(infosPanel);
 
     }
   }
@@ -181,44 +196,43 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     available.setFont(mediumFont);
     avaiblePanel.add(available);
     // Panel with buttons were you can add items to rucksack or trash
-    JPanel controlPannel = new JPanel();
+    JPanel controlPanel = new JPanel();
     JLabel control = new JLabel("Kontrollfläche: ");
     control.setFont(mediumFont);
-    controlPannel.add(control);
+    controlPanel.add(control);
     rightPanel.add(avaiblePanel, BorderLayout.NORTH);
-    rightPanel.add(controlPannel, BorderLayout.SOUTH);
+    rightPanel.add(controlPanel, BorderLayout.SOUTH);
 
     // Rucksack Panel
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(200, 350,
+        rucksackImage.getImage().getScaledInstance(50, 100,
             java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
-    JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
-    JLabel rucksack = new JLabel("Rucksack:");
-    rucksack.setFont(mediumFont);
-    rucksackPanel.add(rucksack);
+    ImageIcon rucksackIcon = new ImageIcon(scaledRucksackImage);
+    JLabel rucksackIconLabel = new JLabel(rucksackIcon);
+
+    JPanel rucksackPanel = new JPanel(new GridLayout(2, 1));
+    rucksackPanel.add(rucksackIconLabel);
+
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebGrauMitSack.png");
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
-      Image.SCALE_SMOOTH);
+        Image.SCALE_SMOOTH);
 
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 100);
 
     //Trash Panel
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
     ImageIcon trashImage = new ImageIcon(urlTrash);
-    Image scaledTrashImage = trashImage.getImage().getScaledInstance(200, 350,
-      Image.SCALE_SMOOTH);
-    JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20, 0);
+    Image scaledTrashImage = trashImage.getImage().getScaledInstance(50, 100,
+        Image.SCALE_SMOOTH);
+    ImageIcon trashIcon = new ImageIcon(scaledTrashImage);
+    JLabel trashIconLabel = new JLabel(trashIcon);
+    JPanel trashPanel = new JPanel(new GridLayout(2, 1));
+    trashPanel.add(trashIconLabel);
 
-    JLabel trash = new JLabel("Müll:");
-    trash.setFont(mediumFont);
-    trashPanel.add(trash);
-    leftPanel.add(rucksackPanel, BorderLayout.NORTH);
-    leftPanel.add(trashPanel, BorderLayout.SOUTH);
 
     //Panel where escape-Button and clue-Button are
     //JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -227,10 +241,20 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     if (GuiOptionsPage.backtrackingTipsAllowed) {
       this.clueButton(centerPanel);
     }
-    this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPannel);
 
+    JPanel rucksackPanelItems = new JPanel();
+    JPanel trashPanelItems = new JPanel();
+
+    this.itemButtons(avaiblePanel, rucksackPanel, trashPanel, controlPanel);
+
+    rucksackPanel.add(rucksackPanelItems);
+    trashPanel.add(trashPanelItems);
 
     //alles zusammenpuzzeln
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    leftPanel.add(rucksackPanel);
+    leftPanel.add(trashPanel);
+
     JButton treeButton = new JButton("Zeige Baum");
     treeButton.setFont(mediumFont);
     treeButton.addActionListener(e -> buttonHandler.show());
@@ -385,6 +409,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
           case 2 -> {
+            buttonHandler.resetLevel(getLevel(), levelNumber);
+            for (int i = 0; i < getLevel().getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevelSelectScreen();
             System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
           }
@@ -400,6 +428,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
   /**
    * Method for generating the message when clicking the escape button.
+   *
    * @return String of the escape message
    */
   @Override
@@ -407,12 +436,11 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     SolverBacktracking s = new SolverBacktracking();
     String solutionString = this.buttonHandler.getSolution();
     if (solutionString == null) {
-      return "Drücke vor beenden des Levels den Knopf im Baum der,"
-              + "der richtigen Lösung entspricht.";
+      return "Drücke vor beenden des Levels das Blatt im Baum, welches"
+          + "der richtigen Lösung entspricht.";
     }
     ArrayList<Item> solution = new ArrayList<>();
     for (int i = 0; i < getLevel().getBacktrackingItemList().size(); i++) {
-      System.out.println(solutionString);
       if (solutionString.charAt(i) == '0') {
         solution.add(getLevel().getItemList().get(i));
       }

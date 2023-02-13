@@ -1,6 +1,11 @@
 package gui.level;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -12,7 +17,6 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-
 import solving.AppData;
 
 /**
@@ -24,6 +28,7 @@ public class GuiOptionsPage {
    */
   public static boolean backtrackingTipsAllowed = false;
   public static boolean greedyTipsAllowed = false;
+  public static boolean altTreeSelected = false;
   /**
    * the number of rows on the pane.
    */
@@ -97,6 +102,23 @@ public class GuiOptionsPage {
     JPanel descriptionPanel = new JPanel();
     passwordInputPanel.add(passwordInput);
     passwordInput.setValue("");
+    JPanel treeModePanel = new JPanel();
+    JButton treeModeButton = new JButton();
+    treeModeButton.setFont(font);
+    if (altTreeSelected) {
+      treeModeButton.setText("Zeige Standart Backtrackingbaum");
+    } else {
+      treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+    }
+    treeModeButton.addActionListener(e -> {
+      if (!altTreeSelected) {
+        treeModeButton.setText("Zeige Standart Backtrackingbaum");
+      } else {
+        treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+      }
+      altTreeSelected = !altTreeSelected;
+    });
+    treeModePanel.add(treeModeButton);
 
     //erzeuge Buttons
     JButton enterPassword = new JButton("Eingabe");
@@ -116,9 +138,9 @@ public class GuiOptionsPage {
     });
 
     ImageIcon clueSymbol = new ImageIcon(
-            "src/main/resources/icons/clueSymbol.png");
+        "src/main/resources/icons/clueSymbol.png");
     Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
-            60, 60, java.awt.Image.SCALE_SMOOTH);
+        60, 60, java.awt.Image.SCALE_SMOOTH);
     ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
     JButton clueButton = new JButton(newClueSymbol);
     descriptionPanel.add(clueButton);
@@ -126,18 +148,18 @@ public class GuiOptionsPage {
       String editorMessage = null;
       /*try {
         editorMessage = GuiLevelPage.fileToString(
-                "src/main/resources/texts/4_Options.txt");
+            "src/main/resources/texts/4_Options.txt");
       } catch (IOException ex) {
         throw new RuntimeException(ex);
       }*/
       String[] editorButtons = {"Verstanden"};
       int chosenEditorButton = JOptionPane.showOptionDialog(null,
-              editorMessage,
-              "Passworteingabe",
-              JOptionPane.DEFAULT_OPTION,
-              JOptionPane.INFORMATION_MESSAGE,
-              null,
-              editorButtons, editorButtons[0]);
+          editorMessage,
+          "Passworteingabe",
+          JOptionPane.DEFAULT_OPTION,
+          JOptionPane.INFORMATION_MESSAGE,
+          null,
+          editorButtons, editorButtons[0]);
       switch (chosenEditorButton) {
         case 0 -> {
           GuiManager.openOptionsMenu();
@@ -153,6 +175,7 @@ public class GuiOptionsPage {
     subPane.add(passwordInputPanel);
     subPane.add(enterPasswordPanel);
     subPane.add(backPanel);
+    subPane.add(treeModePanel);
     subPane.add(descriptionPanel);
     //add panels and subpane on pane
     pane.add(subPane, BorderLayout.CENTER);

@@ -72,13 +72,16 @@ public class BacktrackingNode {
    * @param myParent    parent of this node
    * @param isInBag     true if item is in the bag, false if
    *                    it's in the trash
+   * @param myLevel     the depth of the node
    */
   public BacktrackingNode(final BacktrackingItem bagItem, final int oldWeight,
                           final int oldValue, final int bagCapacity,
                           final ArrayList<BacktrackingItem> myItemList,
                           final BacktrackingNode myParent,
-                          final boolean isInBag) {
+                          final boolean isInBag,
+                          final int myLevel) {
     item = bagItem;
+    this.level = myLevel;
     if (item.getState() == BacktrackingItem.StateBacktracking.TRASH) {
       currentValue = oldValue;
       currentWeight = oldWeight;
@@ -160,7 +163,7 @@ public class BacktrackingNode {
   public boolean addToRucksack(final BacktrackingItem childItem) {
     if (itemFitsInRucksack(childItem)) {
       rightChild = new BacktrackingNode(childItem, currentWeight,
-          currentValue, capacity, itemList, this, true);
+          currentValue, capacity, itemList, this, true, level + 1);
       System.out.println(childItem.getName() + " wurde hinzugefügt");
       childItem.setState(BacktrackingItem.StateBacktracking.RUCKSACK);
       return true;
@@ -289,5 +292,11 @@ public class BacktrackingNode {
    */
   public BacktrackingNode getParent() {
     return parent;
+  }
+
+  private final int level;
+
+  public int getLevel() {
+    return level;
   }
 }

@@ -266,5 +266,4 @@ public class GuiLevelDeciderPage {
   public GuiLevelPage[] getGuiLevelPages() {
     return guiLevelPages;
   }
-
 }

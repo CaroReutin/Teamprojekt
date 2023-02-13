@@ -62,8 +62,8 @@ public class GuiManager {
     frame = new JFrame();
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setTitle("Optimal Heist");
-    frame.setSize(1000, 750);
-    frame.setMinimumSize(new Dimension(800, 600));
+    frame.setSize(new Dimension(1000, 750));
+    frame.setMinimumSize(new Dimension(1000, 750));
     frame.setLocationRelativeTo(null);
     frame.setDropTarget(new DropTarget() {
       public synchronized void drop(final DropTargetDropEvent evt) {
