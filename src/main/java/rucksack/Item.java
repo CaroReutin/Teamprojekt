@@ -32,6 +32,16 @@ public class Item implements Serializable {
   private ImageIcon imageIcon;
 
   /**
+   * the spaces of the depth.
+   */
+  private static final int SPACES_DEPTH = 4;
+
+  /**
+   * the spaces remaining.
+   */
+  private static final int SPACES_REMAINING = 10;
+
+  /**
    * Instantiates a new item.
    *
    * @param itemValue  the value
@@ -141,10 +151,11 @@ public class Item implements Serializable {
    * @return "
    */
   public String getBacktrackingName(final int depthRemaining) {
-    int spacesPerDepth = 4;
+    int spacesPerDepth = SPACES_DEPTH;
     assert name != null;
     StringBuilder res = new StringBuilder(name);
-    int spacesRemaining = 10 + depthRemaining * spacesPerDepth - name.length();
+    int spacesRemaining = SPACES_REMAINING + depthRemaining
+      * spacesPerDepth - name.length();
     res.append(" ".repeat(Math.max(0, spacesRemaining)));
     return res.toString();
   }
