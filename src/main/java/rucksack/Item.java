@@ -29,17 +29,7 @@ public class Item implements Serializable {
   /**
    * The icon portraying the item.
    */
-  private ImageIcon imageIcon;
-
-  /**
-   * the spaces of the depth.
-   */
-  private static final int SPACES_DEPTH = 4;
-
-  /**
-   * the spaces remaining.
-   */
-  private static final int SPACES_REMAINING = 10;
+  private final ImageIcon imageIcon;
 
   /**
    * Instantiates a new item.
@@ -142,32 +132,6 @@ public class Item implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(value, weight, name);
-  }
-
-  /**
-   * .
-   *
-   * @param depthRemaining .
-   * @return "
-   */
-  public String getBacktrackingName(final int depthRemaining) {
-    int spacesPerDepth = SPACES_DEPTH;
-    assert name != null;
-    StringBuilder res = new StringBuilder(name);
-    int spacesRemaining = SPACES_REMAINING + depthRemaining
-      * spacesPerDepth - name.length();
-    res.append(" ".repeat(Math.max(0, spacesRemaining)));
-    return res.toString();
-  }
-
-  /**
-   * Method for getting the default icon of an item.
-   *
-   * @return the image icon DefaultBox.png
-   */
-  public ImageIcon getIcon() {
-    return new ImageIcon(Objects.requireNonNull(getClass()
-        .getResource("icons/DefaultBox.png")));
   }
 
 }

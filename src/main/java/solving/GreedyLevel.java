@@ -53,6 +53,7 @@ public final class GreedyLevel {
           AppData.class.getClassLoader().getResourceAsStream(
           "Level/Greedy1.zip");
       File file = File.createTempFile("Greedy1", "zip");
+      assert is != null;
       FileUtils.copyInputStreamToFile(is, file);
       //Backtracking Level 1
       LEVEL_GREEDY[0] =
@@ -62,6 +63,7 @@ public final class GreedyLevel {
           AppData.class.getClassLoader().getResourceAsStream(
           "Level/Greedy2.zip");
       File file2 = File.createTempFile("Greedy2", "zip");
+      assert is2 != null;
       FileUtils.copyInputStreamToFile(is2, file2);
       //Backtracking Level 2
       LEVEL_GREEDY[1] =
@@ -71,6 +73,7 @@ public final class GreedyLevel {
           AppData.class.getClassLoader().getResourceAsStream(
           "Level/Greedy3.zip");
       File file3 = File.createTempFile("Greedy3", "zip");
+      assert is3 != null;
       FileUtils.copyInputStreamToFile(is3, file3);
       //Backtracking Level 3
       LEVEL_GREEDY[2] =
@@ -80,6 +83,7 @@ public final class GreedyLevel {
             AppData.class.getClassLoader().getResourceAsStream(
           "Level/Greedy4.zip");
       File file4 = File.createTempFile("Greedy4", "zip");
+      assert is4 != null;
       FileUtils.copyInputStreamToFile(is4, file4);
       //Backtracking Level 4
       LEVEL_GREEDY[LEVEL_THREE] =
@@ -89,6 +93,7 @@ public final class GreedyLevel {
           AppData.class.getClassLoader().getResourceAsStream(
           "Level/Greedy5.zip");
       File file5 = File.createTempFile("Greedy5", "zip");
+      assert is5 != null;
       FileUtils.copyInputStreamToFile(is5, file5);
       //Backtracking Level 5
       LEVEL_GREEDY[LEVEL_FOUR] =
@@ -98,6 +103,7 @@ public final class GreedyLevel {
           AppData.class.getClassLoader().getResourceAsStream(
           "Level/Greedy6.zip");
       File file6 = File.createTempFile("Greedy6", "zip");
+      assert is6 != null;
       FileUtils.copyInputStreamToFile(is6, file6);
       //Backtracking Level 6
       LEVEL_GREEDY[LEVEL_FIVE] =
@@ -107,6 +113,7 @@ public final class GreedyLevel {
           AppData.class.getClassLoader().getResourceAsStream(
           "Level/Greedy7.zip");
       File file7 = File.createTempFile("Greedy7", "zip");
+      assert is7 != null;
       FileUtils.copyInputStreamToFile(is7, file7);
       //Backtracking Level 7
       LEVEL_GREEDY[LEVEL_SIX] =

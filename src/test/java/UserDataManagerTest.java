@@ -16,7 +16,6 @@ public class UserDataManagerTest {
   public void cleanUp() {
     UserDataManager.reset();
     File save = new File(testSaveFile);
-    boolean ignoreResult = save.delete();
   }
 
   @Test

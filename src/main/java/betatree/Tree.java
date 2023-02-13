@@ -131,9 +131,8 @@ public class Tree {
             actualButtons.add(new JButton(""));
             actualButtons.get(colCounter).setVisible(false);
             int finalColCounter = colCounter;
-            actualButtons.get(colCounter).addActionListener(e -> {
-              this.solution = Integer.toBinaryString(finalColCounter);
-            });
+            actualButtons.get(colCounter).addActionListener(e ->
+              this.solution = Integer.toBinaryString(finalColCounter));
             panel.add(actualButtons.get(colCounter));
             colCounter++;
           } else if (columnsWithButtons.contains(j)) {

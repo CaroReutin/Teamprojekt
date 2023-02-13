@@ -274,18 +274,7 @@ public class BacktrackingAlgo {
     expectedItems.add(items.get(0));
     expectedItems.add(items.get(1));
     Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expectedItems),SolverGreedy.sortLikeGreedy(solverBacktracking.solveAlgorithm(level)));
-    // Weight Negative (Not allowed)
-    /*
-    items = new ArrayList<>();
-    expectedItems = new ArrayList<>();
-    items.add(new Item(60,10,"1"));
-    items.add(new Item(100,20,"2"));
-    items.add(new Item(5000,-3,"3"));
-    level = new Level(items,amount,0,50);
-    expectedItems.add(items.get(0));
-    expectedItems.add(items.get(1));
-    Assertions.assertEquals(SolverGreedy.sortLikeGreedy(expectedItems),SolverGreedy.sortLikeGreedy(solverBacktracking.solveAlgorithm(level)));
-     */
+
     // Value Negative
     items = new ArrayList<>();
     expectedItems = new ArrayList<>();

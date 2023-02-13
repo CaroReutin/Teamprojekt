@@ -65,13 +65,6 @@ public class GuiManager {
   }
 
   /**
-     * Setter method for the private int numberLevel.
-     */
-  public static void setNumberLevel() {
-    setNumberLevel(0);
-  }
-
-  /**
    * Setter method for the private int numberLevel.
    *
    * @param numberLevel the int value the numberLevel should be set to.

@@ -191,10 +191,8 @@ public class BacktrackingNode {
 
   private boolean isNextSelectableItemForBag(final BacktrackingItem
                                                  newBagItem) {
-    final int weightNewBagItem = newBagItem.getWeight();
     final int indexThis = itemList.indexOf(this.getItem());
     final int indexNewBagItem = itemList.indexOf(newBagItem);
-    final int weightThis = this.item.getWeight();
 
     //if item is in available
     if (newBagItem.getState() != BacktrackingItem.StateBacktracking.AVAILABLE) {

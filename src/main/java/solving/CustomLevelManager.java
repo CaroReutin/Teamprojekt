@@ -40,8 +40,6 @@ public final class CustomLevelManager {
     try {
       if (destDir.exists()) {
         FileUtils.cleanDirectory(destDir);
-      } else {
-        Boolean ignoreResult = destDir.mkdirs();
       }
       zip = new File(destDir + "/" + zippedLevel.getName());
       FileUtils.copyFile(zippedLevel, zip);
@@ -131,8 +129,6 @@ public final class CustomLevelManager {
                              final String path, final String identifier,
                              final Level level,
                              final ArrayList<Integer> validItems) {
-    // Make path if it does not exist already
-    boolean ignoreResult = new File(path + "/temp").mkdirs();
     // Use jaxb to turn Level into xml file
     String levelPath = path + "/" + identifier + ".xml";
     XStream xstream = new XStream(new DomDriver());
@@ -144,8 +140,6 @@ public final class CustomLevelManager {
       fos.close();
 
       zipLevel(pictureFolder, levelPath, validItems);
-      boolean ignoreResult2 = new File(levelPath).delete();
-      boolean ignoreResult3 = new File(path + "/temp").delete();
       return true;
     } catch (IOException e) {
       e.printStackTrace();

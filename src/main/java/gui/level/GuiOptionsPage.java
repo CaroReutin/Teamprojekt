@@ -30,16 +30,6 @@ public class GuiOptionsPage {
   private static boolean backtrackingTipsAllowed = false;
 
   /**
-   * Setter method for the value of backtracking clues being allowed.
-   *
-   * @param backtrackingTipsAllowed boolean value whether clues are allowed
-   */
-  public static void setBacktrackingTipsAllowed(
-      final boolean backtrackingTipsAllowed) {
-    GuiOptionsPage.backtrackingTipsAllowed = backtrackingTipsAllowed;
-  }
-
-  /**
    * Getter method for the value of backtracking clues being allowed.
    *
    * @return the value of backtrackingTipsAllowed
@@ -52,16 +42,6 @@ public class GuiOptionsPage {
    * The boolean value whether the clues for the greedy levels are unlocked.
    */
   private static boolean greedyTipsAllowed = false;
-
-  /**
-   * Setter method for the value of greedy clues being allowed.
-   *
-   * @param greedyTipsAllowed boolean value whether clues are allowed
-   */
-  public static void setGreedyTipsAllowed(
-      final boolean greedyTipsAllowed) {
-    GuiOptionsPage.greedyTipsAllowed = greedyTipsAllowed;
-  }
 
   /**
    * Getter method for the value of backtracking clues being allowed.
@@ -77,17 +57,6 @@ public class GuiOptionsPage {
    * the tree depiction is necessary.
    */
   private static boolean altTreeSelected = false;
-
-  /**
-   * Setter method for selection of the alternate tree version.
-   *
-   * @param altTreeSelected boolean value whether the alternate version
-   *                        of the backtracking tree is selected
-   */
-  public static void setAltTreeSelected(
-      final boolean altTreeSelected) {
-    GuiOptionsPage.altTreeSelected = altTreeSelected;
-  }
 
   /**
    * Getter method for the boolean value whether
@@ -248,8 +217,6 @@ public class GuiOptionsPage {
         }
       }
     });
-
-    JPanel emptyPanel = new JPanel();
 
     //add panels on sub-pane
     subPane.add(passwordInputPanel);

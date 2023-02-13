@@ -1,6 +1,5 @@
 package solving;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +7,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import org.apache.commons.io.FileUtils;
-import rucksack.Item;
 import rucksack.Level;
 
 /**
@@ -71,11 +69,6 @@ public final class AppData {
    */
   private static String customLevelUnzipFolder;
   /**
-   * The font to use for text.
-   */
-  public static final Font FONT_STYLE = new Font("Arial",
-      Font.BOLD + Font.ITALIC, 30);
-  /**
    * Max amount of items in custom level, used to make the GUI.
    */
   public static final int MAXIMUM_ITEMS_IN_CUSTOM_LEVEL = 15;
@@ -87,10 +80,6 @@ public final class AppData {
    * the passwords that are used.
    */
   private static final ArrayList<String> PASSWORDS = new ArrayList<>();
-  /**
-   * the items.
-   */
-  private static final ArrayList<Item> ITEMS = new ArrayList<>();
 
   /**
    * the level.
@@ -112,7 +101,6 @@ public final class AppData {
       customLevelPictureFolder = homePath + "/Optimal Heist/customLevel/temp";
       customLevelUnzipFolder = homePath + "/Optimal Heist/customLevel/unzip/";
     }
-    boolean ignoreResult = new File(customLevelPictureFolder).mkdirs();
     PASSWORDS.add("Gr33dy");
     PASSWORDS.add("B4cktr4cking");
 
@@ -120,7 +108,6 @@ public final class AppData {
     initializeGreedy();
     initializeBacktrackingLevel();
   }
-
 
   /**
    * Load level.
@@ -159,6 +146,7 @@ public final class AppData {
       InputStream is = AppData.class.getClassLoader().getResourceAsStream(
               "Level/Startlevel.zip");
       File file = File.createTempFile("startlevel", "zip");
+      assert is != null;
       FileUtils.copyInputStreamToFile(is, file);
       LEVEL_ZERO[0] = loadLevel(file);
     } catch (IOException e) {
@@ -182,27 +170,6 @@ public final class AppData {
 
 
   /**
-   * Gets greedy level.
-   *
-   * @param level the level
-   * @return the greedy level
-   */
-  public static Level getGreedyLevel(final int level) {
-    return GreedyLevel.getLevelGreedy(level);
-  }
-
-  /**
-   * Gets backtracking level.
-   *
-   * @param level the level
-   * @return the backtracking level
-   */
-  public static Level getBacktrackingLevel(final int level) {
-    return BacktrackingLevel.getLevelBacktracking(level);
-  }
-
-
-  /**
    * based on os.
    *
    * @return returns the path for the pictures
@@ -219,27 +186,6 @@ public final class AppData {
    */
   public static String getPassword(final int i) {
     return PASSWORDS.get(i);
-  }
-
-  /**
-   * Get password amount int.
-   *
-   * @return the int
-   */
-  public static int getPasswordAmount() {
-    return PASSWORDS.size();
-  }
-
-  /**
-   * Generate item.
-   *
-   * @param index the unique index of the item
-   * @return returns a new Instance of the wanted item if it
-   *     is in the ArrayList else it returns null
-   */
-  public static Item generateItem(final int index) {
-    return new Item(ITEMS.get(index).getValue(), ITEMS.get(index).getWeight(),
-        ITEMS.get(index).getName(), ITEMS.get(index).getImageIcon());
   }
 
   /**

@@ -56,7 +56,6 @@ public final class UserDataManager {
    * @param saveFolder the Folder in which userData.xml should be saved in
    */
   public static void save(final String saveFolder) {
-    Boolean ignoreResult = new File(saveFolder).mkdirs();
     String saveFilePath = saveFolder + "/userData.xml";
     XStream xstream = new XStream(new DomDriver());
     xstream.alias("UserData", UserData.class);
@@ -97,7 +96,6 @@ public final class UserDataManager {
    * @param saveFolder the Folder that contains userData.save-file
    */
   public static void load(final String saveFolder) {
-    Boolean ignoreResult = new File(saveFolder).mkdirs();
     String saveFilePath = saveFolder + "/userData.xml";
     File saveFile = new File(saveFilePath);
     if (!saveFile.exists()) {

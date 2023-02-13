@@ -42,15 +42,6 @@ public class Level implements Serializable {
   }
 
   /**
-   * Getter method for the array list of the items' amounts.
-   *
-   * @return the array list of the items' amount
-   */
-  public ArrayList<Integer> getItemAmountInRucksackList() {
-    return this.myRucksack.getInRucksackAmountList();
-  }
-
-  /**
    * Greedy -> Gieriger Ganove
    * Backtracking -> Backtracking Bandit
    * Else -> Dr. Meta
@@ -234,6 +225,7 @@ public class Level implements Serializable {
    * Turns level into backtracking level if needed.
    */
   public void turnIntoBacktracking() {
+    assert this.robber != null;
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
       myRucksack.turnIntoBacktracking();
     }

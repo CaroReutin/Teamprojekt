@@ -203,6 +203,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
     //Trash Panel
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
+    assert urlTrash != null;
     ImageIcon trashImage = new ImageIcon(urlTrash);
     Image scaledTrashImage = trashImage.getImage().getScaledInstance(200, 350,
         Image.SCALE_SMOOTH);
@@ -218,6 +219,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //Panel where escape-Button and clue-Button are
     URL urlRobber = getClass().getClassLoader().getResource(
       "DiebGrauMitSack.png");
+    assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(
         100, 200, Image.SCALE_SMOOTH);
