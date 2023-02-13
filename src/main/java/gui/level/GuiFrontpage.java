@@ -70,13 +70,12 @@ public class GuiFrontpage {
     Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
         WIDTH_RUCKSACK, WIDTH_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
     ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
-    JButton clueButton = new JButton(newClueSymbol);
-
     //add functions
+    JButton clueButton = new JButton(newClueSymbol);
+    clueButton.addActionListener(e -> clueButtonEvent());
     levelButton.addActionListener(e -> GuiManager.openLevelSelectScreen());
     ownLevelButton.addActionListener(e -> GuiManager.openLevelEditor());
     settingsButton.addActionListener(e -> GuiManager.openOptionsMenu());
-    clueButton.addActionListener(e -> clueButtonEvent());
 
     //Füge Rucksack und Hinweis png ein und ändere Größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");

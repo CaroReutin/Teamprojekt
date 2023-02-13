@@ -36,6 +36,50 @@ public class GuiLevelPage {
    */
   public static final int LAST_GREEDY_LEVELNUMBER = 7;
   /**
+   * the size 20 font.
+   */
+  private static final int FONT_TWENTY = 20;
+  /**
+   * the size 15 font.
+   */
+  private static final int FONT_FIFTEEN = 15;
+  /**
+   * the size 30 font.
+   */
+  private static final int FONT_THIRTY = 30;
+  /**
+   * the number of grid rows.
+   */
+  private static final int GRID_FOUR = 4;
+  /**
+   * the number of grid rows.
+   */
+  private static final int GRID_THREE = 3;
+  /**
+   * the width of the rucksack image.
+   */
+  private static final int WIDTH_RUCKSACK = 300;
+  /**
+   * the height of the rucksack image.
+   */
+  private static final int HEIGHT_RUCKSACK = 500;
+  /**
+   * the x position of the robber on the screen.
+   */
+  private static final int X_POS_ROBBER = 120;
+  /**
+   * the y position of the robber on the screen.
+   */
+  private static final int Y_POS_ROBBER = 50;
+  /**
+   * the width of the robber image.
+   */
+  private static final int WIDTH_ROBBER = 100;
+  /**
+   * the height of the robber image.
+   */
+  private static final int HEIGHT_ROBBER = 200;
+  /**
    * the level which is currently played.
    */
   private final Level level;
@@ -76,7 +120,7 @@ public class GuiLevelPage {
    * @param centerPanel the Panel that the escapeButton should be on.
    */
   public void escapeButton(final Container centerPanel) {
-    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JButton flucht = new JButton("Flucht");
     flucht.setFont(font);
     int levelNumber = GuiManager.getNumberLevel();
@@ -205,7 +249,7 @@ public class GuiLevelPage {
    * @param centerPanel the Panel that the escapeButton should be on.
    */
   public void clueButton(final Container centerPanel) {
-    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JButton clue = new JButton("Hinweis");
     clue.setFont(font);
     int levelNumber = GuiManager.getNumberLevel();
@@ -297,6 +341,7 @@ public class GuiLevelPage {
   /**
    * Method for generating the correct escape message
    * depending on the level and solution.
+   *
    * @return String of the generated escape message
    */
   public String generateEscapeMessage() {
@@ -369,6 +414,7 @@ public class GuiLevelPage {
 
   /**
    * Method for formatting a TXT-file into a single String instance.
+   *
    * @param fileName name of the TXT-file supposed to be shown
    * @return the String of the given TXT-file
    */
@@ -396,8 +442,8 @@ public class GuiLevelPage {
    *                      the items IN the bag should go to.
    */
   public void itemButtons(final JPanel panelItems, final JPanel panelRucksack) {
-    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
-    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_FIFTEEN);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_THIRTY);
     currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
     currentWeightLabel.setFont(bigFont);
 
@@ -414,8 +460,7 @@ public class GuiLevelPage {
 
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(font);
-      int finalI = i;
-      JPanel itemPanel = new JPanel(new GridLayout(1, 4));
+      JPanel itemPanel = new JPanel(new GridLayout(1, GRID_FOUR));
       ImageIcon imageIcon = items.get(i).getImageIcon();
       JButton itemIcon = new JButton(imageIcon);
       itemPanel.add(itemIcon);
@@ -423,6 +468,7 @@ public class GuiLevelPage {
           + items.get(i).getValue() + "€)");
       current.setFont(font);
       itemPanel.add(current);
+      int finalI = i;
       itemIcon.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
@@ -473,7 +519,7 @@ public class GuiLevelPage {
    */
   public Container getPane() {
     Container pane = new Container();
-    pane.setLayout(new GridLayout(1, 3));
+    pane.setLayout(new GridLayout(1, GRID_THREE));
 
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
@@ -481,27 +527,22 @@ public class GuiLevelPage {
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
-            300, 500, java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
-
+            WIDTH_RUCKSACK, HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebRot.png");
     assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
-    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
-      Image.SCALE_SMOOTH);
-
-    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(
+      WIDTH_ROBBER, HEIGHT_ROBBER, Image.SCALE_SMOOTH);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage,
+      X_POS_ROBBER, Y_POS_ROBBER);
     JPanel rightPanel = new JPanel();
-
-
+    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     // erzeuge Buttons
     this.escapeButton(centerPanel);
     this.clueButton(centerPanel);
     this.itemButtons(rightPanel, leftPanel);
-
-    JPanel emptyPanel = new JPanel();
 
     //alles zusammenpuzzeln
     pane.add(leftPanel);

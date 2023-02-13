@@ -63,6 +63,7 @@ public class Tree {
    * Maximum amount of items in backtracking levels.
    */
   private static final int MAX_AMOUNT = 5;
+
   /**
    * Constructor of the tree.
    *

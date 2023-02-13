@@ -40,6 +40,35 @@ import solving.CustomLevelManager;
 public final class GuiLevelEditorPage {
 
   /**
+  * the number of the grid.
+  */
+  private static final int GRIND_THREE = 3;
+
+  /**
+   * the number of the grid.
+   */
+  private static final int GRID_FIVE = 5;
+
+  /**
+   * the size of the font.
+   */
+  private static final int FONT_TWENTY = 20;
+
+  /**
+   * the size of the font.
+   */
+  private static final int FONT_FIFTEEN = 15;
+
+  /**
+   * the rows of the grid.
+   */
+  private static final int GRID_FOUR = 4;
+
+  /**
+   * the rows of the grid.
+   */
+  private static final int GRID_EIGHT = 8;
+  /**
    * The path for the default Icon.
    */
   private static final String DEFAULTICONPATH = "icons/DefaultBox.png";
@@ -116,13 +145,13 @@ public final class GuiLevelEditorPage {
       e.printStackTrace();
     }
     Container pane = new Container();
-    pane.setLayout(new GridLayout(1, 3));
+    pane.setLayout(new GridLayout(1, GRIND_THREE));
 
     Container leftSide = new Container();
-    leftSide.setLayout(new GridLayout(5, 2));
+    leftSide.setLayout(new GridLayout(GRID_FIVE, 2));
 
     Font leveleditorFont = new Font("Arial",
-        Font.BOLD + Font.ITALIC, 20);
+        Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JLabel titel = new JLabel("Titel: ");
     titel.setFont(leveleditorFont);
     leftSide.add(titel);
@@ -217,10 +246,8 @@ public final class GuiLevelEditorPage {
     });
     reset.setFont(fontButtons);
     resetPanel.add(reset);
-
     leftSide.add(resetPanel);
     pane.add(leftSide);
-
     addMiddleAndRightPart(pane);
 
     return pane;
@@ -229,11 +256,9 @@ public final class GuiLevelEditorPage {
   private void addMiddleAndRightPart(final Container pane) {
     panelCounter = 0;
     Container middle = new Container();
-    middle.setLayout(new GridLayout(8, 1));
-
+    middle.setLayout(new GridLayout(GRID_EIGHT, 1));
     Container right = new Container();
-    right.setLayout(new GridLayout(8, 1));
-
+    right.setLayout(new GridLayout(GRID_EIGHT, 1));
     ArrayList<Container> itemPanels = new ArrayList<>();
     ArrayList<Container> fieldPanels = new ArrayList<>();
     ArrayList<Container> labelPanels = new ArrayList<>();
@@ -250,17 +275,15 @@ public final class GuiLevelEditorPage {
     weightFieldDocuments = new ArrayList<>();
     nameFields = new ArrayList<>();
     nameLabels = new ArrayList<>();
-
     Font panelFont = new Font("Arial",
-        Font.BOLD + Font.ITALIC, 15);
-
+        Font.BOLD + Font.ITALIC, FONT_FIFTEEN);
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
       itemPanels.add(new Container());
-      itemPanels.get(i).setLayout(new GridLayout(1, 3));
+      itemPanels.get(i).setLayout(new GridLayout(1, GRIND_THREE));
       fieldPanels.add(new Container());
-      fieldPanels.get(i).setLayout(new GridLayout(4, 1));
+      fieldPanels.get(i).setLayout(new GridLayout(GRID_FOUR, 1));
       labelPanels.add(new Container());
-      labelPanels.get(i).setLayout(new GridLayout(4, 1));
+      labelPanels.get(i).setLayout(new GridLayout(GRID_FOUR, 1));
       icons.add(new ImageIcon(DEFAULTICONPATH));
       Image image = icons.get(i).getImage();
       icons.set(i, new ImageIcon(image.getScaledInstance(
@@ -311,53 +334,42 @@ public final class GuiLevelEditorPage {
         }
       });
       itemPanels.get(i).add(iconSelectors.get(i));
-
       nameLabels.add(new JLabel("Name: "));
       nameLabels.get(i).setFont(panelFont);
       labelPanels.get(i).add(nameLabels.get(i));
-
       nameFields.add(new JTextField());
       fieldPanels.get(i).add(nameFields.get(i));
-
       valueLabels.add(new JLabel("Wert: "));
       valueLabels.get(i).setFont(panelFont);
       labelPanels.get(i).add(valueLabels.get(i));
-
       valueFields.add(new JTextField());
       valueFieldDocuments.add((AbstractDocument)
           valueFields.get(i).getDocument());
       valueFieldDocuments.get(i).setDocumentFilter(new NumberListener());
       fieldPanels.get(i).add(valueFields.get(i));
-
       weightLabels.add(new JLabel("Gewicht: "));
       weightLabels.get(i).setFont(panelFont);
       labelPanels.get(i).add(weightLabels.get(i));
-
       weightFields.add(new JTextField());
       weightFieldDocuments.add((AbstractDocument)
           weightFields.get(i).getDocument());
       weightFieldDocuments.get(i).setDocumentFilter(new NumberListener());
       fieldPanels.get(i).add(weightFields.get(i));
-
       amountLabels.add(new JLabel("Anzahl: "));
       amountLabels.get(i).setFont(panelFont);
       labelPanels.get(i).add(amountLabels.get(i));
-
       amountFields.add(new JTextField());
       amountFieldDocuments.add((AbstractDocument)
           amountFields.get(i).getDocument());
       amountFieldDocuments.get(i).setDocumentFilter(new NumberListener());
       fieldPanels.get(i).add(amountFields.get(i));
-
       itemPanels.get(i).add(labelPanels.get(i));
       itemPanels.get(i).add(fieldPanels.get(i));
-
       if (i % 2 == 1) {
         right.add(itemPanels.get(i));
       } else {
         middle.add(itemPanels.get(i));
       }
-
       if (i < AppData.DEFAULT_ITEMS_IN_CUSTOM_LEVEL) {
         setItemPanelVisibility(true, i);
         panelCounter++;
@@ -365,7 +377,6 @@ public final class GuiLevelEditorPage {
         setItemPanelVisibility(false, i);
       }
     }
-
     JButton moreItemsButton = new JButton("");
     ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass()
         .getResource("/icons/Plus.png")));
@@ -380,9 +391,7 @@ public final class GuiLevelEditorPage {
       }
     });
     right.add(moreItemsButton);
-
     pane.add(middle);
-
     pane.add(right);
   }
 

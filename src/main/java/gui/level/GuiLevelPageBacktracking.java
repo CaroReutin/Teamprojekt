@@ -102,23 +102,16 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(smallFont);
-
-      // Laufvariable
-      int finalI = i;
-
       //Available Labels
-      ImageIcon imageIcon = items.get(i).getImageIcon();
-      JLabel itemIcon = new JLabel(imageIcon);
-
       JLabel itemLabel = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€), ");
       itemLabel.setFont(smallFont);
-
       itemLabel.setBackground(Color.white);
 
       //buttons rucksack
       JButton putToRucksack = new JButton("mitnehmen");
       putToRucksack.setFont(smallFont);
+      int finalI = i;
       putToRucksack.addActionListener(e -> handleButtons(finalI, true));
 
       //Trash Buttons and Labels
@@ -131,9 +124,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       JButton putToTrash = new JButton("wegwerfen");
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
-      JLabel currentRucksack = new JLabel(imageIcon);
+      ImageIcon imageIcon = items.get(i).getImageIcon();
 
       JPanel availableTempPanel = new JPanel(new GridLayout(1, 4));
+      JLabel itemIcon = new JLabel(imageIcon);
       availableTempPanel.add(itemIcon);
       availableTempPanel.add(itemLabel);
       availableTempPanel.add(labels[i]);
@@ -156,6 +150,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       JLabel currentTrash = new JLabel(imageIcon);
       panelTrash.add(currentTrash);
       panelTrash.add(trashLabels[i]);
+      JLabel currentRucksack = new JLabel(imageIcon);
 
       panelRucksack.add(currentRucksack);
       panelRucksack.add(rucksackLabels[i]);
@@ -180,7 +175,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
     assert url != null;
     // Panel were available items are
-    JPanel rightPanel = new JPanel(new GridLayout(2, 1));
+
     JPanel availablePanel = new JPanel(new GridLayout(
         getLevel().getItemList().size() + 1, 2));
     JLabel available = new JLabel("Verfügbar:");
@@ -191,6 +186,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     JLabel control = new JLabel("Kontrollfläche: ");
     control.setFont(mediumFont);
     controlPanel.add(control);
+    JPanel rightPanel = new JPanel(new GridLayout(2, 1));
     rightPanel.add(availablePanel, BorderLayout.NORTH);
     rightPanel.add(controlPanel, BorderLayout.SOUTH);
 
@@ -199,20 +195,11 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(200, 350,
             java.awt.Image.SCALE_SMOOTH);
-    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+
     JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     JLabel rucksack = new JLabel("Rucksack:");
     rucksack.setFont(mediumFont);
     rucksackPanel.add(rucksack);
-
-    //füge Räuber ein
-    URL urlRobber = getClass().getClassLoader().getResource(
-            "DiebGrauMitSack.png");
-    ImageIcon robberImage = new ImageIcon(urlRobber);
-    Image scaledRobberImage = robberImage.getImage().getScaledInstance(100, 200,
-        Image.SCALE_SMOOTH);
-
-    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 100);
 
     //Trash Panel
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
@@ -224,12 +211,17 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     JLabel trash = new JLabel("Müll:");
     trash.setFont(mediumFont);
     trashPanel.add(trash);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
     leftPanel.add(rucksackPanel, BorderLayout.NORTH);
     leftPanel.add(trashPanel, BorderLayout.SOUTH);
 
     //Panel where escape-Button and clue-Button are
-    //JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    //Panel where escape-Button is
+    URL urlRobber = getClass().getClassLoader().getResource(
+      "DiebGrauMitSack.png");
+    ImageIcon robberImage = new ImageIcon(urlRobber);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(
+        100, 200, Image.SCALE_SMOOTH);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 100);
     this.escapeButton(centerPanel);
     if (GuiOptionsPage.getBacktrackingTipsAllowed()) {
       this.clueButton(centerPanel);
