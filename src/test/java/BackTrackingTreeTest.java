@@ -180,7 +180,7 @@ public class BackTrackingTreeTest {
 
   /**
    * this test tests
-   * -if an item can be add to trash if in this branch no other lighter item can be put to rucksack
+   * -if an item can be added to trash if in this branch no other lighter item can be put to rucksack
    * -if an already added item gets added again
    * and if the lightest item can be added even if it is not
    *
@@ -233,8 +233,8 @@ public class BackTrackingTreeTest {
   /**
    * this test tests:
    * - try to add an item into trash even through there are heavier items to look at first
-   * - try to put an item into trash even through it should be add to the rucksack first
-   * - add an item into trash and his subtree is full (should be succsess)
+   * - try to put an item into trash even through it should be added to the rucksack first
+   * - add an item into trash and his subtree is full (should be success)
    */
   @Test
   public void test5() {
@@ -296,8 +296,8 @@ public class BackTrackingTreeTest {
    * tests
    * - if an item can be added trash again, which already is in trash
    * - try to add an item into trash even through there are same weighted but more valuable items to look at first
-   * - try to put an item into trash even through it should be add to the rucksack first
-   * - try to put an non selectable item to rucksack
+   * - try to put an item into trash even through it should be added to the rucksack first
+   * - try to put a non-selectable item to rucksack
    *
    */
   @Test

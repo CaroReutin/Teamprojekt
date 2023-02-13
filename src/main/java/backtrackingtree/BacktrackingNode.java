@@ -249,7 +249,7 @@ public class BacktrackingNode {
   /**
    * sets the left child of this node.
    *
-   * @param myLeftChild saif child which is going to be set
+   * @param myLeftChild sets child which is going to be set
    */
   public void setLeftChild(final BacktrackingNode myLeftChild) {
     this.leftChild = myLeftChild;

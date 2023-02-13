@@ -114,8 +114,8 @@ public class GuiManager {
 
   /**
    * Opens the Options Menu.
-   * (Currently after exiting the Options menu the Main-menu will
-   * always be opened, regardless where the options menu was opened from).
+   * (Currently after exiting the Options' menu the Main-menu will
+   * always be opened, regardless where the options' menu was opened from).
    */
   public static void openOptionsMenu() {
     frame.setContentPane(GUI_OPTIONS_PAGE.getPane());

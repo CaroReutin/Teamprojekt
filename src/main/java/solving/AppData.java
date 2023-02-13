@@ -145,7 +145,7 @@ public final class AppData {
     try {
       InputStream is = AppData.class.getClassLoader().getResourceAsStream(
               "Level/Startlevel.zip");
-      File file = File.createTempFile("startlevel", "zip");
+      File file = File.createTempFile("Startlevel", "zip");
       assert is != null;
       FileUtils.copyInputStreamToFile(is, file);
       LEVEL_ZERO[0] = loadLevel(file);

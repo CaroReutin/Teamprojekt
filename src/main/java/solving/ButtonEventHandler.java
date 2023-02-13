@@ -4,7 +4,7 @@ import backtrackingtree.BacktrackingTree;
 import rucksack.Level;
 
 /**
- * handels button events.
+ * handles button events.
  */
 public abstract class ButtonEventHandler {
   /**

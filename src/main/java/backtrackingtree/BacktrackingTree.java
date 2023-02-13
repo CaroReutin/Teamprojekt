@@ -269,7 +269,7 @@ public class BacktrackingTree {
     if (currentNode.getCurrentWeight() >= bagCapacity) {
       return;
     }
-    // be on leafs
+    // be on leaves
     if (currentNode.getRightChild() == null
         && currentNode.getLeftChild() == null) {
       // last item witch can be chosen is used
