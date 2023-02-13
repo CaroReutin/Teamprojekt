@@ -5,9 +5,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
 import solving.SolverBacktracking;
@@ -83,7 +83,12 @@ public class GuiLevelPage {
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = generateEscapeMessage();
+        String message = null;
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -121,7 +126,11 @@ public class GuiLevelPage {
 
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
         String message = null;
-        message = generateEscapeMessage();
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -157,7 +166,11 @@ public class GuiLevelPage {
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
         String message = null;
-        message = generateEscapeMessage();
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -213,8 +226,7 @@ public class GuiLevelPage {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/X1.txt");
+          message = fileToStringFromFile("texts/levelTexts/Editor1.txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -237,8 +249,7 @@ public class GuiLevelPage {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/E1.txt");
+          message = fileToStringFromFile("texts/levelTexts/Eingangslevel1.txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -262,9 +273,7 @@ public class GuiLevelPage {
         String message = null;
         try {
           int fileNumber = levelNumber + 1;
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/G"
-                          + fileNumber + ".txt");
+          message = fileToStringFromFile("texts/levelTexts/Greedy" + fileNumber + ".txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -289,9 +298,7 @@ public class GuiLevelPage {
         String message = null;
         try {
           int fileNumber = levelNumber - LAST_GREEDY_LEVELNUMBER + 1;
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/B"
-                          + fileNumber + ".txt");
+          message = fileToStringFromFile("texts/levelTexts/Backtracking" + fileNumber + ".txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -318,7 +325,7 @@ public class GuiLevelPage {
    * depending on the level and solution.
    * @return String of the generated escape message
    */
-  public String generateEscapeMessage() {
+  public String generateEscapeMessage() throws IOException {
     SolverBacktracking s = new SolverBacktracking();
     SolverGreedy sg = new SolverGreedy();
     ArrayList<Item> solution = new ArrayList<>();
@@ -334,8 +341,7 @@ public class GuiLevelPage {
         //case: correct solution
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_1_OptimalSolution.txt");
+         message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -343,8 +349,7 @@ public class GuiLevelPage {
       } else {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_2_SuboptimalSolution.txt");
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -355,8 +360,7 @@ public class GuiLevelPage {
               .sortLikeGreedy(sg.solveAlgorithm(this.level)))) {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_1_OptimalSolution.txt");
+          message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -365,8 +369,7 @@ public class GuiLevelPage {
               .sortLikeGreedy(s.solveAlgorithm(this.level)))) {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_3_OptimalButWrongSolution.txt");
+          message = fileToStringFromFile("texts/2_1_3_OptimalButWrongSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -374,8 +377,7 @@ public class GuiLevelPage {
       } else {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_2_SuboptimalSolution.txt");
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -388,11 +390,19 @@ public class GuiLevelPage {
 
   /**
    * Method for formatting a TXT-file into a single String instance.
-   * @param fileName name of the TXT-file supposed to be shown
+   * @param path name of the TXT-file supposed to be shown
    * @return the String of the given TXT-file
    */
-  public static String fileToString(final String fileName) throws IOException {
-    FileReader reader = new FileReader(fileName);
+  public static String fileToStringFromFile(final String path) throws IOException {
+    InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream(path);
+    String[] pathArguments = path.split("[/.]");
+    int size = pathArguments.length;
+    String prefix = pathArguments[size - 2];
+    String suffix = pathArguments[size - 1];
+    File file = File.createTempFile(prefix, suffix);
+    FileUtils.copyInputStreamToFile(is, file);
+
+    FileReader reader = new FileReader(file.getPath());
     BufferedReader inBuffer = new BufferedReader(reader);
     StringBuilder message = new StringBuilder();
     String line = inBuffer.readLine();
