@@ -29,6 +29,62 @@ import solving.UserDataManager;
  */
 public class GuiLevelPageBacktracking extends GuiLevelPage {
   /**
+   * the font size 15.
+   */
+  private static final int FONT_FIFTEEN = 15;
+  /**
+   * the font size 25.
+   */
+  private static final int FONT_TWENTY_FIVE = 25;
+  /**
+   * the font size 30.
+   */
+  private static final int FONT_THIRTY = 30;
+  /**
+   * the font size 20.
+   */
+  private static final int FONT_TWENTY = 20;
+  /**
+   * the size of the grid.
+   */
+  private static final int GRID_FOUR = 4;
+  /**
+   * the size of the grid.
+   */
+  private static final int GRID_FIVE = 5;
+  /**
+   * the size of the grid.
+   */
+  private static final int GRID_THREE = 3;
+  /**
+   * the width of the rucksack.
+   */
+  private static final int WIDTH_RUCKSACK = 200;
+  /**
+   * the height of the rucksack.
+   */
+  private static final int HEIGHT_RUCKSACK = 350;
+  /**
+   * the x position of the trash on the window.
+   */
+  private static final int X_POS_TRASH = 20;
+  /**
+   * the width of the robber.
+   */
+  private static final int WIDTH_ROBBER = 100;
+  /**
+   * the height of the robber.
+   */
+  private static final int HEIGHT_ROBBER = 200;
+  /**
+   * the x position of the robber on the window.
+   */
+  private static final int X_POS_ROBBER = 120;
+  /**
+   * the y position of the robber on the window.
+   */
+  private static final int Y_POS_ROBBER = 100;
+  /**
    * the Button Event Handler.
    */
   private final ButtonEventHandler buttonHandler;
@@ -83,9 +139,10 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
                           final JPanel panelRucksack,
                           final JPanel panelTrash,
                           final JPanel controlPanel) {
-    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
-    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
-    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_FIFTEEN);
+    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC,
+        FONT_TWENTY_FIVE);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_THIRTY);
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
     currentWeightLabel.setFont(bigFont);
 
@@ -126,7 +183,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
       ImageIcon imageIcon = items.get(i).getImageIcon();
 
-      JPanel availableTempPanel = new JPanel(new GridLayout(1, 4));
+      JPanel availableTempPanel = new JPanel(new GridLayout(1, GRID_FOUR));
       JLabel itemIcon = new JLabel(imageIcon);
       availableTempPanel.add(itemIcon);
       availableTempPanel.add(itemLabel);
@@ -139,7 +196,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
               + items.get(i).getValue() + "€)");
       itemControlLabel.setFont(smallFont);
 
-      JPanel tempControlPanel = new JPanel(new GridLayout(2, 5));
+      JPanel tempControlPanel = new JPanel(new GridLayout(2,  GRID_FIVE));
 
       tempControlPanel.add(itemControlLabelIcon);
       tempControlPanel.add(itemControlLabel);
@@ -167,9 +224,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    */
   @Override
   public Container getPane() {
-    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
+    Font mediumFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     Container pane = new Container();
-    pane.setLayout(new GridLayout(1, 3));
+    pane.setLayout(new GridLayout(1, GRID_THREE));
 
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
@@ -193,8 +250,8 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     // Rucksack Panel
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(200, 350,
-            java.awt.Image.SCALE_SMOOTH);
+        rucksackImage.getImage().getScaledInstance(WIDTH_RUCKSACK,
+          HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
 
     JPanel rucksackPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     JLabel rucksack = new JLabel("Rucksack:");
@@ -205,9 +262,9 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     URL urlTrash = getClass().getClassLoader().getResource("Müll.png");
     assert urlTrash != null;
     ImageIcon trashImage = new ImageIcon(urlTrash);
-    Image scaledTrashImage = trashImage.getImage().getScaledInstance(200, 350,
-        Image.SCALE_SMOOTH);
-    JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, 20, 0);
+    Image scaledTrashImage = trashImage.getImage().getScaledInstance(
+        WIDTH_RUCKSACK, HEIGHT_RUCKSACK, Image.SCALE_SMOOTH);
+    JPanel trashPanel = new JbackgroundPanel(scaledTrashImage, X_POS_TRASH, 0);
 
     JLabel trash = new JLabel("Müll:");
     trash.setFont(mediumFont);
@@ -218,12 +275,13 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
     //Panel where escape-Button and clue-Button are
     URL urlRobber = getClass().getClassLoader().getResource(
-      "DiebGrauMitSack.png");
+        "DiebGrauMitSack.png");
     assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(
-        100, 200, Image.SCALE_SMOOTH);
-    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 100);
+        WIDTH_ROBBER, HEIGHT_ROBBER, Image.SCALE_SMOOTH);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, X_POS_ROBBER,
+        Y_POS_ROBBER);
     this.escapeButton(centerPanel);
     if (GuiOptionsPage.getBacktrackingTipsAllowed()) {
       this.clueButton(centerPanel);
@@ -280,7 +338,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
    */
   @Override
   public void escapeButton(final Container centerPanel) {
-    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JButton flucht = new JButton("Flucht");
     flucht.setFont(font);
     int levelNumber = GuiManager.getNumberLevel();

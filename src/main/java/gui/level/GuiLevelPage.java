@@ -534,9 +534,9 @@ public class GuiLevelPage {
     assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(
-      WIDTH_ROBBER, HEIGHT_ROBBER, Image.SCALE_SMOOTH);
+        WIDTH_ROBBER, HEIGHT_ROBBER, Image.SCALE_SMOOTH);
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage,
-      X_POS_ROBBER, Y_POS_ROBBER);
+        X_POS_ROBBER, Y_POS_ROBBER);
     JPanel rightPanel = new JPanel();
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     // erzeuge Buttons

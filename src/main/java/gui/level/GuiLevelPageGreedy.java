@@ -19,6 +19,42 @@ import rucksack.Level;
  */
 public class GuiLevelPageGreedy extends GuiLevelPage {
   /**
+   * the font size 15.
+   */
+  private static final int FONT_FIFTEEN = 15;
+  /**
+   * the font size 30.
+   */
+  private static final int FONT_THIRTY = 30;
+  /**
+   * the grid size 3.
+   */
+  private static final int GRID_THREE = 3;
+  /**
+   * the width of the rucksack.
+   */
+  private static final int WIDTH_RUCKSACK = 300;
+  /**
+   * the height of the rucksack.
+   */
+  private static final int HEIGHT_RUCKSACK = 700;
+  /**
+   * the width of the robber.
+   */
+  private static final int WIDTH_ROBBER = 100;
+  /**
+   * the height of the robber.
+   */
+  private static final int HEIGHT_ROBBER = 200;
+  /**
+   * the x position of the robber on the window.
+   */
+  private static final int X_POS_ROBBER = 120;
+  /**
+   * the y position of the robber on the window.
+   */
+  private static final int Y_POS_ROBBER = 50;
+  /**
    * the labels of the page.
    */
   private JLabel[] labels;
@@ -55,8 +91,8 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
   @Override
   public void itemButtons(final JPanel panelItems,
                           final JPanel panelRucksack) {
-    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
-    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, 30);
+    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_FIFTEEN);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_THIRTY);
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
     currentWeightLabel.setFont(bigFont);
 
@@ -121,15 +157,15 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
   @Override
   public Container getPane() {
     Container pane = new Container();
-    pane.setLayout(new GridLayout(1, 3));
+    pane.setLayout(new GridLayout(1, GRID_THREE));
 
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(300, 700,
-            java.awt.Image.SCALE_SMOOTH);
+        rucksackImage.getImage().getScaledInstance(WIDTH_RUCKSACK,
+          HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource(
@@ -137,9 +173,10 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     assert urlRobber != null;
     ImageIcon robberImage = new ImageIcon(urlRobber);
     Image scaledRobberImage = robberImage.getImage().getScaledInstance(
-            100, 200, Image.SCALE_SMOOTH);
+            WIDTH_ROBBER, HEIGHT_ROBBER, Image.SCALE_SMOOTH);
 
-    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, 120, 50);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, X_POS_ROBBER,
+        Y_POS_ROBBER);
     JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
     JPanel rightPanel = new JPanel();
 
