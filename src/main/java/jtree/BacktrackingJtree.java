@@ -6,13 +6,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import rucksack.Level;
+import solving.AppData;
 
 /**
  * Class for the item selection tree given as a visual aid
  * in a backtracking level. It is a JTree.
  * The tree is called backtracking tree.
  */
-public class BacktrackingJTree {
+public class BacktrackingJtree {
   /**
    * The new frame for the tree.
    */
@@ -20,11 +21,12 @@ public class BacktrackingJTree {
   /**
    * The tree's root node.
    */
-  private DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+  private final DefaultMutableTreeNode root
+      = new DefaultMutableTreeNode("Root");
   /**
    * The new tree, starting with the root node.
    */
-  private JTree tree = new JTree(root);
+  private final JTree tree = new JTree(root);
   /**
    * The current node of the tree.
    */
@@ -36,22 +38,21 @@ public class BacktrackingJTree {
   /**
    * The number of items that are part of the tree.
    */
-  private int itemAmount;
+  private final int itemAmount;
 
   /**
    * The constructor for the tree of a backtracking level.
    *
    * @param level the backtracking level whose tree shall be drawn
    */
-  public BacktrackingJTree(final Level level) {
+  public BacktrackingJtree(final Level level) {
     itemAmount = level.getBacktrackingItemList().size();
-    tree.addTreeSelectionListener(treeSelectionEvent -> {
-      selectedNode = (DefaultMutableTreeNode)
-          tree.getLastSelectedPathComponent();
-    });
+    tree.addTreeSelectionListener(treeSelectionEvent
+        -> selectedNode = (DefaultMutableTreeNode)
+        tree.getLastSelectedPathComponent());
     currentNode = root;
     treeFrame = new JFrame();
-    treeFrame.setSize(800, 600);
+    treeFrame.setSize(AppData.MINIMUM_WIDTH, AppData.MINIMUM_HEIGHT);
     JScrollPane treeView = new JScrollPane(tree);
     treeFrame.add(treeView);
     treeFrame.setVisible(false);
@@ -106,10 +107,14 @@ public class BacktrackingJTree {
                        final String suffix) {
     StringBuilder res = new StringBuilder(currentBacktrackingNode.getName()
         + suffix);
-    res.append("    ".repeat(Math.max(0, 10 - currentNode.getLevel())));
-    res.append(" ".repeat(20 - currentBacktrackingNode.getName().length()));
+    final int maxSpacingDepth = 10;
+    res.append("    ".repeat(Math.max(0, maxSpacingDepth
+        - currentNode.getLevel())));
+    final int maxNameLength = 20;
+    res.append(" ".repeat(maxNameLength
+        - currentBacktrackingNode.getName().length()));
     res.append(currentBacktrackingNode.getCurrentWeight());
-    res.append(" / " + currentBacktrackingNode.getCurrentValue());
+    res.append(" / ").append(currentBacktrackingNode.getCurrentValue());
     DefaultMutableTreeNode child = new DefaultMutableTreeNode(res);
     currentNode.add(child);
     currentNode = (DefaultMutableTreeNode) currentNode.getLastChild();

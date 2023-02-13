@@ -7,29 +7,27 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import jtree.BacktrackingJTree;
+import jtree.BacktrackingJtree;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
 
+/**
+ * handel button presses.
+ */
 public class ButtonEventHandlerJtree extends ButtonEventHandler {
 
   /**
    * The tree of a backtracking level.
    */
-  private final BacktrackingJTree tree;
-  /**
-   * The int value of the last depth in tree.
-   */
-  private int lastDepth;
+  private final BacktrackingJtree tree;
 
   /**
+   * Makes a new button handler with a jtree window.
    *
-   *
-   * @param level
+   * @param level the level the jtree will show
    */
   public ButtonEventHandlerJtree(final Level level) {
-    lastDepth = 0;
-    tree = new BacktrackingJTree(level);
+    tree = new BacktrackingJtree(level);
     setMyLevel(level);
     getMyLevel().turnIntoBacktracking();
     ArrayList<BacktrackingItem> oldList = level.getBacktrackingItemList();
@@ -42,25 +40,24 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
                 oldList.get(i).getName(), oldList.get(i).getImageIcon()));
       }
     }
-    backtrackingTree = new backtrackingtree.BacktrackingTree(
-        level.getCapacity(), logicItemList);
+    setBacktrackingTree(new backtrackingtree.BacktrackingTree(
+        level.getCapacity(), logicItemList));
   }
 
   /**
    * Method for adding items to a rucksack.
    *
    * @param itemButtonIndex index of the item that is supposed to be added
-   * @param level in which level the adding takes place
+   * @param level           in which level the adding takes place
    */
   @Override
   public void addToRucksack(final int itemButtonIndex, final Level level) {
     boolean fromTrashToRucksack =
         level.getBacktrackingItemList().get(itemButtonIndex).getState().equals(
             BacktrackingItem.StateBacktracking.TRASH);
-    if (this.backtrackingTree.addToRucksack(
+    if (this.getBacktrackingTree().addToRucksack(
         this.getMyLevel().getBacktrackingItemList().get(itemButtonIndex))) {
-      this.tree.putInBag(backtrackingTree.getCurrentNode());
-      lastDepth++;
+      this.tree.putInBag(getBacktrackingTree().getCurrentNode());
       if (fromTrashToRucksack) {
         level.setInTrashAmountList(itemButtonIndex,
             level.getInTrashAmountList().get(itemButtonIndex) - 1);
@@ -84,13 +81,13 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
    *
    * @param itemButtonIndex index of the item that is
    *                        supposed to be thrown away
-   * @param level in which level the throwing away takes place
+   * @param level           in which level the throwing away takes place
    */
   @Override
   public void addToTrash(final int itemButtonIndex, final Level level) {
     boolean fromRucksackToTrash =
-            level.getBacktrackingItemList().get(itemButtonIndex).getState()
-                    .equals(BacktrackingItem.StateBacktracking.RUCKSACK);
+        level.getBacktrackingItemList().get(itemButtonIndex).getState()
+            .equals(BacktrackingItem.StateBacktracking.RUCKSACK);
     ArrayList<Integer> fromTrashToRucksackSubsequent = new ArrayList<>();
     for (int i = itemButtonIndex + 1;
          i < level.getBacktrackingItemList().size();
@@ -105,10 +102,10 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
         fromTrashToRucksackSubsequent.add(2);
       }
     }
-    if (this.backtrackingTree.addToTrash(
+    if (this.getBacktrackingTree().addToTrash(
         this.getMyLevel().getBacktrackingItemList().get(itemButtonIndex))) {
       ImageIcon crossedOut =
-              backtrackingTree.getCurrentNode().getItem().getImageIcon();
+          getBacktrackingTree().getCurrentNode().getItem().getImageIcon();
       BufferedImage crossedOutBuffered = new BufferedImage(
           crossedOut.getIconWidth(),
           crossedOut.getIconHeight(),
@@ -118,7 +115,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
       g.dispose();
       ImageIcon not = new ImageIcon("src/main/resources/icons/Not.png");
       not = new ImageIcon(not.getImage().getScaledInstance(
-              AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
+          AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
       BufferedImage notBuffered = new BufferedImage(
           not.getIconWidth(),
           not.getIconHeight(),
@@ -129,7 +126,8 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
       for (int y = 0; y < crossedOutBuffered.getHeight(); y++) {
         for (int x = 0; x < crossedOutBuffered.getWidth(); x++) {
           int clr;
-          if (notBuffered.getRGB(x, y) == -16777216) {
+          final int colorRed = -16777216;
+          if (notBuffered.getRGB(x, y) == colorRed) {
             clr = crossedOutBuffered.getRGB(x, y);
           } else {
             clr = notBuffered.getRGB(x, y);
@@ -137,7 +135,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
           crossedOutBuffered.setRGB(x, y, clr);
         }
       }
-      tree.putInTrash(backtrackingTree.getCurrentNode());
+      tree.putInTrash(getBacktrackingTree().getCurrentNode());
       if (fromRucksackToTrash) {
         level.setInRucksackAmountList(itemButtonIndex,
             level.getItemAmountInRucksack(itemButtonIndex) - 1);
@@ -155,15 +153,15 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
           level.setInTrashAmountList(i,
               level.getInTrashAmountList().get(i) - 1);
           level.setAvailableItemAmountList(
-                  i, level.getItemAmountAvailable(i) + 1);
+              i, level.getItemAmountAvailable(i) + 1);
           level.getBacktrackingItemList().get(i)
               .setState(BacktrackingItem.StateBacktracking.AVAILABLE);
         } else if (fromTrashToRucksackSubsequent.get(i - itemButtonIndex - 1)
-                == 1) {
+            == 1) {
           level.setInRucksackAmountList(i,
               level.getItemAmountInRucksack(i) - 1);
           level.setAvailableItemAmountList(i,
-                  level.getItemAmountAvailable(i) + 1);
+              level.getItemAmountAvailable(i) + 1);
           level.getBacktrackingItemList().get(i)
               .setState(BacktrackingItem.StateBacktracking.AVAILABLE);
           level.setCurrentWeight(level.getCurrentWeight()
@@ -200,7 +198,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
   /**
    * Method for resetting a level.
    *
-   * @param level which is supposed to be reset
+   * @param level       which is supposed to be reset
    * @param levelNumber number of the level
    */
   @Override

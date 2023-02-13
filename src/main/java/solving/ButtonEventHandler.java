@@ -24,44 +24,40 @@ public abstract class ButtonEventHandler {
   /**
    * Setter method for the level.
    *
-   * @param myLevel the new level
+   * @param level the new level
    */
-  public void setMyLevel(final Level myLevel) {
-    this.myLevel = myLevel;
+  public void setMyLevel(final Level level) {
+    this.myLevel = level;
   }
 
   /**
    * The tree for the backtracking level.
    */
-  protected BacktrackingTree backtrackingTree;
+  private BacktrackingTree backtrackingTree;
+
   /**
    * Getter method for the backtracking tree.
    *
    * @return the tree
    */
-  public Level getBacktrackingTree() {
-    return myLevel;
+  public BacktrackingTree getBacktrackingTree() {
+    return backtrackingTree;
   }
 
   /**
    * Setter method for the backtracking tree.
    *
-   * @param backtrackingTree the new tree
+   * @param myBacktrackingTree the new tree
    */
-  public void setBacktrackingTree(final BacktrackingTree backtrackingTree) {
-    this.backtrackingTree = backtrackingTree;
+  public void setBacktrackingTree(final BacktrackingTree myBacktrackingTree) {
+    this.backtrackingTree = myBacktrackingTree;
   }
-
-  /**
-   * The index of a level's last item .
-   */
-  private int indexOfLastItem;
 
   /**
    * Abstract method for adding items to a rucksack.
    *
    * @param itemButtonIndex index of the item that is supposed to be added
-   * @param level in which level the adding takes place
+   * @param level           in which level the adding takes place
    */
   public abstract void addToRucksack(int itemButtonIndex, Level level);
 
@@ -70,7 +66,7 @@ public abstract class ButtonEventHandler {
    *
    * @param itemButtonIndex index of the item that is
    *                        supposed to be thrown away
-   * @param level in which level the throwing away takes place
+   * @param level           in which level the throwing away takes place
    */
   public abstract void addToTrash(int itemButtonIndex, Level level);
 
@@ -89,7 +85,7 @@ public abstract class ButtonEventHandler {
   /**
    * Abstract method for resetting a level.
    *
-   * @param level which is supposed to be reset
+   * @param level       which is supposed to be reset
    * @param levelNumber number of the level
    */
   public abstract void resetLevel(Level level, int levelNumber);
