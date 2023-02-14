@@ -1,11 +1,13 @@
 package solving;
 
-import java.awt.Image;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+
+import gui.level.GuiManager;
 import org.apache.commons.io.FileUtils;
 import rucksack.Level;
 
@@ -24,11 +26,12 @@ public final class AppData {
   /**
    * The minimum width a game frame must have.
    */
-  public static final int MINIMUM_WIDTH = 800;
+  public static final int MINIMUM_WIDTH = 1000;
+
   /**
    * The minimum height a game frame must have.
    */
-  public static final int MINIMUM_HEIGHT = 600;
+  public static final int MINIMUM_HEIGHT = 750;
 
   /**
    * The height and width of an image icon.

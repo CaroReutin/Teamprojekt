@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,16 +27,7 @@ public class GuiOptionsPage {
   /**
    * The boolean value whether the tips for backtracking levels are unlocked.
    */
-  public static boolean backtrackingTipsAllowed = false;
-
-  /**
-   * Getter method for the value of backtracking clues being allowed.
-   *
-   * @return the value of backtrackingTipsAllowed
-   */
-  public static boolean getBacktrackingTipsAllowed() {
-    return backtrackingTipsAllowed;
-  }
+  private static boolean backtrackingTipsAllowed = false;
 
   /**
    * The boolean value whether the clues for the greedy levels are unlocked.
@@ -43,29 +35,10 @@ public class GuiOptionsPage {
   private static boolean greedyTipsAllowed = false;
 
   /**
-   * Getter method for the value of backtracking clues being allowed.
-   *
-   * @return the value of backtrackingTipsAllowed
-   */
-  public static boolean getGreedyTipsAllowed() {
-    return greedyTipsAllowed;
-  }
-
-  /**
    * The boolean value whether the alternate version of
    * the tree depiction is necessary.
    */
-  public static boolean altTreeSelected = false;
-
-  /**
-   * Getter method for the boolean value whether
-   * the alternate tree version is selected.
-   *
-   * @return the value of altTreeSelected
-   */
-  public static boolean getAltTreeSelected() {
-    return altTreeSelected;
-  }
+  private static boolean altTreeSelected = false;
 
   /**
    * the number of rows on the pane.
@@ -194,12 +167,12 @@ public class GuiOptionsPage {
     descriptionPanel.add(clueButton);
     clueButton.addActionListener(e -> {
       String editorMessage = null;
-      /*try {
-        editorMessage = GuiLevelPage.fileToString(
-          "src/main/resources/texts/4_Options.txt");
+      try {
+        editorMessage = GuiLevelPage.fileToStringFromFile(
+          "texts/4_Options.txt");
       } catch (IOException ex) {
         throw new RuntimeException(ex);
-      }*/
+      }
       String[] editorButtons = {"Verstanden"};
       int chosenEditorButton = JOptionPane.showOptionDialog(null,
           editorMessage,
@@ -223,6 +196,34 @@ public class GuiOptionsPage {
     //add panels and sub-pane on pane
     pane.add(subPane, BorderLayout.CENTER);
     return pane;
+  }
+
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getGreedyTipsAllowed() {
+    return greedyTipsAllowed;
+  }
+
+  /**
+   * Getter method for the boolean value whether
+   * the alternate tree version is selected.
+   *
+   * @return the value of altTreeSelected
+   */
+  public static boolean getAltTreeSelected() {
+    return altTreeSelected;
+  }
+
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getBacktrackingTipsAllowed() {
+    return backtrackingTipsAllowed;
   }
 
 }
