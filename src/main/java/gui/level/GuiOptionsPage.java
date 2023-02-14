@@ -28,16 +28,7 @@ public class GuiOptionsPage {
   /**
    * The boolean value whether the tips for backtracking levels are unlocked.
    */
-  public static boolean backtrackingTipsAllowed = false;
-
-  /**
-   * Getter method for the value of backtracking clues being allowed.
-   *
-   * @return the value of backtrackingTipsAllowed
-   */
-  public static boolean getBacktrackingTipsAllowed() {
-    return backtrackingTipsAllowed;
-  }
+  private static boolean backtrackingTipsAllowed = false;
 
   /**
    * The boolean value whether the clues for the greedy levels are unlocked.
@@ -45,29 +36,10 @@ public class GuiOptionsPage {
   private static boolean greedyTipsAllowed = false;
 
   /**
-   * Getter method for the value of backtracking clues being allowed.
-   *
-   * @return the value of backtrackingTipsAllowed
-   */
-  public static boolean getGreedyTipsAllowed() {
-    return greedyTipsAllowed;
-  }
-
-  /**
    * The boolean value whether the alternate version of
    * the tree depiction is necessary.
    */
-  public static boolean altTreeSelected = false;
-
-  /**
-   * Getter method for the boolean value whether
-   * the alternate tree version is selected.
-   *
-   * @return the value of altTreeSelected
-   */
-  public static boolean getAltTreeSelected() {
-    return altTreeSelected;
-  }
+  private static boolean altTreeSelected = false;
 
   /**
    * the number of rows on the pane.
@@ -226,6 +198,34 @@ public class GuiOptionsPage {
     //add panels and sub-pane on pane
     pane.add(subPane, BorderLayout.CENTER);
     return pane;
+  }
+
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getGreedyTipsAllowed() {
+    return greedyTipsAllowed;
+  }
+
+  /**
+   * Getter method for the boolean value whether
+   * the alternate tree version is selected.
+   *
+   * @return the value of altTreeSelected
+   */
+  public static boolean getAltTreeSelected() {
+    return altTreeSelected;
+  }
+
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getBacktrackingTipsAllowed() {
+    return backtrackingTipsAllowed;
   }
 
 }

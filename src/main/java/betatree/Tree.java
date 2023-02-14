@@ -1,12 +1,6 @@
 package betatree;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Panel;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -176,8 +170,6 @@ public class Tree {
       }
     }
     buttons.get(0).get(0).setText("Gewicht");
-    //To big for 800x600
-    //buttons.get(0).get(0).setFont(treeLabelFont);
     buttons.get(0).get(0).setFont(treeButtonFont);
     buttons.get(0).get(0).setVisible(true);
     buttons.get(0).get(1).setText("/");
@@ -188,6 +180,7 @@ public class Tree {
     buttons.get(0).get(2).setVisible(true);
     treeFrame.add(panel);
     treeFrame.setSize(AppData.MINIMUM_WIDTH, AppData.MINIMUM_HEIGHT);
+    treeFrame.setMinimumSize(new Dimension(AppData.MINIMUM_WIDTH, AppData.MINIMUM_HEIGHT));
     treeFrame.setVisible(false);
     treeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
   }

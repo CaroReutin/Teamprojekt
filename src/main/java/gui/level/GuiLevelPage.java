@@ -420,13 +420,13 @@ public class GuiLevelPage {
    */
   public static String fileToStringFromFile(final String path)
           throws IOException {
-    InputStream is = GuiLevelPage.class.getClassLoader()
-            .getResourceAsStream(path);
+    InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream(path);
     String[] pathArguments = path.split("[/.]");
     int size = pathArguments.length;
     String prefix = pathArguments[size - 2];
     String suffix = pathArguments[size - 1];
     File file = File.createTempFile(prefix, suffix);
+    assert is != null;
     FileUtils.copyInputStreamToFile(is, file);
 
     FileReader reader = new FileReader(file.getPath());
