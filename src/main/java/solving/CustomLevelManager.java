@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
@@ -217,6 +218,12 @@ public final class CustomLevelManager {
     File destDir = new File(AppData.getCustomLevelUnzipFolder());
     String levelName;
     try {
+      URL defaultIconUrl = CustomLevelManager.class
+          .getResource("/icons/DefaultBox.png");
+      assert defaultIconUrl != null;
+      ImageIcon wrongSizedDefaultIcon = new ImageIcon(defaultIconUrl);
+      Image defaultImage = wrongSizedDefaultIcon.getImage().getScaledInstance(
+          AppData.ICON_SIZE, AppData.ICON_SIZE, java.awt.Image.SCALE_SMOOTH);
       levelName = unzip(zippedLevel, destDir);
       if (levelName == null) {
         throw new IOException("Level not found");
@@ -232,6 +239,8 @@ public final class CustomLevelManager {
                 .getAbsolutePath()).getImage()
                 .getScaledInstance(AppData.ICON_SIZE,
                     AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
+          } else {
+            level.setItemIcon(i, new ImageIcon(defaultImage));
           }
         }
         if (level.getRobber().equals(Level.Robber.DR_META)) {

@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.imageio.ImageIO;
@@ -68,10 +69,6 @@ public final class GuiLevelEditorPage {
    * the rows of the grid.
    */
   private static final int GRID_EIGHT = 8;
-  /**
-   * The path for the default Icon.
-   */
-  private static final String DEFAULTICONPATH = "icons/DefaultBox.png";
 
   /**
    * The list of icons.
@@ -230,20 +227,25 @@ public final class GuiLevelEditorPage {
     loadPanel.add(load);
     leftSide.add(loadPanel);
 
-    JPanel resetPanel = new JPanel();
     JButton reset = new JButton("Reset");
+    URL defaultIconUrl = getClass().getResource("/icons/DefaultBox.png");
+    assert defaultIconUrl != null;
+    ImageIcon wrongSizedDefaultIcon = new ImageIcon(defaultIconUrl);
+    Image defaultImage = wrongSizedDefaultIcon.getImage().getScaledInstance(
+        AppData.ICON_SIZE, AppData.ICON_SIZE, java.awt.Image.SCALE_SMOOTH);
     reset.addActionListener(e -> {
       panelCounter = 0;
       for (int i = 0; i < icons.size(); i++) {
-        icons.set(i, new ImageIcon(DEFAULTICONPATH));
+        icons.set(i, new ImageIcon(defaultImage));
         nameFields.get(i).setText("");
-        weightFields.get(i);
+        weightFields.get(i).setText("");
         valueFields.get(i).setText("");
         amountFields.get(i).setText("");
         iconSelectors.get(i).setIcon(icons.get(i));
       }
       GuiManager.openLevelEditor();
     });
+    JPanel resetPanel = new JPanel();
     reset.setFont(fontButtons);
     resetPanel.add(reset);
     leftSide.add(resetPanel);
@@ -277,6 +279,11 @@ public final class GuiLevelEditorPage {
     nameLabels = new ArrayList<>();
     Font panelFont = new Font("Arial",
         Font.BOLD + Font.ITALIC, FONT_FIFTEEN);
+    URL defaultIconUrl = getClass().getResource("/icons/DefaultBox.png");
+    assert defaultIconUrl != null;
+    ImageIcon wrongSizedDefaultIcon = new ImageIcon(defaultIconUrl);
+    Image defaultImage = wrongSizedDefaultIcon.getImage().getScaledInstance(
+        AppData.ICON_SIZE, AppData.ICON_SIZE, java.awt.Image.SCALE_SMOOTH);
     for (int i = 0; i < AppData.MAXIMUM_ITEMS_IN_CUSTOM_LEVEL; i++) {
       itemPanels.add(new Container());
       itemPanels.get(i).setLayout(new GridLayout(1, GRIND_THREE));
@@ -284,7 +291,7 @@ public final class GuiLevelEditorPage {
       fieldPanels.get(i).setLayout(new GridLayout(GRID_FOUR, 1));
       labelPanels.add(new Container());
       labelPanels.get(i).setLayout(new GridLayout(GRID_FOUR, 1));
-      icons.add(new ImageIcon(DEFAULTICONPATH));
+      icons.add(new ImageIcon(defaultImage));
       Image image = icons.get(i).getImage();
       icons.set(i, new ImageIcon(image.getScaledInstance(
           AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
