@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-14T21:57:23.304Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="uB7L_5oKeP1l3HZgtVLi" version="20.8.20" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-14T22:04:54.678Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="MvJKUfM552q57OY9IPTI" version="20.8.20" type="github">
   <diagram id="mvksxYR37wyYuG3UCGVY" name="Page-1">
-    <mxGraphModel dx="1363" dy="3149" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="658" dy="2730" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -8,10 +8,10 @@
           <mxGeometry x="1390" y="161" width="2270" height="943" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-325" value="" style="rounded=0;whiteSpace=wrap;html=1;textOpacity=0;opacity=50;" parent="1" vertex="1">
-          <mxGeometry x="1275" y="-858" width="2690" height="1003" as="geometry" />
+          <mxGeometry x="1188" y="-842" width="2690" height="1003" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-321" value="" style="rounded=0;whiteSpace=wrap;html=1;textOpacity=0;opacity=50;" parent="1" vertex="1">
-          <mxGeometry x="1440" y="-788.5" width="2435" height="873" as="geometry" />
+          <mxGeometry x="1480" y="-592" width="2435" height="873" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-318" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="1" source="4iRdVt_hhF0twq2A7KBy-176" target="4iRdVt_hhF0twq2A7KBy-219" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -206,7 +206,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-283" value="BacktrackingTree" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="2832.5" y="-694" width="389" height="216" as="geometry" />
+          <mxGeometry x="2832.5" y="-694" width="389" height="319" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-284" value="- root: BacktrackingNode&#xa;- currentNode: BacktrackingNode&#xa;- isSubTreeFull: boolean&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-283" vertex="1">
           <mxGeometry y="26" width="389" height="75" as="geometry" />
@@ -215,7 +215,7 @@
           <mxGeometry y="101" width="389" height="8" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-286" value="+ BacktrackingTree(capacity: int, items: ArrayList&lt;BacktrackingItem&gt;)&#xa;+ addToTrash(item: BacktrackingItem)&#xa;- helpAddToTrash(childItem: BacktrackingItem): BacktrackingNode&#xa;+ addToRucksack(item: BacktrackingItem)&#xa;+ print(stream: PrintStream)&#xa;- traverseNodes(sb: StringBuilder, padding String,&#xa;pointer String,node BacktrackingNode,hasRightSibling boolean)&#xa;- traversePreOrder(myRoot: BacktrackingNode): String&#xa;+ isSubTreeFull(nodeItemToTrash: BacktrackingNode): boolean&#xa;- moveDownTheSubtree(nodeItemToTrash: BacktrackingNode)&#xa;- allLeftChildrenAreThere(): boolean&#xa;+ getCurrentNode(): BacktrackinNode&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-283" vertex="1">
-          <mxGeometry y="109" width="389" height="107" as="geometry" />
+          <mxGeometry y="109" width="389" height="210" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-288" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="1" source="4iRdVt_hhF0twq2A7KBy-233" target="4iRdVt_hhF0twq2A7KBy-275" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -335,16 +335,7 @@
             <mxPoint x="-20" y="-2" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-238" value="GUIOptionsPage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="2291" y="-725" width="180" height="170" as="geometry" />
-        </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-239" value="- backtrackingTipsAllowed: boolean &lt;&lt;static&gt;&gt;&#xa;- greedyTipsAllowed: boolean &lt;&lt;static&gt;&gt;&#xa;- altTreeSelected: boolean &lt;&lt;static&gt;&gt;&#xa;" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-238" vertex="1">
-          <mxGeometry y="26" width="180" height="58" as="geometry" />
-        </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-240" value="- confirmPassword(pw: String,&#xa; parent: Container) &lt;&lt;static&gt;&gt;&#xa;+ getPane(): Container&#xa;+ getBacktrackingTipsAllowed(): boolean&#xa;+ getGreedyTipsAllowed(): boolean&#xa;+ getAltTreeSelected(): boolean&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-238" vertex="1">
-          <mxGeometry y="84" width="180" height="86" as="geometry" />
-        </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-241" value="guiOptionsPage" style="endArrow=open;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;entryX=0.001;entryY=0.153;entryDx=0;entryDy=0;exitX=1.002;exitY=0.031;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;" parent="1" source="4iRdVt_hhF0twq2A7KBy-219" target="4iRdVt_hhF0twq2A7KBy-238" edge="1">
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-241" value="guiOptionsPage" style="endArrow=open;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;exitX=1.002;exitY=0.031;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4iRdVt_hhF0twq2A7KBy-219" target="_9WyEV-QkiOCcUFDRxFL-23" edge="1">
           <mxGeometry x="-1" y="-3" relative="1" as="geometry">
             <mxPoint x="1614" y="-461" as="sourcePoint" />
             <mxPoint x="1984" y="-151" as="targetPoint" />
@@ -485,6 +476,18 @@
         </mxCell>
         <mxCell id="_9WyEV-QkiOCcUFDRxFL-22" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-21">
           <mxGeometry x="-1" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-23" value="GUIOptionsPage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="2376" y="-787" width="233" height="213" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-24" value="- backtrackingTipsAllowed: boolean &lt;&lt;static&gt;&gt;&#xa;- greedyTipsAllowed: boolean &lt;&lt;static&gt;&gt;&#xa;- altTreeSelected: boolean &lt;&lt;static&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-23">
+          <mxGeometry y="26" width="233" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-25" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-23">
+          <mxGeometry y="81" width="233" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-26" value="- confirmPassword(pw: String,&#xa; parent: Container) &lt;&lt;static&gt;&gt;&#xa;+ getPane(): Container&#xa;+ getBacktrackingTipsAllowed(): boolean&#xa;+ getGreedyTipsAllowed(): boolean&#xa;+ getAltTreeSelected(): boolean&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-23">
+          <mxGeometry y="89" width="233" height="124" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
