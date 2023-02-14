@@ -7,6 +7,7 @@ import gui.level.GuiManager;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import rucksack.BacktrackingItem;
@@ -105,8 +106,10 @@ public class ButtonEventHandlerTable extends ButtonEventHandler {
       Graphics g = crossedOutBuffered.createGraphics();
       crossedOut.paintIcon(null, g, 0, 0);
       g.dispose();
-      ImageIcon not = new ImageIcon("src/main/resources/icons/Not.png");
-      not = new ImageIcon(not.getImage().getScaledInstance(
+      URL urlNot = getClass().getResource("/icons/Not.png");
+      assert urlNot != null;
+      ImageIcon not = new ImageIcon(new ImageIcon(urlNot).getImage()
+          .getScaledInstance(
           crossedOut.getIconWidth(),
           crossedOut.getIconHeight(),
           Image.SCALE_SMOOTH));
