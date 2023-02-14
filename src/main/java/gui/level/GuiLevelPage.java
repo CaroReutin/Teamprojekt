@@ -61,11 +61,11 @@ public class GuiLevelPage {
   /**
    * the width of the rucksack image.
    */
-  private static final int WIDTH_RUCKSACK = 300;
+  private static final int WIDTH_RUCKSACK = 200;
   /**
    * the height of the rucksack image.
    */
-  private static final int HEIGHT_RUCKSACK = 500;
+  private static final int HEIGHT_RUCKSACK = 400;
   /**
    * the x position of the robber on the screen.
    */

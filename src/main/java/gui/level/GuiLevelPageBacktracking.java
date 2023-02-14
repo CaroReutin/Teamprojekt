@@ -59,11 +59,11 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   /**
    * the width of the rucksack.
    */
-  private static final int WIDTH_RUCKSACK = 200;
+  private static final int WIDTH_RUCKSACK = 100;
   /**
    * the height of the rucksack.
    */
-  private static final int HEIGHT_RUCKSACK = 350;
+  private static final int HEIGHT_RUCKSACK = 200;
   /**
    * the x position of the trash on the window.
    */
