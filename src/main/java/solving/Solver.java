@@ -9,7 +9,7 @@ import rucksack.Level;
  */
 public abstract class Solver {
   /**
-   * This is abstract why does it need a comment ?.
+   * solves a level.
    *
    * @param level level
    * @return return
