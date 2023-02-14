@@ -1,6 +1,7 @@
 package solving;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import gui.level.GuiLevelPage;
@@ -18,6 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
@@ -252,10 +254,17 @@ public final class CustomLevelManager {
    * @return the level produced by the conversion
    */
   public static Level convertLevelfileToLevel(final File levelFile) {
-    XStream xstream = new XStream(new DomDriver());
-    xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
-    xstream.allowTypes(new Class[] {Level.class, Rucksack.class,
-        Item.class, ImageIcon.class});
-    return (Level) xstream.fromXML(levelFile);
+    try {
+      XStream xstream = new XStream(new DomDriver());
+      xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+      xstream.allowTypes(new Class[] {Level.class, Rucksack.class,
+          Item.class, ImageIcon.class});
+      return (Level) xstream.fromXML(levelFile);
+    } catch (XStreamException e) {
+      JOptionPane.showMessageDialog(null, "Es gab ein "
+          + "Problem beim starten des Levels, stelle sicher ob die zip ein"
+          + " gültiges Level beinhaltet.");
+      return null;
+    }
   }
 }
