@@ -164,8 +164,7 @@ public class GuiLevelPage {
         }
 
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = null;
-        message = generateEscapeMessage();
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -200,8 +199,7 @@ public class GuiLevelPage {
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
-        String message = null;
-        message = generateEscapeMessage();
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -269,8 +267,6 @@ public class GuiLevelPage {
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
         //this case is not possible, all buttons are switched
-        if (chosenButton == 0) { //nothing is supposed to happen
-        }
       });
     } else if (levelNumber == 0) {
       clue.addActionListener(e -> {
@@ -288,8 +284,6 @@ public class GuiLevelPage {
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
         //this case is not possible, all buttons are switched
-        if (chosenButton == 0) { //nothing is supposed to happen
-        }
       });
     } else if (0 < levelNumber && levelNumber <= LAST_GREEDY_LEVELNUMBER) {
       clue.addActionListener(e -> {
@@ -309,8 +303,6 @@ public class GuiLevelPage {
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
         //this case is not possible, all buttons are switched
-        if (chosenButton == 0) { //nothing is supposed to happen
-        }
       });
     } else if (0 < LAST_GREEDY_LEVELNUMBER
             & levelNumber <= LAST_BACKTRACKING_LEVELNUMBER) {
@@ -331,8 +323,6 @@ public class GuiLevelPage {
                         .INFORMATION_MESSAGE, null, buttons,
                 buttons[0]);
         //this case is not possible, all buttons are switched
-        if (chosenButton == 0) { //nothing is supposed to happen
-        }
       });
     }
     centerPanel.add(clue);

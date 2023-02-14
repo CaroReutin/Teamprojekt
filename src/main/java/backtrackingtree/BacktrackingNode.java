@@ -74,6 +74,7 @@ public class BacktrackingNode {
    *                    it's in the trash
    * @param myLevel     the depth of the node
    */
+  // TODO: Parameteranzahl reduzieren?
   public BacktrackingNode(final BacktrackingItem bagItem, final int oldWeight,
                           final int oldValue, final int bagCapacity,
                           final ArrayList<BacktrackingItem> myItemList,

@@ -209,12 +209,9 @@ public class GuiOptionsPage {
           JOptionPane.INFORMATION_MESSAGE,
           null,
           editorButtons, editorButtons[0]);
-      switch (chosenEditorButton) {
-        case 0 -> {
-          GuiManager.openOptionsMenu();
-        }
-        default -> { //should not happen...
-        }
+      //should not happen...
+      if (chosenEditorButton == 0) {
+        GuiManager.openOptionsMenu();
       }
     });
 

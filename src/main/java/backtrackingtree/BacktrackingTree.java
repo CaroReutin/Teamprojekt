@@ -265,6 +265,7 @@ public class BacktrackingTree {
     }
   }
 
+// TODO: Leere If-Anweisungsblöcke
   private void moveDownTheSubtree(final BacktrackingNode nodeItemToTrash) {
     if (currentNode.getCurrentWeight() >= bagCapacity) {
       return;
@@ -272,7 +273,7 @@ public class BacktrackingTree {
     // be on leaves
     if (currentNode.getRightChild() == null
         && currentNode.getLeftChild() == null) {
-      // last item witch can be chosen is used
+      // last item which can be chosen is used
       // (in other words the highest high of the tree is reached)
       if (itemArrayList.indexOf(currentNode.getItem())
           == itemArrayList.size() - 1) {

@@ -383,8 +383,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           }
         }
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = null;
-        message = generateEscapeMessage();
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -419,8 +418,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
-        String message = null;
-        message = generateEscapeMessage();
+        String message = generateEscapeMessage();
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
