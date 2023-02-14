@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-14T19:34:08.666Z" agent="5.0 (Windows)" etag="9gPqZ5BH944vgvzQJl0c" version="20.6.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-14T19:40:36.698Z" agent="5.0 (Windows)" etag="iQKxd57o8tQkjdoo-hKu" version="20.6.2" type="github">
   <diagram id="mvksxYR37wyYuG3UCGVY" name="Page-1">
-    <mxGraphModel dx="1778" dy="3268" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="981" dy="2851" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -179,16 +179,16 @@
           <mxGeometry y="34" width="325" height="70" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-275" value="jbackgroundPanel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="2565" y="-343" width="201" height="99" as="geometry" />
+          <mxGeometry x="2565" y="-343" width="201" height="133" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-276" value="+ background: Image" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-275" vertex="1">
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-276" value="+ background: Image&#xa;- xpos: int&#xa;- ypos: int&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-275" vertex="1">
           <mxGeometry y="26" width="201" height="26" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-277" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-275" vertex="1">
           <mxGeometry y="52" width="201" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-278" value="+ jbackgroundPanel(image: Image)&#xa;+ paintComponent(g: Graphics)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-275" vertex="1">
-          <mxGeometry y="60" width="201" height="39" as="geometry" />
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-278" value="+ jbackgroundPanel(image: Image, x: int, y: int)&#xa;+ paintComponent(g: Graphics)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-275" vertex="1">
+          <mxGeometry y="60" width="201" height="73" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-279" value="BacktrackingNode" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2836" y="-319" width="382" height="437" as="geometry" />
@@ -330,13 +330,13 @@
         <mxCell id="4iRdVt_hhF0twq2A7KBy-232" value="GUILevelPage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2114" y="-381" width="329" height="239" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-233" value="- labels: JLabel[]&#xa;- rucksackLabels: JLabel[]&#xa;- currentValueLabel: Jlabel&#xa;- currentWeightLabel: JLabel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-232" vertex="1">
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-233" value="- labels: JLabel[]&#xa;- rucksackLabels: JLabel[]&#xa;- currentValueLabel: JLabel&#xa;- currentWeightLabel: JLabel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-232" vertex="1">
           <mxGeometry y="26" width="329" height="74" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-234" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-232" vertex="1">
           <mxGeometry y="100" width="329" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-235" value="+ GUILevelPage(level: Level)&#xa;+ escapeButton(centerPanel: Container)&#xa;+ itemButtons(panelItems: JPanel, panelRucksack: JPanel)&#xa;+ updateLabel(i: int)&#xa;+ getPane(): Container&#xa;+ getLevel(): Level&#xa;+ getLevelNumber(): int&#xa;+ getPane(): Container&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-232" vertex="1">
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-235" value="+ GUILevelPage(myLevel: Level)&#xa;+ escapeButton(centerPanel: Container)&#xa;+ clueButton(centerPanel: Container)&#xa;+ generateEscapeMessage(): String&#xa;+ fileToStringFromFile(path: String): String &lt;&lt;static&gt;&gt;&#xa;+ itemButtons(panelItems: JPanel, panelRucksack: JPanel)&#xa;+ updateLabel(i: int)&#xa;+ getPane(): Container&#xa;+ getLevel(): Level&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-232" vertex="1">
           <mxGeometry y="108" width="329" height="131" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-236" value="guiLevelPages[]" style="endArrow=open;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.235;entryY=-0.01;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="4iRdVt_hhF0twq2A7KBy-229" target="4iRdVt_hhF0twq2A7KBy-232" edge="1">
