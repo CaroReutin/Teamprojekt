@@ -1,11 +1,13 @@
 package solving;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -107,11 +109,24 @@ public final class UserDataManager {
   }
 
   private static UserData getData(final File saveFile) {
-    XStream xstream = new XStream(new DomDriver());
-    xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
-    xstream.allowTypes(new Class[]{UserData.class});
-    xstream.alias("UserData", UserData.class);
-    return (UserData) xstream.fromXML(saveFile);
+    try {
+      XStream xstream = new XStream(new DomDriver());
+      xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+      xstream.allowTypes(new Class[] {UserData.class});
+      xstream.alias("UserData", UserData.class);
+      return (UserData) xstream.fromXML(saveFile);
+    } catch (XStreamException e) {
+      int result = JOptionPane.showConfirmDialog(null,
+          "Es gab einen Fehler beim lesen der Benutzterdaten,"
+              + " möchten Sie die ihre daten zurücksetzten ?",
+          "Fehler", JOptionPane.YES_NO_OPTION);
+      if (result == 0) {
+        newUser();
+        return data;
+      } else {
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   /**
@@ -149,7 +164,7 @@ public final class UserDataManager {
    * Data to string string.
    *
    * @return returns the Scores in format x1|x2|...|x14|x15
-   *     where xn is the score of the nth Level
+   *      where xn is the score of the nth Level
    */
   public static String dataToString() {
     return data.toString();
