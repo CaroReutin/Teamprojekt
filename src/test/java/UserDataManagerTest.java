@@ -16,6 +16,9 @@ public class UserDataManagerTest {
   public void cleanUp() {
     UserDataManager.reset();
     File save = new File(testSaveFile);
+    if (save.exists()){
+      save.delete();
+    }
   }
 
   @Test
