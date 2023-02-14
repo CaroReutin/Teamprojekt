@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-14T23:06:40.668Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="rvs1EL4mbk3xlBkt137M" version="20.8.20" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-14T23:08:33.538Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="XfExXanqNePy0MjYafYL" version="20.8.20" type="github">
   <diagram id="mvksxYR37wyYuG3UCGVY" name="Page-1">
-    <mxGraphModel dx="3180" dy="4231" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1590" dy="3285" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -11,7 +11,7 @@
           <mxGeometry x="1188" y="-1198" width="3233" height="398" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-321" value="" style="rounded=0;whiteSpace=wrap;html=1;textOpacity=0;opacity=50;" parent="1" vertex="1">
-          <mxGeometry x="1698" y="-719" width="1933" height="873" as="geometry" />
+          <mxGeometry x="998" y="-719" width="2633" height="873" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-318" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="1" source="4iRdVt_hhF0twq2A7KBy-176" target="4iRdVt_hhF0twq2A7KBy-219" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -493,7 +493,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="_9WyEV-QkiOCcUFDRxFL-35" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;NumberListener&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- acceptedCharacters: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ insertString(fb: FilterBypass, offset: int, string: String, attr: AttributeSet)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ replace(fb: FilterBypass, offset: int, length: int, text: String, attrs: AttributeSet)&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1317" y="-976" width="430" height="90" as="geometry" />
+          <mxGeometry x="1115" y="-108" width="430" height="90" as="geometry" />
         </mxCell>
         <mxCell id="_9WyEV-QkiOCcUFDRxFL-36" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;BacktrackingJTree&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- treeFrame: JFrame&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- root: DefaultMutableTreeNode&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- tree: JTree&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- currentNode:&amp;nbsp;&lt;/p&gt;DefaultMutableTreeNode&lt;br&gt;- selectedNode:&amp;nbsp;DefaultMutableTreeNode&lt;br&gt;- itemAmount: int&lt;br&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ BacktrackinJTree(level: Level)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ putInBag(currentBacktrackingNode: BacktrackingNode)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- update()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ show()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ close()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ putInTrash(currentBacktrackingNode: BacktrackingNode)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- addNode(&lt;/p&gt;currentBacktrackingNode: BacktrackingNode, suffix: String)&lt;br&gt;+ getSolution(): String" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
           <mxGeometry x="2851" y="-270" width="333" height="317" as="geometry" />
@@ -503,17 +503,6 @@
         </mxCell>
         <mxCell id="_9WyEV-QkiOCcUFDRxFL-40" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ButtonEventHandlerJTree&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-tree: BacktrackingJTree&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ButtonEventHandlerJTree(level: Level)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ addToRucksack&lt;/p&gt;(itemButtonIndex: int, level: Level)&lt;br&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ addToTrash&lt;/p&gt;(itemButtonIndex: int, level: Level)&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ show()&amp;nbsp;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ getSolution: String&amp;nbsp;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ resetLevel(level: Level, levelNumber: int)&amp;nbsp;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
           <mxGeometry x="2229" y="-1075" width="292" height="203" as="geometry" />
-        </mxCell>
-        <mxCell id="_9WyEV-QkiOCcUFDRxFL-41" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="_9WyEV-QkiOCcUFDRxFL-40" target="_9WyEV-QkiOCcUFDRxFL-39">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="2043" y="-968" as="sourcePoint" />
-            <mxPoint x="2203" y="-968" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="2186" y="-1076" />
-              <mxPoint x="2117" y="-1073" />
-              <mxPoint x="2049" y="-1073" />
-            </Array>
-          </mxGeometry>
         </mxCell>
         <mxCell id="_9WyEV-QkiOCcUFDRxFL-42" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ButtonEventHandlerTable&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ButtonEventHandlerJTable(level: Level)&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ addToRucksack&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;(itemButtonIndex: int, level: Level)&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ addToTrash&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;(itemButtonIndex: int, level: Level)&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ show()&amp;nbsp;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ getSolution: String&amp;nbsp;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ resetLevel(level: Level, levelNumber: int)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ generateNodes()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- back()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- addNode(labelIcon: ImageIcon, buttonText: String)&amp;nbsp;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
           <mxGeometry x="2661" y="-1041" width="288" height="220" as="geometry" />
@@ -560,6 +549,15 @@
         </mxCell>
         <mxCell id="_9WyEV-QkiOCcUFDRxFL-48" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-47">
           <mxGeometry x="-1" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-50" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="_9WyEV-QkiOCcUFDRxFL-40" target="_9WyEV-QkiOCcUFDRxFL-39">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2272" y="-800" as="sourcePoint" />
+            <mxPoint x="2432" y="-800" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="2310" y="-809" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
