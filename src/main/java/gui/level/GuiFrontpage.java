@@ -120,7 +120,7 @@ public class GuiFrontpage {
   private static void clueButtonEvent() {
     try {
       String message = GuiLevelPage.fileToStringFromFile(
-              "src/main/resources/texts/1_Introtext.txt");
+              "texts/1_Introtext.txt");
       String[] buttons = {
               "Schließen",
               "Wie spiele ich?",
