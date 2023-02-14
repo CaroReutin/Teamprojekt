@@ -2,26 +2,15 @@ package solving;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-// In case this becomes an issue later fyi
-// < will be saved as &lt;
-// & will be saved as &amp;
-// > will be saved as &gt;
-// \" will be saved as "
-// !§$%/()=?"+#*~'`sèé^°,.;:_-@|äÄ were as saved correctly
 
 /**
  * Do not make a Solving.UserData object,
  * use the static methods in UserDataManager instead.
  */
-@XmlRootElement
 public class UserData implements Serializable {
   /**
    * the best level scores.
    */
-  @XmlElement
   private ArrayList<Integer> bestLevelScores = new ArrayList<>();
 
   /**
@@ -29,7 +18,7 @@ public class UserData implements Serializable {
    */
   public void newUser() {
     bestLevelScores = new ArrayList<>();
-    for (int i = 0; i < AppData.LEVELAMOUNT; i++) {
+    for (int i = 0; i < AppData.LEVEL_AMOUNT; i++) {
       bestLevelScores.add(0);
     }
   }

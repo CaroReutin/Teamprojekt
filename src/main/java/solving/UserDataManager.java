@@ -1,10 +1,13 @@
 package solving;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import java.io.File;
 import java.io.FileOutputStream;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -55,19 +58,17 @@ public final class UserDataManager {
    * @param saveFolder the Folder in which userData.xml should be saved in
    */
   public static void save(final String saveFolder) {
-    Boolean ignoreResult = new File(saveFolder).mkdirs();
     String saveFilePath = saveFolder + "/userData.xml";
+    XStream xstream = new XStream(new DomDriver());
+    xstream.alias("UserData", UserData.class);
+    String xml = xstream.toXML(data);
+    File output = new File(saveFilePath);
     try {
-      FileOutputStream fos = new FileOutputStream(saveFilePath);
-      JAXBContext jaxbContext = JAXBContext.newInstance(UserData.class);
-      Marshaller marsh = jaxbContext.createMarshaller();
-
-      marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-      marsh.marshal(data, fos);
-
+      FileOutputStream fos = new FileOutputStream(output);
+      byte[] strToBytes = xml.getBytes();
+      fos.write(strToBytes);
       fos.close();
-    } catch (Exception e) {
+    } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
@@ -91,13 +92,12 @@ public final class UserDataManager {
   }
 
   /**
-   * If the userData.save file is not in the specified directory,
+   * If the userData.save-file is not in the specified directory,
    * a new User will be created and saved in that directory.
    *
-   * @param saveFolder the Folder that contains userData.save
+   * @param saveFolder the Folder that contains userData.save-file
    */
   public static void load(final String saveFolder) {
-    Boolean ignoreResult = new File(saveFolder).mkdirs();
     String saveFilePath = saveFolder + "/userData.xml";
     File saveFile = new File(saveFilePath);
     if (!saveFile.exists()) {
@@ -105,13 +105,27 @@ public final class UserDataManager {
       save(saveFolder);
       return;
     }
-    try {
-      JAXBContext jaxbContext = JAXBContext.newInstance(UserData.class);
-      Unmarshaller marsh = jaxbContext.createUnmarshaller();
+    data = getData(saveFile);
+  }
 
-      data = (UserData) marsh.unmarshal(saveFile);
-    } catch (Exception e) {
-      throw new RuntimeException(e);
+  private static UserData getData(final File saveFile) {
+    try {
+      XStream xstream = new XStream(new DomDriver());
+      xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+      xstream.allowTypes(new Class[] {UserData.class});
+      xstream.alias("UserData", UserData.class);
+      return (UserData) xstream.fromXML(saveFile);
+    } catch (XStreamException e) {
+      int result = JOptionPane.showConfirmDialog(null,
+          "Es gab einen Fehler beim lesen der Benutzterdaten,"
+              + " möchten Sie die ihre daten zurücksetzten ?",
+          "Fehler", JOptionPane.YES_NO_OPTION);
+      if (result == 0) {
+        newUser();
+        return data;
+      } else {
+        throw new RuntimeException(e);
+      }
     }
   }
 

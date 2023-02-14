@@ -2,7 +2,6 @@ package gui.level;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -19,6 +18,42 @@ import rucksack.Level;
  * greedy level pages.
  */
 public class GuiLevelPageGreedy extends GuiLevelPage {
+  /**
+   * the font size 15.
+   */
+  private static final int FONT_FIFTEEN = 15;
+  /**
+   * the font size 30.
+   */
+  private static final int FONT_THIRTY = 30;
+  /**
+   * the grid size 3.
+   */
+  private static final int GRID_THREE = 3;
+  /**
+   * the width of the rucksack.
+   */
+  private static final int WIDTH_RUCKSACK = 200;
+  /**
+   * the height of the rucksack.
+   */
+  private static final int HEIGHT_RUCKSACK = 400;
+  /**
+   * the width of the robber.
+   */
+  private static final int WIDTH_ROBBER = 100;
+  /**
+   * the height of the robber.
+   */
+  private static final int HEIGHT_ROBBER = 200;
+  /**
+   * the x position of the robber on the window.
+   */
+  private static final int X_POS_ROBBER = 120;
+  /**
+   * the y position of the robber on the window.
+   */
+  private static final int Y_POS_ROBBER = 50;
   /**
    * the labels of the page.
    */
@@ -56,36 +91,32 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
   @Override
   public void itemButtons(final JPanel panelItems,
                           final JPanel panelRucksack) {
+    Font smallFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_FIFTEEN);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_THIRTY);
     currentWeightLabel = new JLabel("0/" + getLevel().getCapacity() + "g");
-    Font fontCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(
-        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel.getStyle()
-            | Font.BOLD));
+    currentWeightLabel.setFont(bigFont);
 
     currentValueLabel = new JLabel("0€");
-    Font fontCurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(
-        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel.getStyle()
-            | Font.BOLD));
+    currentValueLabel.setFont(bigFont);
 
     ArrayList<Item> items = getLevel().getItemList();
     labels = new JLabel[items.size()];
     rucksackLabels = new JLabel[items.size()];
     for (int i = 0; i < items.size(); i++) {
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
+      labels[i].setFont(smallFont);
 
-      Font f = labels[i].getFont();
-      labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+      JPanel rucksackPanel = new JPanel(new GridLayout(1, 2));
 
       rucksackLabels[i] = new JLabel("0");
-      Font fontRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fontRucksack
-          .deriveFont(fontRucksack.getStyle() | Font.BOLD));
+      rucksackLabels[i].setFont(smallFont);
       int finalI = i;
-      JButton current = new JButton(items.get(i)
-          .getName() + " (" + items.get(i).getWeight() + "g, "
+      ImageIcon currentIcon = items.get(i).getImageIcon();
+      JButton currentItemIcon = new JButton(currentIcon);
+      JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
-      current.addActionListener(e -> {
+      current.setFont(smallFont);
+      currentItemIcon.addActionListener(e -> {
         if (getLevel().getItemAmountAvailable(finalI) <= 0) {
           return;
         }
@@ -95,23 +126,23 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksack = new JButton(items.get(i).getName());
-      currentRucksack.addActionListener(e -> {
-        if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
-          return;
-        }
-        if (!getLevel().getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          getLevel().moveFromRucksack(finalI);
-          updateLabel(finalI);
-        }
+      JLabel currentRucksackIcon = new JLabel(currentIcon);
 
-      });
-      panelItems.add(current);
-      panelItems.add(labels[i]);
-      panelRucksack.add(currentRucksack);
-      panelRucksack.add(rucksackLabels[i]);
-      panelRucksack.add(currentWeightLabel);
-      panelRucksack.add(currentValueLabel);
+      JPanel infosPanel = new JPanel();
+      infosPanel.add(currentWeightLabel);
+      infosPanel.add(currentValueLabel);
+
+      JPanel availableItems = new JPanel(new GridLayout(1, 2));
+      availableItems.add(currentItemIcon);
+      availableItems.add(current);
+      availableItems.add(labels[i]);
+      panelItems.add(availableItems);
+
+      rucksackPanel.add(currentRucksackIcon);
+      rucksackPanel.add(rucksackLabels[i]);
+
+      panelRucksack.add(rucksackPanel);
+      panelRucksack.add(infosPanel);
 
     }
   }
@@ -124,27 +155,43 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
   @Override
   public Container getPane() {
     Container pane = new Container();
-    pane.setLayout(new GridLayout(1, 3));
+    pane.setLayout(new GridLayout(1, GRID_THREE));
 
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(170, 300,
-            java.awt.Image.SCALE_SMOOTH);
+        rucksackImage.getImage().getScaledInstance(WIDTH_RUCKSACK,
+          HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon rucksackIcon = new ImageIcon(scaledRucksackImage);
+    JLabel rucksackLabel = new JLabel(rucksackIcon);
 
+    //füge Räuber ein
+    URL urlRobber = getClass().getClassLoader().getResource(
+            "DiebGrauMitSack.png");
+    assert urlRobber != null;
+    ImageIcon robberImage = new ImageIcon(urlRobber);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(
+            WIDTH_ROBBER, HEIGHT_ROBBER, Image.SCALE_SMOOTH);
 
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage);
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, X_POS_ROBBER,
+        Y_POS_ROBBER);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    leftPanel.add(rucksackLabel);
     JPanel rightPanel = new JPanel();
-    //JPanel rightPanel = new JPanel(new GridLayout
-    // (level.getItemList().size(), 1));
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
-    this.itemButtons(rightPanel, leftPanel);
+    if (GuiOptionsPage.getGreedyTipsAllowed()) {
+      this.clueButton(centerPanel);
+    }
 
+    JPanel rucksackPanel = new JPanel();
+
+    this.itemButtons(rightPanel, rucksackPanel);
+
+    leftPanel.add(rucksackPanel);
 
     //alles zusammenpuzzeln
 

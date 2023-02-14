@@ -1,0 +1,28 @@
+Bei mir - dem Backtracking-Banditen - geht es um das bestmögliche
+Ergebnis. Ich betrachte Stück für Stück alle möglichen Kombinationen
+an Gegenständen, die in den Rucksack kommen dürfen.
+
+Jeder Gegenstand kann im Ende in meinem Rucksack oder in der Müll-
+tonne landen. Was ich nicht brauche, kann weg. Ich beginne immer mit
+dem schwersten Gegenstand und betrachte nacheinander immer leichtere
+Gegenstände. Ich will ja nicht, dass die schweren Sachen die leichten
+zerdrücken...
+Bei gleich schweren Gegenständen nehme ich natürlich das Wertvollere zuerst.
+
+Um den Überblick nicht zu verlieren, lasse ich mir ein Baumdiagramm
+zeichnen, welches meine bisher ausprobierten Kombinationen anzeigt.
+Zuerst versuche ich, alle Gegenstände in den Rucksack zu legen. Sobald
+der Rucksack zu schwer wird, überspringe ich den restlichen Teilbaum,
+da dieser auch nur zu schwere Kombinationen anzeigt.
+Wenn ich einen Gegenstand, der bereits im Rucksack liegt, in den Müll
+werfen möchte (um andere Kombinationen von Gegenständen auszuprobieren),
+werden alle leichteren Gegenstände wieder verfügbar.
+
+Vor dem Flüchten am Ende, klicke ich auf den Knoten am Pfadende des Baumes,
+welcher der richtigen Lösung entspricht. Die Items, die auf diesem Pfad
+entsprechend im Rucksack liegen, nehme ich mit.
+
+Mit dieser Methode brauche ich etwas länger,
+bekomme aber immer die beste Lösung.
+
+BORIS, DER BACKTRACKING-BANDIT

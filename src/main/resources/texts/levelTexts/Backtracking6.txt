@@ -1,0 +1,4 @@
+Manchmal ergeben die verschiedenen Optionen viele ähnlich wertvolle Ergebnisse.
+Versuche trotzdem, die eine Lösung zu finden, die optimal ist.
+
+Zielwert: 22

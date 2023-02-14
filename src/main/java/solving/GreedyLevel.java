@@ -1,14 +1,37 @@
 package solving;
 
-import java.util.ArrayList;
-import rucksack.Item;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.commons.io.FileUtils;
 import rucksack.Level;
-
 
 /**
  * The type Greedy level.
  */
 public final class GreedyLevel {
+
+  /**
+   * the level 7.
+   */
+  private static final int LEVEL_SEVEN = 7;
+  /**
+   * the level 6.
+   */
+  private static final int LEVEL_SIX = 6;
+  /**
+   * the level 5.
+   */
+  private static final int LEVEL_FIVE = 5;
+  /**
+   * the level4.
+   */
+  private static final int LEVEL_FOUR = 4;
+  /**
+   * the level 3.
+   */
+  private static final int LEVEL_THREE = 3;
+
   /**
    * do not make.
    */
@@ -19,144 +42,85 @@ public final class GreedyLevel {
   /**
    * The Greedy level.
    */
-  private static final Level[] LEVEL_GREEDY = new Level[7];
+  private static final Level[] LEVEL_GREEDY = new Level[LEVEL_SEVEN];
 
   /**
    * Initialize greedy.
    */
   public static void initializeGreedy() {
-    // Greedy Level 1
-    ArrayList<Item> currentItems = new ArrayList<>();
-    ArrayList<Integer> currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(9));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(11));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(13));
-    currentAmount.add(1);
-    LEVEL_GREEDY[0] = new Level(currentItems, currentAmount,
-        rucksack.Level.Robber.GIERIGER_GANOVE, 1, 6);
+    try {
+      InputStream is =
+          AppData.class.getClassLoader().getResourceAsStream(
+          "Level/Greedy1.zip");
+      File file = File.createTempFile("Greedy1", "zip");
+      assert is != null;
+      FileUtils.copyInputStreamToFile(is, file);
+      //Backtracking Level 1
+      LEVEL_GREEDY[0] =
+        AppData.loadLevel(file);
 
-    // Greedy Level 2
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(13));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(6));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(12));
-    currentAmount.add(1);
-    LEVEL_GREEDY[1] = new Level(currentItems, currentAmount,
-        rucksack.Level.Robber.GIERIGER_GANOVE, 2, 9);
+      InputStream is2 =
+          AppData.class.getClassLoader().getResourceAsStream(
+          "Level/Greedy2.zip");
+      File file2 = File.createTempFile("Greedy2", "zip");
+      assert is2 != null;
+      FileUtils.copyInputStreamToFile(is2, file2);
+      //Backtracking Level 2
+      LEVEL_GREEDY[1] =
+        AppData.loadLevel(file2);
 
-    //Greedy Level 3
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(4));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(18));
-    currentAmount.add(1);
-    LEVEL_GREEDY[2] = new Level(currentItems, currentAmount,
-        Level.Robber.GIERIGER_GANOVE, 3, 9);
+      InputStream is3 =
+          AppData.class.getClassLoader().getResourceAsStream(
+          "Level/Greedy3.zip");
+      File file3 = File.createTempFile("Greedy3", "zip");
+      assert is3 != null;
+      FileUtils.copyInputStreamToFile(is3, file3);
+      //Backtracking Level 3
+      LEVEL_GREEDY[2] =
+        AppData.loadLevel(file3);
 
+      InputStream is4 =
+            AppData.class.getClassLoader().getResourceAsStream(
+          "Level/Greedy4.zip");
+      File file4 = File.createTempFile("Greedy4", "zip");
+      assert is4 != null;
+      FileUtils.copyInputStreamToFile(is4, file4);
+      //Backtracking Level 4
+      LEVEL_GREEDY[LEVEL_THREE] =
+        AppData.loadLevel(file4);
 
-    //Greedy Level 4
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(15));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(16));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(21));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(10));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(7));
-    currentAmount.add(2);
-    LEVEL_GREEDY[3] = new Level(currentItems, currentAmount,
-        Level.Robber.GIERIGER_GANOVE, 4, 20);
+      InputStream is5 =
+          AppData.class.getClassLoader().getResourceAsStream(
+          "Level/Greedy5.zip");
+      File file5 = File.createTempFile("Greedy5", "zip");
+      assert is5 != null;
+      FileUtils.copyInputStreamToFile(is5, file5);
+      //Backtracking Level 5
+      LEVEL_GREEDY[LEVEL_FOUR] =
+        AppData.loadLevel(file5);
 
+      InputStream is6 =
+          AppData.class.getClassLoader().getResourceAsStream(
+          "Level/Greedy6.zip");
+      File file6 = File.createTempFile("Greedy6", "zip");
+      assert is6 != null;
+      FileUtils.copyInputStreamToFile(is6, file6);
+      //Backtracking Level 6
+      LEVEL_GREEDY[LEVEL_FIVE] =
+        AppData.loadLevel(file6);
 
-    //Greedy Level 5
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(29));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(19));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(22));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(17));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(14));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(8));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(5));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(32));
-    currentAmount.add(1);
-    LEVEL_GREEDY[4] = new Level(currentItems, currentAmount,
-        Level.Robber.GIERIGER_GANOVE, 5, 35);
-
-
-    //Greedy Level 6
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(31));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(27));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(33));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(26));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(34));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(30));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(26));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(20));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(47));
-    currentAmount.add(1);
-    LEVEL_GREEDY[5] = new Level(currentItems, currentAmount,
-        Level.Robber.GIERIGER_GANOVE, 6, 100);
-
-
-    //Greedy Level 7
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(45));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(42));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(38));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(35));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(36));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(37));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(44));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(40));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(43));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(41));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(39));
-    currentAmount.add(2);
-    currentItems.add(AppData.generateItem(28));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(24));
-    currentAmount.add(2);
-    LEVEL_GREEDY[6] = new Level(currentItems, currentAmount,
-        Level.Robber.GIERIGER_GANOVE, 7, 426);
-
+      InputStream is7 =
+          AppData.class.getClassLoader().getResourceAsStream(
+          "Level/Greedy7.zip");
+      File file7 = File.createTempFile("Greedy7", "zip");
+      assert is7 != null;
+      FileUtils.copyInputStreamToFile(is7, file7);
+      //Backtracking Level 7
+      LEVEL_GREEDY[LEVEL_SIX] =
+        AppData.loadLevel(file7);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   /**

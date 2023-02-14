@@ -1,20 +1,28 @@
 package gui.level;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
+import solving.SolverBacktracking;
+import solving.SolverGreedy;
 import solving.UserDataManager;
 
 
@@ -30,6 +38,50 @@ public class GuiLevelPage {
    * last greedy level index.
    */
   public static final int LAST_GREEDY_LEVELNUMBER = 7;
+  /**
+   * the size 20 font.
+   */
+  private static final int FONT_TWENTY = 20;
+  /**
+   * the size 15 font.
+   */
+  private static final int FONT_FIFTEEN = 15;
+  /**
+   * the size 30 font.
+   */
+  private static final int FONT_THIRTY = 30;
+  /**
+   * the number of grid rows.
+   */
+  private static final int GRID_FOUR = 4;
+  /**
+   * the number of grid rows.
+   */
+  private static final int GRID_THREE = 3;
+  /**
+   * the width of the rucksack image.
+   */
+  private static final int WIDTH_RUCKSACK = 200;
+  /**
+   * the height of the rucksack image.
+   */
+  private static final int HEIGHT_RUCKSACK = 400;
+  /**
+   * the x position of the robber on the screen.
+   */
+  private static final int X_POS_ROBBER = 120;
+  /**
+   * the y position of the robber on the screen.
+   */
+  private static final int Y_POS_ROBBER = 50;
+  /**
+   * the width of the robber image.
+   */
+  private static final int WIDTH_ROBBER = 100;
+  /**
+   * the height of the robber image.
+   */
+  private static final int HEIGHT_ROBBER = 200;
   /**
    * the level which is currently played.
    */
@@ -57,29 +109,35 @@ public class GuiLevelPage {
    * @param mylevel the level that can be played in this page
    */
   public GuiLevelPage(final Level mylevel) {
+    if (mylevel.getRobber().equals(Level.Robber.BACKTRACKING_BANDIT)) {
+      mylevel.getItemList().sort(
+          Comparator.comparingInt(Item::getWeight)
+              .thenComparingInt(Item::getValue).reversed());
+    }
     this.level = mylevel;
   }
 
   /**
-   * Adds the Button to the Panel.
+   * Adds the escapeButton to the Panel.
    *
    * @param centerPanel the Panel that the escapeButton should be on.
    */
   public void escapeButton(final Container centerPanel) {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JButton flucht = new JButton("Flucht");
-    int levelNumber = this.level.getLevelNumber();
-    if (levelNumber <= 0 || levelNumber == LAST_GREEDY_LEVELNUMBER
-        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER) {
+    flucht.setFont(font);
+    int levelNumber = GuiManager.getNumberLevel();
+    if (levelNumber == -1) {
       flucht.addActionListener(e -> {
-        if (level.getCurrentValue() > UserDataManager.getScore(
-            level.getLevelNumber())) {
-          UserDataManager.newHighScore(level.getLevelNumber(),
-              level.getCurrentValue());
-          UserDataManager.save();
-        }
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        String message = null;
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
-            "Hier steht Tips / Feedback",
+            message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
                 .INFORMATION_MESSAGE, null, buttons,
             buttons[0]);
@@ -91,6 +149,52 @@ public class GuiLevelPage {
             }
           }
           case 1 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
+            GuiManager.openMainMenu();
+            System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
+          }
+          default -> {
+          }
+          //this case is not possible, all buttons are switched
+        }
+      });
+    } else if (levelNumber == LAST_GREEDY_LEVELNUMBER
+        || levelNumber == LAST_BACKTRACKING_LEVELNUMBER || levelNumber == 0) {
+      flucht.addActionListener(e -> {
+        if (level.getCurrentValue() > UserDataManager.getScore(
+                GuiManager.getNumberLevel())) {
+          UserDataManager.newHighScore(GuiManager.getNumberLevel(),
+              level.getCurrentValue());
+          UserDataManager.save();
+        }
+
+        String[] buttons = {"Erneut Spielen", "Levelauswahl"};
+        String message = null;
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+            message,
+            "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
+                .INFORMATION_MESSAGE, null, buttons,
+            buttons[0]);
+        switch (chosenButton) {
+          case 0 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
+          }
+          case 1 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevelSelectScreen();
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
@@ -102,14 +206,20 @@ public class GuiLevelPage {
     } else {
       flucht.addActionListener(e -> {
         if (level.getCurrentValue() > UserDataManager
-            .getScore(level.getLevelNumber())) {
-          UserDataManager.newHighScore(level.getLevelNumber(),
+            .getScore(GuiManager.getNumberLevel())) {
+          UserDataManager.newHighScore(GuiManager.getNumberLevel(),
               level.getCurrentValue());
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
+        String message = null;
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
-            "Hier steht Tips / Feedback",
+            message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
                 .INFORMATION_MESSAGE, null, buttons,
             buttons[0]);
@@ -121,12 +231,21 @@ public class GuiLevelPage {
             }
           }
           case 1 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevel(
                 GuiManager.getGuiLevelDeciderPage().getGuiLevelPages()
-                    [level.getLevelNumber() + 1]);
+                    [GuiManager.getNumberLevel() + 1],
+                    GuiManager.getNumberLevel() + 1);
             System.out.println("Es wurde auf " + buttons[1] + " geklickt.");
           }
           case 2 -> {
+            level.resetLevel();
+            for (int i = 0; i < level.getItemList().size(); i++) {
+              updateLabel(i);
+            }
             GuiManager.openLevelSelectScreen();
             System.out.println("Es wurde auf " + buttons[2] + " geklickt.");
           }
@@ -141,6 +260,189 @@ public class GuiLevelPage {
   }
 
   /**
+   * Adds the clueButton to the Panel.
+   *
+   * @param centerPanel the Panel that the escapeButton should be on.
+   */
+  public void clueButton(final Container centerPanel) {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
+    JButton clue = new JButton("Hinweis");
+    clue.setFont(font);
+    int levelNumber = GuiManager.getNumberLevel();
+    if (levelNumber == -1) {
+      clue.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          message = fileToStringFromFile("texts/levelTexts/Editor1.txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        //this case is not possible, all buttons are switched
+      });
+    } else if (levelNumber == 0) {
+      clue.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          message = fileToStringFromFile("texts/levelTexts/Eingangslevel1.txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        //this case is not possible, all buttons are switched
+      });
+    } else if (0 < levelNumber && levelNumber <= LAST_GREEDY_LEVELNUMBER) {
+      clue.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          int fileNumber = levelNumber + 1;
+          message = fileToStringFromFile("texts/levelTexts/Greedy"
+                  + fileNumber + ".txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        //this case is not possible, all buttons are switched
+      });
+    } else if (0 < LAST_GREEDY_LEVELNUMBER
+            & levelNumber <= LAST_BACKTRACKING_LEVELNUMBER) {
+      clue.addActionListener(e -> {
+        String[] buttons = {"Schließen"};
+        String message = null;
+        try {
+          int fileNumber = levelNumber - LAST_GREEDY_LEVELNUMBER + 1;
+          message = fileToStringFromFile("texts/levelTexts/Backtracking"
+                  + fileNumber + ".txt");
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+        int chosenButton = JOptionPane.showOptionDialog(centerPanel,
+                message,
+                "Hinweis", JOptionPane.DEFAULT_OPTION, JOptionPane
+                        .INFORMATION_MESSAGE, null, buttons,
+                buttons[0]);
+        //this case is not possible, all buttons are switched
+      });
+    }
+    centerPanel.add(clue);
+  }
+
+  /**
+   * Method for generating the correct escape message
+   * depending on the level and solution.
+   *
+   * @return String of the generated escape message
+   */
+  public String generateEscapeMessage() throws IOException {
+    SolverBacktracking s = new SolverBacktracking();
+    SolverGreedy sg = new SolverGreedy();
+    ArrayList<Item> solution = new ArrayList<>();
+    for (int i = 0; i < level.getItemList().size(); i++) {
+      for (int j = 0; j < level.getItemAmountInRucksack(i); j++) {
+        solution.add(level.getItemList().get(i));
+      }
+    }
+    SolverGreedy.sortLikeGreedy(solution);
+    if (this.level.getRobber().equals(Level.Robber.DR_META)) {
+      if (solution.equals(SolverGreedy
+              .sortLikeGreedy(s.solveAlgorithm(this.level)))) {
+        //case: correct solution
+        String message = null;
+        try {
+         message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
+      } else {
+        String message = null;
+        try {
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
+      }
+    } else if (this.level.getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
+      if (solution.equals(SolverGreedy
+              .sortLikeGreedy(sg.solveAlgorithm(this.level)))) {
+        String message = null;
+        try {
+          message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
+      } else if (solution.equals(SolverGreedy
+              .sortLikeGreedy(s.solveAlgorithm(this.level)))) {
+        String message = null;
+        try {
+          message = fileToStringFromFile(
+                  "texts/2_1_3_OptimalButWrongSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
+      } else {
+        String message = null;
+        try {
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+        return message;
+      }
+    } else {
+      return "Das solltest du nicht sehen können, es lief etwas schief.";
+    }
+  }
+
+  /**
+   * Method for formatting a TXT-file into a single String instance.
+   *
+   * @param path name of the TXT-file supposed to be shown
+   * @return the String of the given TXT-file
+   */
+  public static String fileToStringFromFile(final String path)
+          throws IOException {
+    InputStream is = GuiLevelPage.class.getClassLoader().getResourceAsStream(path);
+    String[] pathArguments = path.split("[/.]");
+    int size = pathArguments.length;
+    String prefix = pathArguments[size - 2];
+    String suffix = pathArguments[size - 1];
+    File file = File.createTempFile(prefix, suffix);
+    assert is != null;
+    FileUtils.copyInputStreamToFile(is, file);
+
+    FileReader reader = new FileReader(file.getPath());
+    BufferedReader inBuffer = new BufferedReader(reader);
+    StringBuilder message = new StringBuilder();
+    String line = inBuffer.readLine();
+
+    while (line != null) {
+      message.append(line);
+      message.append("\n");
+      line = inBuffer.readLine();
+    }
+    return message.toString();
+  }
+
+  /**
    * Adds the Buttons representing the items in and out of the
    * Rucksack to the 2 panels.
    *
@@ -150,17 +452,13 @@ public class GuiLevelPage {
    *                      the items IN the bag should go to.
    */
   public void itemButtons(final JPanel panelItems, final JPanel panelRucksack) {
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_FIFTEEN);
+    Font bigFont = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_THIRTY);
     currentWeightLabel = new JLabel("0/" + level.getCapacity() + "g");
-    Font fontCurrentWeightLabel = currentWeightLabel.getFont();
-    currentWeightLabel.setFont(
-        fontCurrentWeightLabel.deriveFont(fontCurrentWeightLabel
-            .getStyle() | Font.BOLD));
+    currentWeightLabel.setFont(bigFont);
 
     currentValueLabel = new JLabel("0€");
-    Font fontCurrentValueLabel = currentValueLabel.getFont();
-    currentValueLabel.setFont(
-        fontCurrentValueLabel.deriveFont(fontCurrentValueLabel
-            .getStyle() | Font.BOLD));
+    currentValueLabel.setFont(bigFont);
 
     ArrayList<Item> items = level.getItemList();
     labels = new JLabel[items.size()];
@@ -168,18 +466,21 @@ public class GuiLevelPage {
     for (int i = 0; i < items.size(); i++) {
       labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
 
-      Font f = labels[i].getFont();
-      labels[i].setFont(f.deriveFont((f.getStyle() | Font.BOLD)));
+      labels[i].setFont(font);
+      JPanel rucksackPanel = new JPanel(new GridLayout(1, GRID_FOUR));
 
       rucksackLabels[i] = new JLabel("0");
-      Font fontRucksack = rucksackLabels[i].getFont();
-      rucksackLabels[i].setFont(fontRucksack.deriveFont(
-          fontRucksack.getStyle() | Font.BOLD));
-      int finalI = i;
-      JButton current = new JButton(items.get(i).getName()
-          + " (" + items.get(i).getWeight() + "g, "
+      rucksackLabels[i].setFont(font);
+      JPanel itemPanel = new JPanel(new GridLayout(1, GRID_FOUR));
+      ImageIcon imageIcon = items.get(i).getImageIcon();
+      JButton itemIcon = new JButton(imageIcon);
+      itemPanel.add(itemIcon);
+      JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
-      current.addActionListener(e -> {
+      current.setFont(font);
+      itemPanel.add(current);
+      int finalI = i;
+      itemIcon.addActionListener(e -> {
         if (level.getItemAmountAvailable(finalI) <= 0) {
           return;
         }
@@ -189,7 +490,7 @@ public class GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksack = new JButton(items.get(i).getName());
+      JButton currentRucksack = new JButton(imageIcon);
       currentRucksack.addActionListener(e -> {
         if (level.getItemAmountInRucksack(finalI) <= 0) {
           return;
@@ -198,15 +499,18 @@ public class GuiLevelPage {
           level.moveFromRucksack(finalI);
           updateLabel(finalI);
         }
-
       });
-      panelItems.add(current);
-      panelItems.add(labels[i]);
-      panelRucksack.add(currentRucksack);
-      panelRucksack.add(rucksackLabels[i]);
-      panelRucksack.add(currentWeightLabel);
-      panelRucksack.add(currentValueLabel);
+      itemPanel.add(labels[i]);
+      rucksackPanel.add(currentRucksack);
+      rucksackPanel.add(rucksackLabels[i]);
 
+      JPanel infosPanel = new JPanel();
+      infosPanel.add(currentWeightLabel);
+      infosPanel.add(currentValueLabel);
+
+      panelItems.add(itemPanel);
+      panelRucksack.add(rucksackPanel);
+      panelRucksack.add(infosPanel);
     }
   }
 
@@ -230,7 +534,7 @@ public class GuiLevelPage {
    */
   public Container getPane() {
     Container pane = new Container();
-    pane.setLayout(new GridLayout(1, 3));
+    pane.setLayout(new GridLayout(1, GRID_THREE));
 
     //Füge Rucksack png ein und ändere größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
@@ -238,26 +542,36 @@ public class GuiLevelPage {
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
-            170, 300, java.awt.Image.SCALE_SMOOTH);
+            WIDTH_RUCKSACK, HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon rucksackIcon = new ImageIcon(scaledRucksackImage);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    JLabel rucksackImageLabel = new JLabel(rucksackIcon);
+    leftPanel.add(rucksackImageLabel);
 
-
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage);
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    //füge Räuber ein
+    URL urlRobber = getClass().getClassLoader().getResource("DiebRot.png");
+    assert urlRobber != null;
+    ImageIcon robberImage = new ImageIcon(urlRobber);
+    Image scaledRobberImage = robberImage.getImage().getScaledInstance(
+        WIDTH_ROBBER, HEIGHT_ROBBER, Image.SCALE_SMOOTH);
+    JPanel centerPanel = new JbackgroundPanel(scaledRobberImage,
+        X_POS_ROBBER, Y_POS_ROBBER);
     JPanel rightPanel = new JPanel();
-    //JPanel rightPanel = new JPanel
-    // (new GridLayout(level.getItemList().size(), 1));
+
+    JPanel rucksackItems = new JPanel();
+
 
     // erzeuge Buttons
     this.escapeButton(centerPanel);
-    this.itemButtons(rightPanel, leftPanel);
+    this.clueButton(centerPanel);
+    this.itemButtons(rightPanel, rucksackItems);
 
+    leftPanel.add(rucksackItems);
 
     //alles zusammenpuzzeln
-
-    pane.add(leftPanel, BorderLayout.WEST);
-    pane.add(centerPanel, BorderLayout.CENTER);
-    pane.add(rightPanel, BorderLayout.EAST);
-
+    pane.add(leftPanel);
+    pane.add(centerPanel);
+    pane.add(rightPanel);
     return pane;
   }
 
@@ -268,15 +582,5 @@ public class GuiLevelPage {
    */
   public Level getLevel() {
     return level;
-  }
-
-
-  /**
-   * returns the level number.
-   *
-   * @return the level number.
-   */
-  public int getLevelNumber() {
-    return this.level.getLevelNumber();
   }
 }

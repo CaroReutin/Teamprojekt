@@ -1,7 +1,9 @@
 package solving;
 
-import java.util.ArrayList;
-import rucksack.Item;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.commons.io.FileUtils;
 import rucksack.Level;
 
 /**
@@ -16,131 +18,128 @@ public final class BacktrackingLevel {
   }
 
   /**
+   * level position of "Level One".
+   */
+  private static final int LEVEL_ONE = 0;
+
+  /**
+   * level position of "Level Two".
+   */
+  private static final int LEVEL_TWO = 1;
+
+  /**
+   * level position of "Level Three".
+   */
+  private static final int LEVEL_THREE = 2;
+
+  /**
+   * level position of "Level Four".
+   */
+  private static final int LEVEL_FOUR = 3;
+
+  /**
+   * level position of "Level Five".
+   */
+  private static final int LEVEL_FIVE = 4;
+
+  /**
+   * level position of "Level Six".
+   */
+  private static final int LEVEL_SIX = 5;
+
+  /**
+   * level position of "Level Seven".
+   */
+  private static final int LEVEL_SEVEN = 6;
+
+  /**
+   * Amount of levels from one mode.
+   */
+  private static final int LEVEL_AMOUNT = 7;
+
+
+  /**
    * The Backtracking level.
    */
-  private static final Level[] LEVEL_BACKTRACKING = new Level[7];
+  private static final Level[] LEVEL_BACKTRACKING = new Level[LEVEL_AMOUNT];
 
   /**
    * Initialize backtracking.
    */
   public static void initializeBacktracking() {
-    //Backtracking Level
-    //Backtracking Level 1
-    ArrayList<Item> currentItems = new ArrayList<>();
-    ArrayList<Integer> currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(48));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(49));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(50));
-    currentAmount.add(1);
-    LEVEL_BACKTRACKING[0] =
-        new Level(currentItems, currentAmount,
-            Level.Robber.BACKTRACKING_BANDIT, 8, 10);
+    try {
+      InputStream is =
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking1.zip");
+      File file = File.createTempFile("backtracking", "zip");
+      assert is != null;
+      FileUtils.copyInputStreamToFile(is, file);
+      //Backtracking Level 1
+      LEVEL_BACKTRACKING[LEVEL_ONE] =
+          AppData.loadLevel(file);
 
+      InputStream is2 =
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking2.zip");
+      File file2 = File.createTempFile("backtracking2", "zip");
+      assert is2 != null;
+      FileUtils.copyInputStreamToFile(is2, file2);
+      //Backtracking Level 2
+      LEVEL_BACKTRACKING[LEVEL_TWO] =
+          AppData.loadLevel(file2);
 
-    //Backtracking Level 2
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(51));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(10));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(52));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(17));
-    currentAmount.add(1);
-    LEVEL_BACKTRACKING[1] =
-        new Level(currentItems, currentAmount,
-            Level.Robber.BACKTRACKING_BANDIT, 9, 10);
+      InputStream is3 =
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking3.zip");
+      File file3 = File.createTempFile("backtracking3", "zip");
+      assert is3 != null;
+      FileUtils.copyInputStreamToFile(is3, file3);
+      //Backtracking Level 3
+      LEVEL_BACKTRACKING[LEVEL_THREE] =
+          AppData.loadLevel(file3);
 
+      InputStream is4 =
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking4.zip");
+      File file4 = File.createTempFile("backtracking4", "zip");
+      assert is4 != null;
+      FileUtils.copyInputStreamToFile(is4, file4);
+      //Backtracking Level 4
+      LEVEL_BACKTRACKING[LEVEL_FOUR] =
+          AppData.loadLevel(file4);
 
-    //Backtracking Level 3
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(53));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(54));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(55));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(56));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(57));
-    currentAmount.add(1);
-    LEVEL_BACKTRACKING[2] =
-        new Level(currentItems, currentAmount,
-            Level.Robber.BACKTRACKING_BANDIT, 10, 20);
+      InputStream is5 =
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking5.zip");
+      File file5 = File.createTempFile("backtracking5", "zip");
+      assert is5 != null;
+      FileUtils.copyInputStreamToFile(is5, file5);
+      //Backtracking Level 5
+      LEVEL_BACKTRACKING[LEVEL_FIVE] =
+          AppData.loadLevel(file5);
 
-    //Backtracking Level 4
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(58));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(59));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(14));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(60));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(61));
-    currentAmount.add(1);
-    LEVEL_BACKTRACKING[3] =
-        new Level(currentItems, currentAmount,
-            Level.Robber.BACKTRACKING_BANDIT, 11, 14);
+      InputStream is6 =
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking6.zip");
+      File file6 = File.createTempFile("backtracking6", "zip");
+      assert is6 != null;
+      FileUtils.copyInputStreamToFile(is6, file6);
+      //Backtracking Level 6
+      LEVEL_BACKTRACKING[LEVEL_SIX] =
+          AppData.loadLevel(file6);
 
-    //Backtracking Level 5
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(62));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(55));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(63));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(64));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(65));
-    currentAmount.add(1);
-    LEVEL_BACKTRACKING[4] =
-        new Level(currentItems, currentAmount,
-            Level.Robber.BACKTRACKING_BANDIT, 12, 20);
-
-    //Backtracking Level 6
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(66));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(67));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(68));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(17));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(69));
-    currentAmount.add(1);
-    LEVEL_BACKTRACKING[5] =
-        new Level(currentItems, currentAmount,
-            Level.Robber.BACKTRACKING_BANDIT, 13, 25);
-
-    //Backtracking Level 7
-    currentItems = new ArrayList<>();
-    currentAmount = new ArrayList<>();
-    currentItems.add(AppData.generateItem(70));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(71));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(72));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(73));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(66));
-    currentAmount.add(1);
-    currentItems.add(AppData.generateItem(74));
-    currentAmount.add(1);
-    LEVEL_BACKTRACKING[6] =
-        new Level(currentItems, currentAmount,
-            Level.Robber.BACKTRACKING_BANDIT, 14, 42);
+      InputStream is7 =
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking7.zip");
+      File file7 = File.createTempFile("backtracking7", "zip");
+      assert is7 != null;
+      FileUtils.copyInputStreamToFile(is7, file7);
+      //Backtracking Level 7
+      LEVEL_BACKTRACKING[LEVEL_SEVEN] =
+          AppData.loadLevel(file7);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   /**

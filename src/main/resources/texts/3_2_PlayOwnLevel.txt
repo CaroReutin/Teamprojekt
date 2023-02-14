@@ -1,0 +1,10 @@
+Jedes Level, dass du in der Museumswerkstatt gebaut hast und als
+ZIP-Datei gespeichert hast, kannst du auf verschiedene Wege öffnen.
+
+Mit der Schaltfläche "Eigene Level" öffnet sich die Museumswerk-
+statt und mit "Spielen" öffnet sich die Ordnerstruktur deines PC.
+Dann kannst du ein Level auswählen und spielen.
+
+Alternativ kannst du ein erstelltes Level auch jederzeit in das
+Fenster hineinziehen. Dann wird deine aktuelle Aktion abgebrochen
+und der selbsterstellte Level startet direkt.

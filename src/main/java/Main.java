@@ -7,7 +7,7 @@ import solving.UserDataManager;
  */
 public final class Main {
   /**
-   * do not make.
+   * Do not construct.
    */
   private Main() {
 
@@ -21,10 +21,7 @@ public final class Main {
    */
   public static void main(final String[] args) {
     AppData.initialize();
-    AppData.initializeBeginningLevel();
-    AppData.initializeItems();
     UserDataManager.load();
-
     GuiManager guiManager = new GuiManager();
     guiManager.launch();
   }

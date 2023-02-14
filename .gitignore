@@ -9,3 +9,4 @@ target
 *.iml
 *.zip
 /src/test/resources/customLevel/temp/
+/src/test/resources/treeOutput.txt

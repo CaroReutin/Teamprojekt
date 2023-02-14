@@ -15,14 +15,29 @@ public class JbackgroundPanel extends JPanel {
    */
   private final Image background;
 
+  /**
+   * the x position of the picture.
+   */
+  private final int xpos;
+
+  /**
+   * the y position of the picture.
+   */
+  private final int ypos;
+
+
 
   /**
    * Instantiates a new J background panel.
    *
    * @param myBackground the background
+   * @param x            the x
+   * @param y            the y
    */
-  public JbackgroundPanel(final Image myBackground) {
+  public JbackgroundPanel(final Image myBackground, final int x, final int y) {
     this.background = myBackground;
+    this.xpos = x;
+    this.ypos = y;
   }
 
   /**
@@ -32,6 +47,6 @@ public class JbackgroundPanel extends JPanel {
   protected void paintComponent(final Graphics g) {
 
     super.paintComponent(g);
-    g.drawImage(this.background, 0, 0, this);
+    g.drawImage(this.background, this.xpos, this.ypos, this);
   }
 }

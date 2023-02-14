@@ -1,15 +1,46 @@
 package rucksack;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.swing.ImageIcon;
 
 /**
  * The class that holds the level information.
  */
-@XmlRootElement
+@XStreamAlias("Level")
 public class Level implements Serializable {
+  /**
+   * Setter method for the current value held in the rucksack.
+   *
+   * @param i integer the value shall be set to
+   */
+  public void setCurrentValue(final int i) {
+    this.myRucksack.setCurrentValue(i);
+  }
+
+  /**
+   * Setter method for the current weight held in the rucksack.
+   *
+   * @param i integer the weight shall be set to
+   */
+  public void setCurrentWeight(final int i) {
+    this.myRucksack.setCurrentWeight(i);
+  }
+
+  /**
+   * Setter method for assigning an image icon to an item.
+   *
+   * @param i integer value of the item's position in the item list.
+   * @param imageIcon the image icon to be assigned
+   */
+  public void setItemIcon(final int i, final ImageIcon imageIcon) {
+    Item oldItem = this.myRucksack.getItemList().get(i);
+    this.myRucksack.getItemList().set(i,
+      new Item(oldItem.getValue(), oldItem.getWeight(),
+        oldItem.getName(), imageIcon));
+  }
+
   /**
    * Greedy -> Gieriger Ganove
    * Backtracking -> Backtracking Bandit
@@ -31,45 +62,16 @@ public class Level implements Serializable {
   }
 
   /**
-   * the list with all items.
-   */
-  @XmlElement
-  private final ArrayList<Item> itemList;
-  /**
-   * the list with the amout of the items.
-   */
-  @XmlElement
-  private final ArrayList<Integer> itemAmountList;
-  /**
-   * the lsit with the amout of available items.
-   */
-  private ArrayList<Integer> availableItemAmountList;
-  /**
-   * the list of the amount in the rucksack.
-   */
-  private ArrayList<Integer> inRucksackAmountList;
-  /**
-   * the current value.
-   */
-  private int currentValue;
-  /**
-   * the current weight.
-   */
-  private int currentWeight;
-  /**
    * the current robber.
    */
-  @XmlElement
+  @XStreamAlias("Robber")
   private final Robber robber;
+
   /**
-   * the level index.
+   * The rucksack of this level.
    */
-  private final int levelindex;
-  /**
-   * the capacity of the rucksack.
-   */
-  @XmlElement
-  private final int capacity;
+  @XStreamAlias("Rucksack")
+  private final Rucksack myRucksack;
 
   /**
    * By default, has Dr.Meta as Robber.
@@ -85,48 +87,8 @@ public class Level implements Serializable {
   public Level(final ArrayList<Item> myItemList,
                final ArrayList<Integer> myItemAmountList,
                final int levelIndex, final int myCapacity) {
-    this.capacity = myCapacity;
-    this.levelindex = levelIndex;
-    this.itemList = myItemList;
-    this.itemAmountList = myItemAmountList;
-    this.availableItemAmountList = new ArrayList<>();
-    availableItemAmountList.addAll(myItemAmountList);
+    this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
     this.robber = Robber.DR_META;
-    inRucksackAmountList = new ArrayList<>();
-    for (int i = 0; i < myItemAmountList.size(); i++) {
-      inRucksackAmountList.add(0);
-    }
-    currentWeight = 0;
-    currentValue = 0;
-  }
-
-  /**
-   * amount of steps needed until now
-   * a step is either "putting item in rucksack"
-   * or "removing items from rucksack".
-   */
-  private int counter = 0;
-
-
-  /**
-   * counts the number of steps needed;
-   * adding and removing items both count as a step.
-   *
-   * @return current value of the counter
-   */
-  public int getCounter() {
-    return counter;
-  }
-
-
-  /**
-   * sets the counter to a new value.
-   *
-   * @param myCounter the new value of the counter
-   *                  which overwrites the current one
-   */
-  public void setCounter(final int myCounter) {
-    this.counter = myCounter;
   }
 
   /**
@@ -145,44 +107,18 @@ public class Level implements Serializable {
                final ArrayList<Integer> myItemAmountList,
                final Robber myRobber, final int levelIndex,
                final int myCapacity) {
-    this.capacity = myCapacity;
-    this.levelindex = levelIndex;
-    this.itemList = myItemList;
-    this.itemAmountList = myItemAmountList;
-    this.availableItemAmountList = new ArrayList<>();
-    availableItemAmountList.addAll(myItemAmountList);
-    inRucksackAmountList = new ArrayList<>();
-    for (int i = 0; i < myItemAmountList.size(); i++) {
-      inRucksackAmountList.add(0);
-    }
+    this.myRucksack = new Rucksack(myItemList, myItemAmountList, myCapacity);
     this.robber = myRobber;
-    currentWeight = 0;
-    currentValue = 0;
-  }
-
-  /**
-   * Only for level editor.
-   */
-  private Level() {
-    this.capacity = -1;
-    this.levelindex = -1;
-    this.itemList = new ArrayList<>();
-    this.itemAmountList = new ArrayList<>();
-    this.availableItemAmountList = new ArrayList<>();
-    this.inRucksackAmountList = new ArrayList<>();
-    this.robber = null;
-    currentWeight = 0;
-    currentValue = 0;
   }
 
   /**
    * NOTE: this does not return the items still available in the level
-   * (i.e. the ones not in the Backpack)
+   * (i.e. the ones not in the rucksack)
    *
    * @return Returns the items that exist in the Rucksack.Level
    */
   public ArrayList<Item> getItemList() {
-    return itemList;
+    return myRucksack.getItemList();
   }
 
   /**
@@ -192,7 +128,7 @@ public class Level implements Serializable {
    * @return Returns the amounts of the items that exist in the Rucksack.Level
    */
   public ArrayList<Integer> getItemAmountList() {
-    return itemAmountList;
+    return myRucksack.getItemAmountList();
   }
 
   /**
@@ -200,10 +136,10 @@ public class Level implements Serializable {
    *
    * @param i the
    * @return Returns the amounts of the items that are still available
-   *      in the Rucksack.Level
+   *         in the Rucksack.Level
    */
   public int getItemAmountAvailable(final int i) {
-    return availableItemAmountList.get(i);
+    return myRucksack.getAvailableItemAmount(i);
   }
 
   /**
@@ -213,30 +149,14 @@ public class Level implements Serializable {
    * @return the item amount in rucksack
    */
   public int getItemAmountInRucksack(final int i) {
-    return inRucksackAmountList.get(i);
+    return myRucksack.getInRucksackAmount(i);
   }
 
   /**
    * Reset level.
    */
   public void resetLevel() {
-    inRucksackAmountList = new ArrayList<>();
-    availableItemAmountList = new ArrayList<>();
-    for (Integer amount : itemAmountList) {
-      inRucksackAmountList.add(0);
-      availableItemAmountList.add(amount);
-    }
-    currentWeight = 0;
-    currentValue = 0;
-  }
-
-  /**
-   * Gets level number.
-   *
-   * @return the level number
-   */
-  public int getLevelNumber() {
-    return this.levelindex;
+    myRucksack.reset();
   }
 
   /**
@@ -245,22 +165,16 @@ public class Level implements Serializable {
    * @param i the
    */
   public void moveToRucksack(final int i) {
-    availableItemAmountList.set(i, availableItemAmountList.get(i) - 1);
-    inRucksackAmountList.set(i, inRucksackAmountList.get(i) + 1);
-    currentValue += itemList.get(i).getValue();
-    currentWeight += itemList.get(i).getWeight();
+    myRucksack.moveToRucksack(i);
   }
 
   /**
    * Move from rucksack.
    *
-   * @param i the
+   * @param i the index of the item to be moved
    */
   public void moveFromRucksack(final int i) {
-    availableItemAmountList.set(i, availableItemAmountList.get(i) + 1);
-    inRucksackAmountList.set(i, inRucksackAmountList.get(i) - 1);
-    currentValue -= itemList.get(i).getValue();
-    currentWeight -= itemList.get(i).getWeight();
+    myRucksack.moveFromRucksack(i);
   }
 
   /**
@@ -269,7 +183,7 @@ public class Level implements Serializable {
    * @return the current value
    */
   public int getCurrentValue() {
-    return currentValue;
+    return myRucksack.getCurrentValue();
   }
 
   /**
@@ -278,7 +192,7 @@ public class Level implements Serializable {
    * @return the capacity
    */
   public int getCapacity() {
-    return capacity;
+    return myRucksack.getCapacity();
   }
 
   /**
@@ -287,7 +201,7 @@ public class Level implements Serializable {
    * @return the current weight
    */
   public int getCurrentWeight() {
-    return currentWeight;
+    return myRucksack.getCurrentWeight();
   }
 
   /**
@@ -298,4 +212,63 @@ public class Level implements Serializable {
   public Robber getRobber() {
     return robber;
   }
+
+  /**
+   * Turns level into backtracking level if needed.
+   */
+  public void turnIntoBacktracking() {
+    assert this.robber != null;
+    if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
+      myRucksack.turnIntoBacktracking();
+    }
+  }
+
+  /**
+   * Getter method for the array list containing the trash amount list.
+   *
+   * @return array list containing the trash amount list
+   */
+  public ArrayList<Integer> getInTrashAmountList() {
+    return myRucksack.getInTrashAmountList();
+  }
+
+  /**
+   * Setter method for an element in the trash amount list.
+   *
+   * @param index where to set a new value in the list
+   * @param newAmount new value to set in the list
+   */
+  public void setInTrashAmountList(final int index, final int newAmount) {
+    myRucksack.setInTrashAmountList(index, newAmount);
+  }
+
+  /**
+   * Setter method for an element in the available item amount list.
+   *
+   * @param index where to set a new value in the list
+   * @param newAmount new value to set in the list
+   */
+  public void setAvailableItemAmountList(final int index, final int newAmount) {
+    myRucksack.setAvailableItemAmountList(index, newAmount);
+  }
+
+  /**
+   * Setter method for an element in the rucksack amount list.
+   *
+   * @param index where to set a new value in the list
+   * @param newAmount new value to set in the list
+   */
+  public void setInRucksackAmountList(final int index, final int newAmount) {
+    myRucksack.setInRucksackAmountList(index, newAmount);
+  }
+
+  /**
+   * Getter method for the list of backtracking items.
+   *
+   * @return the list of backtracking items
+   */
+  public ArrayList<BacktrackingItem> getBacktrackingItemList() {
+    return myRucksack.getBacktrackingItemList();
+  }
+
 }
