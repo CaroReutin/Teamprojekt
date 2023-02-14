@@ -109,7 +109,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public GuiLevelPageBacktracking(final Level level) {
     super(level);
     getLevel().turnIntoBacktracking();
-    if (GuiOptionsPage.altTreeSelected) {
+    if (GuiOptionsPage.getAltTreeSelected()) {
       buttonHandler = new ButtonEventHandlerJtree(getLevel());
     } else {
       buttonHandler = new ButtonEventHandlerTable(getLevel());
@@ -284,7 +284,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     //Panel where escape-Button and clue-Button are
     //Panel where escape-Button is
     this.escapeButton(centerPanel);
-    if (GuiOptionsPage.backtrackingTipsAllowed) {
+    if (GuiOptionsPage.getBacktrackingTipsAllowed()) {
       this.clueButton(centerPanel);
     }
 
