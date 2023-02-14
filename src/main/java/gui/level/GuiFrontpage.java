@@ -120,7 +120,7 @@ public class GuiFrontpage {
   private static void clueButtonEvent() {
     try {
       String message = GuiLevelPage.fileToStringFromFile(
-              "src/main/resources/texts/1_Introtext.txt");
+              "texts/1_Introtext.txt");
       String[] buttons = {
               "Schließen",
               "Wie spiele ich?",
@@ -138,7 +138,7 @@ public class GuiFrontpage {
         }
         case 1 -> {
           String levelMessage = GuiLevelPage.fileToStringFromFile(
-                  "src/main/resources/texts/2_1_HowToPlay.txt");
+                  "texts/2_1_HowToPlay.txt");
           String[] levelTypeButtons = {
                   "Zur Levelauswahl",
                   "Greedy-Ganove?",
@@ -157,7 +157,7 @@ public class GuiFrontpage {
             case 1 -> {
               GuiManager.openLevelSelectScreen();
               String greedyMessage = GuiLevelPage.fileToStringFromFile(
-                      "src/main/resources/texts/2_2_HowToGreedy.txt");
+                      "texts/2_2_HowToGreedy.txt");
               String[] greedyButtons = {"Los geht's!"};
               int chosenGreedyButton = JOptionPane.showOptionDialog(null,
                       greedyMessage,
@@ -177,7 +177,7 @@ public class GuiFrontpage {
             case 2 -> {
               GuiManager.openLevelSelectScreen();
               String backtrackingMessage = GuiLevelPage.fileToStringFromFile(
-                      "src/main/resources/texts/2_3_HowToBacktracking.txt");
+                      "texts/2_3_HowToBacktracking.txt");
               String[] greedyButtons = {"Los geht's!"};
               int chosenGreedyButton = JOptionPane.showOptionDialog(null,
                       backtrackingMessage,
@@ -200,7 +200,7 @@ public class GuiFrontpage {
         }
         case 2 -> {
           String playOwnMessage = GuiLevelPage.fileToStringFromFile(
-                  "src/main/resources/texts/3_2_PlayOwnLevel.txt");
+                  "texts/3_2_PlayOwnLevel.txt");
           String[] playOwnButtons = {
                   "Museumswerkstatt betreten",
                   "Was ist die Museumswerkstatt?"};
@@ -218,7 +218,7 @@ public class GuiFrontpage {
             case 1 -> {
               GuiManager.openLevelEditor();
               String editorMessage = GuiLevelPage.fileToStringFromFile(
-                      "src/main/resources/texts/3_1_GenerateOwnLevel.txt");
+                      "texts/3_1_GenerateOwnLevel.txt");
               String[] editorButtons = {"Los geht's!"};
               int chosenEditorButton = JOptionPane.showOptionDialog(null,
                       editorMessage,

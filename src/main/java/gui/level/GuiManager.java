@@ -6,6 +6,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.ComponentAdapter;
 import java.io.File;
 import java.util.List;
 import javax.swing.JComponent;
@@ -75,7 +76,7 @@ public class GuiManager {
    * Opens the main Menu.
    */
   public void launch() {
-    Dimension dimension = new Dimension(1000, 750);
+    Dimension dimension = new Dimension(WIDTH_WINDOW, HEIGHT_WINDOW);
     frame = new JFrame();
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setTitle("Optimal Heist");
