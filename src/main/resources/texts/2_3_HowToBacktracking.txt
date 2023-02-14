@@ -16,15 +16,11 @@ der Rucksack zu schwer wird, überspringe ich den restlichen Teilbaum,
 da dieser auch nur zu schwere Kombinationen anzeigt.
 Wenn ich einen Gegenstand, der bereits im Rucksack liegt, in den Müll
 werfen möchte (um andere Kombinationen von Gegenständen auszuprobieren),
-werden alle leichteren Gegenstände wieder verfügbar, damit mein Baumdiagramm
-übersichtlich bleibt.
+werden alle leichteren Gegenstände wieder verfügbar.
 
-Außerdem überspringe Teile des Baumes nicht nur, wenn die Kombis zu schwer für
-meinen Rucksack sind, sondern auch, wenn sie nicht mehr wertvoller werden.
-
-Um am Ende zu flüchten, klicke ich auf den Button am Pfadende des Baumes. Die
-Items, die auf diesem Pfad entsprechend im Rucksack und Müll liegen, sind
-die Lösung.
+Vor dem Flüchten am Ende, klicke ich auf den Knoten am Pfadende des Baumes,
+welcher der richtigen Lösung entspricht. Die Items, die auf diesem Pfad
+entsprechend im Rucksack liegen, nehme ich mit.
 
 Mit dieser Methode brauche ich etwas länger,
 bekomme aber immer die beste Lösung.
