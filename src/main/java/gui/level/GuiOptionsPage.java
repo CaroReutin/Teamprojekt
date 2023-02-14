@@ -70,7 +70,7 @@ public class GuiOptionsPage {
   /**
    * the number of rows on the pane.
    */
-  public static final int ROWS_ON_PANE = 4;
+  public static final int ROWS_ON_PANE = 5;
 
   /**
    * the preferred height of the field.
