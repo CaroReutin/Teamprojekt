@@ -1,5 +1,6 @@
 package gui.level;
 
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -8,7 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,25 +24,73 @@ import solving.AppData;
  */
 public class GuiOptionsPage {
   /**
-   * the boolean value whether the tips for backtracking levels are unlocked
+   * The boolean value whether the tips for backtracking levels are unlocked.
    */
-  public static boolean backtrackingTipsAllowed = false;
-  public static boolean greedyTipsAllowed = false;
-  public static boolean altTreeSelected = false;
+  private static boolean backtrackingTipsAllowed = false;
+
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getBacktrackingTipsAllowed() {
+    return backtrackingTipsAllowed;
+  }
+
+  /**
+   * The boolean value whether the clues for the greedy levels are unlocked.
+   */
+  private static boolean greedyTipsAllowed = false;
+
+  /**
+   * Getter method for the value of backtracking clues being allowed.
+   *
+   * @return the value of backtrackingTipsAllowed
+   */
+  public static boolean getGreedyTipsAllowed() {
+    return greedyTipsAllowed;
+  }
+
+  /**
+   * The boolean value whether the alternate version of
+   * the tree depiction is necessary.
+   */
+  private static boolean altTreeSelected = false;
+
+  /**
+   * Getter method for the boolean value whether
+   * the alternate tree version is selected.
+   *
+   * @return the value of altTreeSelected
+   */
+  public static boolean getAltTreeSelected() {
+    return altTreeSelected;
+  }
+
   /**
    * the number of rows on the pane.
    */
   public static final int ROWS_ON_PANE = 4;
 
   /**
-   * the preferred length of the field.
+   * the preferred height of the field.
    */
-  public static final int LENGTH_OF_FIELD = 200;
+  public static final int HEIGHT_OF_FIELD = 50;
 
   /**
    * the preferred width of the field.
    */
-  public static final int HIGHT_OF_FIELD = 50;
+  private static final int WIDTH_OF_FIELD = 200;
+
+  /**
+   * the size of the font.
+   */
+  private static final int FONT_TWENTY = 20;
+
+  /**
+   * the size of the icon.
+   */
+  private static final int SIZE_ICON = 60;
 
   /**
    * Compares the given String with the set of implemented passwords.
@@ -54,12 +102,12 @@ public class GuiOptionsPage {
   private static void confirmPassword(final String pw, final Container parent) {
     if (pw.matches(AppData.getPassword(0))) {
       JOptionPane.showMessageDialog(parent,
-          "Hinweise für Greedy-Level sind nun freigeschalten.",
+          "Hinweise für Greedy-Level sind nun freigeschaltet.",
           "Erfolg", JOptionPane.INFORMATION_MESSAGE);
       GuiOptionsPage.greedyTipsAllowed = true;
     } else if (pw.matches(AppData.getPassword(1))) {
       JOptionPane.showMessageDialog(parent,
-          "Hinweise für Backtracking-Level sind nun freigeschalten.",
+          "Hinweise für Backtracking-Level sind nun freigeschaltet.",
           "Erfolg", JOptionPane.INFORMATION_MESSAGE);
       GuiOptionsPage.backtrackingTipsAllowed = true;
     } else {
@@ -75,7 +123,6 @@ public class GuiOptionsPage {
    * @return returns the Container that contains the content of the options page
    */
   public Container getPane() {
-    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
     Container pane = new Container();
     pane.setLayout(new BorderLayout());
 
@@ -84,45 +131,45 @@ public class GuiOptionsPage {
 
     JFormattedTextField passwordInput = new JFormattedTextField("");
     passwordInput.setPreferredSize(
-        new Dimension(LENGTH_OF_FIELD, HIGHT_OF_FIELD));
+      new Dimension(WIDTH_OF_FIELD, HEIGHT_OF_FIELD));
     GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
         .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-            "callConfirmPassword");
+        "callConfirmPassword");
     GuiManager.getRootPane().getActionMap()
         .put("callConfirmPassword", new AbstractAction() {
           @Override
-          public void actionPerformed(final ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             confirmPassword(passwordInput.getText(), pane);
           }
         });
 
     //erzeuge JPanels
-    JPanel enterPasswordPanel = new JPanel();
     JPanel passwordInputPanel = new JPanel();
-    JPanel descriptionPanel = new JPanel();
     passwordInputPanel.add(passwordInput);
     passwordInput.setValue("");
-    JPanel treeModePanel = new JPanel();
     JButton treeModeButton = new JButton();
+    Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     treeModeButton.setFont(font);
     if (altTreeSelected) {
-      treeModeButton.setText("Zeige Standart Backtrackingbaum");
+      treeModeButton.setText("Zeige Standard-Backtrackingbaum");
     } else {
-      treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+      treeModeButton.setText("Zeige alternativen Backtrackingbaum");
     }
     treeModeButton.addActionListener(e -> {
       if (!altTreeSelected) {
-        treeModeButton.setText("Zeige Standart Backtrackingbaum");
+        treeModeButton.setText("Zeige Standard-Backtrackingbaum");
       } else {
-        treeModeButton.setText("Zeige Alternativen Backtrackingbaum");
+        treeModeButton.setText("Zeige alternativen Backtrackingbaum");
       }
       altTreeSelected = !altTreeSelected;
     });
+    JPanel treeModePanel = new JPanel();
     treeModePanel.add(treeModeButton);
 
     //erzeuge Buttons
     JButton enterPassword = new JButton("Eingabe");
     enterPassword.setFont(font);
+    JPanel enterPasswordPanel = new JPanel();
     enterPasswordPanel.add(enterPassword);
     enterPassword.addActionListener(e ->
         confirmPassword(passwordInput.getText(), pane));
@@ -133,22 +180,23 @@ public class GuiOptionsPage {
     backPanel.add(back);
     back.addActionListener(e -> {
       GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-          .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+        .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
       GuiManager.openMainMenu();
     });
 
     ImageIcon clueSymbol = new ImageIcon(
         "src/main/resources/icons/clueSymbol.png");
     Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
-        60, 60, java.awt.Image.SCALE_SMOOTH);
+        SIZE_ICON, SIZE_ICON, java.awt.Image.SCALE_SMOOTH);
     ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
     JButton clueButton = new JButton(newClueSymbol);
+    JPanel descriptionPanel = new JPanel();
     descriptionPanel.add(clueButton);
     clueButton.addActionListener(e -> {
       String editorMessage = null;
       /*try {
         editorMessage = GuiLevelPage.fileToString(
-            "src/main/resources/texts/4_Options.txt");
+          "src/main/resources/texts/4_Options.txt");
       } catch (IOException ex) {
         throw new RuntimeException(ex);
       }*/
@@ -160,24 +208,19 @@ public class GuiOptionsPage {
           JOptionPane.INFORMATION_MESSAGE,
           null,
           editorButtons, editorButtons[0]);
-      switch (chosenEditorButton) {
-        case 0 -> {
-          GuiManager.openOptionsMenu();
-        }
-        default -> { //should not happen...
-        }
+      //should not happen...
+      if (chosenEditorButton == 0) {
+        GuiManager.openOptionsMenu();
       }
     });
 
-    JPanel emptyPanel = new JPanel();
-
-    //add panels on subpane
+    //add panels on sub-pane
     subPane.add(passwordInputPanel);
     subPane.add(enterPasswordPanel);
     subPane.add(backPanel);
     subPane.add(treeModePanel);
     subPane.add(descriptionPanel);
-    //add panels and subpane on pane
+    //add panels and sub-pane on pane
     pane.add(subPane, BorderLayout.CENTER);
     return pane;
   }

@@ -10,23 +10,35 @@ import javax.swing.ImageIcon;
  */
 @XStreamAlias("Level")
 public class Level implements Serializable {
+  /**
+   * Setter method for the current value held in the rucksack.
+   *
+   * @param i integer the value shall be set to
+   */
   public void setCurrentValue(final int i) {
     this.myRucksack.setCurrentValue(i);
   }
 
+  /**
+   * Setter method for the current weight held in the rucksack.
+   *
+   * @param i integer the weight shall be set to
+   */
   public void setCurrentWeight(final int i) {
     this.myRucksack.setCurrentWeight(i);
   }
 
-  public void setItemIcon(int i, ImageIcon imageIcon) {
+  /**
+   * Setter method for assigning an image icon to an item.
+   *
+   * @param i integer value of the item's position in the item list.
+   * @param imageIcon the image icon to be assigned
+   */
+  public void setItemIcon(final int i, final ImageIcon imageIcon) {
     Item oldItem = this.myRucksack.getItemList().get(i);
     this.myRucksack.getItemList().set(i,
       new Item(oldItem.getValue(), oldItem.getWeight(),
         oldItem.getName(), imageIcon));
-  }
-
-  public ArrayList<Integer> getItemAmountInRucksackList() {
-    return this.myRucksack.getInRucksackAmountList();
   }
 
   /**
@@ -56,7 +68,7 @@ public class Level implements Serializable {
   private final Robber robber;
 
   /**
-   * the rucksack of this level
+   * The rucksack of this level.
    */
   @XStreamAlias("Rucksack")
   private final Rucksack myRucksack;
@@ -109,7 +121,7 @@ public class Level implements Serializable {
 
   /**
    * NOTE: this does not return the items still available in the level
-   * (i.e. the ones not in the Backpack)
+   * (i.e. the ones not in the rucksack)
    *
    * @return Returns the items that exist in the Rucksack.Level
    */
@@ -132,7 +144,7 @@ public class Level implements Serializable {
    *
    * @param i the
    * @return Returns the amounts of the items that are still available
-   * in the Rucksack.Level
+   *         in the Rucksack.Level
    */
   public int getItemAmountAvailable(final int i) {
     return myRucksack.getAvailableItemAmount(i);
@@ -213,27 +225,56 @@ public class Level implements Serializable {
    * Turns level into backtracking level if needed.
    */
   public void turnIntoBacktracking() {
+    assert this.robber != null;
     if (this.robber.equals(Robber.BACKTRACKING_BANDIT)) {
       myRucksack.turnIntoBacktracking();
     }
   }
 
+  /**
+   * Getter method for the array list containing the trash amount list.
+   *
+   * @return array list containing the trash amount list
+   */
   public ArrayList<Integer> getInTrashAmountList() {
     return myRucksack.getInTrashAmountList();
   }
 
+  /**
+   * Setter method for an element in the trash amount list.
+   *
+   * @param index where to set a new value in the list
+   * @param newAmount new value to set in the list
+   */
   public void setInTrashAmountList(final int index, final int newAmount) {
     myRucksack.setInTrashAmountList(index, newAmount);
   }
 
+  /**
+   * Setter method for an element in the available item amount list.
+   *
+   * @param index where to set a new value in the list
+   * @param newAmount new value to set in the list
+   */
   public void setAvailableItemAmountList(final int index, final int newAmount) {
     myRucksack.setAvailableItemAmountList(index, newAmount);
   }
 
+  /**
+   * Setter method for an element in the rucksack amount list.
+   *
+   * @param index where to set a new value in the list
+   * @param newAmount new value to set in the list
+   */
   public void setInRucksackAmountList(final int index, final int newAmount) {
     myRucksack.setInRucksackAmountList(index, newAmount);
   }
 
+  /**
+   * Getter method for the list of backtracking items.
+   *
+   * @return the list of backtracking items
+   */
   public ArrayList<BacktrackingItem> getBacktrackingItemList() {
     return myRucksack.getBacktrackingItemList();
   }

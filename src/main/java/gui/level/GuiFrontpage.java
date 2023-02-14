@@ -1,15 +1,13 @@
 
 package gui.level;
 
-import org.apache.commons.io.FileUtils;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,13 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * This class confugures the gui frontpage.
+ * This class configures the gui frontpage.
  */
 public class GuiFrontpage {
   /**
-   * the constant NUM_ROWS_SUBPANE.
+   * The constant NUM_ROWS_SUBPANE, the number of rows in the pane.
    */
-  public static final int NUM_ROWS_SUBPANE = 7;
+  public static final int NUM_ROWS_SUBPANE = 5;
 
   /**
    * The constant SIZE_FONT_SMALL.
@@ -35,7 +33,7 @@ public class GuiFrontpage {
   public static final int SIZE_FONT_BIG = 50;
 
   /**
-   * The constant HIGHT_RUCKSACK.
+   * The constant HEIGHT_RUCKSACK.
    */
   public static final int HEIGHT_RUCKSACK = 80;
   /**
@@ -48,15 +46,13 @@ public class GuiFrontpage {
    *
    * @return returns the Container that contains the content of the frontpage
    */
-  @SuppressWarnings("checkstyle:TodoComment")
   public Container getPane() {
     Container pane = new Container();
-    pane.setLayout(new GridLayout(5, 1));
-
+    pane.setLayout(new GridLayout(NUM_ROWS_SUBPANE, 1));
     //füge Text und Buttons hinzu
     Font fontStyle = new Font("Arial", Font.BOLD + Font.ITALIC, SIZE_FONT_BIG);
     Font fontButtons = new Font("Arial",
-        Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL);
+            Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL);
     JLabel title = new JLabel("Optimal Heist");
     title.setFont(fontStyle);
     JButton levelButton = new JButton("Level");
@@ -71,155 +67,31 @@ public class GuiFrontpage {
 
 
     JButton clueButton = new JButton();
-    URL urlCLue = getClass().getResource("/icons/clueSymbol.png");
-    if(urlCLue == null) {
+    URL urlClue = getClass().getResource("/icons/clueSymbol.png");
+    if (urlClue == null) {
       System.out.println("falsch");
     } else {
-      ImageIcon clueIcon = new ImageIcon(urlCLue);
+      ImageIcon clueIcon = new ImageIcon(urlClue);
       Image clueSymbolImage = clueIcon.getImage().getScaledInstance(
-        WIDTH_RUCKSACK, WIDTH_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+              WIDTH_RUCKSACK, WIDTH_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
       ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
       clueButton.setIcon(newClueSymbol);
     }
 
     //add functions
+    clueButton.addActionListener(e -> clueButtonEvent());
     levelButton.addActionListener(e -> GuiManager.openLevelSelectScreen());
     ownLevelButton.addActionListener(e -> GuiManager.openLevelEditor());
     settingsButton.addActionListener(e -> GuiManager.openOptionsMenu());
-    clueButton.addActionListener(e -> {
-      try {
-        // TODO Alternative Buttons und Icons im Bild!
-        String message = GuiLevelPage.fileToStringFromFile("texts/1_Introtext.txt");
-        String[] buttons = {"Schließen",
-                "Wie spiele ich?",
-                "Eigene Level spielen?"};
-        int chosenButton = JOptionPane.showOptionDialog(null,
-                message,
-                "Begrüßung",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                buttons, buttons[0]);
-        switch (chosenButton) {
-          case 0 -> {
-            GuiManager.openMainMenu();
-          }
-          case 1 -> {
-            String levelMessage = GuiLevelPage.fileToStringFromFile("texts/2_1_HowToPlay.txt");
-            String[] levelTypeButtons = {
-                    "Zur Levelauswahl",
-                    "Greedy-Ganove?",
-                    "Backtracking-Bandit?"};
-            int chosenLevelButton = JOptionPane.showOptionDialog(null,
-                    levelMessage,
-                    "Wie spiele ich?",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE,
-                    null,
-                    levelTypeButtons, levelTypeButtons[0]);
-            switch (chosenLevelButton) {
-              case 0 -> {
-                GuiManager.openLevelSelectScreen();
-              }
-              case 1 -> {
-                GuiManager.openLevelSelectScreen();
-                String greedyMessage = GuiLevelPage.fileToStringFromFile("texts/2_2_HowToGreedy.txt");
-                String[] greedyButtons = {"Los geht's!"};
-                int chosenGreedyButton = JOptionPane.showOptionDialog(null,
-                        greedyMessage,
-                        "Greedy-Ganove",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null,
-                        greedyButtons, greedyButtons[0]);
-                switch (chosenGreedyButton) {
-                  case 0 -> {
-                    GuiManager.openLevelSelectScreen();
-                  }
-                  default -> { //should not happen...
-                  }
-                }
-              }
-              case 2 -> {
-                GuiManager.openLevelSelectScreen();;
-                String backtrackingMessage = GuiLevelPage.fileToStringFromFile("texts/2_3_HowToBacktracking.txt");
-
-                String[] greedyButtons = {"Los geht's!"};
-                int chosenGreedyButton = JOptionPane.showOptionDialog(null,
-                        backtrackingMessage,
-                        "Backtracking-Bandit",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null,
-                        greedyButtons, greedyButtons[0]);
-                switch (chosenGreedyButton) {
-                  case 0 -> {
-                    GuiManager.openLevelSelectScreen();
-                  }
-                  default -> { //should not happen...
-                  }
-                }
-              }
-              default -> { //should not happen...
-              }
-            }
-          }
-          case 2 -> {
-            String playOwnMessage = GuiLevelPage.fileToStringFromFile("texts/3_2_PlayOwnLevel.txt");
-
-            String[] playOwnButtons = {
-                    "Museumswerkstatt betreten",
-                    "Was ist die Museumswerkstatt?"};
-            int chosenGreedyButton = JOptionPane.showOptionDialog(null,
-                    playOwnMessage,
-                    "Eigene Level",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE,
-                    null,
-                    playOwnButtons, playOwnButtons[0]);
-            switch (chosenGreedyButton) {
-              case 0 -> {
-                GuiManager.openLevelEditor();
-              }
-              case 1 -> {
-                GuiManager.openLevelEditor();
-                String editorMessage = GuiLevelPage.fileToStringFromFile("texts/3_1_GenerateOwnLevel.txt");
-
-                String[] editorButtons = {"Los geht's!"};
-                int chosenEditorButton = JOptionPane.showOptionDialog(null,
-                        editorMessage,
-                        "Museumswerkstatt",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null,
-                        editorButtons, editorButtons[0]);
-                switch (chosenEditorButton) {
-                  case 0 -> {
-                    GuiManager.openLevelEditor();
-                  }
-                  default -> { //should not happen...
-                  }
-                }
-              }
-              default -> { //should not happen...
-              }
-            }
-          }
-          default -> { //should not happen...
-          }
-        }
-      } catch (IOException ex) {
-        throw new RuntimeException(ex);
-      }
-    });
 
     //Füge Rucksack und Hinweis png ein und ändere Größe
     URL url = getClass().getClassLoader().getResource("RucksackPNG.png");
     assert url != null;
     ImageIcon rucksackImage = new ImageIcon(url);
     Image scaledRucksackImage =
-        rucksackImage.getImage().getScaledInstance(
-            WIDTH_RUCKSACK, HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+            rucksackImage.getImage().getScaledInstance(
+                    WIDTH_RUCKSACK, HEIGHT_RUCKSACK,
+                    java.awt.Image.SCALE_SMOOTH);
 
     JLabel picture = new JLabel(new ImageIcon(scaledRucksackImage));
 
@@ -235,7 +107,6 @@ public class GuiFrontpage {
     settingsPanel.add(settingsButton);
     JPanel cluePanel = new JPanel();
     cluePanel.add(clueButton);
-    //TODO Un-fuck up the frontpage
     //add panels on subpane
     pane.add(titlePanel);
     pane.add(levelPanel);
@@ -244,5 +115,132 @@ public class GuiFrontpage {
     pane.add(cluePanel);
 
     return pane;
+  }
+
+  private static void clueButtonEvent() {
+    try {
+      String message = GuiLevelPage.fileToStringFromFile(
+              "src/main/resources/texts/1_Introtext.txt");
+      String[] buttons = {
+              "Schließen",
+              "Wie spiele ich?",
+              "Eigene Level spielen?"};
+      int chosenButton = JOptionPane.showOptionDialog(null,
+              message,
+              "Begrüßung",
+              JOptionPane.DEFAULT_OPTION,
+              JOptionPane.INFORMATION_MESSAGE,
+              null,
+              buttons, buttons[0]);
+      switch (chosenButton) {
+        case 0 -> {
+          GuiManager.openMainMenu();
+        }
+        case 1 -> {
+          String levelMessage = GuiLevelPage.fileToStringFromFile(
+                  "src/main/resources/texts/2_1_HowToPlay.txt");
+          String[] levelTypeButtons = {
+                  "Zur Levelauswahl",
+                  "Greedy-Ganove?",
+                  "Backtracking-Bandit?"};
+          int chosenLevelButton = JOptionPane.showOptionDialog(null,
+                  levelMessage,
+                  "Wie spiele ich?",
+                  JOptionPane.DEFAULT_OPTION,
+                  JOptionPane.INFORMATION_MESSAGE,
+                  null,
+                  levelTypeButtons, levelTypeButtons[0]);
+          switch (chosenLevelButton) {
+            case 0 -> {
+              GuiManager.openLevelSelectScreen();
+            }
+            case 1 -> {
+              GuiManager.openLevelSelectScreen();
+              String greedyMessage = GuiLevelPage.fileToStringFromFile(
+                      "src/main/resources/texts/2_2_HowToGreedy.txt");
+              String[] greedyButtons = {"Los geht's!"};
+              int chosenGreedyButton = JOptionPane.showOptionDialog(null,
+                      greedyMessage,
+                      "Greedy-Ganove",
+                      JOptionPane.DEFAULT_OPTION,
+                      JOptionPane.INFORMATION_MESSAGE,
+                      null,
+                      greedyButtons, greedyButtons[0]);
+              switch (chosenGreedyButton) {
+                case 0 -> {
+                  GuiManager.openLevelSelectScreen();
+                }
+                default -> { //should not happen...
+                }
+              }
+            }
+            case 2 -> {
+              GuiManager.openLevelSelectScreen();
+              String backtrackingMessage = GuiLevelPage.fileToStringFromFile(
+                      "src/main/resources/texts/2_3_HowToBacktracking.txt");
+              String[] greedyButtons = {"Los geht's!"};
+              int chosenGreedyButton = JOptionPane.showOptionDialog(null,
+                      backtrackingMessage,
+                      "Backtracking-Bandit",
+                      JOptionPane.DEFAULT_OPTION,
+                      JOptionPane.INFORMATION_MESSAGE,
+                      null,
+                      greedyButtons, greedyButtons[0]);
+              switch (chosenGreedyButton) {
+                case 0 -> {
+                  GuiManager.openLevelSelectScreen();
+                }
+                default -> { //should not happen...
+                }
+              }
+            }
+            default -> { //should not happen...
+            }
+          }
+        }
+        case 2 -> {
+          String playOwnMessage = GuiLevelPage.fileToStringFromFile(
+                  "src/main/resources/texts/3_2_PlayOwnLevel.txt");
+          String[] playOwnButtons = {
+                  "Museumswerkstatt betreten",
+                  "Was ist die Museumswerkstatt?"};
+          int chosenGreedyButton = JOptionPane.showOptionDialog(null,
+                  playOwnMessage,
+                  "Eigene Level",
+                  JOptionPane.DEFAULT_OPTION,
+                  JOptionPane.INFORMATION_MESSAGE,
+                  null,
+                  playOwnButtons, playOwnButtons[0]);
+          switch (chosenGreedyButton) {
+            case 0 -> {
+              GuiManager.openLevelEditor();
+            }
+            case 1 -> {
+              GuiManager.openLevelEditor();
+              String editorMessage = GuiLevelPage.fileToStringFromFile(
+                      "src/main/resources/texts/3_1_GenerateOwnLevel.txt");
+              String[] editorButtons = {"Los geht's!"};
+              int chosenEditorButton = JOptionPane.showOptionDialog(null,
+                      editorMessage,
+                      "Museumswerkstatt",
+                      JOptionPane.DEFAULT_OPTION,
+                      JOptionPane.INFORMATION_MESSAGE,
+                      null,
+                      editorButtons, editorButtons[0]);
+              //should not happen...
+              if (chosenEditorButton == 0) {
+                GuiManager.openLevelEditor();
+              }
+            }
+            default -> { //should not happen...
+            }
+          }
+        }
+        default -> { //should not happen...
+        }
+      }
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
   }
 }

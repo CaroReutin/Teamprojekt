@@ -17,25 +17,51 @@ public final class BacktrackingLevel {
 
   }
 
-  private static final int levelOne = 0;
+  /**
+   * level position of "Level One".
+   */
+  private static final int LEVEL_ONE = 0;
 
-  private static final int levelTwo = 1;
+  /**
+   * level position of "Level Two".
+   */
+  private static final int LEVEL_TWO = 1;
 
-  private static final int levelThree = 2;
+  /**
+   * level position of "Level Three".
+   */
+  private static final int LEVEL_THREE = 2;
 
-  private static final int levelFour = 3;
+  /**
+   * level position of "Level Four".
+   */
+  private static final int LEVEL_FOUR = 3;
 
-  private static final int levelFive = 4;
+  /**
+   * level position of "Level Five".
+   */
+  private static final int LEVEL_FIVE = 4;
 
-  private static final int levelSix = 5;
+  /**
+   * level position of "Level Six".
+   */
+  private static final int LEVEL_SIX = 5;
 
-  private static final int levelSeven = 6;
+  /**
+   * level position of "Level Seven".
+   */
+  private static final int LEVEL_SEVEN = 6;
+
+  /**
+   * Amount of levels from one mode.
+   */
+  private static final int LEVEL_AMOUNT = 7;
 
 
   /**
    * The Backtracking level.
    */
-  private static final Level[] LEVEL_BACKTRACKING = new Level[7];
+  private static final Level[] LEVEL_BACKTRACKING = new Level[LEVEL_AMOUNT];
 
   /**
    * Initialize backtracking.
@@ -43,59 +69,73 @@ public final class BacktrackingLevel {
   public static void initializeBacktracking() {
     try {
       InputStream is =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Backtracking1.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking1.zip");
       File file = File.createTempFile("backtracking", "zip");
+      assert is != null;
       FileUtils.copyInputStreamToFile(is, file);
       //Backtracking Level 1
-      LEVEL_BACKTRACKING[levelOne] =
+      LEVEL_BACKTRACKING[LEVEL_ONE] =
           AppData.loadLevel(file);
 
       InputStream is2 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Backtracking2.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking2.zip");
       File file2 = File.createTempFile("backtracking2", "zip");
+      assert is2 != null;
       FileUtils.copyInputStreamToFile(is2, file2);
       //Backtracking Level 2
-      LEVEL_BACKTRACKING[levelTwo] =
+      LEVEL_BACKTRACKING[LEVEL_TWO] =
           AppData.loadLevel(file2);
 
       InputStream is3 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Backtracking3.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking3.zip");
       File file3 = File.createTempFile("backtracking3", "zip");
+      assert is3 != null;
       FileUtils.copyInputStreamToFile(is3, file3);
       //Backtracking Level 3
-      LEVEL_BACKTRACKING[levelThree] =
+      LEVEL_BACKTRACKING[LEVEL_THREE] =
           AppData.loadLevel(file3);
 
       InputStream is4 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Backtracking4.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking4.zip");
       File file4 = File.createTempFile("backtracking4", "zip");
+      assert is4 != null;
       FileUtils.copyInputStreamToFile(is4, file4);
       //Backtracking Level 4
-      LEVEL_BACKTRACKING[levelFour] =
+      LEVEL_BACKTRACKING[LEVEL_FOUR] =
           AppData.loadLevel(file4);
 
       InputStream is5 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Backtracking5.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking5.zip");
       File file5 = File.createTempFile("backtracking5", "zip");
+      assert is5 != null;
       FileUtils.copyInputStreamToFile(is5, file5);
       //Backtracking Level 5
-      LEVEL_BACKTRACKING[levelFive] =
+      LEVEL_BACKTRACKING[LEVEL_FIVE] =
           AppData.loadLevel(file5);
 
       InputStream is6 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Backtracking6.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking6.zip");
       File file6 = File.createTempFile("backtracking6", "zip");
+      assert is6 != null;
       FileUtils.copyInputStreamToFile(is6, file6);
       //Backtracking Level 6
-      LEVEL_BACKTRACKING[levelSix] =
+      LEVEL_BACKTRACKING[LEVEL_SIX] =
           AppData.loadLevel(file6);
 
       InputStream is7 =
-          AppData.class.getClassLoader().getResourceAsStream("Level/Backtracking7.zip");
+          AppData.class.getClassLoader().getResourceAsStream(
+                  "Level/Backtracking7.zip");
       File file7 = File.createTempFile("backtracking7", "zip");
+      assert is7 != null;
       FileUtils.copyInputStreamToFile(is7, file7);
       //Backtracking Level 7
-      LEVEL_BACKTRACKING[levelSeven] =
+      LEVEL_BACKTRACKING[LEVEL_SEVEN] =
           AppData.loadLevel(file7);
     } catch (IOException e) {
       e.printStackTrace();

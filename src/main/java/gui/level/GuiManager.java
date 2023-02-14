@@ -18,6 +18,14 @@ import solving.CustomLevelManager;
  */
 public class GuiManager {
   /**
+   * the width of the window in pixels.
+   */
+  private static final int WIDTH_WINDOW = 1000;
+  /**
+   * the height of the window in pixels.
+   */
+  private static final int HEIGHT_WINDOW = 750;
+  /**
    * the current gui frontpage.
    */
   private static final GuiFrontpage GUI_FRONTPAGE = new GuiFrontpage();
@@ -42,8 +50,10 @@ public class GuiManager {
   private static JFrame frame;
 
 
-
-  public static int numberLevel;
+  /**
+   * Number of the level.
+   */
+  private static int numberLevel;
 
   /**
    * Opens the Leveleditor.
@@ -54,7 +64,14 @@ public class GuiManager {
     paint();
   }
 
-
+  /**
+   * Setter method for the private int numberLevel.
+   *
+   * @param numberLevel the int value the numberLevel should be set to.
+   */
+  public static void setNumberLevel(final int numberLevel) {
+    GuiManager.numberLevel = numberLevel;
+  }
   /**
    * Opens the main Menu.
    */
@@ -62,8 +79,8 @@ public class GuiManager {
     frame = new JFrame();
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setTitle("Optimal Heist");
-    frame.setSize(new Dimension(1000, 750));
-    frame.setMinimumSize(new Dimension(1000, 750));
+    frame.setSize(new Dimension(WIDTH_WINDOW, HEIGHT_WINDOW));
+    frame.setMinimumSize(new Dimension(WIDTH_WINDOW, HEIGHT_WINDOW));
     frame.setLocationRelativeTo(null);
     frame.setDropTarget(new DropTarget() {
       public synchronized void drop(final DropTargetDropEvent evt) {
@@ -97,8 +114,8 @@ public class GuiManager {
 
   /**
    * Opens the Options Menu.
-   * (Currently after exiting the Options menu the Main-menu will
-   * always be opened, regardless where the options menu was opened from).
+   * (Currently after exiting the Options' menu the Main-menu will
+   * always be opened, regardless where the options' menu was opened from).
    */
   public static void openOptionsMenu() {
     frame.setContentPane(GUI_OPTIONS_PAGE.getPane());
@@ -132,7 +149,7 @@ public class GuiManager {
    */
   public static void openLevel(final GuiLevelPage levelPage,
                                final int levelNumber) {
-    numberLevel = levelNumber;
+    setNumberLevel(levelNumber);
     frame.setContentPane(levelPage.getPane());
     final int lastGreedyNumber = 7;
     String title = "Level ";
@@ -150,6 +167,11 @@ public class GuiManager {
 
   }
 
+  /**
+   * Getter method for receiving the level's number.
+   *
+   * @return integer number of the current level.
+   */
   public static int getNumberLevel() {
     return numberLevel;
   }

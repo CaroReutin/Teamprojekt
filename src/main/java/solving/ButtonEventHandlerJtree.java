@@ -7,20 +7,29 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import jtree.BacktrackingJTree;
+import jtree.BacktrackingJtree;
 import rucksack.BacktrackingItem;
 import rucksack.Level;
 
+/**
+ * handel button presses.
+ */
 public class ButtonEventHandlerJtree extends ButtonEventHandler {
 
-  private final BacktrackingJTree tree;
-  private int lastDepth;
+  /**
+   * The tree of a backtracking level.
+   */
+  private final BacktrackingJtree tree;
 
+  /**
+   * Makes a new button handler with a jtree window.
+   *
+   * @param level the level the jtree will show
+   */
   public ButtonEventHandlerJtree(final Level level) {
-    lastDepth = 0;
-    tree = new BacktrackingJTree(level);
-    myLevel = level;
-    myLevel.turnIntoBacktracking();
+    tree = new BacktrackingJtree(level);
+    setMyLevel(level);
+    getMyLevel().turnIntoBacktracking();
     ArrayList<BacktrackingItem> oldList = level.getBacktrackingItemList();
     ArrayList<BacktrackingItem> logicItemList = new ArrayList<>();
     for (int i = 0; i < oldList.size(); i++) {
@@ -31,19 +40,24 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
                 oldList.get(i).getName(), oldList.get(i).getImageIcon()));
       }
     }
-    backtrackingTree = new backtrackingtree.BacktrackingTree(
-        level.getCapacity(), logicItemList);
+    setBacktrackingTree(new backtrackingtree.BacktrackingTree(
+        level.getCapacity(), logicItemList));
   }
 
+  /**
+   * Method for adding items to a rucksack.
+   *
+   * @param itemButtonIndex index of the item that is supposed to be added
+   * @param level           in which level the adding takes place
+   */
   @Override
   public void addToRucksack(final int itemButtonIndex, final Level level) {
     boolean fromTrashToRucksack =
         level.getBacktrackingItemList().get(itemButtonIndex).getState().equals(
             BacktrackingItem.StateBacktracking.TRASH);
-    if (this.backtrackingTree.addToRucksack(
-        this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
-      this.tree.putInBag(backtrackingTree.getCurrentNode());
-      lastDepth++;
+    if (this.getBacktrackingTree().addToRucksack(
+        this.getMyLevel().getBacktrackingItemList().get(itemButtonIndex))) {
+      this.tree.putInBag(getBacktrackingTree().getCurrentNode());
       if (fromTrashToRucksack) {
         level.setInTrashAmountList(itemButtonIndex,
             level.getInTrashAmountList().get(itemButtonIndex) - 1);
@@ -62,12 +76,22 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
     }
   }
 
+  /**
+   * Method for throwing an item to the trash.
+   *
+   * @param itemButtonIndex index of the item that is
+   *                        supposed to be thrown away
+   * @param level           in which level the throwing away takes place
+   */
   @Override
   public void addToTrash(final int itemButtonIndex, final Level level) {
-    boolean fromRucksackToTrash = level.getBacktrackingItemList().get(itemButtonIndex)
-        .getState().equals(BacktrackingItem.StateBacktracking.RUCKSACK);
+    boolean fromRucksackToTrash =
+        level.getBacktrackingItemList().get(itemButtonIndex).getState()
+            .equals(BacktrackingItem.StateBacktracking.RUCKSACK);
     ArrayList<Integer> fromTrashToRucksackSubsequent = new ArrayList<>();
-    for (int i = itemButtonIndex + 1; i < level.getBacktrackingItemList().size(); i++) {
+    for (int i = itemButtonIndex + 1;
+         i < level.getBacktrackingItemList().size();
+         i++) {
       if (level.getBacktrackingItemList().get(i).getState().equals(
           BacktrackingItem.StateBacktracking.TRASH)) {
         fromTrashToRucksackSubsequent.add(0);
@@ -78,9 +102,10 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
         fromTrashToRucksackSubsequent.add(2);
       }
     }
-    if (this.backtrackingTree.addToTrash(
-        this.myLevel.getBacktrackingItemList().get(itemButtonIndex))) {
-      ImageIcon crossedOut = backtrackingTree.getCurrentNode().getItem().getImageIcon();
+    if (this.getBacktrackingTree().addToTrash(
+        this.getMyLevel().getBacktrackingItemList().get(itemButtonIndex))) {
+      ImageIcon crossedOut =
+          getBacktrackingTree().getCurrentNode().getItem().getImageIcon();
       BufferedImage crossedOutBuffered = new BufferedImage(
           crossedOut.getIconWidth(),
           crossedOut.getIconHeight(),
@@ -89,8 +114,8 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
       crossedOut.paintIcon(null, g, 0, 0);
       g.dispose();
       ImageIcon not = new ImageIcon("src/main/resources/icons/Not.png");
-      not = new ImageIcon(not.getImage()
-          .getScaledInstance(AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
+      not = new ImageIcon(not.getImage().getScaledInstance(
+          AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH));
       BufferedImage notBuffered = new BufferedImage(
           not.getIconWidth(),
           not.getIconHeight(),
@@ -101,7 +126,8 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
       for (int y = 0; y < crossedOutBuffered.getHeight(); y++) {
         for (int x = 0; x < crossedOutBuffered.getWidth(); x++) {
           int clr;
-          if (notBuffered.getRGB(x, y) == -16777216) {
+          final int colorRed = -16777216;
+          if (notBuffered.getRGB(x, y) == colorRed) {
             clr = crossedOutBuffered.getRGB(x, y);
           } else {
             clr = notBuffered.getRGB(x, y);
@@ -109,7 +135,7 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
           crossedOutBuffered.setRGB(x, y, clr);
         }
       }
-      tree.putInTrash(backtrackingTree.getCurrentNode());
+      tree.putInTrash(getBacktrackingTree().getCurrentNode());
       if (fromRucksackToTrash) {
         level.setInRucksackAmountList(itemButtonIndex,
             level.getItemAmountInRucksack(itemButtonIndex) - 1);
@@ -121,17 +147,21 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
         level.setAvailableItemAmountList(itemButtonIndex,
             level.getItemAmountAvailable(itemButtonIndex) - 1);
       }
-      for (int i = itemButtonIndex + 1; i < level.getBacktrackingItemList().size(); i++) {
+      for (int i = itemButtonIndex + 1;
+           i < level.getBacktrackingItemList().size(); i++) {
         if (fromTrashToRucksackSubsequent.get(i - itemButtonIndex - 1) == 0) {
           level.setInTrashAmountList(i,
               level.getInTrashAmountList().get(i) - 1);
-          level.setAvailableItemAmountList(i, level.getItemAmountAvailable(i) + 1);
+          level.setAvailableItemAmountList(
+              i, level.getItemAmountAvailable(i) + 1);
           level.getBacktrackingItemList().get(i)
               .setState(BacktrackingItem.StateBacktracking.AVAILABLE);
-        } else if (fromTrashToRucksackSubsequent.get(i - itemButtonIndex - 1) == 1) {
+        } else if (fromTrashToRucksackSubsequent.get(i - itemButtonIndex - 1)
+            == 1) {
           level.setInRucksackAmountList(i,
               level.getItemAmountInRucksack(i) - 1);
-          level.setAvailableItemAmountList(i, level.getItemAmountAvailable(i) + 1);
+          level.setAvailableItemAmountList(i,
+              level.getItemAmountAvailable(i) + 1);
           level.getBacktrackingItemList().get(i)
               .setState(BacktrackingItem.StateBacktracking.AVAILABLE);
           level.setCurrentWeight(level.getCurrentWeight()
@@ -147,16 +177,30 @@ public class ButtonEventHandlerJtree extends ButtonEventHandler {
     }
   }
 
+  /**
+   * Method for showing the backtracking tree.
+   */
   @Override
   public void show() {
     tree.show();
   }
 
+  /**
+   * Method for getting the solution as String.
+   *
+   * @return String of the solution
+   */
   @Override
   public String getSolution() {
     return tree.getSolution();
   }
 
+  /**
+   * Method for resetting a level.
+   *
+   * @param level       which is supposed to be reset
+   * @param levelNumber number of the level
+   */
   @Override
   public void resetLevel(final Level level, final int levelNumber) {
     level.resetLevel();

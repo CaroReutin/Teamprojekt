@@ -1,9 +1,9 @@
 package rucksack;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.swing.ImageIcon;
-import com.thoughtworks.xstream.annotations.*;
 
 /**
  * Item that can be stolen.
@@ -26,14 +26,18 @@ public class Item implements Serializable {
   @XStreamAlias("Name")
   private final String name;
 
-  private ImageIcon imageIcon;
+  /**
+   * The icon portraying the item.
+   */
+  private final ImageIcon imageIcon;
 
   /**
-   * Instantiates a new Item.
+   * Instantiates a new item.
    *
-   * @param itemValue  the Value
-   * @param itemWeight the Weight
-   * @param itemName   the Name
+   * @param itemValue  the value
+   * @param itemWeight the weight
+   * @param itemName   the name
+   * @param imageIcon the icon
    */
   public Item(final int itemValue, final int itemWeight,
               final String itemName, final ImageIcon imageIcon) {
@@ -91,10 +95,21 @@ public class Item implements Serializable {
     return name + "\nWeight: " + weight + "\nValue: " + value;
   }
 
+  /**
+   * Method for getting the image icon of an item.
+   *
+   * @return the icon
+   */
   public ImageIcon getImageIcon() {
     return imageIcon;
   }
 
+  /**
+   * Method for checking whether two items are equal.
+   *
+   * @param o the object to compare
+   * @return the boolean value whether the items are equal
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -108,29 +123,15 @@ public class Item implements Serializable {
         == item.weight && Objects.equals(name, item.name);
   }
 
+  /**
+   * Method for creating the hash code of an item.
+   * The hash value is determined by the attributes value, weight and name.
+   *
+   * @return the hash code of an item
+   */
   @Override
   public int hashCode() {
     return Objects.hash(value, weight, name);
-  }
-
-  /**
-   * .
-   *
-   * @param depthRemaining .
-   * @return "
-   */
-  public String getBacktrackingName(final int depthRemaining) {
-    int spacesPerDepth = 4;
-    assert name != null;
-    StringBuilder res = new StringBuilder(name);
-    int spacesRemaing = 10 + depthRemaining * spacesPerDepth - name.length();
-    res.append(" ".repeat(Math.max(0, spacesRemaing)));
-    return res.toString();
-  }
-
-  public ImageIcon getIcon() {
-    return new ImageIcon(Objects.requireNonNull(getClass()
-        .getResource("icons/DefaultBox.png")));
   }
 
 }

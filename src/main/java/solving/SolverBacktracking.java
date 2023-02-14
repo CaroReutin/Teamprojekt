@@ -84,11 +84,11 @@ public class SolverBacktracking extends Solver {
 
     // Werte zum Vergleichen was besser ist
     int excludedValue = getValue(excluded);
-    int incudedValue = getValue(included);
+    int includedValue = getValue(included);
 
     // Momentan wird ein Item mit Wert 0 nicht in den Rucksack getan,
-    // kommt bei unseren leveln nicht vor
-    if (excludedValue >= incudedValue) {
+    // kommt in keinem unserer Level vor.
+    if (excludedValue >= includedValue) {
       return excluded;
     } else {
       return included;

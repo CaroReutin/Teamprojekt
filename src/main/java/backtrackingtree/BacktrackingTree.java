@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import rucksack.BacktrackingItem;
 import rucksack.Item;
 
-
 /**
  * this class represents the backtracking tree.
  */
@@ -24,17 +23,17 @@ public class BacktrackingTree {
   private BacktrackingNode currentNode;
 
   /**
-   * capacity of the bag.
+   * Integer number of the current rucksack's capacity.
    */
   private final int bagCapacity;
 
   /**
-   * the items.
+   * Array list of all the items available in the level.
    */
   private final ArrayList<BacktrackingItem> itemArrayList;
 
   /**
-   * variable that stores if subtree is full.
+   * Boolean value whether the subtree is complete (full) or not.
    */
   private boolean isSubtreeFull = true;
 
@@ -48,12 +47,13 @@ public class BacktrackingTree {
   public BacktrackingTree(final int myBagCapacity,
                           final ArrayList<BacktrackingItem> myItemArrayList) {
     myItemArrayList.sort(
-        Comparator.comparingInt(Item::getWeight)
-            .thenComparingInt(Item::getValue).reversed());
+            Comparator.comparingInt(Item::getWeight)
+                    .thenComparingInt(Item::getValue).reversed());
     this.itemArrayList = myItemArrayList;
-    root = new BacktrackingNode(new BacktrackingItem(0,
-        0, "root", new ImageIcon()),
-        0, 0, myBagCapacity, myItemArrayList,
+    root = new BacktrackingNode(new BacktrackingItem(
+            0,
+        0, "root", new ImageIcon()), 0, 0,
+            myBagCapacity, myItemArrayList,
         null, true, 0);
     currentNode = root;
     this.bagCapacity = myBagCapacity;
@@ -85,7 +85,7 @@ public class BacktrackingTree {
     String pointerLeft = (myRoot.getRightChild() != null) ? "├──" : "└──";
 
     traverseNodes(sb, "", pointerLeft, myRoot.getLeftChild(),
-        myRoot.getRightChild() != null);
+            myRoot.getRightChild() != null);
     traverseNodes(sb, "", pointerRight, myRoot.getRightChild(), false);
 
     return sb.toString();
@@ -100,8 +100,9 @@ public class BacktrackingTree {
       sb.append(padding);
       sb.append(pointer);
       sb.append(node.getName()).append(" [akt. Gewicht:")
-          .append(node.getCurrentWeight())
-          .append(", akt. Wert: ").append(node.getCurrentValue()).append("]");
+              .append(node.getCurrentWeight())
+              .append(", akt. Wert: ").append(node.getCurrentValue())
+              .append("]");
 
       StringBuilder paddingBuilder = new StringBuilder(padding);
       if (hasRightSibling) {
@@ -115,9 +116,9 @@ public class BacktrackingTree {
       String pointerLeft = (node.getRightChild() != null) ? "├──" : "└──";
 
       traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeftChild(),
-          node.getRightChild() != null);
+              node.getRightChild() != null);
       traverseNodes(sb, paddingForBoth, pointerRight,
-          node.getRightChild(), false);
+              node.getRightChild(), false);
     }
   }
 
@@ -125,10 +126,11 @@ public class BacktrackingTree {
    * adds an item to the rucksack (right child).
    *
    * @param item said item
+   * @return boolean value whether adding the item was successful or not.
    */
   public boolean addToRucksack(final BacktrackingItem item) {
     System.out.println(item.getName()
-        + " soll dem Rucksack hinzugefügt werden.");
+            + " soll dem Rucksack hinzugefügt werden.");
     boolean addedSuccessfully = currentNode.addToRucksack(item);
 
     if (addedSuccessfully) {
@@ -146,6 +148,7 @@ public class BacktrackingTree {
    * adds an item to the trash bin (left child).
    *
    * @param item said item
+   * @return boolean value whether adding the item was successful or not.
    */
   public boolean addToTrash(final BacktrackingItem item) {
     System.out.println(item.getName() + " soll in den Müll geworfen werden.");
@@ -153,9 +156,9 @@ public class BacktrackingTree {
     if (newCurrent != null) {
       currentNode = newCurrent;
       System.out.println("Item " + item.getName()
-          + " wurde in den Müll gelegt.");
+              + " wurde in den Müll gelegt.");
       System.out.println("Der current Node ist nun "
-          + currentNode.getName());
+              + currentNode.getName());
       System.out.println("-----------------");
       return true;
     }
@@ -184,14 +187,14 @@ public class BacktrackingTree {
         currentParent = currentNode;
       } else {
         while (!Objects.equals(currentParent.getItem().getName(),
-            childItem.getName())) {
+                childItem.getName())) {
           if (currentParent.getName().equals("root")) {
             break;
           } else if (currentParent.getItem().getState()
-              != BacktrackingItem.StateBacktracking.TRASH) {
+                  != BacktrackingItem.StateBacktracking.TRASH) {
             System.out.println(
-                currentParent.getItem().getName()
-                    + " muss zuerst in den Müll bewegt werden.");
+                    currentParent.getItem().getName()
+                            + " muss zuerst in den Müll bewegt werden.");
             return null;
           }
           currentParent = currentParent.getParent();
@@ -202,9 +205,9 @@ public class BacktrackingTree {
       // is subtree full?
       if (!isSubtreeFull(currentParent)) {
         System.out.println(
-            childItem.getName() + " kann noch nicht in"
-                + " den Müll geworfen werden, weil der "
-                + "Subtree noch nicht voll ist.");
+                childItem.getName() + " kann noch nicht in"
+                        + " den Müll geworfen werden, weil der "
+                        + "Subtree noch nicht voll ist.");
         return null;
       }
       childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
@@ -214,35 +217,35 @@ public class BacktrackingTree {
       int newCurrentWeight = currentParent.getCurrentWeight();
       int newCurrentValue = currentParent.getCurrentValue();
       currentParent.setLeftChild(new BacktrackingNode(childItem,
-          newCurrentWeight, newCurrentValue, bagCapacity, itemArrayList,
-          currentParent, false, currentParent.getLevel() + 1));
+              newCurrentWeight, newCurrentValue, bagCapacity, itemArrayList,
+              currentParent, false, currentParent.getLevel() + 1));
       currentNode.moveItemsIntoAvailable(currentParent.getRightChild());
       return currentParent.getLeftChild();
 
     } else if (childState == BacktrackingItem.StateBacktracking.AVAILABLE) {
       //see if another item should be taken first
       if (itemArrayList.indexOf(currentNode.getItem())
-          + 1 != itemArrayList.indexOf(childItem)) {
+              + 1 != itemArrayList.indexOf(childItem)) {
         System.out.println("Vorher solltest du ein"
-            + " schwerers oder mehr wertiges Item betrachten");
+                + " schwereres oder wertvolleres Item betrachten");
         return null;
       }
       //see if item should be put to rucksack first
       if (currentNode.getCurrentWeight()
-          + childItem.getWeight() <= bagCapacity) {
+              + childItem.getWeight() <= bagCapacity) {
         System.out.println(childItem.getName()
-            + " sollte zuerst in den Rucksack gelegt werden");
+                + " sollte zuerst in den Rucksack gelegt werden");
         return null;
       }
       childItem.setState(BacktrackingItem.StateBacktracking.TRASH);
       currentNode.setLeftChild(new BacktrackingNode(
-          childItem, currentNode.getCurrentWeight(),
-          currentNode.getCurrentValue(), bagCapacity,
-          itemArrayList, currentNode, false, currentNode.getLevel() + 1));
+              childItem, currentNode.getCurrentWeight(),
+              currentNode.getCurrentValue(), bagCapacity,
+              itemArrayList, currentNode, false, currentNode.getLevel() + 1));
       return currentNode.getLeftChild();
     }
     System.out.println(childItem.getName()
-        + " konnte nicht in den Müll geworfen werden.");
+            + " konnte nicht in den Müll geworfen werden.");
     return null;
   }
 
@@ -252,6 +255,7 @@ public class BacktrackingTree {
    * (state: Rucksack) witch should be added to trash
    *
    * @param nodeItemToTrash the Node of the Item witch should be to add to trash
+   * @return boolean value whether the subtree is full or not.
    */
   public boolean isSubtreeFull(final BacktrackingNode nodeItemToTrash) {
     this.moveDownTheSubtree(nodeItemToTrash);
@@ -269,37 +273,30 @@ public class BacktrackingTree {
       isSubtreeFull = allLeftChildrenAreThere();
       return;
     }
-    // be on leafs
+    // be on leaves
     if (currentNode.getRightChild() == null
-        && currentNode.getLeftChild() == null) {
-      // last item witch can be choosen is used
+            && currentNode.getLeftChild() == null) {
+      // last item which can be chosen is used
       // (in other words the highest high of the tree is reached)
-      if (itemArrayList.indexOf(currentNode.getItem())
-          == itemArrayList.size() - 1) {
-        //  no other item fits in rucksack
-      } else if (currentNode.getCurrentWeight()
-          + itemArrayList.get(itemArrayList.size() - 1)
-          .getWeight() > bagCapacity) {
-        return;
-      } else {
+      if (itemArrayList.indexOf(currentNode.getItem()) != itemArrayList.size()
+              - 1 && currentNode.getCurrentWeight()
+              + itemArrayList.get(itemArrayList.size() - 1).getWeight()
+              <= bagCapacity) {
         isSubtreeFull = false;
-        return;
       }
     } else if (currentNode.getRightChild() == null) {
       if (currentNode.getCurrentWeight()
-          + itemArrayList.get(itemArrayList.size() - 1)
-          .getWeight() <= bagCapacity) {
+              + itemArrayList.get(itemArrayList.size() - 1)
+              .getWeight() <= bagCapacity) {
         isSubtreeFull = false;
-        return;
       } else {
         this.moveDownTheSubtree(nodeItemToTrash.getLeftChild());
       }
     } else if (currentNode.getLeftChild() == null) {
       if (currentNode.getCurrentWeight()
-          + itemArrayList.get(itemArrayList.size() - 1)
-          .getWeight() <= bagCapacity) {
+              + itemArrayList.get(itemArrayList.size() - 1)
+              .getWeight() <= bagCapacity) {
         isSubtreeFull = false;
-        return;
       } else {
         this.moveDownTheSubtree(nodeItemToTrash.getRightChild());
       }

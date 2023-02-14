@@ -7,7 +7,7 @@ import solving.UserDataManager;
  */
 public final class Main {
   /**
-   * do not make.
+   * Do not construct.
    */
   private Main() {
 

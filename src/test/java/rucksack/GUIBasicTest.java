@@ -1,5 +1,4 @@
 package rucksack;
-import gui.level.GuiLevelPage;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
@@ -20,8 +19,6 @@ class GUIBasicTest{
         amount.add(10);
         amount.add(7);
         amount.add(4);
-        //
-        GuiLevelPage gui = new GuiLevelPage(new Level(items, amount,0,60));
 
     }
 

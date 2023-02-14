@@ -14,28 +14,28 @@ import solving.BacktrackingLevel;
 import solving.GreedyLevel;
 
 /**
- * The class GuiLevelDeciderPage confugures the gui of the level decider page.
+ * The class GuiLevelDeciderPage configures the gui of the level decider page.
  */
 public class GuiLevelDeciderPage {
 
   /**
-   * the array GUILevelPage holds all levelpages.
+   * the array GUILevelPage holds all level pages.
    */
   private final GuiLevelPage[] guiLevelPages =
-      new GuiLevelPage[AppData.LEVELAMOUNT];
+      new GuiLevelPage[AppData.LEVEL_AMOUNT];
 
   /**
    * the array GUILevelButtons holds all buttons that start level.
    */
-  private final JButton[] guiLevelButtons = new JButton[AppData.LEVELAMOUNT];
+  private final JButton[] guiLevelButtons = new JButton[AppData.LEVEL_AMOUNT];
 
   /**
-   * the number of the rows of the subpane.
+   * the number of the rows of the sub-pane.
    */
   public static final int NUM_ROWS_SUBPANE = 8;
 
   /**
-   * the number of the colums on the algorithm panes.
+   * the number of the columns on the algorithm panes.
    */
   public static final int NUM_COLS_SUBALGO = 7;
 
@@ -131,7 +131,7 @@ public class GuiLevelDeciderPage {
     Font fontButtons = new Font("Arial", Font.BOLD + Font.ITALIC,
         SIZE_FONT_SMALL);
 
-    for (int i = 0; i < AppData.LEVELAMOUNT; i++) {
+    for (int i = 0; i < AppData.LEVEL_AMOUNT; i++) {
       if (i == 0) {
         guiLevelPages[i] = new GuiLevelPage(AppData.getLevel(i));
         guiLevelButtons[i] = new JButton("1");
@@ -166,53 +166,65 @@ public class GuiLevelDeciderPage {
 
     greedyLevel.add(guiLevelButtons[NUM_LEVEL_THREE]);
     guiLevelButtons[NUM_LEVEL_THREE].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_THREE], NUM_LEVEL_THREE));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_THREE], NUM_LEVEL_THREE));
 
     greedyLevel.add(guiLevelButtons[NUM_LEVEL_FOUR]);
     guiLevelButtons[NUM_LEVEL_FOUR].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_FOUR], NUM_LEVEL_FOUR));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_FOUR], NUM_LEVEL_FOUR));
 
     greedyLevel.add(guiLevelButtons[NUM_LEVEL_FIVE]);
     guiLevelButtons[NUM_LEVEL_FIVE].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_FIVE], NUM_LEVEL_FIVE));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_FIVE], NUM_LEVEL_FIVE));
 
     greedyLevel.add(guiLevelButtons[NUM_LEVEL_SIX]);
     guiLevelButtons[NUM_LEVEL_SIX].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_SIX], NUM_LEVEL_SIX));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_SIX], NUM_LEVEL_SIX));
 
     greedyLevel.add(guiLevelButtons[NUM_LEVEL_SEVEN]);
     guiLevelButtons[NUM_LEVEL_SEVEN].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_SEVEN], NUM_LEVEL_SEVEN));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_SEVEN], NUM_LEVEL_SEVEN));
 
     JPanel backtrackingLevel = new JPanel();
 
     backtrackingLevel.add(guiLevelButtons[NUM_LEVEL_EIGHT]);
     guiLevelButtons[NUM_LEVEL_EIGHT].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_EIGHT], NUM_LEVEL_EIGHT));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_EIGHT], NUM_LEVEL_EIGHT));
 
     backtrackingLevel.add(guiLevelButtons[NUM_LEVEL_NINE]);
     guiLevelButtons[NUM_LEVEL_NINE].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_NINE], NUM_LEVEL_NINE));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_NINE], NUM_LEVEL_NINE));
 
     backtrackingLevel.add(guiLevelButtons[NUM_LEVEL_TEN]);
     guiLevelButtons[NUM_LEVEL_TEN].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_TEN], NUM_LEVEL_TEN));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_TEN], NUM_LEVEL_TEN));
 
     backtrackingLevel.add(guiLevelButtons[NUM_LEVEL_ELEVEN]);
     guiLevelButtons[NUM_LEVEL_ELEVEN].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_ELEVEN], NUM_LEVEL_ELEVEN));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_ELEVEN], NUM_LEVEL_ELEVEN));
 
     backtrackingLevel.add(guiLevelButtons[NUM_LEVEL_TWELVE]);
     guiLevelButtons[NUM_LEVEL_TWELVE].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_TWELVE], NUM_LEVEL_TWELVE));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_TWELVE], NUM_LEVEL_TWELVE));
 
     backtrackingLevel.add(guiLevelButtons[NUM_LEVEL_THIRTEEN]);
     guiLevelButtons[NUM_LEVEL_THIRTEEN].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_THIRTEEN], NUM_LEVEL_THIRTEEN));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_THIRTEEN], NUM_LEVEL_THIRTEEN));
 
     backtrackingLevel.add(guiLevelButtons[NUM_LEVEL_FOURTEEN]);
     guiLevelButtons[NUM_LEVEL_FOURTEEN].addActionListener(
-        e -> GuiManager.openLevel(guiLevelPages[NUM_LEVEL_FOURTEEN], NUM_LEVEL_FOURTEEN));
+        e -> GuiManager.openLevel(
+                guiLevelPages[NUM_LEVEL_FOURTEEN], NUM_LEVEL_FOURTEEN));
 
     //erzeuge Buttons
     Font fontBig = new Font("Arial", Font.BOLD + Font.ITALIC, SIZE_FONT_BIG);
@@ -245,7 +257,7 @@ public class GuiLevelDeciderPage {
     JPanel levelOneTitlePanel = new JPanel();
     levelOneTitlePanel.add(levelOneTitle);
 
-    //add panels on subpane
+    //add panels on sub-pane
     subPane.add(titlePanel);
     subPane.add(levelOneTitlePanel);
     subPane.add(levelOne);
@@ -259,9 +271,9 @@ public class GuiLevelDeciderPage {
   }
 
   /**
-   * this getter gets all levelpages.
+   * this getter gets all level pages.
    *
-   * @return the levelpage.
+   * @return the level page.
    */
   public GuiLevelPage[] getGuiLevelPages() {
     return guiLevelPages;

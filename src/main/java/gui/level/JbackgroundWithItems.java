@@ -1,8 +1,13 @@
 package gui.level;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.JPanel;
 
+/**
+ * Class for a GUI background with items.
+ */
 public class JbackgroundWithItems extends JPanel {
 
   /**
@@ -13,12 +18,12 @@ public class JbackgroundWithItems extends JPanel {
   /**
    * the x position of the picture.
    */
-  private final int xPos;
+  private final int xpos;
 
   /**
    * the y position of the picture.
    */
-  private final int yPos;
+  private final int ypos;
 
 
   /**
@@ -28,10 +33,11 @@ public class JbackgroundWithItems extends JPanel {
    * @param x            the x
    * @param y            the y
    */
-  public JbackgroundWithItems(final Image myBackground, final int x, final int y) {
+  public JbackgroundWithItems(final Image myBackground,
+                              final int x, final int y) {
     this.background = myBackground;
-    this.xPos = x;
-    this.yPos = y;
+    this.xpos = x;
+    this.ypos = y;
     setLayout(new BorderLayout());
   }
 
@@ -42,7 +48,7 @@ public class JbackgroundWithItems extends JPanel {
   protected void paintComponent(final Graphics g) {
 
     super.paintComponent(g);
-    g.drawImage(this.background, this.xPos, this.yPos, this);
+    g.drawImage(this.background, this.xpos, this.ypos, this);
   }
 
 
