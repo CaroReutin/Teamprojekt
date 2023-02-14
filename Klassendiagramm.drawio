@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-14T20:50:22.179Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="TRyk0lFtHVt_qxjwRW4o" version="20.8.20" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-14T21:20:10.423Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="h4y9YqRuYJYUdoF1tz5N" version="20.8.20" type="github">
   <diagram id="mvksxYR37wyYuG3UCGVY" name="Page-1">
-    <mxGraphModel dx="795" dy="2811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1363" dy="3149" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -95,16 +95,16 @@
           <mxGeometry y="88" width="240" height="102" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-200" value="Level" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="1560" y="189" width="349" height="445" as="geometry" />
+          <mxGeometry x="1560" y="189" width="349" height="341" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-201" value="- itemAmountList: ArrayList&lt;int&gt;&#xa;- availableItemAmountList: ArrayList&lt;int&gt;&#xa;- inRucksackAmountList: ArrayList&lt;int&gt;&#xa;- currentValue: int&#xa;- currentWeight: int&#xa;- robber: Robber&#xa;- levelindex: int&#xa;- capacity: int&#xa;- counter: int&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-200" vertex="1">
-          <mxGeometry y="26" width="349" height="144" as="geometry" />
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-201" value="- robber: Robber&#xa;- myRucksack: Rucksack&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-200" vertex="1">
+          <mxGeometry y="26" width="349" height="40" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-202" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-200" vertex="1">
-          <mxGeometry y="170" width="349" height="8" as="geometry" />
+          <mxGeometry y="66" width="349" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-203" value="+ Level(itemList: ArrayList&lt;Item&gt;, itemAmountList: &#xa;ArrayList&lt;int&gt;, levelindex: int, capacity: int)&#xa;+ Level(itemList: ArrayList&lt;Item&gt;, itemAmountList: &#xa;ArrayList&lt;int&gt;, levelindex: int, capacity: int, robber: Robber)&#xa;+ Level() // Only for XML creation&#xa;+ getItemList(): ArrayList&lt;Item&gt;&#xa;+ getItemAmountList(): ArrayList&lt;int&gt;&#xa;+ getItemAmountAvailable(i: int): int&#xa;+ getItemAmountInRucksack(i: int): int&#xa;+ resetLevel()&#xa;+ getLevelNumber(): int&#xa;+ moveToRucksack(i: int)&#xa;+ moveFromRucksack(i: int)&#xa;+ getCurrentValue(): int&#xa;+ getCurrentWeight(): int&#xa;+ getCapacity(): int&#xa;+ getRobber(): Robber&#xa;&#xa;+ getCounter(): int&#xa;+ setCounter(i: int)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-200" vertex="1">
-          <mxGeometry y="178" width="349" height="267" as="geometry" />
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-203" value="+ Level(myItemList: ArrayList&lt;Item&gt;, myItemAmountList: &#xa;ArrayList&lt;int&gt;, levelindex: int, myCapacity: int)&#xa;+ Level(myItemList: ArrayList&lt;Item&gt;, myItemAmountList: &#xa;ArrayList&lt;int&gt;, levelindex: int, myCapacity: int, myRobber: Robber)&#xa;+ setCurrentValue(i: int) &#xa;+ setCurrentWeight(i: int)&#xa;+ setItemIcon(i: int, imageIcon: ImageIcon)&#xa;+ getItemList(): ArrayList&lt;Item&gt;&#xa;+ getItemAmountList(): ArrayList&lt;int&gt;&#xa;+ getItemAmountAvailable(i: int): int&#xa;+ getItemAmountInRucksack(i: int): int&#xa;+ resetLevel()&#xa;+ moveToRucksack(i: int)&#xa;+ moveFromRucksack(i: int)&#xa;+ getCurrentValue(): int&#xa;+ getCurrentWeight(): int&#xa;+ getCapacity(): int&#xa;+ getRobber(): Robber&#xa;+ turnIntoBacktracking()&#xa;+ getInTrashAmountList(): ArrayList&lt;Integer&gt;&#xa;+ setInTrashAmountList(index: int, newAmount: int)&#xa;+ setAvaibleItemAmountList(index: int, newAmount: int)&#xa;+ setInRucksackAmountList(index: int, newAmount: int)&#xa;+ getBacktrackingItemList(): ArrayList&lt;BacktrackingItem&gt;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-200" vertex="1">
+          <mxGeometry y="74" width="349" height="267" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-243" value="BacktrackingLevel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2389" y="563" width="261" height="147" as="geometry" />
@@ -444,6 +444,18 @@
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-328" value="Model" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="1502" y="170" width="51" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-10" value="Rucksack" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="1565" y="556" width="314" height="448" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-11" value="- itemList: ArrayList&lt;Item&gt;&#xa;- itemAmountList: ArrayList&lt;Integer&gt;&#xa;- inRucksackAmountList: ArrayList&lt;Integer&gt;&#xa;- availableItemAmountList: ArrayList&lt;Integer&gt;&#xa;- currentValue: int&#xa;- currentWeight: int&#xa;- capacity: int&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-10">
+          <mxGeometry y="26" width="314" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-10">
+          <mxGeometry y="145" width="314" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="_9WyEV-QkiOCcUFDRxFL-13" value="+ Rucksack(myItemList: ArrayList&lt;Item&gt;,&#xa;myIitemAmountList: ArrayList&lt;Integer&gt;, myCapacity: int)&#xa;+ reset()&#xa;+ moveToRucksack(i: int)&#xa;+ moveFromRucksack(i: int)&#xa;+ getItemAmountList(): ArrayList&lt;Integer&gt;&#xa;+ getCurrentValue(): int&#xa;+ getCurrentWeight(): int&#xa;+ getCapacity(): int&#xa;+ getInRucksackAmount(i: int): int&#xa;+ getAvailableItemAmount(i:int):int&#xa;+ getItemList(): ArrayList&lt;Item&gt;&#xa;+ turnIntoBacktracking()&#xa;+ getInTrashAmountList(): ArrayList&lt;Integer&gt;&#xa;+ setInTrashAmountList(index: int, newAmount: int)&#xa;+ setAvailableItemAmountList(index: int, newAmount: int)&#xa;+ setInRucksackAmountList(index: int, newAmount: int)&#xa;+ getBacktrackingItemList(): Arraylist&lt;BacktrackingItem&gt;&#xa;+ setCurrentValue(i: int)&#xa;+ setCurrentWeight(i:int)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="_9WyEV-QkiOCcUFDRxFL-10">
+          <mxGeometry y="153" width="314" height="295" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
