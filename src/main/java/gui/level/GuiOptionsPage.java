@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URL;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -104,14 +105,14 @@ public class GuiOptionsPage {
 
     JFormattedTextField passwordInput = new JFormattedTextField("");
     passwordInput.setPreferredSize(
-      new Dimension(WIDTH_OF_FIELD, HEIGHT_OF_FIELD));
+        new Dimension(WIDTH_OF_FIELD, HEIGHT_OF_FIELD));
     GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
         .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-        "callConfirmPassword");
+            "callConfirmPassword");
     GuiManager.getRootPane().getActionMap()
         .put("callConfirmPassword", new AbstractAction() {
           @Override
-        public void actionPerformed(final ActionEvent e) {
+          public void actionPerformed(final ActionEvent e) {
             confirmPassword(passwordInput.getText(), pane);
           }
         });
@@ -153,23 +154,24 @@ public class GuiOptionsPage {
     backPanel.add(back);
     back.addActionListener(e -> {
       GuiManager.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+          .remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
       GuiManager.openMainMenu();
     });
 
-    ImageIcon clueSymbol = new ImageIcon(
-        "src/main/resources/icons/clueSymbol.png");
-    Image clueSymbolImage = clueSymbol.getImage().getScaledInstance(
+    URL urlClue = getClass().getResource("/icons/clueSymbol.png");
+    assert urlClue != null;
+    ImageIcon clueIcon = new ImageIcon(urlClue);
+    Image clueSymbolImage = clueIcon.getImage().getScaledInstance(
         SIZE_ICON, SIZE_ICON, java.awt.Image.SCALE_SMOOTH);
     ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
     JButton clueButton = new JButton(newClueSymbol);
     JPanel descriptionPanel = new JPanel();
     descriptionPanel.add(clueButton);
     clueButton.addActionListener(e -> {
-      String editorMessage = null;
+      String editorMessage;
       try {
         editorMessage = GuiLevelPage.fileToStringFromFile(
-          "texts/4_Options.txt");
+            "texts/4_Options.txt");
       } catch (IOException ex) {
         throw new RuntimeException(ex);
       }
