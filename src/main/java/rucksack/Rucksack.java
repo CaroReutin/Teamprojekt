@@ -65,19 +65,6 @@ public class Rucksack {
   }
 
   /**
-   * level editor only.
-   */
-  private Rucksack() {
-    this.itemList = new ArrayList<>();
-    this.itemAmountList = new ArrayList<>();
-    this.availableItemAmountList = new ArrayList<>();
-    this.inRucksackAmountList = new ArrayList<>();
-    currentWeight = 0;
-    currentValue = 0;
-    capacity = -1;
-  }
-
-  /**
    * resets the content of the Rucksack to its original content.
    */
   public void reset() {

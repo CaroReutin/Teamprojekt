@@ -112,14 +112,6 @@ public class Level implements Serializable {
   }
 
   /**
-   * Only for level editor.
-   */
-  private Level() {
-    this.myRucksack = new Rucksack(new ArrayList<>(), new ArrayList<>(), -1);
-    this.robber = null;
-  }
-
-  /**
    * NOTE: this does not return the items still available in the level
    * (i.e. the ones not in the rucksack)
    *

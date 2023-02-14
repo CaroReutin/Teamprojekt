@@ -37,24 +37,14 @@ public class Item implements Serializable {
    * @param itemValue  the value
    * @param itemWeight the weight
    * @param itemName   the name
-   * @param imageIcon the icon
+   * @param myImageIcon the icon
    */
   public Item(final int itemValue, final int itemWeight,
-              final String itemName, final ImageIcon imageIcon) {
+              final String itemName, final ImageIcon myImageIcon) {
     this.value = itemValue;
     this.weight = itemWeight;
     this.name = itemName;
-    this.imageIcon = imageIcon;
-  }
-
-  /**
-   * Only for XML document.
-   */
-  private Item() {
-    this.value = -1;
-    this.weight = -1;
-    this.name = null;
-    this.imageIcon = null;
+    this.imageIcon = myImageIcon;
   }
 
   /**
