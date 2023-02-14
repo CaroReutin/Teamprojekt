@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-14T19:33:38.798Z" agent="5.0 (Windows)" etag="xoB5hmgzgpP4C9sBUx33" version="20.6.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-14T19:34:08.666Z" agent="5.0 (Windows)" etag="9gPqZ5BH944vgvzQJl0c" version="20.6.2" type="github">
   <diagram id="mvksxYR37wyYuG3UCGVY" name="Page-1">
-    <mxGraphModel dx="729" dy="2720" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1778" dy="3268" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -229,7 +229,7 @@
         <mxCell id="4iRdVt_hhF0twq2A7KBy-208" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-207" vertex="1">
           <mxGeometry y="178" width="181" height="121" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-209" value="+ getPane(): Container&#xa;- addMiddleAndRightPart(pane: Container)&#xa;- setItemPanelVisibility(b: boolean, i: int)&#xa;- saveLevel(pane: Containerl, titleField: JTextField, capacityField: JTextField,&#xa;modeDropdown: JComboBox&lt;String&gt;) &lt;&lt;static&gt;&gt;&#xa;- generateItem(i: int): Item &lt;&lt;static&gt;&gt;&#xa;+ insertString(fb: FilterBypass, offset: int, string: String, attr: AttributeSet)&#xa;+ replace(fb: FilterBypass, offset: int, length: int, text: String, attr: AttributeSet)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-207" vertex="1">
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-209" value="+ getPane(): Container&#xa;- addMiddleAndRightPart(pane: Container)&#xa;- setItemPanelVisibility(b: boolean, i: int)&#xa;- saveLevel(pane: Containerl, titleField: JTextField, capacityField: JTextField,&#xa;modeDropdown: JComboBox&lt;String&gt;) &lt;&lt;static&gt;&gt;&#xa;- generateItem(i: int): Item &lt;&lt;static&gt;&gt;&#xa;+ insertString(fb: FilterBypass, offset: int, string: String, attr: AttributeSet)&#xa;+ replace(fb: FilterBypass, offset: int, length: int, text: String, attrs: AttributeSet)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-207" vertex="1">
           <mxGeometry y="299" width="181" height="122" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-210" value="GUIFrontpage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
