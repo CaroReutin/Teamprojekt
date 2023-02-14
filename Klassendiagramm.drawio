@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-14T19:41:37.983Z" agent="5.0 (Windows)" etag="aGDQE4HMLyOJC7Z_2hKQ" version="20.6.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-14T19:48:24.677Z" agent="5.0 (Windows)" etag="8qmibCnBvQ6Mak07yerD" version="20.6.2" type="github">
   <diagram id="mvksxYR37wyYuG3UCGVY" name="Page-1">
-    <mxGraphModel dx="813" dy="2763" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="527" dy="2614" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -35,13 +35,16 @@
           <mxGeometry y="34" width="351" height="132" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-182" value="UserDataManager" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;strokeColor=#4059FF;" parent="1" vertex="1">
-          <mxGeometry x="3570" y="-123" width="330" height="180" as="geometry" />
+          <mxGeometry x="3570" y="-123" width="330" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="U7-lJyw8QJTyMmq4wvhR-7" value="- data: UserData &amp;lt;&amp;lt;static&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="4iRdVt_hhF0twq2A7KBy-182">
+          <mxGeometry y="26" width="330" height="30" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-183" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-182" vertex="1">
-          <mxGeometry y="26" width="330" height="8" as="geometry" />
+          <mxGeometry y="56" width="330" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-184" value="+ newUser() &lt;&lt;static&gt;&gt;&#xa;+ save() &lt;&lt;static&gt;&gt;&#xa;+ save(saveFolder: String) &lt;&lt;static&gt;&gt;&#xa;+ load() &lt;&lt;static&gt;&gt;&#xa;+ load(saveFolder: String) &lt;&lt;static&gt;&gt;&#xa;+ getScore(level: int):int &lt;&lt;static&gt;&gt;&#xa;+ newHighScore(level: int, score: int) &lt;&lt;static&gt;&gt;&#xa;+ reset() &lt;&lt;static&gt;&gt;&#xa;+ dataToString(): String &lt;&lt;static&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-182" vertex="1">
-          <mxGeometry y="34" width="330" height="146" as="geometry" />
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-184" value="- UserDataManager()&#xa;+ newUser() &lt;&lt;static&gt;&gt;&#xa;+ save() &lt;&lt;static&gt;&gt;+ save(saveFolder: String) &lt;&lt;static&gt;&gt;&#xa;+ load() &lt;&lt;static&gt;&gt;&#xa;+ load(saveFolder: String) &lt;&lt;static&gt;&gt;&#xa;+ getScore(level: int):int &lt;&lt;static&gt;&gt;&#xa;+ newHighScore(level: int, score: int) &lt;&lt;static&gt;&gt;&#xa;+ reset() &lt;&lt;static&gt;&gt;&#xa;+ dataToString(): String &lt;&lt;static&gt;&gt;&#xa;+ getData(saveFile: File): UserData &lt;&lt;static&gt;&gt;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-182" vertex="1">
+          <mxGeometry y="64" width="330" height="146" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-185" value="UserData" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;strokeColor=#4059FF;" parent="1" vertex="1">
           <mxGeometry x="3034" y="194" width="210" height="140" as="geometry" />
@@ -193,13 +196,13 @@
         <mxCell id="4iRdVt_hhF0twq2A7KBy-279" value="BacktrackingNode" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2836" y="-319" width="382" height="437" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-280" value="- capacity: int&#xa;- currentValue: int&#xa;- currentWeight: int&#xa;- itemList: ArrayList &lt;BacktrackingItem&gt;&#xa;- name: String&#xa;- item: BacktraingItem&#xa;- itemList: ArrayList&lt;BacktrackingItem&gt;&#xa;- leftChild: BacktrackingNode&#xa;- rightChild: BacktrackingNode&#xa;- parent: BacktrackingNode" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-279" vertex="1">
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-280" value="- level: int&#xa;- capacity: int- currentValue: int&#xa;- currentWeight: int&#xa;- itemList: ArrayList &lt;BacktrackingItem&gt;&#xa;- name: String&#xa;- item: BacktraingItem&#xa;- itemList: ArrayList&lt;BacktrackingItem&gt;&#xa;- leftChild: BacktrackingNode&#xa;- rightChild: BacktrackingNode&#xa;- parent: BacktrackingNode" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-279" vertex="1">
           <mxGeometry y="26" width="382" height="137" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-281" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-279" vertex="1">
           <mxGeometry y="163" width="382" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-282" value="+ BacktrackingNode(bagItem: BacktrackingItem , oldWeight:int, &#xa;oldValue: int, bagCapacity: int, sortedItemList: &#xa;ArrayList&lt;BacktrackingItem&gt;,myParent: BacktrackingNode ,&#xa;isInBag: boolean)&#xa;+ setLeftChild(node: BacktrackingNode)&#xa;+ getRightChild(): BacktrackingNode&#xa;+ getLeftChild(): BacktrackingNode&#xa;+ getParent(): BacktrackingNode&#xa;+ getName(): String&#xa;+ getItem(): Item&#xa;+ getCurrentWeight(): int&#xa;+ getCurrentValue(): int&#xa;+ addToTrash(item: BacktrackingItem): BacktrackingNode&#xa;+ addToRucksack(item: BacktrackingItem): BacktrackingNode&#xa;- isNextSelectableItemForBag(item: BacktrackingItem): boolean&#xa;- itemFitsInRucksack(item: BacktrackingItem):boolean&#xa;- moveItemsIntoAvailable(item: BacktrackingNode)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-279" vertex="1">
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-282" value="+ BacktrackingNode(bagItem: BacktrackingItem , oldWeight:int, &#xa;oldValue: int, bagCapacity: int, myItemList: &#xa;ArrayList&lt;BacktrackingItem&gt;,myParent: BacktrackingNode ,&#xa;isInBag: boolean, myLevel: int)&#xa;+ setLeftChild(node: BacktrackingNode)&#xa;+ getRightChild(): BacktrackingNode&#xa;+ getLeftChild(): BacktrackingNode&#xa;+ getParent(): BacktrackingNode&#xa;+ getName(): String&#xa;+ getItem(): Item&#xa;+ getLevel(): Level+ getCurrentWeight(): int&#xa;+ getCurrentValue(): int&#xa;+ addToTrash(item: BacktrackingItem): BacktrackingNode&#xa;+ addToRucksack(item: BacktrackingItem): BacktrackingNode&#xa;- isNextSelectableItemForBag(item: BacktrackingItem): boolean&#xa;- itemFitsInRucksack(item: BacktrackingItem):boolean&#xa;- moveItemsIntoAvailable(item: BacktrackingNode)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-279" vertex="1">
           <mxGeometry y="171" width="382" height="266" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-287" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="1" source="4iRdVt_hhF0twq2A7KBy-283" target="4iRdVt_hhF0twq2A7KBy-279" edge="1">
