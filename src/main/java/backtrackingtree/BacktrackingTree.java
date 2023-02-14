@@ -51,8 +51,10 @@ public class BacktrackingTree {
                     .thenComparingInt(Item::getValue).reversed());
     this.itemArrayList = myItemArrayList;
     root = new BacktrackingNode(new BacktrackingItem(
-            0, 0, "root", new ImageIcon()), 0, 0,
-            myBagCapacity, myItemArrayList, null, true, 0);
+            0,
+        0, "root", new ImageIcon()), 0, 0,
+            myBagCapacity, myItemArrayList,
+        null, true, 0);
     currentNode = root;
     this.bagCapacity = myBagCapacity;
   }
@@ -268,6 +270,7 @@ public class BacktrackingTree {
 
   private void moveDownTheSubtree(final BacktrackingNode nodeItemToTrash) {
     if (currentNode.getCurrentWeight() >= bagCapacity) {
+      isSubtreeFull = allLeftChildrenAreThere();
       return;
     }
     // be on leaves
@@ -301,6 +304,22 @@ public class BacktrackingTree {
       this.moveDownTheSubtree(nodeItemToTrash.getLeftChild());
       this.moveDownTheSubtree(nodeItemToTrash.getRightChild());
     }
+  }
+
+  private boolean allLeftChildrenAreThere() {
+    boolean res = true;
+    String currentNodeName = currentNode.getName();
+    while (currentNode.getLevel() < itemArrayList.size()) {
+      if (currentNode.getLeftChild() == null) {
+        res = false;
+        break;
+      }
+      currentNode = currentNode.getLeftChild();
+    }
+    while (!Objects.equals(currentNode.getName(), currentNodeName)) {
+      currentNode = currentNode.getParent();
+    }
+    return res;
   }
 
   /**

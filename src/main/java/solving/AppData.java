@@ -43,7 +43,7 @@ public final class AppData {
   }
 
   /**
-   * The size of Icons in the level editor.
+   * The size of icons in the level editor.
    */
   public static final int ICON_SIZE = 75;
   /**

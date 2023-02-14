@@ -1,13 +1,14 @@
 package gui.level;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import org.apache.commons.io.FileUtils;
 import rucksack.Item;
 import rucksack.Level;
 import solving.SolverBacktracking;
@@ -127,7 +130,12 @@ public class GuiLevelPage {
     if (levelNumber == -1) {
       flucht.addActionListener(e -> {
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = generateEscapeMessage();
+        String message = null;
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -164,7 +172,12 @@ public class GuiLevelPage {
         }
 
         String[] buttons = {"Erneut Spielen", "Levelauswahl"};
-        String message = generateEscapeMessage();
+        String message = null;
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -199,7 +212,12 @@ public class GuiLevelPage {
           UserDataManager.save();
         }
         String[] buttons = {"Erneut Spielen", "Nächstes Level", "Levelauswahl"};
-        String message = generateEscapeMessage();
+        String message = null;
+        try {
+          message = generateEscapeMessage();
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
         int chosenButton = JOptionPane.showOptionDialog(centerPanel,
             message,
             "Geflohen", JOptionPane.DEFAULT_OPTION, JOptionPane
@@ -256,8 +274,7 @@ public class GuiLevelPage {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/X1.txt");
+          message = fileToStringFromFile("texts/levelTexts/Editor1.txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -273,8 +290,7 @@ public class GuiLevelPage {
         String[] buttons = {"Schließen"};
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/E1.txt");
+          message = fileToStringFromFile("texts/levelTexts/Eingangslevel1.txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -291,9 +307,8 @@ public class GuiLevelPage {
         String message = null;
         try {
           int fileNumber = levelNumber + 1;
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/G"
-                          + fileNumber + ".txt");
+          message = fileToStringFromFile("texts/levelTexts/Greedy"
+                  + fileNumber + ".txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -311,9 +326,8 @@ public class GuiLevelPage {
         String message = null;
         try {
           int fileNumber = levelNumber - LAST_GREEDY_LEVELNUMBER + 1;
-          message = fileToString(
-                  "src/main/resources/texts/levelTexts/B"
-                          + fileNumber + ".txt");
+          message = fileToStringFromFile("texts/levelTexts/Backtracking"
+                  + fileNumber + ".txt");
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -334,7 +348,7 @@ public class GuiLevelPage {
    *
    * @return String of the generated escape message
    */
-  public String generateEscapeMessage() {
+  public String generateEscapeMessage() throws IOException {
     SolverBacktracking s = new SolverBacktracking();
     SolverGreedy sg = new SolverGreedy();
     ArrayList<Item> solution = new ArrayList<>();
@@ -350,8 +364,7 @@ public class GuiLevelPage {
         //case: correct solution
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_1_OptimalSolution.txt");
+         message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -359,8 +372,7 @@ public class GuiLevelPage {
       } else {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_2_SuboptimalSolution.txt");
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -371,8 +383,7 @@ public class GuiLevelPage {
               .sortLikeGreedy(sg.solveAlgorithm(this.level)))) {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_1_OptimalSolution.txt");
+          message = fileToStringFromFile("texts/2_1_1_OptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -381,8 +392,8 @@ public class GuiLevelPage {
               .sortLikeGreedy(s.solveAlgorithm(this.level)))) {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_3_OptimalButWrongSolution.txt");
+          message = fileToStringFromFile(
+                  "texts/2_1_3_OptimalButWrongSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -390,8 +401,7 @@ public class GuiLevelPage {
       } else {
         String message = null;
         try {
-          message = fileToString(
-                  "src/main/resources/texts/2_1_2_SuboptimalSolution.txt");
+          message = fileToStringFromFile("texts/2_1_2_SuboptimalSolution.txt");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -405,11 +415,21 @@ public class GuiLevelPage {
   /**
    * Method for formatting a TXT-file into a single String instance.
    *
-   * @param fileName name of the TXT-file supposed to be shown
+   * @param path name of the TXT-file supposed to be shown
    * @return the String of the given TXT-file
    */
-  public static String fileToString(final String fileName) throws IOException {
-    FileReader reader = new FileReader(fileName);
+  public static String fileToStringFromFile(final String path)
+          throws IOException {
+    InputStream is = GuiLevelPage.class.getClassLoader()
+            .getResourceAsStream(path);
+    String[] pathArguments = path.split("[/.]");
+    int size = pathArguments.length;
+    String prefix = pathArguments[size - 2];
+    String suffix = pathArguments[size - 1];
+    File file = File.createTempFile(prefix, suffix);
+    FileUtils.copyInputStreamToFile(is, file);
+
+    FileReader reader = new FileReader(file.getPath());
     BufferedReader inBuffer = new BufferedReader(reader);
     StringBuilder message = new StringBuilder();
     String line = inBuffer.readLine();
@@ -447,6 +467,7 @@ public class GuiLevelPage {
       labels[i] = new JLabel(level.getItemAmountList().get(i).toString());
 
       labels[i].setFont(font);
+      JPanel rucksackPanel = new JPanel(new GridLayout(1, GRID_FOUR));
 
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(font);
@@ -480,12 +501,16 @@ public class GuiLevelPage {
         }
       });
       itemPanel.add(labels[i]);
-      panelItems.add(itemPanel);
-      panelRucksack.add(currentRucksack, BorderLayout.CENTER);
-      panelRucksack.add(rucksackLabels[i], BorderLayout.CENTER);
-      panelRucksack.add(currentWeightLabel, BorderLayout.SOUTH);
-      panelRucksack.add(currentValueLabel, BorderLayout.SOUTH);
+      rucksackPanel.add(currentRucksack);
+      rucksackPanel.add(rucksackLabels[i]);
 
+      JPanel infosPanel = new JPanel();
+      infosPanel.add(currentWeightLabel);
+      infosPanel.add(currentValueLabel);
+
+      panelItems.add(itemPanel);
+      panelRucksack.add(rucksackPanel);
+      panelRucksack.add(infosPanel);
     }
   }
 
@@ -518,6 +543,10 @@ public class GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(
             WIDTH_RUCKSACK, HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon rucksackIcon = new ImageIcon(scaledRucksackImage);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    JLabel rucksackImageLabel = new JLabel(rucksackIcon);
+    leftPanel.add(rucksackImageLabel);
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource("DiebRot.png");
@@ -528,21 +557,21 @@ public class GuiLevelPage {
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage,
         X_POS_ROBBER, Y_POS_ROBBER);
     JPanel rightPanel = new JPanel();
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
+
+    JPanel rucksackItems = new JPanel();
+
+
     // erzeuge Buttons
     this.escapeButton(centerPanel);
     this.clueButton(centerPanel);
-    this.itemButtons(rightPanel, leftPanel);
+    this.itemButtons(rightPanel, rucksackItems);
+
+    leftPanel.add(rucksackItems);
 
     //alles zusammenpuzzeln
     pane.add(leftPanel);
     pane.add(centerPanel);
     pane.add(rightPanel);
-
-    pane.add(leftPanel, BorderLayout.WEST);
-    pane.add(centerPanel, BorderLayout.CENTER);
-    pane.add(rightPanel, BorderLayout.EAST);
-
     return pane;
   }
 

@@ -106,6 +106,8 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
       labels[i] = new JLabel(getLevel().getItemAmountList().get(i).toString());
       labels[i].setFont(smallFont);
 
+      JPanel rucksackPanel = new JPanel(new GridLayout(1, 2));
+
       rucksackLabels[i] = new JLabel("0");
       rucksackLabels[i].setFont(smallFont);
       int finalI = i;
@@ -124,27 +126,23 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
           updateLabel(finalI);
         }
       });
-      JButton currentRucksackIcon = new JButton(currentIcon);
-      currentRucksackIcon.addActionListener(e -> {
-        if (getLevel().getItemAmountInRucksack(finalI) <= 0) {
-          return;
-        }
-        if (!getLevel().getRobber().equals(Level.Robber.GIERIGER_GANOVE)) {
-          getLevel().moveFromRucksack(finalI);
-          updateLabel(finalI);
-        }
+      JLabel currentRucksackIcon = new JLabel(currentIcon);
 
-      });
+      JPanel infosPanel = new JPanel();
+      infosPanel.add(currentWeightLabel);
+      infosPanel.add(currentValueLabel);
 
       JPanel availableItems = new JPanel(new GridLayout(1, 2));
       availableItems.add(currentItemIcon);
       availableItems.add(current);
       availableItems.add(labels[i]);
       panelItems.add(availableItems);
-      panelRucksack.add(currentRucksackIcon);
-      panelRucksack.add(rucksackLabels[i]);
-      panelRucksack.add(currentWeightLabel);
-      panelRucksack.add(currentValueLabel);
+
+      rucksackPanel.add(currentRucksackIcon);
+      rucksackPanel.add(rucksackLabels[i]);
+
+      panelRucksack.add(rucksackPanel);
+      panelRucksack.add(infosPanel);
 
     }
   }
@@ -166,6 +164,8 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     Image scaledRucksackImage =
         rucksackImage.getImage().getScaledInstance(WIDTH_RUCKSACK,
           HEIGHT_RUCKSACK, java.awt.Image.SCALE_SMOOTH);
+    ImageIcon rucksackIcon = new ImageIcon(scaledRucksackImage);
+    JLabel rucksackLabel = new JLabel(rucksackIcon);
 
     //füge Räuber ein
     URL urlRobber = getClass().getClassLoader().getResource(
@@ -177,7 +177,8 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
 
     JPanel centerPanel = new JbackgroundPanel(scaledRobberImage, X_POS_ROBBER,
         Y_POS_ROBBER);
-    JPanel leftPanel = new JbackgroundPanel(scaledRucksackImage, 0, 0);
+    JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+    leftPanel.add(rucksackLabel);
     JPanel rightPanel = new JPanel();
 
     // erzeuge Buttons
@@ -185,7 +186,12 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
     if (GuiOptionsPage.getGreedyTipsAllowed()) {
       this.clueButton(centerPanel);
     }
-    this.itemButtons(rightPanel, leftPanel);
+
+    JPanel rucksackPanel = new JPanel();
+
+    this.itemButtons(rightPanel, rucksackPanel);
+
+    leftPanel.add(rucksackPanel);
 
     //alles zusammenpuzzeln
 
