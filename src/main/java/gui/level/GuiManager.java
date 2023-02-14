@@ -49,7 +49,6 @@ public class GuiManager {
    */
   private static JFrame frame;
 
-
   /**
    * Number of the level.
    */
@@ -76,12 +75,12 @@ public class GuiManager {
    * Opens the main Menu.
    */
   public void launch() {
-    Dimension window = new Dimension(1000, 750);
+    Dimension dimension = new Dimension(1000, 750);
     frame = new JFrame();
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setTitle("Optimal Heist");
-    frame.setSize(window);
-    frame.setMinimumSize(window);
+    frame.setSize(dimension);
+    frame.setMinimumSize(dimension);
     frame.setLocationRelativeTo(null);
     frame.setDropTarget(new DropTarget() {
       public synchronized void drop(final DropTargetDropEvent evt) {
@@ -194,4 +193,5 @@ public class GuiManager {
   public static GuiLevelDeciderPage getGuiLevelDeciderPage() {
     return GUI_LEVEL_DECIDER_PAGE;
   }
+
 }
