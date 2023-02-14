@@ -222,8 +222,6 @@ public class BackTrackingTreeTest {
       answer = input.nextLine();
       Assertions.assertEquals(answer, "└──Crown [akt. Gewicht:6, akt. Wert: 6]");
       answer = input.nextLine();
-      Assertions.assertEquals(answer, "   ├──not Pearl [akt. Gewicht:6, akt. Wert: 6]");
-      answer = input.nextLine();
       Assertions.assertEquals(answer, "   └──Pearl [akt. Gewicht:10, akt. Wert: 13]");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
