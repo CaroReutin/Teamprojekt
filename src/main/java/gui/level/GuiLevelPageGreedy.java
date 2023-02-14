@@ -33,11 +33,11 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
   /**
    * the width of the rucksack.
    */
-  private static final int WIDTH_RUCKSACK = 300;
+  private static final int WIDTH_RUCKSACK = 200;
   /**
    * the height of the rucksack.
    */
-  private static final int HEIGHT_RUCKSACK = 700;
+  private static final int HEIGHT_RUCKSACK = 400;
   /**
    * the width of the robber.
    */

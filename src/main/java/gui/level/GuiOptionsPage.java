@@ -26,7 +26,7 @@ public class GuiOptionsPage {
   /**
    * The boolean value whether the tips for backtracking levels are unlocked.
    */
-  private static boolean backtrackingTipsAllowed = false;
+  public static boolean backtrackingTipsAllowed = false;
 
   /**
    * Getter method for the value of backtracking clues being allowed.
@@ -55,7 +55,7 @@ public class GuiOptionsPage {
    * The boolean value whether the alternate version of
    * the tree depiction is necessary.
    */
-  private static boolean altTreeSelected = false;
+  public static boolean altTreeSelected = false;
 
   /**
    * Getter method for the boolean value whether

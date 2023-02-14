@@ -53,7 +53,7 @@ public class GuiManager {
   /**
    * Number of the level.
    */
-  private static int numberLevel;
+  public static int numberLevel;
 
   /**
    * Opens the Leveleditor.
