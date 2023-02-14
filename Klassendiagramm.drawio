@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-02-14T21:34:42.453Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="f2xm2vFZA57o9HfRqhq5" version="20.8.20" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-14T21:47:09.998Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="6N2kniHtUxRA79H7KZrT" version="20.8.20" type="github">
   <diagram id="mvksxYR37wyYuG3UCGVY" name="Page-1">
     <mxGraphModel dx="795" dy="2811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -71,16 +71,16 @@
           <mxGeometry y="34" width="311" height="114" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-192" value="AppData" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="2461" y="185" width="393" height="329" as="geometry" />
+          <mxGeometry x="2461" y="185" width="393" height="286" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-193" value="+ ZIP_BYTE_SIZE: int &lt;&lt;static&gt;&gt; &lt;&lt;final&gt;&gt;&#xa;- customLevelPictureFolder: String &lt;&lt;static&gt;&gt;&#xa;+ LEVELAMOUNT: int &lt;&lt;static&gt;&gt; &lt;&lt;final&gt;&gt;&#xa;+ MAXIMUM_ITEMS_IN_CUSTOM_LEVEL: int &lt;&lt;static&gt;&gt; &lt;&lt;final&gt;&gt;&#xa;+ FONT_STYLE: Font &lt;&lt;static&gt;&gt; &lt;&lt;final&gt;&gt;&#xa;- passwords: ArrayList&lt;String&gt;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-192" vertex="1">
-          <mxGeometry y="26" width="393" height="106" as="geometry" />
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-193" value="+ ZIP_BYTE_SIZE: int &lt;&lt;static&gt;&gt; &lt;&lt;final&gt;&gt;&#xa;- customLevelPictureFolder: String &lt;&lt;static&gt;&gt;&#xa;+ LEVELAMOUNT: int &lt;&lt;static&gt;&gt; &lt;&lt;final&gt;&gt;&#xa;+ MAXIMUM_ITEMS_IN_CUSTOM_LEVEL: int &lt;&lt;static&gt;&gt; &lt;&lt;final&gt;&gt;&#xa;- PASSWORDS: ArrayList&lt;String&gt; &lt;&lt;static&gt;&gt;&#xa;- customLevelUnzipFolder: String &lt;&lt;static&gt;&gt;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-192" vertex="1">
+          <mxGeometry y="26" width="393" height="97" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-194" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="4iRdVt_hhF0twq2A7KBy-192" vertex="1">
-          <mxGeometry y="132" width="393" height="8" as="geometry" />
+          <mxGeometry y="123" width="393" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4iRdVt_hhF0twq2A7KBy-195" value="+ initialize() &lt;&lt;static&gt;&gt;&#xa;+ initializeItems() &lt;&lt;static&gt;&gt;&#xa;+ initializeBeginningLevel() &lt;&lt;static&gt;&gt;&#xa;+ getPassword(i: int): String &lt;&lt;static&gt;&gt;&#xa;+ getPasswordAmount(): int &lt;&lt;static&gt;&gt;&#xa;+ getCustomLevelPictureFolder(): String &lt;&lt;static&gt;&gt;&#xa;+ getCustomLevelUnzipFolder(): String &lt;&lt;static&gt;&gt;&#xa;+ getLevel(i: int): Level &lt;&lt;static&gt;&gt;&#xa;+ generateItem(name: String): Item &lt;&lt;static&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-192" vertex="1">
-          <mxGeometry y="140" width="393" height="189" as="geometry" />
+        <mxCell id="4iRdVt_hhF0twq2A7KBy-195" value="- AppData()&#xa;+ initialize() &lt;&lt;static&gt;&gt;&#xa;+ initializeBeginningLevel() &lt;&lt;static&gt;&gt;&#xa;+ getPassword(i: int): String &lt;&lt;static&gt;&gt;&#xa;+ getCustomLevelPictureFolder(): String &lt;&lt;static&gt;&gt;&#xa;+ getCustomLevelUnzipFolder(): String &lt;&lt;static&gt;&gt;&#xa;+ getLevel(i: int): Level &lt;&lt;static&gt;&gt;&#xa;+ loadLevel(zippedLevel: File): Level &lt;&lt;static&gt;&gt;&#xa;+ initializeGreedy() &lt;&lt;static&gt;&gt; &#xa;+ initializeBacktrackingLevel() &lt;&lt;static&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4iRdVt_hhF0twq2A7KBy-192" vertex="1">
+          <mxGeometry y="131" width="393" height="155" as="geometry" />
         </mxCell>
         <mxCell id="4iRdVt_hhF0twq2A7KBy-196" value="Item" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2022" y="189" width="240" height="268" as="geometry" />
