@@ -171,7 +171,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
       trashLabels[i] = new JLabel(getLevel().getInTrashAmountList()
         .get(i).toString());
 
-      trashLabels[i].setFont(mediumFont);
+      trashLabels[i].setFont(smallFont);
 
       //buttons trash
       JButton putToTrash = new JButton("wegwerfen");
