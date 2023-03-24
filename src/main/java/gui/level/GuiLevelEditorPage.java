@@ -5,10 +5,7 @@ import static gui.level.GuiFrontpage.SIZE_FONT_SMALL;
 import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -185,10 +182,12 @@ public final class GuiLevelEditorPage {
         Font.BOLD + Font.ITALIC, SIZE_FONT_SMALL / 2 - 2);
 
     JButton save = new JButton("Speichern");
+    save.setBackground(Color.lightGray);
     save.addActionListener(e -> saveLevel(pane,
         titleField, capacityField, modeDropdown));
     save.setFont(fontButtons);
     JButton back = new JButton("Abbrechen");
+    back.setBackground(Color.lightGray);
     back.addActionListener(e -> {
       if (JOptionPane.YES_OPTION
           == showConfirmDialog(pane,
@@ -210,6 +209,7 @@ public final class GuiLevelEditorPage {
 
     JPanel loadPanel = new JPanel();
     JButton load = new JButton("Level öffnen");
+    load.setBackground(Color.lightGray);
     load.addActionListener(e -> {
       JFileChooser chooseIcon = new JFileChooser();
       chooseIcon.setCurrentDirectory(new java.io.File("."));
@@ -228,6 +228,7 @@ public final class GuiLevelEditorPage {
     leftSide.add(loadPanel);
 
     JButton reset = new JButton("Reset");
+    reset.setBackground(Color.lightGray);
     URL defaultIconUrl = getClass().getResource("/icons/DefaultBox.png");
     assert defaultIconUrl != null;
     ImageIcon wrongSizedDefaultIcon = new ImageIcon(defaultIconUrl);
@@ -296,6 +297,7 @@ public final class GuiLevelEditorPage {
       icons.set(i, new ImageIcon(image.getScaledInstance(
           AppData.ICON_SIZE, AppData.ICON_SIZE, Image.SCALE_SMOOTH)));
       iconSelectors.add(new JButton());
+
       iconSelectors.get(i).setIcon(icons.get(i));
       JFileChooser chooseIcon = new JFileChooser();
       chooseIcon.setCurrentDirectory(new File("."));
@@ -385,6 +387,7 @@ public final class GuiLevelEditorPage {
       }
     }
     JButton moreItemsButton = new JButton("");
+    moreItemsButton.setBackground(Color.lightGray);
     ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass()
         .getResource("/icons/Plus.png")));
     Image image = icon.getImage();

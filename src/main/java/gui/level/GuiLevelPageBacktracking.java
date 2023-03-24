@@ -163,6 +163,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons rucksack
       JButton putToRucksack = new JButton("mitnehmen");
+      putToRucksack.setBackground(Color.lightGray);
       putToRucksack.setFont(smallFont);
       int finalI = i;
       putToRucksack.addActionListener(e -> handleButtons(finalI, true));
@@ -175,6 +176,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
 
       //buttons trash
       JButton putToTrash = new JButton("wegwerfen");
+      putToTrash.setBackground(Color.lightGray);
       putToTrash.setFont(smallFont);
       putToTrash.addActionListener(e -> handleButtons(finalI, false));
 
@@ -300,6 +302,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
     leftPanel.add(trashPanel);
 
     JButton treeButton = new JButton("Zeige Baum");
+    treeButton.setBackground(Color.lightGray);
     treeButton.setFont(mediumFont);
     treeButton.addActionListener(e -> buttonHandler.show());
     centerPanel.add(treeButton);
@@ -348,6 +351,7 @@ public class GuiLevelPageBacktracking extends GuiLevelPage {
   public void escapeButton(final Container centerPanel) {
     Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JButton flucht = new JButton("Flucht");
+    flucht.setBackground(Color.lightGray);
     flucht.setFont(font);
     int levelNumber = GuiManager.numberLevel;
     if (levelNumber == -1) {

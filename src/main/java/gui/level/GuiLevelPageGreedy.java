@@ -1,10 +1,6 @@
 package gui.level;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -113,6 +109,7 @@ public class GuiLevelPageGreedy extends GuiLevelPage {
       int finalI = i;
       ImageIcon currentIcon = items.get(i).getImageIcon();
       JButton currentItemIcon = new JButton(currentIcon);
+      currentItemIcon.setBackground(Color.LIGHT_GRAY);
       JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
       current.setFont(smallFont);
