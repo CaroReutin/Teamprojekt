@@ -65,8 +65,8 @@ public class GuiFrontpage {
     settingsButton.setBackground(Color.LIGHT_GRAY);
     settingsButton.setFont(fontButtons);
 
-
     JButton clueButton = new JButton();
+    clueButton.setBackground(Color.lightGray);
     URL urlClue = getClass().getResource("/icons/clueSymbol.png");
     if (urlClue == null) {
       System.out.println("falsch");
