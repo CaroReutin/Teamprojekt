@@ -1,9 +1,6 @@
 package gui.level;
 
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -125,6 +122,7 @@ public class GuiLevelPage {
   public void escapeButton(final Container centerPanel) {
     Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JButton flucht = new JButton("Flucht");
+    flucht.setBackground(Color.lightGray);
     flucht.setFont(font);
     int levelNumber = GuiManager.getNumberLevel();
     if (levelNumber == -1) {
@@ -267,6 +265,7 @@ public class GuiLevelPage {
   public void clueButton(final Container centerPanel) {
     Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     JButton clue = new JButton("Hinweis");
+    clue.setBackground(Color.lightGray);
     clue.setFont(font);
     int levelNumber = GuiManager.getNumberLevel();
     if (levelNumber == -1) {
@@ -474,6 +473,7 @@ public class GuiLevelPage {
       JPanel itemPanel = new JPanel(new GridLayout(1, GRID_FOUR));
       ImageIcon imageIcon = items.get(i).getImageIcon();
       JButton itemIcon = new JButton(imageIcon);
+      itemIcon.setBackground(Color.LIGHT_GRAY);
       itemPanel.add(itemIcon);
       JLabel current = new JLabel(" (" + items.get(i).getWeight() + "g, "
           + items.get(i).getValue() + "€)");
@@ -491,6 +491,7 @@ public class GuiLevelPage {
         }
       });
       JButton currentRucksack = new JButton(imageIcon);
+      currentRucksack.setBackground(Color.lightGray);
       currentRucksack.addActionListener(e -> {
         if (level.getItemAmountInRucksack(finalI) <= 0) {
           return;

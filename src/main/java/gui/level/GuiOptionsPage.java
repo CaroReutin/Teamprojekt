@@ -1,12 +1,7 @@
 package gui.level;
 
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -122,6 +117,7 @@ public class GuiOptionsPage {
     passwordInputPanel.add(passwordInput);
     passwordInput.setValue("");
     JButton treeModeButton = new JButton();
+    treeModeButton.setBackground(Color.lightGray);
     Font font = new Font("Arial", Font.BOLD + Font.ITALIC, FONT_TWENTY);
     treeModeButton.setFont(font);
     if (altTreeSelected) {
@@ -142,6 +138,7 @@ public class GuiOptionsPage {
 
     //erzeuge Buttons
     JButton enterPassword = new JButton("Eingabe");
+    enterPassword.setBackground(Color.lightGray);
     enterPassword.setFont(font);
     JPanel enterPasswordPanel = new JPanel();
     enterPasswordPanel.add(enterPassword);
@@ -150,6 +147,7 @@ public class GuiOptionsPage {
 
     JPanel backPanel = new JPanel();
     JButton back = new JButton("Zurück");
+    back.setBackground(Color.lightGray);
     back.setFont(font);
     backPanel.add(back);
     back.addActionListener(e -> {
@@ -165,6 +163,7 @@ public class GuiOptionsPage {
         SIZE_ICON, SIZE_ICON, java.awt.Image.SCALE_SMOOTH);
     ImageIcon newClueSymbol = new ImageIcon(clueSymbolImage);
     JButton clueButton = new JButton(newClueSymbol);
+    clueButton.setBackground(Color.lightGray);
     JPanel descriptionPanel = new JPanel();
     descriptionPanel.add(clueButton);
     clueButton.addActionListener(e -> {
